@@ -1,0 +1,28 @@
+day_night_mode:
+  name: Day/Night Mode
+  options:
+    - "Auto"
+    - "Day"
+    - "Night"
+  initial: "Auto"
+
+heatpump_room_tab:
+  name: Heat Pump Room Tabs
+  options:
+    - "Office"
+    - "Family Room"
+    - "Living Room"
+    - "Master Bedroom"
+    - "Dining Room"
+    - "Ducted"
+  initial: "Office"
+  icon: mdi:home-group
+
+hvac_mode:
+  name: HVAC Mode
+  options:
+    - "Heat"
+    - "Cool"
+    - "Off"
+  initial: "Off"
+  icon: mdi:thermostat

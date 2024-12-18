@@ -1,0 +1,9 @@
+day_start_time:
+  name: Day Start Time
+  has_time: true
+  initial: "05:30"
+
+night_start_time:
+  name: Night Start Time
+  has_time: true
+  initial: "21:00"

@@ -1,0 +1,76 @@
+- id: set_hvac_system_modes
+  alias: "Set All Systems Based on HVAC Mode"
+  description: "Synchronize all heat pumps and radiators to follow the HVAC mode (Off, Heat, Cool)."
+  trigger:
+    - platform: state
+      entity_id: input_select.hvac_mode
+  condition: []
+  action:
+    - variables:
+        hvac_mode: "{{ states('input_select.hvac_mode') }}"
+
+    - choose:
+        # HVAC Mode: Off
+        - conditions:
+            - condition: template
+              value_template: "{{ hvac_mode == 'Off' }}"
+          sequence:
+            - service: climate.turn_off
+              target:
+                entity_id:
+                  - climate.tinas_office_heat_pump
+                  - climate.family_room_heat_pump
+                  - climate.living_room_heat_pump
+                  - climate.master_bedroom_heat_pump
+                  - climate.dining_room_heat_pump
+                  - climate.ducted_heat_pump
+                  - climate.office
+                  - climate.eriks_office_room
+                  - climate.living_room_main_heating
+                  - climate.family_room_heating
+
+        # HVAC Mode: Heat
+        - conditions:
+            - condition: template
+              value_template: "{{ hvac_mode == 'Heat' }}"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                hvac_mode: "heat"
+              target:
+                entity_id:
+                  - climate.tinas_office_heat_pump
+                  - climate.family_room_heat_pump
+                  - climate.living_room_heat_pump
+                  - climate.master_bedroom_heat_pump
+                  - climate.dining_room_heat_pump
+                  - climate.ducted_heat_pump
+                  - climate.eriks_office_room
+                  - climate.office
+                  - climate.living_room_main_heating
+                  - climate.family_room_heating
+
+        # HVAC Mode: Cool
+        - conditions:
+            - condition: template
+              value_template: "{{ hvac_mode == 'Cool' }}"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                hvac_mode: "cool"
+              target:
+                entity_id:
+                  - climate.tinas_office_heat_pump
+                  - climate.family_room_heat_pump
+                  - climate.living_room_heat_pump
+                  - climate.master_bedroom_heat_pump
+                  - climate.dining_room_heat_pump
+                  - climate.ducted_heat_pump
+                  - climate.eriks_office_room
+            - service: climate.turn_off
+              target:
+                entity_id:
+                  - climate.office
+                  - climate.living_room_main_heating
+                  - climate.family_room_heating
+  mode: single

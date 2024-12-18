@@ -1,0 +1,29 @@
+- name: "Current NWS Outdoor Temperature"
+  unique_id: current_nws_outdoor_temperature
+  unit_of_measurement: "°F"
+  state: "{{ state_attr('weather.kowd', 'temperature') }}"
+
+- name: "Current NWS Outdoor Humidity"
+  unique_id: current_nws_outdoor_humidity
+  unit_of_measurement: "%"
+  state: "{{ state_attr('weather.kowd', 'humidity') }}"
+
+- name: "Current NWS Outdoor Pressure"
+  unique_id: current_nws_outdoor_pressure
+  unit_of_measurement: "inHg"
+  state: "{{ state_attr('weather.kowd', 'pressure') }}"
+
+- name: "Current NWS Outdoor Wind Speed"
+  unique_id: current_nws_outdoor_wind_speed
+  unit_of_measurement: "mph"
+  state: "{{ state_attr('weather.kowd', 'wind_speed') }}"
+
+- name: "Current NWS Outdoor Wind Bearing"
+  unique_id: current_nws_outdoor_wind_bearing
+  unit_of_measurement: "°"
+  state: "{{ state_attr('weather.kowd', 'wind_bearing') }}"
+
+- name: "Current NWS Outdoor Visibility"
+  unique_id: current_nws_outdoor_visibility
+  unit_of_measurement: "mi"
+  state: "{{ state_attr('weather.kowd', 'visibility') }}"

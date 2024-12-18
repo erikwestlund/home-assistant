@@ -1,0 +1,53 @@
+# Office
+office_heatpump_state:
+  name: Office Heat Pump State
+  options:
+    - "Off"
+    - "Supplement"
+    - "Comfort"
+  initial: "Comfort"
+
+# Family Room
+family_room_heatpump_state:
+  name: Family Room Heat Pump State
+  options:
+    - "Off"
+    - "Supplement"
+    - "Comfort"
+  initial: "Comfort"
+
+# Living Room
+living_room_heatpump_state:
+  name: Living Room Heat Pump State
+  options:
+    - "Off"
+    - "Supplement"
+    - "Comfort"
+  initial: "Comfort"
+
+# Master Bedroom
+master_bedroom_heatpump_state:
+  name: Master Bedoom Heat Pump State
+  options:
+    - "Off"
+    - "Supplement"
+    - "Comfort"
+  initial: "Comfort"
+
+# Dining Room
+dining_room_heatpump_state:
+  name: Dining Room Heat Pump State
+  options:
+    - "Off"
+    - "Supplement"
+    - "Comfort"
+  initial: "Comfort"
+
+# Ducted/Kids Rooms
+ducted_heatpump_state:
+  name: Ducted Heat Pump State
+  options:
+    - "Off"
+    - "Supplement"
+    - "Comfort"
+  initial: "Comfort"

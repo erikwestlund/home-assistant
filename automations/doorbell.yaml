@@ -1,0 +1,117 @@
+- id: front_door_bell_alert
+  alias: Play Chime on Sonos when Front Door Doorbell is Pressed
+  description: ""
+  triggers:
+    - entity_id:
+        - binary_sensor.front_door_doorbell
+      to: "on"
+      trigger: state
+  conditions: []
+  actions:
+    - target:
+        entity_id: all
+      action: sonos.snapshot
+      data:
+        with_group: true
+    - data:
+        volume_level: 0.65
+      action: media_player.volume_set
+      target:
+        entity_id:
+          - media_player.kitchen
+    - target:
+        entity_id:
+          - media_player.kitchen
+      data:
+        media_content_type: music
+        media_content_id: /local/chime-front-door.mp3
+      action: media_player.play_media
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - target:
+        entity_id: all
+      action: sonos.restore
+      data:
+        with_group: true
+  mode: single
+- id: side_door_alert
+  alias: Play Chime on Sonos when Side Door Doorbell is Pressed
+  description: ""
+  triggers:
+    - entity_id:
+        - binary_sensor.side_door_doorbell
+      to: "on"
+      trigger: state
+  conditions: []
+  actions:
+    - target:
+        entity_id: all
+      action: sonos.snapshot
+      data:
+        with_group: true
+    - data:
+        volume_level: 0.65
+      action: media_player.volume_set
+      target:
+        entity_id:
+          - media_player.kitchen
+    - target:
+        entity_id:
+          - media_player.kitchen
+      data:
+        media_content_type: music
+        media_content_id: /local/chime-side-door.mp3
+      action: media_player.play_media
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - target:
+        entity_id: all
+      action: sonos.restore
+      data:
+        with_group: true
+  mode: single
+- id: mudroom_door_alert
+  alias: Play Chime on Sonos when Mudroom Door Doorbell is Pressed
+  description: ""
+  triggers:
+    - entity_id:
+        - binary_sensor.mudroom_door_doorbell
+      to: "on"
+      trigger: state
+  conditions: []
+  actions:
+    - target:
+        entity_id: all
+      action: sonos.snapshot
+      data:
+        with_group: true
+    - data:
+        volume_level: 0.65
+      action: media_player.volume_set
+      target:
+        entity_id:
+          - media_player.kitchen
+    - target:
+        entity_id:
+          - media_player.kitchen
+      data:
+        media_content_type: music
+        media_content_id: /local/chime-mudroom-door.mp3
+      action: media_player.play_media
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - target:
+        entity_id: all
+      action: sonos.restore
+      data:
+        with_group: true
+  mode: single

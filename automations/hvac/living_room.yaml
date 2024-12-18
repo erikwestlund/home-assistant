@@ -1,0 +1,49 @@
+- id: living_room_heat_control
+  alias: Living Room Heat Control
+  description:
+    "Controls the living room heat pump to maintain efficiency by setting
+    it to 68°F, except turning it off over 73°F and back on at 71°F."
+  trigger:
+    - platform: state
+      entity_id: sensor.living_room_avg_temperature
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template:
+                "{{ states('sensor.living_room_avg_temperature') | float(0)
+                > 73 }}"
+          sequence:
+            - service: climate.turn_off
+              data:
+                entity_id: climate.living_room_heat_pump
+        - conditions:
+            - condition: state
+              entity_id: climate.living_room_heat_pump
+              state: "off"
+            - condition: template
+              value_template:
+                "{{ states('sensor.living_room_avg_temperature') | float(0)
+                <= 71 }}"
+          sequence:
+            - service: climate.turn_on
+              data:
+                entity_id: climate.living_room_heat_pump
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.living_room_heat_pump
+                temperature: 68.0
+        - conditions:
+            - condition: state
+              entity_id: climate.living_room_heat_pump
+              state: heat
+            - condition: template
+              value_template:
+                "{{ states('sensor.living_room_avg_temperature') | float(0)
+                <= 73 }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.living_room_heat_pump
+                temperature: 68.0
+  mode: single
