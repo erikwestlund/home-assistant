@@ -1,4 +1,4 @@
-office_heatpump_supplemental_temperature:
+office_heatpump_supplemental_setpoint:
   name: Office Heat Pump Supplemental Temperature
   min: 60
   max: 80
@@ -6,7 +6,7 @@ office_heatpump_supplemental_temperature:
   unit_of_measurement: "°F"
   initial: 64
 
-office_heatpump_comfort_night_temperature:
+office_heatpump_comfort_night_setpoint:
   name: Office Heat Pump Comfort Temperature (Night)
   min: 60
   max: 80
@@ -14,7 +14,7 @@ office_heatpump_comfort_night_temperature:
   unit_of_measurement: "°F"
   initial: 66
 
-office_heatpump_comfort_weekday_occupied_temperature:
+office_heatpump_comfort_weekday_occupied_setpoint:
   name: Office Heat Pump Comfort Temperature (Weekday Occupied)
   min: 60
   max: 80
@@ -22,7 +22,7 @@ office_heatpump_comfort_weekday_occupied_temperature:
   unit_of_measurement: "°F"
   initial: 70
 
-office_heatpump_comfort_weekday_unoccupied_temperature:
+office_heatpump_comfort_weekday_unoccupied_setpoint:
   name: Office Heat Pump Comfort Temperature (Weekday Unoccupied)
   min: 60
   max: 80
@@ -30,7 +30,7 @@ office_heatpump_comfort_weekday_unoccupied_temperature:
   unit_of_measurement: "°F"
   initial: 64
 
-office_heatpump_comfort_weekend_occupied_temperature:
+office_heatpump_comfort_weekend_occupied_setpoint:
   name: Office Heat Pump Comfort Temperature (Weekend Occupied)
   min: 60
   max: 80
@@ -38,7 +38,7 @@ office_heatpump_comfort_weekend_occupied_temperature:
   unit_of_measurement: "°F"
   initial: 70
 
-office_heatpump_comfort_weekend_unoccupied_temperature:
+office_heatpump_comfort_weekend_unoccupied_setpoint:
   name: Office Heat Pump Comfort Temperature (Weekend Unoccupied)
   min: 60
   max: 80
