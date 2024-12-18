@@ -1,6 +1,6 @@
-- id: set_office_radiator_temperature_with_logging
-  alias: "Set Office Radiator Temperature with Logging"
-  description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day. Includes detailed logging."
+- id: set_office_radiator_temperature_with_debug
+  alias: "Set Office Radiator Temperature with Debug Logging"
+  description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day, with detailed logging."
   trigger:
     - platform: state
       entity_id:
@@ -20,9 +20,9 @@
     - variables:
         current_time: "{{ now().timestamp() }}"
         occupied_start: >-
-          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_start_time')) | float(0) }}
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_start_time') | default('1970-01-01T00:00:00')) }}
         occupied_end: >-
-          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_end_time')) | float(0) }}
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_end_time') | default('1970-01-01T23:59:59')) }}
         is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
         is_occupied: >-
           {% if occupied_start <= current_time <= occupied_end %}
@@ -35,6 +35,7 @@
       data:
         name: "Office Radiator Automation"
         message: >
+          Debugging Variables: 
           current_time={{ current_time }},
           occupied_start={{ occupied_start }},
           occupied_end={{ occupied_end }},
@@ -42,20 +43,6 @@
           is_occupied={{ is_occupied }},
           is_weekday={{ is_weekday }}
     - choose:
-        # Nighttime temperature
-        - conditions:
-            - condition: template
-              value_template: "{{ not is_daytime }}"
-          sequence:
-            - service: logbook.log
-              data:
-                name: "Office Radiator Automation"
-                message: "Nighttime detected. Setting to night setpoint."
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.office
-                temperature: "{{ states('input_number.office_radiator_night_setpoint') | float(0) }}"
-        # Daytime temperature
         - conditions:
             - condition: template
               value_template: "{{ is_daytime }}"
