@@ -14,3 +14,11 @@ heatpump_overheated_threshold_offset:
   step: 1
   unit_of_measurement: "°F"
   initial: 2
+
+heatpump_cooling_default_setpoint:
+  name: Heat Pump Cooling Default Setpoint
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 71

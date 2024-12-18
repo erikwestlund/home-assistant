@@ -18,11 +18,3 @@ heatpump_room_tab:
   initial: "Office"
   icon: mdi:home-group
 
-hvac_mode:
-  name: HVAC Mode
-  options:
-    - "Heat"
-    - "Cool"
-    - "Off"
-  initial: "Off"
-  icon: mdi:thermostat
