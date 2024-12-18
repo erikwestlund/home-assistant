@@ -28,11 +28,18 @@
         current_time: "{{ now().timestamp() }}"
         occupied_start: >-
           {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
-          (states('input_datetime.office_apply_occupied_start_time') | default('00:00:00'))) }}
+          (states('input_datetime.office_apply_occupied_start_time') | default('05:00:00'))) }}
         occupied_end: >-
           {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
           (states('input_datetime.office_apply_occupied_end_time') | default('23:59:59'))) }}
-        is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
+        is_early_work_mode: "{{ is_state('input_boolean.office_early_work_mode', 'on') }}"
+        is_daytime: >-
+          {% if is_early_work_mode %}
+            {{ now().timestamp() >= as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+            (states('input_datetime.office_early_work_mode_day_start_time') | default('03:00:00'))) }}
+          {% else %}
+            {{ is_state('binary_sensor.daytime_status', 'on') }}
+          {% endif %}
         is_occupied: >-
           {% if occupied_start <= current_time <= occupied_end %}
             {{ is_state('binary_sensor.office_occupied', 'on') }}
@@ -48,6 +55,7 @@
           current_time={{ current_time }},
           occupied_start={{ occupied_start }},
           occupied_end={{ occupied_end }},
+          is_early_work_mode={{ is_early_work_mode }},
           is_daytime={{ is_daytime }},
           is_occupied={{ is_occupied }},
           is_weekday={{ is_weekday }}
