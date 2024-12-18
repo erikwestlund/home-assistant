@@ -1,6 +1,6 @@
-- id: set_office_radiator_temperature
-  alias: "Set Office Radiator Temperature"
-  description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day."
+- id: set_office_radiator_temperature_logging
+  alias: "Set Office Radiator Temperature - Logging Only"
+  description: "Log all variables and conditions for debugging purposes before applying actions."
   trigger:
     - platform: state
       entity_id:
@@ -35,11 +35,9 @@
       data:
         name: "Office Radiator Automation"
         message: >
-          Variables:
           current_time={{ current_time }},
           occupied_start={{ occupied_start }},
           occupied_end={{ occupied_end }},
           is_daytime={{ is_daytime }},
           is_occupied={{ is_occupied }},
           is_weekday={{ is_weekday }}
-  mode: single
