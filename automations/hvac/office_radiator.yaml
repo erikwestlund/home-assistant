@@ -1,5 +1,5 @@
 - id: set_office_radiator_temperature_with_actions
-  alias: "Set Office Radiator Temperature with Debug Logging and Actions"
+  alias: "Set Office Radiator Temperature"
   description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day, with detailed logging and actions."
   trigger:
     - platform: state
