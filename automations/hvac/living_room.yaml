@@ -2,17 +2,17 @@
   alias: Living Room Heat Control
   description:
     "Controls the living room heat pump to maintain efficiency by setting
-    it to 68°F, except turning it off over 73°F and back on at 71°F."
+    it to 66°F, except turning it off over 72°F and back on at 70°F."
   trigger:
     - platform: state
-      entity_id: sensor.living_room_avg_temperature
+      entity_id: sensor.living_room_average_temperature
   action:
     - choose:
         - conditions:
             - condition: template
               value_template:
-                "{{ states('sensor.living_room_avg_temperature') | float(0)
-                > 73 }}"
+                "{{ states('sensor.living_room_average_temperature') | float(0)
+                > 72 }}"
           sequence:
             - service: climate.turn_off
               data:
@@ -23,8 +23,8 @@
               state: "off"
             - condition: template
               value_template:
-                "{{ states('sensor.living_room_avg_temperature') | float(0)
-                <= 71 }}"
+                "{{ states('sensor.living_room_average_temperature') | float(0)
+                <= 70 }}"
           sequence:
             - service: climate.turn_on
               data:
@@ -32,18 +32,18 @@
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_room_heat_pump
-                temperature: 68.0
+                temperature: 66.0
         - conditions:
             - condition: state
               entity_id: climate.living_room_heat_pump
               state: heat
             - condition: template
               value_template:
-                "{{ states('sensor.living_room_avg_temperature') | float(0)
-                <= 73 }}"
+                "{{ states('sensor.living_room_average_temperature') | float(0)
+                <= 72 }}"
           sequence:
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_room_heat_pump
-                temperature: 68.0
+                temperature: 66.0
   mode: single
