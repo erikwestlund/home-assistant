@@ -17,21 +17,35 @@
       entity_id: input_select.hvac_mode
       state: "Heat"
   action:
+    - variables:
+        current_time: "{{ now().timestamp() }}"
+        occupied_start: >-
+          {{ as_timestamp(states('input_datetime.office_apply_occupied_start_time') | default('1970-01-01T00:00:00')) | float(0) }}
+        occupied_end: >-
+          {{ as_timestamp(states('input_datetime.office_apply_occupied_end_time') | default('1970-01-01T23:59:59')) | float(0) }}
+        is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
+        is_occupied: >-
+          {% if occupied_start <= current_time <= occupied_end %}
+            {{ is_state('binary_sensor.office_occupied', 'on') }}
+          {% else %}
+            false
+          {% endif %}
+        is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
     - service: logbook.log
       data:
-        name: "Office Radiator Automation"
+        name: "Office Radiator Debug"
         message: >
-          Variables: current_time={{ now().timestamp() }},
-          occupied_start={{ now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_start_time') }},
-          occupied_end={{ now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_end_time') }},
-          is_daytime={{ is_state('binary_sensor.daytime_status', 'on') }},
-          is_occupied={% if occupied_start <= current_time <= occupied_end %}{{ is_state('binary_sensor.office_occupied', 'on') }}{% else %}false{% endif %},
-          is_weekday={{ is_state('input_select.day_of_week_status', 'Weekday') }}
+          current_time: {{ current_time }},
+          occupied_start: {{ occupied_start }},
+          occupied_end: {{ occupied_end }},
+          is_daytime: {{ is_daytime }},
+          is_occupied: {{ is_occupied }},
+          is_weekday: {{ is_weekday }}
     - choose:
         # Nighttime temperature
         - conditions:
             - condition: template
-              value_template: "{{ not is_state('binary_sensor.daytime_status', 'on') }}"
+              value_template: "{{ not is_daytime }}"
           sequence:
             - service: climate.set_temperature
               data:
@@ -39,18 +53,18 @@
                 temperature: "{{ states('input_number.office_radiator_night_setpoint') | float(0) }}"
             - service: logbook.log
               data:
-                name: "Office Radiator Automation"
+                name: "Office Radiator"
                 message: "Set nighttime temperature."
         # Daytime temperature
         - conditions:
             - condition: template
-              value_template: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
+              value_template: "{{ is_daytime }}"
           sequence:
             - choose:
                 # Weekday and Occupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ is_state('input_select.day_of_week_status', 'Weekday') and is_occupied == true }}"
+                      value_template: "{{ is_weekday and is_occupied == true }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
@@ -58,12 +72,12 @@
                         temperature: "{{ states('input_number.office_radiator_weekday_occupied_setpoint') | float(0) }}"
                     - service: logbook.log
                       data:
-                        name: "Office Radiator Automation"
+                        name: "Office Radiator"
                         message: "Set weekday occupied temperature."
                 # Weekday and Unoccupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ is_state('input_select.day_of_week_status', 'Weekday') and is_occupied == false }}"
+                      value_template: "{{ is_weekday and is_occupied == false }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
@@ -71,12 +85,12 @@
                         temperature: "{{ states('input_number.office_radiator_weekday_unoccupied_setpoint') | float(0) }}"
                     - service: logbook.log
                       data:
-                        name: "Office Radiator Automation"
+                        name: "Office Radiator"
                         message: "Set weekday unoccupied temperature."
                 # Weekend and Occupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ not is_state('input_select.day_of_week_status', 'Weekday') and is_occupied == true }}"
+                      value_template: "{{ not is_weekday and is_occupied == true }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
@@ -84,12 +98,12 @@
                         temperature: "{{ states('input_number.office_radiator_weekend_occupied_setpoint') | float(0) }}"
                     - service: logbook.log
                       data:
-                        name: "Office Radiator Automation"
+                        name: "Office Radiator"
                         message: "Set weekend occupied temperature."
                 # Weekend and Unoccupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ not is_state('input_select.day_of_week_status', 'Weekday') and is_occupied == false }}"
+                      value_template: "{{ not is_weekday and is_occupied == false }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
@@ -97,6 +111,6 @@
                         temperature: "{{ states('input_number.office_radiator_weekend_unoccupied_setpoint') | float(0) }}"
                     - service: logbook.log
                       data:
-                        name: "Office Radiator Automation"
+                        name: "Office Radiator"
                         message: "Set weekend unoccupied temperature."
   mode: single
