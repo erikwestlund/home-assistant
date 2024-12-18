@@ -10,6 +10,11 @@
         - input_datetime.office_apply_occupied_start_time
         - input_datetime.office_apply_occupied_end_time
         - input_select.hvac_mode
+        - input_number.office_radiator_night_setpoint
+        - input_number.office_radiator_weekday_occupied_setpoint
+        - input_number.office_radiator_weekday_unoccupied_setpoint
+        - input_number.office_radiator_weekend_occupied_setpoint
+        - input_number.office_radiator_weekend_unoccupied_setpoint
     - platform: time_pattern
       minutes: "/5"
   condition:
