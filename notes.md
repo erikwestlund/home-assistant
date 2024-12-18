@@ -39,7 +39,7 @@ input_number.radiators_away_setpoint
 
 ## Binary Sensors:
 
-```aiignore
+```
 
 binary_sensor.daytime_status
 binary_sensor.ducted_rooms_occupied
@@ -62,12 +62,18 @@ binary_sensor.hank_s_room_occupied
 ## Office Heat Pump
 
 ```
+
+# Indoor temperature
+sensor.tina_office_average_temperature
+
 # State:
 input_select.office_heatpump_state
+input_boolean.office_overheated_status
 
 # Thresholds
 input_number.office_heatpump_off_to_supplement_threshold
 input_number.office_heatpump_supplement_to_comfort_threshold
+input_number.office_overheated_threshold
 
 # Minisplit set points
 input_number.office_heatpump_supplemental_setpoint
