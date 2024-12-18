@@ -1,5 +1,6 @@
 - id: set_holiday_status
   alias: "Set Holiday Status"
+  description: "Determines if today is a holiday and updates the holiday_status input boolean."
   trigger:
     - platform: time
       at: "00:00:00"  # Runs every day at midnight
