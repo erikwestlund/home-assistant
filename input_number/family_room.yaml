@@ -1,11 +1,3 @@
-family_room_temperature_setpoint:
-  name: Family Room Temperature Setpoint
-  min: 60
-  max: 80
-  step: 1
-  unit_of_measurement: "°F"
-  initial: 68
-
 family_room_heatpump_off_to_supplement_threshold:
   name: Family Room Heat Pump Off Temp
   min: -10

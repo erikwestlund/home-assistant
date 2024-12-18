@@ -1,4 +1,5 @@
 - platform: history_stats
+  unique_id: office_occupancy_detected_last_hour
   name: "Office Occupancy Detected Last Hour"
   entity_id: binary_sensor.office_occupancy_detected
   state: "on"
@@ -8,6 +9,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  unique_id: family_room_occupancy_detected_last_hour
   name: "Family Room Occupancy Detected Last Hour"
   entity_id: binary_sensor.family_room_occupancy_detected
   state: "on"
@@ -17,6 +19,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  unique_id: living_room_occupancy_detected_last_hour
   name: "Living Room Occupancy Detected Last Hour"
   entity_id: binary_sensor.living_room_occupancy_detected
   state: "on"
@@ -26,6 +29,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  unique_id: dining_room_occupancy_detected_last_hour
   name: "Dining Room Occupancy Detected Last Hour"
   entity_id: binary_sensor.dining_room_occupancy_detected
   state: "on"
@@ -35,6 +39,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  unique_id: master_bedroom_occupancy_detected_last_hour
   name: "Master Bedroom Occupancy Detected Last Hour"
   entity_id: binary_sensor.master_bedroom_occupancy_detected
   state: "on"
@@ -44,6 +49,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  unique_id: tillys_room_occupancy_detected_last_hour
   name: "Tilly's Room Occupancy Detected Last Hour"
   entity_id: binary_sensor.tilly_s_room_occupancy_detected
   state: "on"
@@ -53,6 +59,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  unique_id: hanks_room_occupancy_detected_last_hour
   name: "Hank's Room Occupancy Detected Last Hour"
   entity_id: binary_sensor.hank_s_room_occupancy_detected
   state: "on"
