@@ -24,7 +24,7 @@ heatpump_cooling_default_setpoint:
   initial: 71
 
 heatpumps_away_setpoint:
-  name: Heat Pump Away Setpoint
+  name: Heat Pump Away/Vacation Setpoint
   min: 60
   max: 80
   step: 1
@@ -32,7 +32,7 @@ heatpumps_away_setpoint:
   initial: 64
 
 radiators_away_setpoint:
-  name: Radiators Away Setpoint
+  name: Radiators Away/Vacation Setpoint
   min: 60
   max: 80
   step: 1
