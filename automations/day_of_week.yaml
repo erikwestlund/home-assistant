@@ -29,3 +29,22 @@
             - service: input_boolean.turn_off
               target:
                 entity_id: input_boolean.holiday_status
+
+- id: set_day_of_week_status
+  alias: "Set Day of Week Status"
+  description: "Determines if the current day is a weekday or weekend and updates day_of_week_status."
+  trigger:
+    - platform: time
+      at: "00:00:00"  # Runs every day at midnight
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.day_of_week_status
+        option: >
+          {% if is_state('input_boolean.holiday_status', 'on') %}
+            Weekend
+          {% elif now().weekday() in [5, 6] %}
+            Weekend
+          {% else %}
+            Weekday
+          {% endif %}
