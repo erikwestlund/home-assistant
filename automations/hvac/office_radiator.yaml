@@ -15,7 +15,7 @@
   condition:
     - condition: state
       entity_id: input_select.hvac_mode
-      state: "heat"
+      state: "Heat"
   action:
     - variables:
         current_time: "{{ now().timestamp() }}"
