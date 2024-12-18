@@ -20,9 +20,9 @@
     - variables:
         current_time: "{{ now().timestamp() }}"
         occupied_start: >-
-          {{ as_timestamp(states('input_datetime.office_apply_occupied_start_time') | default('1970-01-01T00:00:00')) }}
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_start_time')) }}
         occupied_end: >-
-          {{ as_timestamp(states('input_datetime.office_apply_occupied_end_time') | default('1970-01-01T23:59:59')) }}
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_end_time')) }}
         is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
         is_occupied: >-
           {% if occupied_start <= current_time <= occupied_end %}
