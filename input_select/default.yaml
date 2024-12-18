@@ -6,6 +6,13 @@ day_night_mode:
     - "Night"
   initial: "Auto"
 
+day_of_week_status:
+  name: Day of Week Status
+  options:
+    - "Weekend"
+    - "Weekday"
+  initial: "Weekday"
+
 heatpump_room_tab:
   name: Heat Pump Room Tabs
   options:
