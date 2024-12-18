@@ -1,6 +1,6 @@
-- id: set_office_radiator_temperature_with_debug
-  alias: "Set Office Radiator Temperature with Debug Logging"
-  description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day, with detailed logging."
+- id: set_office_radiator_temperature_with_actions
+  alias: "Set Office Radiator Temperature with Debug Logging and Actions"
+  description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day, with detailed logging and actions."
   trigger:
     - platform: state
       entity_id:
@@ -45,6 +45,20 @@
           is_occupied={{ is_occupied }},
           is_weekday={{ is_weekday }}
     - choose:
+        # Nighttime temperature
+        - conditions:
+            - condition: template
+              value_template: "{{ not is_daytime }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Office Radiator Automation"
+                message: "Nighttime detected. Setting radiator to night setpoint."
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.office
+                temperature: "{{ states('input_number.office_radiator_night_setpoint') | float(0) }}"
+        # Daytime temperature
         - conditions:
             - condition: template
               value_template: "{{ is_daytime }}"
@@ -83,7 +97,7 @@
                 # Weekend and Occupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ not is_weekday and is_occupied == true }}"
+                      value_template: "{{ not is_weekday and is_occupied }}"
                   sequence:
                     - service: logbook.log
                       data:
@@ -96,7 +110,7 @@
                 # Weekend and Unoccupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ not is_weekday and is_occupied == false }}"
+                      value_template: "{{ not is_weekday and not is_occupied }}"
                   sequence:
                     - service: logbook.log
                       data:
