@@ -15,9 +15,9 @@
             now().replace(month=7, day=4).date()    # Independence Day
           ] %}
           {% if today.weekday() in [5, 6] %}  # Saturday or Sunday
-            Weekend
+            "Weekend"
           {% elif today in holidays %}
-            Weekend
+            "Weekend"
           {% else %}
-            Weekday
+            "Weekday"
           {% endif %}
