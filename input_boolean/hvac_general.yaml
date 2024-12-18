@@ -1,0 +1,4 @@
+hvac_away_mode:
+  name: Vacation Mode
+  initial: off
+  icon: mdi:calendar

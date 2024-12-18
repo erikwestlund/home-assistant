@@ -22,3 +22,19 @@ heatpump_cooling_default_setpoint:
   step: 1
   unit_of_measurement: "°F"
   initial: 71
+
+heatpumps_away_setpoint:
+  name: Heat Pump Away Setpoint
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+radiators_away_setpoint:
+  name: Radiators Away Setpoint
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 60
