@@ -1,0 +1,87 @@
+- id: set_office_heatpump_mode
+  alias: "Set Office Heat Pump Mode Based on Outdoor Temperature"
+  description: "Automatically adjust the office heat pump state based on outdoor temperature with hysteresis."
+  trigger:
+    - platform: state
+      entity_id: sensor.current_nws_outdoor_temperature  # Trigger when outdoor temperature changes
+  condition: []
+  action:
+    - variables:
+        current_temp: "{{ states('sensor.current_nws_outdoor_temperature') | float(0) }}"
+        off_to_supplement: "{{ states('input_number.office_heatpump_off_to_supplement_threshold') | float(0) }}"
+        supplement_to_comfort: "{{ states('input_number.office_heatpump_supplement_to_comfort_threshold') | float(0) }}"
+        hysteresis: "{{ states('input_number.heatpump_mode_threshold_offset') | float(0) }}"
+        current_mode: "{{ states('input_select.office_heatpump_state') }}"
+    - service: logbook.log
+      data:
+        name: "Office Heat Pump Mode Automation"
+        message: >
+          Evaluating heat pump mode with current temperature: {{ current_temp }},
+          thresholds: Off to Supplement: {{ off_to_supplement }},
+          Supplement to Comfort: {{ supplement_to_comfort }},
+          current mode: {{ current_mode }}.
+
+    - choose:
+        # Turn off if temperature drops below off_to_supplement threshold
+        - conditions:
+            - condition: template
+              value_template: "{{ current_temp < off_to_supplement }}"
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.office_heatpump_state
+                option: "Off"
+            - service: logbook.log
+              data:
+                name: "Office Heat Pump Mode Automation"
+                message: "Temperature below {{ off_to_supplement }}. Switching to Off mode."
+
+        # Switch to Supplement if temperature rises above off_to_supplement + hysteresis
+        # but is still below supplement_to_comfort
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ current_temp >= (off_to_supplement + hysteresis) and
+                   current_temp < supplement_to_comfort }}
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.office_heatpump_state
+                option: "Supplement"
+            - service: logbook.log
+              data:
+                name: "Office Heat Pump Mode Automation"
+                message: >
+                  Temperature above {{ off_to_supplement + hysteresis }} but below {{ supplement_to_comfort }}.
+                  Switching to Supplement mode.
+
+        # Switch to Comfort if temperature rises above supplement_to_comfort + hysteresis
+        - conditions:
+            - condition: template
+              value_template: "{{ current_temp >= (supplement_to_comfort + hysteresis) }}"
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.office_heatpump_state
+                option: "Comfort"
+            - service: logbook.log
+              data:
+                name: "Office Heat Pump Mode Automation"
+                message: >
+                  Temperature above {{ supplement_to_comfort + hysteresis }}. Switching to Comfort mode.
+
+        # Maintain current state if no conditions are met
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ (current_mode == "Off" and current_temp >= off_to_supplement) or
+                   (current_mode == "Supplement" and
+                    current_temp >= supplement_to_comfort + hysteresis) or
+                   (current_mode == "Comfort" and current_temp < supplement_to_comfort) }}
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Office Heat Pump Mode Automation"
+                message: >
+                  No changes required. Current mode remains: {{ current_mode }}.
+  mode: single

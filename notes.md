@@ -58,3 +58,31 @@ binary_sensor.tilly_s_room_occupied
 binary_sensor.hank_s_room_occupancy_detected
 binary_sensor.hank_s_room_occupied
 ```
+
+## Office Heat Pump
+
+```
+# State:
+input_select.office_heatpump_state
+
+# Thresholds
+input_number.office_heatpump_off_to_supplement_threshold
+input_number.office_heatpump_supplement_to_comfort_threshold
+
+# Minisplit set points
+input_number.office_heatpump_supplemental_setpoint
+input_number.office_heatpump_overheat_setpoint
+input_number.office_heatpump_comfort_night_setpoint
+input_number.office_heatpump_comfort_weekday_occupied_setpoint
+input_number.office_heatpump_comfort_weekday_unoccupied_setpoint
+input_number.office_heatpump_comfort_weekend_occupied_setpoint
+input_number.office_heatpump_comfort_weekend_unoccupied_setpoint
+
+# Radiator setpoints
+input_number.office_radiator_night_setpoint
+input_number.office_radiator_weekday_occupied_setpoint
+input_number.office_radiator_weekday_unoccupied_setpoint
+input_number.office_radiator_weekend_occupied_setpoint
+input_number.office_radiator_weekend_unoccupied_setpoint
+
+```
