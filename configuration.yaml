@@ -13,6 +13,228 @@ input_datetime: !include_dir_merge_named input_datetime/
 input_select: !include_dir_merge_named input_select/
 input_number: !include_dir_merge_named input_number/
 template:
-  - binary_sensor: !include_dir_merge_list template/binary_sensor/
-  - sensor: !include_dir_merge_list template/sensor/
-sensor: !include_dir_merge_list sensor/
+  binary_sensor:
+    - name: "Daytime Status"
+      unique_id: daytime_status
+      state: >
+        {% set mode = states('input_select.day_night_mode') %}
+        {% set today = now().strftime('%Y-%m-%d') %}
+        {% set day_start = today ~ 'T' ~ states('input_datetime.day_start_time') %}
+        {% set night_start = today ~ 'T' ~ states('input_datetime.night_start_time') %}
+        {% set day_start_ts = as_timestamp(strptime(day_start, '%Y-%m-%dT%H:%M:%S')) %}
+        {% set night_start_ts = as_timestamp(strptime(night_start, '%Y-%m-%dT%H:%M:%S')) %}
+        {% set now_ts = now().timestamp() %}
+
+        {% if mode == 'Day' %}
+            true
+        {% elif mode == 'Night' %}
+            false
+        {% else %}
+            {{ day_start_ts <= now_ts < night_start_ts }}
+        {% endif %}
+
+    # Office
+    - name: "Office Occupancy Detected"
+      unique_id: office_occupancy_detected
+      device_class: occupancy
+      state: >
+        {{ is_state('binary_sensor.office_occupancy', 'on')
+          or is_state('binary_sensor.office_bookshelf_occupancy', 'on')
+          or is_state('binary_sensor.tina_desk_occupancy', 'on') }}
+
+    - name: "Office Occupied"
+      unique_id: office_occupied
+      device_class: occupancy
+      state: >
+        {% set recent_occupancy = is_state('binary_sensor.office_occupancy_detected', 'on') %}
+        {% set occupancy_in_last_hour = states('sensor.office_occupancy_detected_last_hour') | float(0) > 0 %}
+        {{ recent_occupancy or occupancy_in_last_hour }}
+
+    # Family Room
+    - name: "Family Room Occupancy Detected"
+      unique_id: family_room_occupancy_detected
+      device_class: occupancy
+      state: >
+        {{ is_state('binary_sensor.family_room_heating_motion', 'on')
+          or is_state('binary_sensor.bookshelf_motion', 'on')
+          or is_state('binary_sensor.family_room_toyshelf_motion', 'on')
+          or is_state('binary_sensor.lamp_motion', 'on') }}
+
+    - name: "Family Room Occupied"
+      unique_id: family_room_occupied
+      device_class: occupancy
+      state: >
+        {% set recent_occupancy = is_state('binary_sensor.family_room_occupancy_detected', 'on') %}
+        {% set occupancy_in_last_hour = states('sensor.family_room_occupancy_detected_last_hour') | float(0) > 0 %}
+        {{ recent_occupancy or occupancy_in_last_hour }}
+
+    # Living Room
+    - name: "Living Room Occupancy Detected"
+      unique_id: living_room_occupancy_detected
+      device_class: occupancy
+      state: >
+        {{ is_state('binary_sensor.living_room_main_heating_occupancy', 'on')
+          or is_state('binary_sensor.living_room_radiator_occupancy', 'on') }}
+
+    - name: "Living Room Occupied"
+      unique_id: living_room_occupied
+      device_class: occupancy
+      state: >
+        {% set recent_occupancy = is_state('binary_sensor.living_room_occupancy_detected', 'on') %}
+        {% set occupancy_in_last_hour = states('sensor.living_room_occupancy_detected_last_hour') | float(0) > 0 %}
+        {{ recent_occupancy or occupancy_in_last_hour }}
+
+    # Dining Room
+    - name: "Dining Room Occupancy Detected"
+      unique_id: dining_room_occupancy_detected
+      device_class: occupancy
+      state: >
+        {{ is_state('binary_sensor.dining_room_motion', 'on') }}
+
+    - name: "Dining Room Occupied"
+      unique_id: dining_room_occupied
+      device_class: occupancy
+      state: >
+        {% set recent_occupancy = is_state('binary_sensor.dining_room_occupancy_detected', 'on') %}
+        {% set occupancy_in_last_hour = states('sensor.dining_room_occupancy_detected_last_hour') | float(0) > 0 %}
+        {{ recent_occupancy or occupancy_in_last_hour }}
+
+    # Master Bedroom
+    - name: "Master Bedroom Occupancy Detected"
+      unique_id: master_bedroom_occupancy_detected
+      device_class: occupancy
+      state: >
+        {{ is_state('binary_sensor.master_bedroom_occupancy', 'on') }}
+
+    - name: "Master Bedroom Occupied"
+      unique_id: master_bedroom_occupied
+      device_class: occupancy
+      state: >
+        {% set recent_occupancy = is_state('binary_sensor.master_bedroom_occupancy_detected', 'on') %}
+        {% set occupancy_in_last_hour = states('sensor.master_bedroom_occupancy_detected_last_hour') | float(0) > 0 %}
+        {{ recent_occupancy or occupancy_in_last_hour }}
+
+    # Tilly's Room
+    - name: "Tilly's Room Occupancy Detected"
+      unique_id: tillys_room_occupancy_detected
+      device_class: occupancy
+      state: >
+        {{ is_state('binary_sensor.tillys_room_occupancy', 'on') }}
+
+    - name: "Tilly's Room Occupied"
+      unique_id: tillys_room_occupied
+      device_class: occupancy
+      state: >
+        {% set recent_occupancy = is_state('binary_sensor.tillys_room_occupancy_detected', 'on') %}
+        {% set occupancy_in_last_hour = states('sensor.tillys_room_occupancy_detected_last_hour') | float(0) > 0 %}
+        {{ recent_occupancy or occupancy_in_last_hour }}
+
+    # Hank's Room
+    - name: "Hank's Room Occupancy Detected"
+      unique_id: hanks_room_occupancy_detected
+      device_class: occupancy
+      state: >
+        {{ is_state('binary_sensor.hanks_room_occupancy', 'on') }}
+
+    - name: "Hank's Room Occupied"
+      unique_id: hanks_room_occupied
+      device_class: occupancy
+      state: >
+        {% set recent_occupancy = is_state('binary_sensor.hanks_room_occupancy_detected', 'on') %}
+        {% set occupancy_in_last_hour = states('sensor.hanks_room_occupancy_detected_last_hour') | float(0) > 0 %}
+        {{ recent_occupancy or occupancy_in_last_hour }}
+
+  sensor:
+    - name: "Current NWS Outdoor Temperature"
+      unique_id: current_nws_outdoor_temperature
+      unit_of_measurement: "°F"
+      state: "{{ state_attr('weather.kowd', 'temperature') }}"
+
+    - name: "Current NWS Outdoor Humidity"
+      unique_id: current_nws_outdoor_humidity
+      unit_of_measurement: "%"
+      state: "{{ state_attr('weather.kowd', 'humidity') }}"
+
+    - name: "Current NWS Outdoor Pressure"
+      unique_id: current_nws_outdoor_pressure
+      unit_of_measurement: "inHg"
+      state: "{{ state_attr('weather.kowd', 'pressure') }}"
+
+    - name: "Current NWS Outdoor Wind Speed"
+      unique_id: current_nws_outdoor_wind_speed
+      unit_of_measurement: "mph"
+      state: "{{ state_attr('weather.kowd', 'wind_speed') }}"
+
+    - name: "Current NWS Outdoor Wind Bearing"
+      unique_id: current_nws_outdoor_wind_bearing
+      unit_of_measurement: "°"
+      state: "{{ state_attr('weather.kowd', 'wind_bearing') }}"
+
+    - name: "Current NWS Outdoor Visibility"
+      unique_id: current_nws_outdoor_visibility
+      unit_of_measurement: "mi"
+      state: "{{ state_attr('weather.kowd', 'visibility') }}"
+
+sensor:
+  - platform: history_stats
+    name: "Office Occupancy Detected Last Hour"
+    entity_id: binary_sensor.office_occupancy_detected
+    state: "on"
+    type: count
+    duration:
+      minutes: 60
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "Family Room Occupancy Detected Last Hour"
+    entity_id: binary_sensor.family_room_occupancy_detected
+    state: "on"
+    type: count
+    duration:
+      minutes: 60
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "Living Room Occupancy Detected Last Hour"
+    entity_id: binary_sensor.living_room_occupancy_detected
+    state: "on"
+    type: count
+    duration:
+      minutes: 60
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "Dining Room Occupancy Detected Last Hour"
+    entity_id: binary_sensor.dining_room_occupancy_detected
+    state: "on"
+    type: count
+    duration:
+      minutes: 60
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "Master Bedroom Occupancy Detected Last Hour"
+    entity_id: binary_sensor.master_bedroom_occupancy_detected
+    state: "on"
+    type: count
+    duration:
+      minutes: 60
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "Tilly's Room Occupancy Detected Last Hour"
+    entity_id: binary_sensor.tilly_s_room_occupancy_detected
+    state: "on"
+    type: count
+    duration:
+      minutes: 60
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "Hank's Room Occupancy Detected Last Hour"
+    entity_id: binary_sensor.hank_s_room_occupancy_detected
+    state: "on"
+    type: count
+    duration:
+      minutes: 60
+    end: "{{ now() }}"
