@@ -84,14 +84,14 @@
   unique_id: tillys_room_occupancy_detected
   device_class: occupancy
   state: >
-    {{ is_state('binary_sensor.tillys_room_occupancy', 'on') }}
+    {{ is_state('binary_sensor.tilly_s_room_occupancy', 'on') }}
 
 - name: "Tilly's Room Occupied"
   unique_id: tillys_room_occupied
   device_class: occupancy
   state: >
-    {% set recent_occupancy = is_state('binary_sensor.tillys_room_occupancy_detected', 'on') %}
-    {% set occupancy_in_last_hour = states('sensor.tillys_room_occupancy_detected_last_hour') | float(0) > 0 %}
+    {% set recent_occupancy = is_state('binary_sensor.tilly_s_room_occupancy_detected', 'on') %}
+    {% set occupancy_in_last_hour = states('sensor.tilly_s_room_occupancy_detected_last_hour') | float(0) > 0 %}
     {{ recent_occupancy or occupancy_in_last_hour }}
 
 # Hank's Room
@@ -99,12 +99,12 @@
   unique_id: hanks_room_occupancy_detected
   device_class: occupancy
   state: >
-    {{ is_state('binary_sensor.hanks_room_occupancy', 'on') }}
+    {{ is_state('binary_sensor.hank_s_room_occupancy', 'on') }}
 
 - name: "Hank's Room Occupied"
   unique_id: hanks_room_occupied
   device_class: occupancy
   state: >
-    {% set recent_occupancy = is_state('binary_sensor.hanks_room_occupancy_detected', 'on') %}
-    {% set occupancy_in_last_hour = states('sensor.hanks_room_occupancy_detected_last_hour') | float(0) > 0 %}
+    {% set recent_occupancy = is_state('binary_sensor.hank_s_room_occupancy_detected', 'on') %}
+    {% set occupancy_in_last_hour = states('sensor.hank_s_room_occupancy_detected_last_hour') | float(0) > 0 %}
     {{ recent_occupancy or occupancy_in_last_hour }}
