@@ -20,4 +20,4 @@ office_apply_occupied_end_time:
   name: Tina Office Apply Occupied End Time
   has_time: true
   has_date: false
-  initial: "09:00:00"
+  initial: "20:59:00"
