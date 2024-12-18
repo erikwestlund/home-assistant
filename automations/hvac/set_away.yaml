@@ -1,5 +1,5 @@
 - id: set_hvac_to_away_mode
-  alias: "Set HVAC to Away Mode with Logging"
+  alias: "Set HVAC to Away Mode"
   description: "Adjusts all thermostats to their away setpoints when HVAC away mode is enabled."
   trigger:
     - platform: state
