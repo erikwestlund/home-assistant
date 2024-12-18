@@ -1,6 +1,6 @@
-- id: set_office_radiator_temperature
-  alias: "Set Office Radiator Temperature"
-  description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day."
+- id: set_office_radiator_temperature_with_logging
+  alias: "Set Office Radiator Temperature with Logging"
+  description: "Adjust the radiator temperature based on HVAC mode, occupancy, and time of day. Includes detailed logging."
   trigger:
     - platform: state
       entity_id:
@@ -31,12 +31,26 @@
             false
           {% endif %}
         is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
+    - service: logbook.log
+      data:
+        name: "Office Radiator Automation"
+        message: >
+          current_time={{ current_time }},
+          occupied_start={{ occupied_start }},
+          occupied_end={{ occupied_end }},
+          is_daytime={{ is_daytime }},
+          is_occupied={{ is_occupied }},
+          is_weekday={{ is_weekday }}
     - choose:
         # Nighttime temperature
         - conditions:
             - condition: template
               value_template: "{{ not is_daytime }}"
           sequence:
+            - service: logbook.log
+              data:
+                name: "Office Radiator Automation"
+                message: "Nighttime detected. Setting to night setpoint."
             - service: climate.set_temperature
               data:
                 entity_id: climate.office
@@ -46,12 +60,20 @@
             - condition: template
               value_template: "{{ is_daytime }}"
           sequence:
+            - service: logbook.log
+              data:
+                name: "Office Radiator Automation"
+                message: "Daytime detected. Determining weekday/weekend and occupancy."
             - choose:
                 # Weekday and Occupied
                 - conditions:
                     - condition: template
                       value_template: "{{ is_weekday and is_occupied == true }}"
                   sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Office Radiator Automation"
+                        message: "Weekday and occupied. Setting to weekday occupied setpoint."
                     - service: climate.set_temperature
                       data:
                         entity_id: climate.office
@@ -61,6 +83,10 @@
                     - condition: template
                       value_template: "{{ is_weekday and is_occupied == false }}"
                   sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Office Radiator Automation"
+                        message: "Weekday and unoccupied. Setting to weekday unoccupied setpoint."
                     - service: climate.set_temperature
                       data:
                         entity_id: climate.office
@@ -70,6 +96,10 @@
                     - condition: template
                       value_template: "{{ not is_weekday and is_occupied == true }}"
                   sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Office Radiator Automation"
+                        message: "Weekend and occupied. Setting to weekend occupied setpoint."
                     - service: climate.set_temperature
                       data:
                         entity_id: climate.office
@@ -79,6 +109,10 @@
                     - condition: template
                       value_template: "{{ not is_weekday and is_occupied == false }}"
                   sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Office Radiator Automation"
+                        message: "Weekend and unoccupied. Setting to weekend unoccupied setpoint."
                     - service: climate.set_temperature
                       data:
                         entity_id: climate.office
