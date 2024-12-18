@@ -1,0 +1,17 @@
+- id: set_day_of_week_status
+  alias: "Set Day of Week Status"
+  trigger:
+    - platform: time
+      at: "00:00:00"  # Runs every day at midnight
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.day_of_week_status
+        option: >
+          {% if now().weekday() in [5, 6] %}  # Saturday or Sunday
+            Weekend
+          {% elif now().date() in ["2024-12-25", "2024-01-01"] %}  # Example holidays
+            Weekend
+          {% else %}
+            Weekday
+          {% endif %}
