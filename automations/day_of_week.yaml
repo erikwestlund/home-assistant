@@ -5,7 +5,7 @@
       at: "00:00:00"  # Runs every day at midnight
   action:
     - service: input_select.select_option
-      data_template:
+      data:
         entity_id: input_select.day_of_week_status
         option: >
           {% set today = now().date() %}
