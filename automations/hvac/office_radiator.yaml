@@ -8,8 +8,10 @@
         - input_select.day_of_week_status
         - binary_sensor.daytime_status
         - binary_sensor.office_occupied
+        - input_boolean.office_early_work_mode
         - input_datetime.office_apply_occupied_start_time
         - input_datetime.office_apply_occupied_end_time
+        - input_datetime.office_early_work_mode_day_start_time
         - input_select.hvac_mode
         - input_number.office_radiator_night_setpoint
         - input_number.office_radiator_weekday_occupied_setpoint
