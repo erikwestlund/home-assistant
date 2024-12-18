@@ -16,8 +16,8 @@ office_heatpump_supplement_to_comfort_threshold:
 
 office_overheated_threshold:
   name: Office Overheat Threshold
-  min: -10
-  max: 60
+  min: 70
+  max: 90
   step: 1
   unit_of_measurement: "°F"
   initial: 73
