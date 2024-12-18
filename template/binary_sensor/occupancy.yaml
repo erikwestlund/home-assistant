@@ -109,8 +109,8 @@
     {% set occupancy_in_last_hour = states('sensor.hanks_room_occupancy_detected_last_hour') | float(0) > 0 %}
     {{ recent_occupancy or occupancy_in_last_hour }}
 
-- name: "Ducted Occupied"
-  unique_id: ducted_occupied
+- name: "Ducted Rooms Occupied"
+  unique_id: ducted_rooms_occupied
   device_class: occupancy
   state: >
     {{ is_state('binary_sensor.hanks_room_occupied', 'on')
