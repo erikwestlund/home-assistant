@@ -1,0 +1,4 @@
+holiday_status:
+  name: Holiday Status
+  initial: off
+  icon: mdi:calendar
