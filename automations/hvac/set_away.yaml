@@ -12,18 +12,18 @@
         message: "HVAC away mode activated. Setting all thermostats to away setpoints."
 
     # Set heat pumps to away setpoint
-#    - service: climate.set_temperature
-#      data:
-#        entity_id:
-#          - climate.tinas_office_heat_pump
-#          - climate.dining_room_heat_pump
-#          - climate.family_room_heat_pump
-#          - climate.family_room_mini_split_hvac_unit
-#          - climate.living_room_heat_pump
-#          - climate.master_bedroom_heat_pump
-#          - climate.ducted_heat_pump
-#          - climate.eriks_office_room
-#        temperature: "{{ states('input_number.heatpumps_away_setpoint') | float(0) }}"
+    - service: climate.set_temperature
+      data:
+        entity_id:
+          - climate.tinas_office_heat_pump
+          - climate.dining_room_heat_pump
+          - climate.family_room_heat_pump
+          - climate.family_room_mini_split_hvac_unit
+          - climate.living_room_heat_pump
+          - climate.master_bedroom_heat_pump
+          - climate.ducted_heat_pump
+          - climate.eriks_office_room
+        temperature: "{{ states('input_number.heatpumps_away_setpoint') | float(0) }}"
     - service: logbook.log
       data:
         name: "HVAC Away Mode Automation"
@@ -32,13 +32,13 @@
           {{ states('input_number.heatpumps_away_setpoint') }}°F.
 
     # Set radiators to away setpoint
-#    - service: climate.set_temperature
-#      data:
-#        entity_id:
-#          - climate.living_room_main_heating
-#          - climate.family_room_heating
-#          - climate.office
-#        temperature: "{{ states('input_number.radiators_away_setpoint') | float(0) }}"
+    - service: climate.set_temperature
+      data:
+        entity_id:
+          - climate.living_room_main_heating
+          - climate.family_room_heating
+          - climate.office
+        temperature: "{{ states('input_number.radiators_away_setpoint') | float(0) }}"
     - service: logbook.log
       data:
         name: "HVAC Away Mode Automation"
