@@ -1,0 +1,16 @@
+# Settings
+heatpump_mode_threshold_offset:
+  name: Heat Pump Mode Threshold Offset
+  min: 0
+  max: 10
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 2
+
+heatpump_overheated_threshold_offset:
+  name: Heat Pump Mode Threshold Offset
+  min: 0
+  max: 10
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 2
