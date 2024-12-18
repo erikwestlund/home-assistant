@@ -5,7 +5,7 @@
       at: "00:00:00"  # Runs every day at midnight
   action:
     - service: input_select.select_option
-      data:
+      data_template:
         entity_id: input_select.day_of_week_status
         option: >
           {% set today = now().date() %}
@@ -14,7 +14,7 @@
             now().replace(month=1, day=1).date(),   # New Year's Day
             now().replace(month=7, day=4).date()    # Independence Day
           ] %}
-          {% if today.weekday() in [5, 6] %}  # Saturday or Sunday
+          {% if today.weekday() in [5, 6] %}  
             "Weekend"
           {% elif today in holidays %}
             "Weekend"
