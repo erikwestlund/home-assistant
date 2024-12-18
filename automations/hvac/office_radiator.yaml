@@ -4,6 +4,7 @@
   trigger:
     - platform: state
       entity_id:
+        - input_boolean.hvac_away_mode
         - input_select.day_of_week_status
         - binary_sensor.daytime_status
         - binary_sensor.office_occupied
