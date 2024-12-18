@@ -30,7 +30,7 @@
           {% if occupied_start <= current_time <= occupied_end %}
             {{ is_state('binary_sensor.office_occupied', 'on') }}
           {% else %}
-            false
+            False
           {% endif %}
         is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
     - service: logbook.log
@@ -57,7 +57,7 @@
                 # Weekday and Occupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ is_weekday and is_occupied == true }}"
+                      value_template: "{{ is_weekday and is_occupied }}"
                   sequence:
                     - service: logbook.log
                       data:
@@ -70,7 +70,7 @@
                 # Weekday and Unoccupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ is_weekday and is_occupied == false }}"
+                      value_template: "{{ is_weekday and not is_occupied }}"
                   sequence:
                     - service: logbook.log
                       data:
