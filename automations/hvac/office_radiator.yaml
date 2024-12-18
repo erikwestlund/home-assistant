@@ -16,8 +16,6 @@
         - input_number.office_radiator_weekday_unoccupied_setpoint
         - input_number.office_radiator_weekend_occupied_setpoint
         - input_number.office_radiator_weekend_unoccupied_setpoint
-    - platform: time_pattern
-      minutes: "/5"
   condition:
     - condition: state
       entity_id: input_select.hvac_mode

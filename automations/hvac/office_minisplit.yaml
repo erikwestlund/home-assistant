@@ -12,7 +12,6 @@
         - input_datetime.office_apply_occupied_end_time
         - input_select.hvac_mode
         - input_select.office_heatpump_state
-        - sensor.current_nws_outdoor_temperature
         - sensor.tina_office_average_temperature
         - input_number.office_heatpump_supplemental_setpoint
         - input_number.office_heatpump_overheat_setpoint

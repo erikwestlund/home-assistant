@@ -2,3 +2,8 @@ office_overheated_status:
     name: Office Overheated
     initial: off
     icon: mdi:fire
+
+office_early_work_mode:
+    name: Office Early Work Mode
+    initial: off
+    icon: mdi:office-building

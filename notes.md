@@ -69,6 +69,7 @@ sensor.tina_office_average_temperature
 # State:
 input_select.office_heatpump_state
 input_boolean.office_overheated_status
+input_boolean.office_early_work_mode
 
 # Thresholds
 input_number.office_heatpump_off_to_supplement_threshold
