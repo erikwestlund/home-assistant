@@ -6,6 +6,7 @@ home-assistant_v2.db
 *.db-wal
 *.db-shm
 *.pid
+.idea*
 
 # Ignore backups and cache
 .backups/
