@@ -23,8 +23,11 @@
         occupied_end: "{{ as_timestamp(states('input_datetime.office_apply_occupied_end_time')) }}"
         is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
         is_occupied: >
-          {{ (current_time >= occupied_start and current_time <= occupied_end and
-             is_state('binary_sensor.office_occupied', 'on')) }}
+          {% if occupied_start <= current_time <= occupied_end %}
+            {{ is_state('binary_sensor.office_occupied', 'on') }}
+          {% else %}
+            false
+          {% endif %}
         is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
     - choose:
         # Nighttime temperature
@@ -45,7 +48,7 @@
                 # Weekday and Occupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ is_weekday and is_occupied }}"
+                      value_template: "{{ is_weekday and is_occupied == true }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
@@ -54,7 +57,7 @@
                 # Weekday and Unoccupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ is_weekday and not is_occupied }}"
+                      value_template: "{{ is_weekday and is_occupied == false }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
@@ -63,7 +66,7 @@
                 # Weekend and Occupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ not is_weekday and is_occupied }}"
+                      value_template: "{{ not is_weekday and is_occupied == true }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
@@ -72,7 +75,7 @@
                 # Weekend and Unoccupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ not is_weekday and not is_occupied }}"
+                      value_template: "{{ not is_weekday and is_occupied == false }}"
                   sequence:
                     - service: climate.set_temperature
                       data:
