@@ -1,5 +1,4 @@
 office_overheated_status:
     name: Office Overheated
-    unique_id: office_overheated_status
     initial: off
     icon: mdi:fire
