@@ -15,4 +15,4 @@ input_number: !include_dir_merge_named input_number/
 template:
   - sensor: !include_dir_merge_named template/sensor/
   - binary_sensor: !include_dir_merge_named template/binary_sensor/
-sensor: !include_dir_merge_named sensor/
+sensor: !include_dir_merge_list sensor/
