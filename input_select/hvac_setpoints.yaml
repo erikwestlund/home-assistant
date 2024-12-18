@@ -1,17 +1,23 @@
-heat_office_setpoint_current:
-  name: Office Setpoint
+office_heatpump_setpoint_current:
+  name: Office Heat Pump Setpoint
   options:
-    - "Heat Pump Supplemental"
-    - "Heat Pump Comfort Night"
-    - "Heat Pump Comfort Weekday Occupied"
-    - "Heat Pump Comfort Weekday Unoccupied"
-    - "Heat Pump Comfort Weekend Occupied"
-    - "Heat Pump Comfort Weekend Unoccupied"
-    - "Heat Pump Overheated"
-    - "Radiator Night"
-    - "Radiator Weekday Occupied"
-    - "Radiator Weekday Unoccupied"
-    - "Radiator Weekend Occupied"
-    - "Radiator Weekend Unoccupied"
-  initial: "Heat Pump Comfort Weekday Occupied"
+    - "Comfort: Weekday Occupied"
+    - "Comfort: Weekday Unoccupied"
+    - "Comfort: Weekend Occupied"
+    - "Comfort: Weekend Unoccupied"
+    - "Comfort: Night"
+    - "Supplemental"
+    - "Overheated"
+  initial: "Comfort: Weekday Occupied"
+  icon: mdi:heat-pump
+
+office_radiator_setpoint_current:
+  name: Office Radiator Setpoint
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+  initial: "Weekday Occupied"
   icon: mdi:thermometer
