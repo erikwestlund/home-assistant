@@ -1,4 +1,4 @@
-office_setpoint_current:
+heat_office_setpoint_current:
   name: Office Setpoint
   options:
     - "Heat Pump Supplemental"
@@ -7,6 +7,7 @@ office_setpoint_current:
     - "Heat Pump Comfort Weekday Unoccupied"
     - "Heat Pump Comfort Weekend Occupied"
     - "Heat Pump Comfort Weekend Unoccupied"
+    - "Heat Pump Overheated"
     - "Radiator Night"
     - "Radiator Weekday Occupied"
     - "Radiator Weekday Unoccupied"
