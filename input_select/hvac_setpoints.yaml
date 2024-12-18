@@ -1,4 +1,4 @@
-office_setpoint_selector:
+office_setpoint_current:
   name: Office Setpoint
   options:
     - "Heat Pump Supplemental"
