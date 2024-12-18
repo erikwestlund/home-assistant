@@ -20,3 +20,7 @@ www/community/
 # Temporary files
 *.tmp
 *.swp
+
+.HA_VERSION
+.cloud*
+.storage*
