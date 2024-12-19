@@ -186,3 +186,123 @@
                         entity_id: input_select.office_heatpump_setpoint_current
                         option: "Weekend Unoccupied"
   mode: single
+
+- id: update_office_heatpump_temperature
+  alias: "Update Office Mini Split Temperature"
+  description: "Adjust the mini split temperature when the setpoint changes."
+  trigger:
+    - platform: state
+      entity_id: input_select.office_heatpump_setpoint_current
+  action:
+    - variables:
+        current_setpoint: "{{ states('input_select.office_heatpump_setpoint_current') }}"
+        override_setpoint: "{{ states('input_number.office_override_setpoint') | float(0) }}"
+        supplemental_setpoint: "{{ states('input_number.office_heatpump_supplemental_setpoint') | float(0) }}"
+        overheat_setpoint: "{{ states('input_number.office_heatpump_overheat_setpoint') | float(0) }}"
+        night_setpoint: "{{ states('input_number.office_heatpump_comfort_night_setpoint') | float(0) }}"
+        weekday_occupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekday_occupied_setpoint') | float(0) }}"
+        weekday_unoccupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekday_unoccupied_setpoint') | float(0) }}"
+        weekend_occupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') | float(0) }}"
+        weekend_unoccupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') | float(0) }}"
+    - service: logbook.log
+      data:
+        name: "Office Mini Split Setpoint Automation"
+        message: >
+          Current setpoint: {{ current_setpoint }}.
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Override' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ override_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to override setpoint: {{ override_setpoint }}."
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Supplemental' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ supplemental_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to supplemental setpoint: {{ supplemental_setpoint }}."
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Overheated' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ overheat_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to overheat setpoint: {{ overheat_setpoint }}."
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Night' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ night_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to night setpoint: {{ night_setpoint }}."
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Weekday Occupied' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ weekday_occupied_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to weekday occupied setpoint: {{ weekday_occupied_setpoint }}."
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Weekday Unoccupied' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ weekday_unoccupied_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to weekday unoccupied setpoint: {{ weekday_unoccupied_setpoint }}."
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Weekend Occupied' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ weekend_occupied_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to weekend occupied setpoint: {{ weekend_occupied_setpoint }}."
+        - conditions:
+            - condition: template
+              value_template: "{{ current_setpoint == 'Weekend Unoccupied' }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: "{{ weekend_unoccupied_setpoint }}"
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Setpoint Automation"
+                message: "Set mini split to weekend unoccupied setpoint: {{ weekend_unoccupied_setpoint }}."
