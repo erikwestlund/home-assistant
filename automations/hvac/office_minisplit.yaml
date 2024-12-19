@@ -189,10 +189,26 @@
 
 - id: update_office_heatpump_temperature
   alias: "Update Office Mini Split Temperature"
-  description: "Adjust the mini split temperature when the setpoint changes."
+  description: "Adjust the mini split temperature when the setpoint changes, only if the thermostat temperature differs from the desired setpoint."
   trigger:
     - platform: state
       entity_id: input_select.office_heatpump_setpoint_current
+  condition:
+    - condition: template
+      value_template: >
+        {{
+          states('climate.tinas_office_heat_pump') | float(0) != 
+          {
+            'Override': states('input_number.office_override_setpoint') | float(0),
+            'Supplemental': states('input_number.office_heatpump_supplemental_setpoint') | float(0),
+            'Overheated': states('input_number.office_heatpump_overheat_setpoint') | float(0),
+            'Night': states('input_number.office_heatpump_comfort_night_setpoint') | float(0),
+            'Weekday Occupied': states('input_number.office_heatpump_comfort_weekday_occupied_setpoint') | float(0),
+            'Weekday Unoccupied': states('input_number.office_heatpump_comfort_weekday_unoccupied_setpoint') | float(0),
+            'Weekend Occupied': states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') | float(0),
+            'Weekend Unoccupied': states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') | float(0)
+          }[states('input_select.office_heatpump_setpoint_current')]
+        }}
   action:
     - variables:
         current_setpoint: "{{ states('input_select.office_heatpump_setpoint_current') }}"
