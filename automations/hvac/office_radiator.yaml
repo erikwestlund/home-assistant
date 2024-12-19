@@ -148,7 +148,7 @@
 
 - id: update_office_radiator_temperature
   alias: "Update Office Radiator Temperature"
-  description: "Adjust the radiator temperature when the setpoint changes."
+  description: "Adjust the radiator temperature when the setpoint changes, only if the thermostat temperature differs."
   trigger:
     - platform: state
       entity_id: input_select.office_radiator_setpoint_current
@@ -161,81 +161,50 @@
         weekday_unoccupied_setpoint: "{{ states('input_number.office_radiator_weekday_unoccupied_setpoint') | float(0) }}"
         weekend_occupied_setpoint: "{{ states('input_number.office_radiator_weekend_occupied_setpoint') | float(0) }}"
         weekend_unoccupied_setpoint: "{{ states('input_number.office_radiator_weekend_unoccupied_setpoint') | float(0) }}"
+        thermostat_temperature: "{{ state_attr('climate.office', 'temperature') | float(0) }}"
+        new_temperature: >-
+          {% if current_setpoint == 'Override' %}
+            {{ override_setpoint }}
+          {% elif current_setpoint == 'Night' %}
+            {{ night_setpoint }}
+          {% elif current_setpoint == 'Weekday Occupied' %}
+            {{ weekday_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekday Unoccupied' %}
+            {{ weekday_unoccupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Occupied' %}
+            {{ weekend_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Unoccupied' %}
+            {{ weekend_unoccupied_setpoint }}
+          {% else %}
+            none
+          {% endif %}
     - service: logbook.log
       data:
         name: "Office Radiator Setpoint Automation"
         message: >
-          Current setpoint: {{ current_setpoint }}.
+          Current setpoint: {{ current_setpoint }}. 
+          Current thermostat temperature: {{ thermostat_temperature }}°. 
+          New thermostat temperature: {{ new_temperature }}°.
     - choose:
         - conditions:
             - condition: template
-              value_template: "{{ current_setpoint == 'Override' }}"
+              value_template: "{{ thermostat_temperature != new_temperature }}"
           sequence:
             - service: climate.set_temperature
               data:
                 entity_id: climate.office
-                temperature: "{{ override_setpoint }}"
+                temperature: "{{ new_temperature }}"
             - service: logbook.log
               data:
                 name: "Office Radiator Setpoint Automation"
-                message: "Set radiator to override setpoint: {{ override_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Night' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.office
-                temperature: "{{ night_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Radiator Setpoint Automation"
-                message: "Set radiator to night setpoint: {{ night_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekday Occupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.office
-                temperature: "{{ weekday_occupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Radiator Setpoint Automation"
-                message: "Set radiator to weekday occupied setpoint: {{ weekday_occupied_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekday Unoccupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.office
-                temperature: "{{ weekday_unoccupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Radiator Setpoint Automation"
-                message: "Set radiator to weekday unoccupied setpoint: {{ weekday_unoccupied_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekend Occupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.office
-                temperature: "{{ weekend_occupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Radiator Setpoint Automation"
-                message: "Set radiator to weekend occupied setpoint: {{ weekend_occupied_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekend Unoccupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.office
-                temperature: "{{ weekend_unoccupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Radiator Setpoint Automation"
-                message: "Set radiator to weekend unoccupied setpoint: {{ weekend_unoccupied_setpoint }}."
+                message: >
+                  Temperature updated to {{ new_temperature }}° 
+                  from {{ thermostat_temperature }}°. 
+                  Setpoint: {{ current_setpoint }}.
+    - service: logbook.log
+      data:
+        name: "Office Radiator Setpoint Automation"
+        message: >
+          No temperature change required. 
+          Current: {{ thermostat_temperature }}°. 
+          Desired: {{ new_temperature }}°.
