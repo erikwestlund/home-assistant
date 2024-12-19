@@ -32,7 +32,7 @@
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_room_heat_pump
-                temperature: 64.0
+                temperature: 64.4
         - conditions:
             - condition: state
               entity_id: climate.living_room_heat_pump
@@ -45,5 +45,5 @@
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_room_heat_pump
-                temperature: 64.0
+                temperature: 64.4
   mode: single
