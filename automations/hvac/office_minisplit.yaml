@@ -206,7 +206,7 @@
         weekend_occupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') | float(0) }}"
         weekend_unoccupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') | float(0) }}"
         thermostat_temperature: "{{ state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) }}"
-        new_temperature: >-
+        raw_new_temperature: >-
           {% if current_setpoint == 'Override' %}
             {{ override_setpoint }}
           {% elif current_setpoint == 'Supplemental' %}
@@ -226,12 +226,14 @@
           {% else %}
             {{ thermostat_temperature }}  # Default to the current thermostat temperature
           {% endif %}
+        new_temperature: "{{ max(raw_new_temperature, 64.4) }}"
     - service: logbook.log
       data:
         name: "Office Mini Split Setpoint Automation"
         message: >
           Current setpoint: {{ current_setpoint }}. 
           Current thermostat temperature: {{ thermostat_temperature }}°. 
+          Raw thermostat temperature: {{ raw_new_temperature }}°.
           New thermostat temperature: {{ new_temperature }}°.
     - choose:
         - conditions:
