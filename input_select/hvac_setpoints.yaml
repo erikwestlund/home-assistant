@@ -12,18 +12,6 @@ office_heatpump_setpoint_current:
   initial: "Weekday Occupied"
   icon: mdi:heat-pump
 
-office_radiator_setpoint_current:
-  name: Office Radiator Setpoint
-  options:
-    - "Night"
-    - "Weekday Occupied"
-    - "Weekday Unoccupied"
-    - "Weekend Occupied"
-    - "Weekend Unoccupied"
-    - "Override"
-  initial: "Weekday Occupied"
-  icon: mdi:thermometer
-
 family_room_heatpump_setpoint_current:
   name: Family Room Heat Pump Setpoint
   options:
@@ -37,6 +25,74 @@ family_room_heatpump_setpoint_current:
     - "Override"
   initial: "Weekday Occupied"
   icon: mdi:heat-pump
+
+living_room_heatpump_setpoint_current:
+  name: Living Room Heat Pump Setpoint
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Supplemental"
+    - "Overheated"
+    - "Override"
+  initial: "Weekday Occupied"
+  icon: mdi:heat-pump
+
+master_bedroom_heatpump_setpoint_current:
+  name: Master Bedroom Heat Pump Setpoint
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Supplemental"
+    - "Overheated"
+    - "Override"
+  initial: "Weekday Occupied"
+  icon: mdi:heat-pump
+
+dining_room_heatpump_setpoint_current:
+  name: Dining Room Heat Pump Setpoint
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Supplemental"
+    - "Overheated"
+    - "Override"
+  initial: "Weekday Occupied"
+  icon: mdi:heat-pump
+
+erik_office_heatpump_setpoint_current:
+  name: Erik Office Heat Pump Setpoint
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Supplemental"
+    - "Overheated"
+    - "Override"
+  initial: "Weekday Occupied"
+  icon: mdi:heat-pump
+
+office_radiator_setpoint_current:
+  name: Office Radiator Setpoint
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Override"
+  initial: "Weekday Occupied"
+  icon: mdi:thermometer
 
 family_room_radiator_setpoint_current:
   name: Family Room Radiator Setpoint
