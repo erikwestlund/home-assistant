@@ -21,3 +21,27 @@ office_radiator_setpoint_current:
     - "Weekend Unoccupied"
   initial: "Weekday Occupied"
   icon: mdi:thermometer
+
+family_room_heatpump_setpoint_current:
+  name: Family Room Heat Pump Setpoint
+  options:
+    - "Comfort: Weekday Occupied"
+    - "Comfort: Weekday Unoccupied"
+    - "Comfort: Weekend Occupied"
+    - "Comfort: Weekend Unoccupied"
+    - "Comfort: Night"
+    - "Supplemental"
+    - "Overheated"
+  initial: "Comfort: Weekday Occupied"
+  icon: mdi:heat-pump
+
+family_room_radiator_setpoint_current:
+  name: Family Room Radiator Setpoint
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+  initial: "Weekday Occupied"
+  icon: mdi:thermometer

@@ -25,3 +25,5 @@ www/community/
 .HA_VERSION
 .cloud*
 .storage*
+
+overview.yml

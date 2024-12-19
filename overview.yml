@@ -1,0 +1,1407 @@
+views:
+  - type: sections
+    max_columns: 6
+    title: HVAC
+    path: hvac
+    subview: false
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Global Settings
+            heading_style: subtitle
+            icon: mdi:cog
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.hvac_mode
+            show_entity_picture: false
+            vertical: false
+            hide_state: false
+            state_content:
+              - state
+              - last_changed
+            grid_options:
+              columns: 12
+              rows: 2
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.heatpump_mode_threshold_offset
+            vertical: false
+            hide_state: true
+            grid_options:
+              columns: 12
+              rows: 2
+            show_entity_picture: false
+            name: Mode Threshold Offset
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.day_night_mode
+            hide_state: true
+            vertical: false
+            grid_options:
+              columns: 12
+              rows: 2
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.day_of_week_status
+            hide_state: true
+            vertical: false
+            grid_options:
+              columns: 12
+              rows: 2
+            name: Weekday/Weekend
+            icon: mdi:calendar
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.heatpumps_away_setpoint
+            grid_options:
+              columns: 12
+              rows: 1
+            vertical: false
+            name: Away Setpoint (Heat Pumps)
+            color: accent
+            icon: mdi:heat-pump-outline
+          - type: tile
+            entity: input_number.radiators_away_setpoint
+            grid_options:
+              columns: 12
+              rows: 1
+            vertical: false
+            name: Away Setpoint (Radiators)
+            icon: mdi:heating-coil
+            color: red
+            features:
+              - type: numeric-input
+                style: buttons
+          - type: tile
+            entity: input_boolean.office_early_work_mode
+            vertical: true
+            name: Early Work Mode
+            state_content: last_changed
+            grid_options:
+              columns: 12
+              rows: 2
+          - type: tile
+            entity: input_boolean.hvac_away_mode
+            grid_options:
+              columns: 12
+              rows: 1
+            vertical: true
+            hide_state: false
+            state_content: state
+          - type: tile
+            entity: binary_sensor.daytime_status
+            name: Currently Daytime
+            vertical: true
+            state_content: state
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_datetime.day_start_time
+            vertical: true
+            hide_state: false
+            state_content: state
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_datetime.night_start_time
+            vertical: true
+            state_content: state
+            grid_options:
+              columns: 12
+              rows: 1
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:heat-wave
+            heading_style: subtitle
+            heading: Select A Room
+            grid_options:
+              columns: full
+              rows: 1
+          - type: horizontal-stack
+            cards:
+              - show_name: true
+                show_icon: false
+                type: button
+                name: Office
+                tap_action:
+                  action: call-service
+                  service: input_select.select_option
+                  data:
+                    entity_id: input_select.heatpump_room_tab
+                    option: Office
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-weight: {% if is_state('input_select.heatpump_room_tab', 'Office') %} 700 {% else %} 400 {% endif %};
+                      border: 2px solid {% if is_state('input_select.heatpump_room_tab', 'Office') %} darkblue {% else %} gray {% endif %};
+                    }
+              - show_name: true
+                show_icon: false
+                type: button
+                name: Family Room
+                tap_action:
+                  action: call-service
+                  service: input_select.select_option
+                  data:
+                    entity_id: input_select.heatpump_room_tab
+                    option: Family Room
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-weight: {% if is_state('input_select.heatpump_room_tab', 'Family Room') %} 700 {% else %} 400 {% endif %};
+                      border: 2px solid {% if is_state('input_select.heatpump_room_tab', 'Family Room') %} darkblue {% else %} gray {% endif %};
+                    }
+              - show_name: true
+                show_icon: false
+                type: button
+                name: Living Room
+                tap_action:
+                  action: call-service
+                  service: input_select.select_option
+                  data:
+                    entity_id: input_select.heatpump_room_tab
+                    option: Living Room
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-weight: {% if is_state('input_select.heatpump_room_tab', 'Living Room') %} 700 {% else %} 400 {% endif %};
+                      border: 2px solid {% if is_state('input_select.heatpump_room_tab', 'Living Room') %} darkblue {% else %} gray {% endif %};
+                    }
+              - show_name: true
+                show_icon: false
+                type: button
+                name: Master Bedroom
+                tap_action:
+                  action: call-service
+                  service: input_select.select_option
+                  data:
+                    entity_id: input_select.heatpump_room_tab
+                    option: Master Bedroom
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-weight: {% if is_state('input_select.heatpump_room_tab', 'Master Bedroom') %} 700 {% else %} 400 {% endif %};
+                      border: 2px solid {% if is_state('input_select.heatpump_room_tab', 'Master Bedroom') %} darkblue {% else %} gray {% endif %};
+                    }
+              - show_name: true
+                show_icon: false
+                type: button
+                name: Dining Room
+                tap_action:
+                  action: call-service
+                  service: input_select.select_option
+                  data:
+                    entity_id: input_select.heatpump_room_tab
+                    option: Dining Room
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-weight: {% if is_state('input_select.heatpump_room_tab', 'Dining Room') %} 700 {% else %} 400 {% endif %};
+                      border: 2px solid {% if is_state('input_select.heatpump_room_tab', 'Dining Room') %} darkblue {% else %} gray {% endif %};
+                    }
+              - show_name: true
+                show_icon: false
+                type: button
+                name: Ducted
+                tap_action:
+                  action: call-service
+                  service: input_select.select_option
+                  data:
+                    entity_id: input_select.heatpump_room_tab
+                    option: Ducted
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-weight: {% if is_state('input_select.heatpump_room_tab', 'Ducted') %} 700 {% else %} 400 {% endif %};
+                      border: 2px solid {% if is_state('input_select.heatpump_room_tab', 'Ducted') %} darkblue {% else %} gray {% endif %};
+                    }
+            grid_options:
+              columns: full
+              rows: 1
+        column_span: 4
+      # Office
+      - type: grid
+        cards:
+          - type: heading
+            heading: Office
+            heading_style: title
+            icon: mdi:chair-rolling
+            grid_options:
+              columns: full
+              rows: 1
+          - type: heading
+            heading: Current Status
+            heading_style: subtitle
+            icon: mdi:cog-outline
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.office_heatpump_state
+            vertical: false
+            state_content: last_changed
+            name: Efficiency Mode
+            grid_options:
+              columns: 12
+              rows: 2
+            icon: mdi:heat-wave
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.office_heatpump_setpoint_current
+            name: Current Heat Pump Setpoint
+            icon: mdi:heat-pump-outline
+            color: accent
+            state_content: last_changed
+            grid_options:
+              columns: 12
+              rows: 2
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.office_radiator_setpoint_current
+            name: Current Radiator Setpoint
+            icon: mdi:heating-coil
+            color: red
+            state_content: last_changed
+            grid_options:
+              columns: 12
+              rows: 2
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_overheated_threshold
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Overheat Threshold
+            color: red
+            icon: mdi:vector-line
+          - type: tile
+            entity: input_boolean.office_overheated_status
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: true
+            state_content: last_changed
+            name: Office Overheated Status
+          - type: tile
+            vertical: true
+            entity: binary_sensor.office_occupied
+            hide_state: false
+            state_content: last_changed
+            grid_options:
+              columns: 12
+              rows: 2
+            name: Office Occupancy
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Office
+      - type: grid
+        cards:
+          - type: heading
+            heading: Daytime (Room Occupied)
+            heading_style: title
+            icon: mdi:account
+          - type: heading
+            heading: Weekday
+            heading_style: subtitle
+            icon: mdi:calendar-week
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_comfort_weekday_occupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            name: Mini Split
+            hide_state: false
+            icon: mdi:heat-pump-outline
+            color: accent
+            state_content: last_changed
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_radiator_weekday_occupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Radiator
+            icon: mdi:heating-coil
+            color: red
+          - type: heading
+            heading: Weekend
+            heading_style: subtitle
+            icon: mdi:calendar-week-begin
+            grid_options:
+              columns: full
+              rows: 1
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_comfort_weekend_occupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            name: Mini Split
+            icon: mdi:heat-pump-outline
+            color: accent
+            show_entity_picture: false
+            hide_state: false
+            state_content: last_changed
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_radiator_weekend_occupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Radiator
+            color: red
+            icon: mdi:heating-coil
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Office
+      - type: grid
+        cards:
+          - type: heading
+            heading: Daytime (Room Unoccupied)
+            heading_style: title
+            visibility:
+              - condition: state
+                entity: input_select.heatpump_room_tab
+                state: Office
+            icon: mdi:account-off
+          - type: heading
+            heading: Weekday
+            heading_style: subtitle
+            icon: mdi:calendar-week
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_comfort_weekday_unoccupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Mini Split
+            color: accent
+            icon: mdi:heat-pump-outline
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_radiator_weekday_unoccupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Radiator
+            icon: mdi:heating-coil
+            color: red
+          - type: heading
+            heading: Weekend
+            heading_style: subtitle
+            icon: mdi:calendar-week-begin
+            grid_options:
+              columns: full
+              rows: 1
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_comfort_weekend_unoccupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Mini Split
+            color: accent
+            icon: mdi:heat-pump-outline
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_radiator_weekend_unoccupied_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Radiator
+            color: red
+            icon: mdi:heating-coil
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Office
+      - type: grid
+        cards:
+          - type: heading
+            heading: Sleep
+            heading_style: title
+            icon: mdi:weather-night
+          - type: heading
+            heading: All Nights
+            heading_style: subtitle
+            icon: mdi:calendar-week
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_comfort_night_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Heat Pump
+            icon: mdi:heat-pump-outline
+            color: accent
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_radiator_night_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            state_content: last_changed
+            name: Radiator
+            color: red
+            icon: mdi:heating-coil
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Office
+      - type: grid
+        cards:
+          - type: heading
+            heading: Settings
+            heading_style: title
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_off_to_supplement_threshold
+            hide_state: false
+            vertical: false
+            name: Off/Supplement Threshold
+            grid_options:
+              rows: 2
+              columns: 12
+            icon: mdi:vector-line
+            color: deep-purple
+            state_content: last_changed
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_supplement_to_comfort_threshold
+            vertical: false
+            hide_state: false
+            name: Supplement/Comfort Threshold
+            grid_options:
+              columns: 12
+              rows: 2
+            icon: mdi:vector-line
+            color: primary
+            state_content: last_changed
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.office_heatpump_supplemental_setpoint
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            name: Supplemental Heat Setpoint
+            show_entity_picture: false
+            hide_state: true
+            icon: mdi:lifebuoy
+            color: accent
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            grid_options:
+              columns: 12
+              rows: 2
+            vertical: false
+            show_entity_picture: false
+            hide_state: true
+            icon: mdi:snowflake-alert
+            color: primary
+            entity: input_number.office_heatpump_overheat_setpoint
+            name: Room Overheated Setpoint
+          - type: tile
+            entity: input_datetime.office_early_work_mode_day_start_time
+            vertical: true
+            name: Early Work Start Time
+            grid_options:
+              columns: 12
+              rows: 2
+          - type: tile
+            entity: input_datetime.office_apply_occupied_start_time
+            grid_options:
+              columns: 12
+              rows: 2
+            name: Apply Occupied Start Time
+            vertical: true
+          - type: tile
+            entity: input_datetime.office_apply_occupied_end_time
+            grid_options:
+              columns: 12
+              rows: 2
+            name: Apply Occupied End Time
+            vertical: true
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Office
+      # Family Room
+      - type: grid
+        cards:
+          - type: heading
+            heading: Family Room
+            heading_style: title
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.family_room_heatpump_state
+            vertical: true
+            state_content: last_changed
+            name: Mode
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.family_room_heatpump_off_to_supplement_threshold
+            hide_state: true
+            vertical: true
+            name: Off/Supplement Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.family_room_heatpump_supplement_to_comfort_threshold
+            vertical: true
+            hide_state: true
+            name: Supplement/Comfort Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - type: tile
+            vertical: true
+            entity: binary_sensor.family_room_occupied
+            hide_state: false
+            state_content: last_changed
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Family Room
+      # Living Room
+      - type: grid
+        cards:
+          - type: heading
+            heading: Living Room
+            heading_style: title
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.living_room_heatpump_state
+            vertical: true
+            state_content: last_changed
+            name: Mode
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.living_room_heatpump_off_to_supplement_threshold
+            hide_state: true
+            vertical: true
+            name: Off/Supplement Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.living_room_heatpump_supplement_to_comfort_threshold
+            vertical: true
+            hide_state: true
+            name: Supplement/Comfort Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - type: tile
+            vertical: true
+            entity: binary_sensor.living_room_occupied
+            hide_state: false
+            state_content: last_changed
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Living Room
+      - type: grid
+        cards:
+          - type: heading
+            heading: Master Bedroom
+            heading_style: title
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.master_bedroom_heatpump_state
+            vertical: true
+            state_content: last_changed
+            name: Mode
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.master_bedroom_heatpump_off_to_supplement_threshold
+            hide_state: true
+            vertical: true
+            name: Off/Supplement Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: >-
+              input_number.master_bedroom_heatpump_supplement_to_comfort_threshold
+            vertical: true
+            hide_state: true
+            name: Supplement/Comfort Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - type: tile
+            vertical: true
+            entity: binary_sensor.master_bedroom_occupied
+            hide_state: false
+            state_content: last_changed
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Master Bedroom
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dining Room
+            heading_style: title
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.dining_room_heatpump_state
+            vertical: true
+            state_content: last_changed
+            name: Mode
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.dining_room_heatpump_off_to_supplement_threshold
+            hide_state: true
+            vertical: true
+            name: Off/Supplement Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.dining_room_heatpump_supplement_to_comfort_threshold
+            vertical: true
+            hide_state: true
+            name: Supplement/Comfort Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - type: tile
+            vertical: true
+            entity: binary_sensor.dining_room_occupied
+            hide_state: false
+            state_content: last_changed
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Dining Room
+      - type: grid
+        cards:
+          - type: heading
+            heading: Ducted System
+            heading_style: title
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.ducted_heatpump_state
+            vertical: true
+            state_content: last_changed
+            name: Mode
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.ducted_heatpump_off_to_supplement_threshold
+            hide_state: true
+            vertical: true
+            name: Off/Supplement Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - features:
+              - type: numeric-input
+                style: buttons
+            type: tile
+            entity: input_number.ducted_heatpump_supplement_to_comfort_threshold
+            vertical: true
+            hide_state: true
+            name: Supplement/Comfort Threshold
+            grid_options:
+              columns: 12
+              rows: 3
+          - type: tile
+            vertical: true
+            entity: binary_sensor.ducted_rooms_occupied
+            hide_state: false
+            state_content: last_changed
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: input_select.heatpump_room_tab
+            state: Ducted
+    cards: []
+    dense_section_placement: true
+  - title: HVAC Old
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: Settings
+          - type: tile
+            entity: input_select.hvac_mode
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_number.heatpump_mode_threshold_offset
+            grid_options:
+              columns: 12
+              rows: 1
+      - type: grid
+        cards:
+          - type: heading
+            heading: Heat Pump States
+            heading_style: title
+          - type: tile
+            entity: input_select.office_heatpump_state
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_select.family_room_heatpump_state
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_select.living_room_heatpump_state
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_select.master_bedroom_heatpump_state
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_select.kids_rooms_heatpump_state
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_select.dining_room_heatpump_state
+            grid_options:
+              columns: 12
+              rows: 1
+      - type: grid
+        cards:
+          - type: heading
+            heading: Sensors
+            heading_style: title
+          - type: tile
+            entity: climate.tinas_office_heat_pump
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.office_current_temperature
+            name: Tina's Office Thermostat
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.office_bookshelf_temperature
+            name: Tina's Office Bookshelf
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.tina_desk_temperature
+            name: Tina's Office Desk
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.tinas_office_puck_temperature
+            name: Tina's Office Puck
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: climate.family_room_heat_pump
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.lamp_temperature
+            name: Family Room Lamp
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.family_room_heating_current_temperature
+            name: Family Room Thermostat
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.family_room_toyshelf_temperature
+            name: Family Room Toyshelf
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.bookshelf_temperature
+            name: Family Room Bookshelf
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.family_room_puck_temperature
+            name: Family Room Puck
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: climate.living_room_heat_pump
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.living_room_main_heating_current_temperature
+            name: Living Room Thermostat
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.living_room_radiator_temperature
+            name: Living Room Radiator
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.living_room_puck_temperature
+            grid_options:
+              columns: 12
+              rows: 1
+            name: Living Room Puck
+          - type: tile
+            entity: climate.dining_room_heat_pump
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.dining_room_chest_temperature
+            grid_options:
+              columns: 12
+              rows: 1
+            name: Dining Room Chest
+          - type: tile
+            entity: climate.master_bedroom_heat_pump
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.master_bedroom_temperature
+            name: Master Bedroom Endtable
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.hanks_room_temperature
+            grid_options:
+              columns: 12
+              rows: 1
+            name: Hank’s Room
+          - type: tile
+            entity: sensor.tillys_room_temperature
+            grid_options:
+              columns: 12
+              rows: 1
+            name: Tilly’s Room
+          - type: tile
+            entity: sensor.erik_office_desk_temperature
+            name: Erik's Office Desk
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.eriks_office_puck_temperature
+            grid_options:
+              columns: 12
+              rows: 1
+            name: Erik’s Office Puck
+          - type: tile
+            entity: sensor.kitchen_temperature
+            name: Kitchen
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.basement_laundry_temperature
+            name: Basement Laundry
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.basement_playroom_temperature
+            name: Basement Playroom
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.basement_storage_temperature
+            name: Basement Storage
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.mudroom_temperature
+            name: Mudroom
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: sensor.attic_temperature
+            name: Attic
+            grid_options:
+              columns: 12
+              rows: 1
+        column_span: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: Tina's Office
+            heading_style: title
+          - type: thermostat
+            entity: climate.office
+            grid_options:
+              columns: 12
+              rows: 5
+            show_current_as_primary: true
+            name: Radiators
+          - type: thermostat
+            entity: climate.tinas_office_heat_pump
+            grid_options:
+              columns: 12
+              rows: 5
+            name: Mini Split
+          - type: tile
+            entity: sensor.tina_office_avg_temperature
+            name: Office
+          - type: tile
+            entity: sensor.office_current_temperature
+            name: Ecobee Thermostat
+          - type: tile
+            entity: sensor.tina_desk_temperature
+            name: Tina's Desk
+          - type: tile
+            entity: sensor.office_current_humidity
+            name: Humidity
+        column_span: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: Family Room
+            heading_style: title
+          - type: thermostat
+            entity: climate.family_room_heating
+            grid_options:
+              columns: 12
+              rows: 5
+            name: In Floor Heat
+          - type: thermostat
+            entity: climate.family_room_heat_pump
+            grid_options:
+              columns: 12
+              rows: 5
+            name: Mini Split
+          - type: tile
+            entity: sensor.family_room_avg_temperature
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Family Room
+          - type: tile
+            entity: sensor.family_room_heating_current_temperature
+            name: Thermostat
+            grid_options:
+              columns: 6
+              rows: 1
+          - type: tile
+            entity: sensor.lamp_temperature
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Lamp
+          - type: tile
+            entity: sensor.family_room_heating_current_humidity
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Humidity
+        column_span: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: Living Room
+            heading_style: title
+          - type: thermostat
+            entity: climate.living_room_main_heating
+            grid_options:
+              columns: 12
+              rows: 5
+            name: Radiators
+          - type: thermostat
+            entity: climate.living_room_heat_pump
+            name: Mini Split
+            grid_options:
+              columns: 12
+              rows: 5
+          - type: tile
+            entity: sensor.living_room_avg_temperature
+            grid_options:
+              columns: 6
+              rows: 1
+          - type: tile
+            grid_options:
+              columns: 6
+              rows: 1
+            entity: sensor.living_room_radiator_temperature
+            name: Radiator Shelf
+          - type: tile
+            entity: sensor.living_room_main_heating_current_temperature
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Ecobee Thermostat
+          - type: tile
+            entity: sensor.living_room_main_heating_current_humidity
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Humidity
+        column_span: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: Upstairs Hallway & Kids Rooms
+            heading_style: title
+          - type: thermostat
+            entity: climate.ducted_heat_pump
+            name: Ducted Thermostat
+            grid_options:
+              columns: 12
+              rows: 5
+          - type: tile
+            entity: climate.ducted_heat_pump
+            name: Hallway
+            grid_options:
+              columns: 6
+              rows: 1
+          - type: tile
+            entity: sensor.kids_room_avg_temperature
+            name: Kids' Rooms Average
+            grid_options:
+              columns: 6
+              rows: 1
+          - type: tile
+            entity: sensor.hanks_room_temperature
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Hank's Room
+          - type: tile
+            entity: sensor.tillys_room_temperature
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Tilly's Room
+          - type: tile
+            entity: sensor.ducted_heat_pump_humidity
+            grid_options:
+              columns: 6
+              rows: 1
+            name: Hallway Humidity
+        column_span: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: Master Bedroom
+            heading_style: title
+          - type: thermostat
+            entity: climate.master_bedroom_heat_pump
+          - type: tile
+            entity: sensor.master_bedroom_temperature
+            name: Side Table
+        column_span: 1
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dining Room
+            heading_style: title
+            grid_options:
+              columns: 3
+              rows: 1
+          - type: thermostat
+            entity: climate.dining_room_heat_pump
+            name: Mini Split
+          - type: tile
+            entity: sensor.dining_room_chest_temperature
+            name: Dining Room
+        column_span: 1
+      - type: grid
+        cards:
+          - type: heading
+            heading: Erik's Office
+            heading_style: title
+          - type: thermostat
+            entity: climate.eriks_office_room
+          - type: tile
+            entity: sensor.erik_office_desk_temperature
+    type: sections
+    max_columns: 2
+    cards: []
+    dense_section_placement: false
+  - type: sections
+    max_columns: 4
+    title: Lights
+    path: lights
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Kitchen
+            heading_style: title
+          - type: light
+            entity: light.caseta_r_diva_smart_dimmer
+            grid_options:
+              columns: 6
+              rows: auto
+          - type: light
+            entity: light.caseta_r_diva_smart_dimmer_2
+            grid_options:
+              columns: 6
+              rows: auto
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.caseta_r_diva_smart_switch
+            grid_options:
+              rows: 4
+              columns: 6
+        column_span: 1
+      - type: grid
+        cards:
+          - type: heading
+            heading: Living Room
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.christmas_tree
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.living_room_lamp
+      - type: grid
+        cards:
+          - type: heading
+            heading: Master Bedroom
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.eriks_lamp
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.tinas_lamp
+      - type: grid
+        cards:
+          - type: heading
+            heading: Family Room
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.family_room_lamp
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.bannister_lights
+      - type: grid
+        cards:
+          - type: heading
+            heading: Christmas
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.christmas_tree
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.bathroom_christmas_light
+            name: Parol
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.bannister_lights
+  - type: sections
+    max_columns: 4
+    title: Cameras
+    path: cameras
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Front Door
+            heading_style: title
+          - camera_view: auto
+            type: picture-glance
+            title: Front Door Package
+            image: https://demo.home-assistant.io/stub_config/kitchen.png
+            entities:
+              - sensor.sun_next_dawn
+              - sensor.sun_next_dusk
+            camera_image: camera.front_door_package_camera
+          - camera_view: auto
+            type: picture-glance
+            title: Front Door
+            image: https://demo.home-assistant.io/stub_config/kitchen.png
+            entities:
+              - binary_sensor.remote_ui
+              - sensor.sun_next_midnight
+            camera_image: camera.front_door_high_resolution_channel
+      - type: grid
+        cards:
+          - type: heading
+            heading: Side Door
+            heading_style: title
+          - camera_view: auto
+            type: picture-glance
+            title: Side Door
+            image: https://demo.home-assistant.io/stub_config/kitchen.png
+            entities:
+              - sensor.sun_next_noon
+              - sensor.sun_next_rising
+            camera_image: camera.side_door_high_resolution_channel
+          - camera_view: auto
+            type: picture-glance
+            title: Side Door Package
+            image: https://demo.home-assistant.io/stub_config/kitchen.png
+            entities:
+              - sensor.sun_next_setting
+              - sensor.family_room_avg_temperature
+            camera_image: camera.side_door_package_camera
+      - type: grid
+        cards:
+          - type: heading
+            heading: Mudroom
+            heading_style: title
+          - camera_view: auto
+            type: picture-glance
+            title: Mudroom Door
+            image: https://demo.home-assistant.io/stub_config/kitchen.png
+            entities:
+              - sensor.dining_room_avg_temperature
+              - sensor.master_bedroom_avg_temperature
+            camera_image: camera.mudroom_door_high_resolution_channel
