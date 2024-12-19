@@ -31,3 +31,39 @@
         message: >
           Override until time successfully set to 
           {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
+
+- id: turn_off_office_override_after_expiration
+  alias: "Turn Off Office Override After Expiration"
+  description: "Automatically turn off the override status if the expiration time has passed, with detailed logging."
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"
+  condition:
+    - condition: state
+      entity_id: input_boolean.office_override_status
+      state: "on"
+    - condition: template
+      value_template: >
+        {% set override_until = states('input_datetime.office_override_until') | as_timestamp %}
+        {% if override_until %}
+          {{ now().timestamp() > override_until }}
+        {% else %}
+          False
+        {% endif %}
+  action:
+    - service: logbook.log
+      data:
+        name: "Office Override Automation"
+        message: >
+          Current time: {{ now() | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
+          Override expiration time: 
+          {{ states('input_datetime.office_override_until') | as_timestamp | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
+          Turning off override status.
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.office_override_status
+    - service: logbook.log
+      data:
+        name: "Office Override Automation"
+        message: >
+          Override status turned off as the expiration time has passed.
