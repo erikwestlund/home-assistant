@@ -22,7 +22,7 @@ family_room_overheated_threshold:
   unit_of_measurement: "°F"
   initial: 73
 
-family_room_override_temperature:
+family_room_override_setpoint:
   name: Family Room Override Temperature
   min: 60
   max: 80
