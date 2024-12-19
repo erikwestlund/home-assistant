@@ -201,10 +201,11 @@
                   Temperature updated to {{ new_temperature }}° 
                   from {{ thermostat_temperature }}°. 
                   Setpoint: {{ current_setpoint }}.
-    - service: logbook.log
-      data:
-        name: "Office Radiator Setpoint Automation"
-        message: >
-          No temperature change required. 
-          Current: {{ thermostat_temperature }}°. 
-          Desired: {{ new_temperature }}°.
+      default:
+        - service: logbook.log
+          data:
+            name: "Office Radiator Setpoint Automation"
+            message: >
+              No temperature change required. 
+              Current: {{ thermostat_temperature }}°. 
+              Desired: {{ new_temperature }}°.
