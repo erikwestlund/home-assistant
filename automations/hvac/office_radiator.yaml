@@ -30,10 +30,10 @@
         current_time: "{{ now().timestamp() }}"
         occupied_start: >-
           {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
-          (states('input_datetime.office_apply_occupied_start_time') | default('05:00:00'))) }}
+          (states('input_datetime.office_apply_occupied_start_time') | default('09:00:00'))) }}
         occupied_end: >-
           {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
-          (states('input_datetime.office_apply_occupied_end_time') | default('23:59:59'))) }}
+          (states('input_datetime.office_apply_occupied_end_time') | default('20:59:00'))) }}
         is_early_work_mode: "{{ is_state('input_boolean.office_early_work_mode', 'on') }}"
         is_daytime: >-
           {% if is_early_work_mode %}

@@ -28,10 +28,10 @@
         current_time: "{{ now().timestamp() }}"
         occupied_start: >-
           {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
-          (states('input_datetime.family_room_apply_occupied_start_time') | default('05:00:00'))) }}
+          (states('input_datetime.family_room_apply_occupied_start_time') | default('09:00:00'))) }}
         occupied_end: >-
           {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
-          (states('input_datetime.family_room_apply_occupied_end_time') | default('23:59:59'))) }}
+          (states('input_datetime.family_room_apply_occupied_end_time') | default('20:59:00'))) }}
         is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
         is_occupied: >-
           {% if occupied_start <= current_time <= occupied_end %}
