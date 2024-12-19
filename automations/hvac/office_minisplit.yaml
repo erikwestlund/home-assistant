@@ -51,7 +51,7 @@
           {% if occupied_start <= current_time <= occupied_end %}
             {{ is_state('binary_sensor.office_occupied', 'on') }}
           {% else %}
-            False
+            True
           {% endif %}
         is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
         is_overheated: "{{ is_state('input_boolean.office_overheated_status', 'on') }}"
