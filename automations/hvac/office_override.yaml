@@ -1,0 +1,23 @@
+- id: set_office_override_until
+  alias: "Set Office Override Until"
+  description: "Adjust the override expiration time when override status changes."
+  trigger:
+    - platform: state
+      entity_id: input_boolean.office_override_status
+  condition:
+    - condition: state
+      entity_id: input_boolean.office_override_status
+      state: "on"
+  action:
+    - variables:
+        override_hours: "{{ states('input_number.office_override_for_hours') | float(0) }}"
+        current_time: "{{ now() }}"
+    - service: input_datetime.set_datetime
+      data:
+        entity_id: input_datetime.office_override_until
+        timestamp: "{{ as_timestamp(current_time) + (override_hours * 3600) }}"
+    - service: logbook.log
+      data:
+        name: "Office Override Automation"
+        message: >
+          Override activated. Override until set to {{ as_timestamp(current_time) + (override_hours * 3600) | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
