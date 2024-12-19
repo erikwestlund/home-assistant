@@ -1,11 +1,11 @@
 office_heatpump_setpoint_current:
   name: Office Heat Pump Setpoint
   options:
+    - "Night"
     - "Weekday Occupied"
     - "Weekday Unoccupied"
     - "Weekend Occupied"
     - "Weekend Unoccupied"
-    - "Night"
     - "Supplemental"
     - "Overheated"
     - "Override"
@@ -26,12 +26,26 @@ office_radiator_setpoint_current:
 
 family_room_heatpump_setpoint_current:
   name: Family Room Heat Pump Setpoint
-  options: *mini_split_options_full
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Supplemental"
+    - "Overheated"
+    - "Override"
   initial: "Weekday Occupied"
   icon: mdi:heat-pump
 
 family_room_radiator_setpoint_current:
   name: Family Room Radiator Setpoint
-  options: *radiator_options_full
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Override"
   initial: "Weekday Occupied"
   icon: mdi:thermometer
