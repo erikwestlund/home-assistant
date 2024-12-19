@@ -21,6 +21,7 @@ heatpump_room_tab:
     - "Living Room"
     - "Master Bedroom"
     - "Dining Room"
+    - "Erik Office"
     - "Ducted"
     - "Main Heat Zone"
     - "Settings"
