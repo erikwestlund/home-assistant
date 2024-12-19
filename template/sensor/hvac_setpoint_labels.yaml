@@ -25,3 +25,31 @@
       states('input_number.office_radiator_weekend_unoccupied_setpoint') | float(0): 'Weekend Unoccupied'
     } %}
     {{ setpoints.get(current_temp, 'Custom') }}
+    
+- name: "Family Room Mini Split Current Setpoint Label"
+  unique_id: family_room_mini_split_setpoint_label
+  state: >
+    {% set current_temp = state_attr('climate.tinas_family_room_heat_pump', 'temperature') | float(0) %}
+    {% set setpoints = {
+      states('input_number.family_room_heatpump_supplemental_setpoint') | float(0): 'Supplemental',
+      states('input_number.family_room_heatpump_overheat_setpoint') | float(0): 'Overheat',
+      states('input_number.family_room_heatpump_comfort_night_setpoint') | float(0): 'Night',
+      states('input_number.family_room_heatpump_comfort_weekday_occupied_setpoint') | float(0): 'Weekday Occupied',
+      states('input_number.family_room_heatpump_comfort_weekday_unoccupied_setpoint') | float(0): 'Weekday Unoccupied',
+      states('input_number.family_room_heatpump_comfort_weekend_occupied_setpoint') | float(0): 'Weekend Occupied',
+      states('input_number.family_room_heatpump_comfort_weekend_unoccupied_setpoint') | float(0): 'Weekend Unoccupied'
+    } %}
+    {{ setpoints.get(current_temp, 'Custom') }}
+
+- name: "Family Room Radiator Current Setpoint Label"
+  unique_id: family_room_radiator_setpoint_label
+  state: >
+    {% set current_temp = state_attr('climate.family_room', 'temperature') | float(0) %}
+    {% set setpoints = {
+      states('input_number.family_room_radiator_night_setpoint') | float(0): 'Night',
+      states('input_number.family_room_radiator_weekday_occupied_setpoint') | float(0): 'Weekday Occupied',
+      states('input_number.family_room_radiator_weekday_unoccupied_setpoint') | float(0): 'Weekday Unoccupied',
+      states('input_number.family_room_radiator_weekend_occupied_setpoint') | float(0): 'Weekend Occupied',
+      states('input_number.family_room_radiator_weekend_unoccupied_setpoint') | float(0): 'Weekend Unoccupied'
+    } %}
+    {{ setpoints.get(current_temp, 'Custom') }}
