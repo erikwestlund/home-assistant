@@ -14,7 +14,7 @@ family_room_overheated_status:
     icon: mdi:fire
 
 living_room_overheated_status:
-    name: Family Room Overheated
+    name: Living Room Overheated
     initial: off
     icon: mdi:fire
 
