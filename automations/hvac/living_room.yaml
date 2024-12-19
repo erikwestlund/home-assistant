@@ -2,7 +2,7 @@
   alias: Living Room Heat Control
   description:
     "Controls the living room heat pump to maintain efficiency by setting
-    it to 66°F, except turning it off over 72°F and back on at 70°F."
+    it to 64°F, except turning it off over 72°F and back on at 70°F."
   trigger:
     - platform: state
       entity_id: sensor.living_room_average_temperature
@@ -32,7 +32,7 @@
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_room_heat_pump
-                temperature: 66.0
+                temperature: 64.0
         - conditions:
             - condition: state
               entity_id: climate.living_room_heat_pump
@@ -45,5 +45,5 @@
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_room_heat_pump
-                temperature: 66.0
+                temperature: 64.0
   mode: single
