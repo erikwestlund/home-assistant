@@ -1,30 +1,26 @@
-minisplit_options_full: &mini_split_options_full
-  - "Weekday Occupied"
-  - "Weekday Unoccupied"
-  - "Weekend Occupied"
-  - "Weekend Unoccupied"
-  - "Night"
-  - "Supplemental"
-  - "Overheated"
-  - "Override"
-
-radiator_options_full: &radiator_options_full
-  - "Night"
-  - "Weekday Occupied"
-  - "Weekday Unoccupied"
-  - "Weekend Occupied"
-  - "Weekend Unoccupied"
-  - "Override"
-
 office_heatpump_setpoint_current:
   name: Office Heat Pump Setpoint
-  options: *mini_split_options_full
+  options:
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Night"
+    - "Supplemental"
+    - "Overheated"
+    - "Override"
   initial: "Weekday Occupied"
   icon: mdi:heat-pump
 
 office_radiator_setpoint_current:
   name: Office Radiator Setpoint
-  options: *radiator_options_full
+  options:
+    - "Night"
+    - "Weekday Occupied"
+    - "Weekday Unoccupied"
+    - "Weekend Occupied"
+    - "Weekend Unoccupied"
+    - "Override"
   initial: "Weekday Occupied"
   icon: mdi:thermometer
 
