@@ -1,0 +1,55 @@
+master_bedroom_heatpump_supplemental_setpoint:
+  name: Master Bedroom Heat Pump Supplemental Temperature
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+master_bedroom_heatpump_overheat_setpoint:
+  name: Master Bedroom Heat Overheated Temperature
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 65
+
+master_bedroom_heatpump_comfort_night_setpoint:
+  name: Master Bedroom Heat Pump Comfort Temperature (Night)
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 71
+
+master_bedroom_heatpump_comfort_weekday_occupied_setpoint:
+  name: Master Bedroom Heat Pump Comfort Temperature (Weekday Occupied)
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+master_bedroom_heatpump_comfort_weekday_unoccupied_setpoint:
+  name: Master Bedroom Heat Pump Comfort Temperature (Weekday Unoccupied)
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+master_bedroom_heatpump_comfort_weekend_occupied_setpoint:
+  name: Master Bedroom Heat Pump Comfort Temperature (Weekend Occupied)
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+master_bedroom_heatpump_comfort_weekend_unoccupied_setpoint:
+  name: Master Bedroom Heat Pump Comfort Temperature (Weekend Unoccupied)
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
