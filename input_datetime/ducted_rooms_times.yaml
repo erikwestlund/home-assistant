@@ -1,0 +1,23 @@
+ducted_day_start_time:
+  name: Day Start Time
+  has_time: true
+  has_date: false
+  initial: "06:00:00"
+
+ducted_bedtime_start_time:
+  name: Bed Time Start Time
+  has_time: true
+  has_date: false
+  initial: "19:30:00"
+
+ducted_sleep_start_time:
+  name: Sleep Start Time
+  has_time: true
+  has_date: false
+  initial: "22:00:00"
+
+ducted_override_until:
+  name: Ducted Rooms Override Until
+  has_time: true
+  has_date: true
+  initial: "2021-01-01T00:00:00"
