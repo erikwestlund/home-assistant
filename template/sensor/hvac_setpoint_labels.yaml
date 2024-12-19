@@ -1,0 +1,27 @@
+- name: "Office Mini Split Current Setpoint Label"
+  unique_id: office_mini_split_setpoint_label
+  state: >
+    {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) %}
+    {% set setpoints = {
+      states('input_number.office_heatpump_supplemental_setpoint') | float(0): 'Supplemental',
+      states('input_number.office_heatpump_overheat_setpoint') | float(0): 'Overheat',
+      states('input_number.office_heatpump_comfort_night_setpoint') | float(0): 'Night',
+      states('input_number.office_heatpump_comfort_weekday_occupied_setpoint') | float(0): 'Weekday Occupied',
+      states('input_number.office_heatpump_comfort_weekday_unoccupied_setpoint') | float(0): 'Weekday Unoccupied',
+      states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') | float(0): 'Weekend Occupied',
+      states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') | float(0): 'Weekend Unoccupied'
+    } %}
+    {{ setpoints.get(current_temp, 'Custom') }}
+
+- name: "Office Radiator Current Setpoint Label"
+  unique_id: office_radiator_setpoint_label
+  state: >
+    {% set current_temp = state_attr('climate.office', 'temperature') | float(0) %}
+    {% set setpoints = {
+      states('input_number.office_radiator_night_setpoint') | float(0): 'Night',
+      states('input_number.office_radiator_weekday_occupied_setpoint') | float(0): 'Weekday Occupied',
+      states('input_number.office_radiator_weekday_unoccupied_setpoint') | float(0): 'Weekday Unoccupied',
+      states('input_number.office_radiator_weekend_occupied_setpoint') | float(0): 'Weekend Occupied',
+      states('input_number.office_radiator_weekend_unoccupied_setpoint') | float(0): 'Weekend Unoccupied'
+    } %}
+    {{ setpoints.get(current_temp, 'Custom') }}
