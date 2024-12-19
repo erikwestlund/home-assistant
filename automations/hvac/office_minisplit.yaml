@@ -1,6 +1,6 @@
-- id: set_office_heatpump_temperature_with_actions
-  alias: "Set Office Mini Split Temperature"
-  description: "Adjust the office mini split temperature based on HVAC mode, occupancy, and time of day, with detailed logging and actions."
+- id: set_office_heatpump_setpoint
+  alias: "Set Office Mini Split Setpoint"
+  description: "Adjust the mini split setpoint based on HVAC mode, occupancy, and time of day, with detailed logging and override functionality."
   trigger:
     - platform: state
       entity_id:
@@ -10,19 +10,15 @@
         - binary_sensor.office_occupied
         - input_boolean.office_overheated_status
         - input_boolean.office_early_work_mode
+        - input_boolean.office_override_status
         - input_datetime.office_apply_occupied_start_time
         - input_datetime.office_apply_occupied_end_time
         - input_datetime.office_early_work_mode_day_start_time
+        - input_datetime.office_override_until
         - input_select.hvac_mode
         - input_select.office_heatpump_state
-        - sensor.tina_office_average_temperature
-        - input_number.office_heatpump_supplemental_setpoint
-        - input_number.office_heatpump_overheat_setpoint
-        - input_number.office_heatpump_comfort_night_setpoint
-        - input_number.office_heatpump_comfort_weekday_occupied_setpoint
-        - input_number.office_heatpump_comfort_weekday_unoccupied_setpoint
-        - input_number.office_heatpump_comfort_weekend_occupied_setpoint
-        - input_number.office_heatpump_comfort_weekend_unoccupied_setpoint
+    - platform: time_pattern
+      minutes: "/5"
   condition:
     - condition: state
       entity_id: input_select.hvac_mode
@@ -48,14 +44,18 @@
             {{ is_state('binary_sensor.daytime_status', 'on') }}
           {% endif %}
         is_occupied: >-
-          {% if occupied_start <= current_time <= occupied_end %}
+          {% if is_early_work_mode %}
+            True
+          {% elif occupied_start <= current_time <= occupied_end %}
             {{ is_state('binary_sensor.office_occupied', 'on') }}
           {% else %}
-            True
+            False
           {% endif %}
         is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
         is_overheated: "{{ is_state('input_boolean.office_overheated_status', 'on') }}"
-        heatpump_mode: "{{ states('input_select.office_heatpump_state') }}"
+        override_active: >-
+          {{ is_state('input_boolean.office_override_status', 'on') and 
+          now().timestamp() < as_timestamp(states('input_datetime.office_override_until')) }}
     - service: logbook.log
       data:
         name: "Office Mini Split Automation"
@@ -69,8 +69,21 @@
           is_occupied={{ is_occupied }},
           is_weekday={{ is_weekday }},
           is_overheated={{ is_overheated }},
-          heatpump_mode={{ heatpump_mode }}.
+          override_active={{ override_active }}
     - choose:
+        # Override logic
+        - conditions:
+            - condition: template
+              value_template: "{{ override_active }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Automation"
+                message: "Override active. Setting mini split to override setpoint."
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.office_heatpump_setpoint_current
+                option: "Override"
         # Overheating logic
         - conditions:
             - condition: template
@@ -79,111 +92,97 @@
             - service: logbook.log
               data:
                 name: "Office Mini Split Automation"
-                message: >
-                  Overheating detected. Setting to overheating setpoint.
-            - service: climate.set_temperature
+                message: "Overheating detected. Setting mini split to overheated setpoint."
+            - service: input_select.select_option
               data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ states('input_number.office_heatpump_overheat_setpoint') | float(0) }}"
-        # Supplemental logic
+                entity_id: input_select.office_heatpump_setpoint_current
+                option: "Overheated"
+        # Nighttime logic
         - conditions:
             - condition: template
-              value_template: "{{ heatpump_mode == 'Supplement' }}"
+              value_template: "{{ not is_daytime }}"
           sequence:
             - service: logbook.log
               data:
                 name: "Office Mini Split Automation"
-                message: >
-                  Supplemental mode detected. Setting to supplemental setpoint.
-            - service: climate.set_temperature
+                message: "Nighttime detected. Setting mini split to nighttime setpoint."
+            - service: input_select.select_option
               data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ states('input_number.office_heatpump_supplemental_setpoint') | float(0) }}"
-        # Comfort logic
+                entity_id: input_select.office_heatpump_setpoint_current
+                option: "Night"
+        # Daytime logic
         - conditions:
             - condition: template
-              value_template: "{{ heatpump_mode == 'Comfort' }}"
+              value_template: "{{ is_daytime }}"
           sequence:
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Automation"
+                message: "Daytime detected. Determining weekday/weekend and occupancy."
             - choose:
-                # Nighttime logic
+                # Supplemental mode
                 - conditions:
                     - condition: template
-                      value_template: "{{ not is_daytime }}"
+                      value_template: "{{ heatpump_mode == 'Supplement' }}"
                   sequence:
                     - service: logbook.log
                       data:
                         name: "Office Mini Split Automation"
-                        message: >
-                          Nighttime detected. Setting to nighttime comfort setpoint.
-                    - service: climate.set_temperature
+                        message: "Supplemental mode detected. Setting mini split to supplemental setpoint."
+                    - service: input_select.select_option
                       data:
-                        entity_id: climate.tinas_office_heat_pump
-                        temperature: "{{ states('input_number.office_heatpump_comfort_night_setpoint') | float(0) }}"
-                # Daytime logic
+                        entity_id: input_select.office_heatpump_setpoint_current
+                        option: "Supplemental"
+                # Weekday and Occupied
                 - conditions:
                     - condition: template
-                      value_template: "{{ is_daytime }}"
+                      value_template: "{{ is_weekday and is_occupied }}"
                   sequence:
                     - service: logbook.log
                       data:
                         name: "Office Mini Split Automation"
-                        message: >
-                          Daytime detected. Determining weekday/weekend and occupancy.
-                    - choose:
-                        # Weekday and Occupied
-                        - conditions:
-                            - condition: template
-                              value_template: "{{ is_weekday and is_occupied }}"
-                          sequence:
-                            - service: logbook.log
-                              data:
-                                name: "Office Mini Split Automation"
-                                message: >
-                                  Weekday and occupied. Setting to weekday occupied setpoint.
-                            - service: climate.set_temperature
-                              data:
-                                entity_id: climate.tinas_office_heat_pump
-                                temperature: "{{ states('input_number.office_heatpump_comfort_weekday_occupied_setpoint') | float(0) }}"
-                        # Weekday and Unoccupied
-                        - conditions:
-                            - condition: template
-                              value_template: "{{ is_weekday and not is_occupied }}"
-                          sequence:
-                            - service: logbook.log
-                              data:
-                                name: "Office Mini Split Automation"
-                                message: >
-                                  Weekday and unoccupied. Setting to weekday unoccupied setpoint.
-                            - service: climate.set_temperature
-                              data:
-                                entity_id: climate.tinas_office_heat_pump
-                                temperature: "{{ states('input_number.office_heatpump_comfort_weekday_unoccupied_setpoint') | float(0) }}"
-                        # Weekend and Occupied
-                        - conditions:
-                            - condition: template
-                              value_template: "{{ not is_weekday and is_occupied }}"
-                          sequence:
-                            - service: logbook.log
-                              data:
-                                name: "Office Mini Split Automation"
-                                message: >
-                                  Weekend and occupied. Setting to weekend occupied setpoint.
-                            - service: climate.set_temperature
-                              data:
-                                entity_id: climate.tinas_office_heat_pump
-                                temperature: "{{ states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') | float(0) }}"
-                        # Weekend and Unoccupied
-                        - conditions:
-                            - condition: template
-                              value_template: "{{ not is_weekday and not is_occupied }}"
-                          sequence:
-                            - service: logbook.log
-                              data:
-                                name: "Office Mini Split Automation"
-                                message: >
-                                  Weekend and unoccupied. Setting to weekend unoccupied setpoint.
-                            - service: climate.set_temperature
-                              data:
-                                entity_id: climate.tinas_office_heat_pump
-                                temperature: "{{ states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') | float(0) }}"
+                        message: "Weekday and occupied. Setting mini split to weekday occupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.office_heatpump_setpoint_current
+                        option: "Weekday Occupied"
+                # Weekday and Unoccupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ is_weekday and not is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Office Mini Split Automation"
+                        message: "Weekday and unoccupied. Setting mini split to weekday unoccupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.office_heatpump_setpoint_current
+                        option: "Weekday Unoccupied"
+                # Weekend and Occupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ not is_weekday and is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Office Mini Split Automation"
+                        message: "Weekend and occupied. Setting mini split to weekend occupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.office_heatpump_setpoint_current
+                        option: "Weekend Occupied"
+                # Weekend and Unoccupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ not is_weekday and not is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Office Mini Split Automation"
+                        message: "Weekend and unoccupied. Setting mini split to weekend unoccupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.office_heatpump_setpoint_current
+                        option: "Weekend Unoccupied"
   mode: single
