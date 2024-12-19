@@ -15,6 +15,7 @@
         - input_datetime.family_room_override_until
         - input_select.hvac_mode
         - input_select.family_room_heatpump_state
+        - sensor.current_nws_outdoor_temperature
     - platform: time_pattern
       minutes: "/5"
   condition:

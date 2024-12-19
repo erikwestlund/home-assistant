@@ -4,7 +4,7 @@ office_radiator_night_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  initial: 67
 
 office_radiator_weekday_occupied_setpoint:
   name: Office Radiator Temperature (Weekday Occupied)
@@ -12,7 +12,7 @@ office_radiator_weekday_occupied_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 68
+  initial: 70
 
 office_radiator_weekday_unoccupied_setpoint:
   name: Office Radiator Temperature (Weekday Unoccupied)
@@ -20,7 +20,7 @@ office_radiator_weekday_unoccupied_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  initial: 68
 
 office_radiator_weekend_occupied_setpoint:
   name: Office Radiator Temperature (Weekend Occupied)
@@ -28,7 +28,7 @@ office_radiator_weekend_occupied_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 68
+  initial: 69
 
 office_radiator_weekend_unoccupied_setpoint:
   name: Office Radiator Temperature (Weekend Unoccupied)
@@ -36,4 +36,4 @@ office_radiator_weekend_unoccupied_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 62
+  initial: 68

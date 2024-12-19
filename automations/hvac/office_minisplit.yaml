@@ -17,6 +17,7 @@
         - input_datetime.office_override_until
         - input_select.hvac_mode
         - input_select.office_heatpump_state
+        - sensor.current_nws_outdoor_temperature
     - platform: time_pattern
       minutes: "/5"
   condition:

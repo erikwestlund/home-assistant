@@ -4,7 +4,7 @@ office_heatpump_supplemental_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  initial: 66
 
 office_heatpump_overheat_setpoint:
   name: Office Heat Overheated Temperature
@@ -12,7 +12,7 @@ office_heatpump_overheat_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 66
+  initial: 65
 
 office_heatpump_comfort_night_setpoint:
   name: Office Heat Pump Comfort Temperature (Night)
@@ -20,7 +20,7 @@ office_heatpump_comfort_night_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 66
+  initial: 67
 
 office_heatpump_comfort_weekday_occupied_setpoint:
   name: Office Heat Pump Comfort Temperature (Weekday Occupied)
@@ -36,7 +36,7 @@ office_heatpump_comfort_weekday_unoccupied_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  initial: 69
 
 office_heatpump_comfort_weekend_occupied_setpoint:
   name: Office Heat Pump Comfort Temperature (Weekend Occupied)
@@ -44,7 +44,7 @@ office_heatpump_comfort_weekend_occupied_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 69
 
 office_heatpump_comfort_weekend_unoccupied_setpoint:
   name: Office Heat Pump Comfort Temperature (Weekend Unoccupied)
@@ -52,4 +52,4 @@ office_heatpump_comfort_weekend_unoccupied_setpoint:
   max: 80
   step: 1
   unit_of_measurement: "°F"
-  initial: 66
+  initial: 68
