@@ -22,6 +22,7 @@ heatpump_room_tab:
     - "Master Bedroom"
     - "Dining Room"
     - "Ducted"
+    - "Settings"
   initial: "Office"
   icon: mdi:home-group
 
