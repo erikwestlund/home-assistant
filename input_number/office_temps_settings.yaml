@@ -21,3 +21,11 @@ office_overheated_threshold:
   step: 1
   unit_of_measurement: "°F"
   initial: 73
+
+office_override_setpoint:
+  name: Office Override Temperature
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 70

@@ -8,7 +8,17 @@ office_early_work_mode:
     initial: off
     icon: mdi:office-building
 
+office_override_status:
+    name: Office Override
+    initial: off
+    icon: mdi:cancel
+
 family_room_overheated_status:
     name: Family Room Overheated
     initial: off
     icon: mdi:fire
+
+family_room_override_status:
+    name: Family Room Override
+    initial: off
+    icon: mdi:cancel

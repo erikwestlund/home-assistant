@@ -1,0 +1,17 @@
+family_room_apply_occupied_start_time:
+  name: Family Room Apply Occupied Start Time
+  has_time: true
+  has_date: false
+  initial: "09:00:00"
+
+family_room_apply_occupied_end_time:
+  name: Family Room Apply Occupied End Time
+  has_time: true
+  has_date: false
+  initial: "20:59:00"
+
+family_room_override_until:
+  name: Family Room Override Until
+  has_time: true
+  has_date: true
+  initial: "2021-01-01T00:00:00"
