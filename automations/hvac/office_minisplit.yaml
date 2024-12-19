@@ -223,7 +223,7 @@
           {% elif current_setpoint == 'Weekend Unoccupied' %}
             {{ weekend_unoccupied_setpoint }}
           {% else %}
-            none
+            {{ thermostat_temperature }}  # Default to the current thermostat temperature
           {% endif %}
     - service: logbook.log
       data:
@@ -248,10 +248,11 @@
                   Temperature updated to {{ new_temperature }}° 
                   from {{ thermostat_temperature }}°. 
                   Setpoint: {{ current_setpoint }}.
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Setpoint Automation"
-        message: >
-          No temperature change required. 
-          Current: {{ thermostat_temperature }}°. 
-          Desired: {{ new_temperature }}°.
+      default:
+        - service: logbook.log
+          data:
+            name: "Office Mini Split Setpoint Automation"
+            message: >
+              No temperature change required. 
+              Current: {{ thermostat_temperature }}°. 
+              Desired: {{ new_temperature }}°.
