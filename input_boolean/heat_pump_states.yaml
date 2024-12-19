@@ -7,3 +7,8 @@ office_early_work_mode:
     name: Office Early Work Mode
     initial: off
     icon: mdi:office-building
+
+family_room_overheated_status:
+    name: Family Room Overheated
+    initial: off
+    icon: mdi:fire
