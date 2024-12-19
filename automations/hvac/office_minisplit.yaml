@@ -189,26 +189,10 @@
 
 - id: update_office_heatpump_temperature
   alias: "Update Office Mini Split Temperature"
-  description: "Adjust the mini split temperature when the setpoint changes, only if the thermostat temperature differs from the desired setpoint."
+  description: "Adjust the mini split temperature when the setpoint changes, only if the thermostat temperature differs."
   trigger:
     - platform: state
       entity_id: input_select.office_heatpump_setpoint_current
-  condition:
-    - condition: template
-      value_template: >
-        {{
-          states('climate.tinas_office_heat_pump') | float(0) != 
-          {
-            'Override': states('input_number.office_override_setpoint') | float(0),
-            'Supplemental': states('input_number.office_heatpump_supplemental_setpoint') | float(0),
-            'Overheated': states('input_number.office_heatpump_overheat_setpoint') | float(0),
-            'Night': states('input_number.office_heatpump_comfort_night_setpoint') | float(0),
-            'Weekday Occupied': states('input_number.office_heatpump_comfort_weekday_occupied_setpoint') | float(0),
-            'Weekday Unoccupied': states('input_number.office_heatpump_comfort_weekday_unoccupied_setpoint') | float(0),
-            'Weekend Occupied': states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') | float(0),
-            'Weekend Unoccupied': states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') | float(0)
-          }[states('input_select.office_heatpump_setpoint_current')]
-        }}
   action:
     - variables:
         current_setpoint: "{{ states('input_select.office_heatpump_setpoint_current') }}"
@@ -220,105 +204,55 @@
         weekday_unoccupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekday_unoccupied_setpoint') | float(0) }}"
         weekend_occupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') | float(0) }}"
         weekend_unoccupied_setpoint: "{{ states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') | float(0) }}"
+        thermostat_temperature: "{{ state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) }}"
+        new_temperature: >-
+          {% if current_setpoint == 'Override' %}
+            {{ override_setpoint }}
+          {% elif current_setpoint == 'Supplemental' %}
+            {{ supplemental_setpoint }}
+          {% elif current_setpoint == 'Overheated' %}
+            {{ overheat_setpoint }}
+          {% elif current_setpoint == 'Night' %}
+            {{ night_setpoint }}
+          {% elif current_setpoint == 'Weekday Occupied' %}
+            {{ weekday_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekday Unoccupied' %}
+            {{ weekday_unoccupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Occupied' %}
+            {{ weekend_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Unoccupied' %}
+            {{ weekend_unoccupied_setpoint }}
+          {% else %}
+            none
+          {% endif %}
     - service: logbook.log
       data:
         name: "Office Mini Split Setpoint Automation"
         message: >
-          Current setpoint: {{ current_setpoint }}.
+          Current setpoint: {{ current_setpoint }}. 
+          Current thermostat temperature: {{ thermostat_temperature }}°. 
+          New thermostat temperature: {{ new_temperature }}°.
     - choose:
         - conditions:
             - condition: template
-              value_template: "{{ current_setpoint == 'Override' }}"
+              value_template: "{{ thermostat_temperature != new_temperature }}"
           sequence:
             - service: climate.set_temperature
               data:
                 entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ override_setpoint }}"
+                temperature: "{{ new_temperature }}"
             - service: logbook.log
               data:
                 name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to override setpoint: {{ override_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Supplemental' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ supplemental_setpoint }}"
+                message: >
+                  Temperature updated to {{ new_temperature }}° 
+                  from {{ thermostat_temperature }}°. 
+                  Setpoint: {{ current_setpoint }}.
+        - default:
             - service: logbook.log
               data:
                 name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to supplemental setpoint: {{ supplemental_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Overheated' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ overheat_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to overheat setpoint: {{ overheat_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Night' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ night_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to night setpoint: {{ night_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekday Occupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ weekday_occupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to weekday occupied setpoint: {{ weekday_occupied_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekday Unoccupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ weekday_unoccupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to weekday unoccupied setpoint: {{ weekday_unoccupied_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekend Occupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ weekend_occupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to weekend occupied setpoint: {{ weekend_occupied_setpoint }}."
-        - conditions:
-            - condition: template
-              value_template: "{{ current_setpoint == 'Weekend Unoccupied' }}"
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                temperature: "{{ weekend_unoccupied_setpoint }}"
-            - service: logbook.log
-              data:
-                name: "Office Mini Split Setpoint Automation"
-                message: "Set mini split to weekend unoccupied setpoint: {{ weekend_unoccupied_setpoint }}."
+                message: >
+                  No temperature change required. 
+                  Current: {{ thermostat_temperature }}°. 
+                  Desired: {{ new_temperature }}°.
