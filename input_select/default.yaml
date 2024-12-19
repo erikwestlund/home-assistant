@@ -22,7 +22,7 @@ heatpump_room_tab:
     - "Master Bedroom"
     - "Dining Room"
     - "Ducted"
-    - "Main Radiator Zone"
+    - "Main Heat Zone"
     - "Settings"
   initial: "Office"
   icon: mdi:home-group
