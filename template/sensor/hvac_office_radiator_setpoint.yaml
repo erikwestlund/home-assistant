@@ -34,8 +34,8 @@
       mdi:sofa
     {% endif %}
 
-- name: "Office Radiator Target Setpoint"
-  unique_id: office_radiator_target_setpoint
+- name: "Office Radiator Setpoint Target Temperature"
+  unique_id: office_radiator_setpoint_target_temperature
   state: >
     {% set setpoint = states('sensor.office_radiator_setpoint') %}
     {% if setpoint == "Off" %}
