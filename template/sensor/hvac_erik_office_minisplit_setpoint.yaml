@@ -60,6 +60,8 @@
       {{ states('input_number.erik_office_heatpump_comfort_weekend_unoccupied_setpoint') }}
     {% elif setpoint == "Supplemental Heat" %}
       {{ states('input_number.erik_office_heatpump_supplemental_setpoint') }}
+    {% elif setpoint == "Overheated" %}
+      {{ states('input_number.erik_office_heatpump_overheat_setpoint') }}
     {% elif setpoint == "Override" %}
       {{ states('input_number.erik_office_override_setpoint') }}
     {% else %}
@@ -67,8 +69,13 @@
     {% endif %}
   unit_of_measurement: "°F"
   icon: >-
-    {% if states('sensor.erik_office_minisplit_target_setpoint') | float == states('input_number.erik_office_heatpump_supplemental_setpoint') | float %}
+    {% set setpoint = states('sensor.erik_office_mini_split_setpoint') %}
+    {% if setpoint == "Overheated" %}
+      mdi:thermometer-alert
+    {% elif setpoint == "Supplemental Heat" %}
       mdi:fire
+    {% elif setpoint == "Override" %}
+      mdi:alert
     {% else %}
       mdi:thermometer
     {% endif %}
