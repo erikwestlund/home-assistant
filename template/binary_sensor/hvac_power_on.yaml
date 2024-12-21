@@ -7,7 +7,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_office_heatpump_on', 'on') and is_state('input_boolean.office_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.office_heat_pump_power_on_control', 'on') and not is_state('sensor.office_heatpump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.office_heat_pump_power_on_control', 'on') and not is_state('sensor.office_heat_pump_operational_mode', 'Off') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.office_heatpump_power_on_status', 'on') %}
@@ -42,7 +42,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_family_room_heatpump_on', 'on') and is_state('input_boolean.family_room_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.family_room_heat_pump_power_on_control', 'on') and not is_state('sensor.family_room_heatpump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.family_room_heat_pump_power_on_control', 'on') and not is_state('sensor.family_room_heat_pump_operational_mode', 'Off') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.family_room_heatpump_power_on_status', 'on') %}
@@ -77,7 +77,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_living_room_heatpump_on', 'on') and is_state('input_boolean.living_room_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.living_room_heat_pump_power_on_control', 'on') and not is_state('sensor.living_room_heatpump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.living_room_heat_pump_power_on_control', 'on') and not is_state('sensor.living_room_heat_pump_operational_mode', 'Off') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.living_room_heatpump_power_on_status', 'on') %}
@@ -112,7 +112,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_dining_room_heatpump_on', 'on') and is_state('input_boolean.dining_room_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.dining_room_heat_pump_power_on_control', 'on') and not is_state('sensor.dining_room_heatpump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.dining_room_heat_pump_power_on_control', 'on') and not is_state('sensor.dining_room_heat_pump_operational_mode', 'Off') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.dining_room_heatpump_power_on_status', 'on') %}
@@ -130,7 +130,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_erik_office_heatpump_on', 'on') and is_state('input_boolean.erik_office_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.erik_office_heat_pump_power_on_control', 'on') and not is_state('sensor.erik_office_heatpump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.erik_office_heat_pump_power_on_control', 'on') and not is_state('sensor.erik_office_heat_pump_operational_mode', 'Off') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.erik_office_heatpump_power_on_status', 'on') %}
@@ -148,7 +148,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_master_bedroom_heatpump_on', 'on') and is_state('input_boolean.master_bedroom_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.master_bedroom_heat_pump_power_on_control', 'on') and not is_state('sensor.master_bedroom_heatpump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.master_bedroom_heat_pump_power_on_control', 'on') and not is_state('sensor.master_bedroom_heat_pump_operational_mode', 'Off') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.master_bedroom_heatpump_power_on_status', 'on') %}
@@ -166,7 +166,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_ducted_heatpump_on', 'on') and is_state('input_boolean.ducted_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.ducted_heat_pump_power_on_control', 'on') and not is_state('sensor.ducted_heatpump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.ducted_heat_pump_power_on_control', 'on') and not is_state('sensor.ducted_heat_pump_operational_mode', 'Off') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.ducted_heatpump_power_on_status', 'on') %}
