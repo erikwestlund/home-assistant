@@ -1,0 +1,141 @@
+- id: "monitor_and_turn_off_units"
+  alias: "Monitor and Turn Off Units"
+  description: "Turns off units based on binary sensor states."
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.dining_room_heat_pump_power_on_status
+        - binary_sensor.ducted_heat_pump_power_on_status
+        - binary_sensor.erik_office_heat_pump_power_on_status
+        - binary_sensor.family_room_heat_pump_power_on_status
+        - binary_sensor.family_room_radiator_power_on_status
+        - binary_sensor.living_room_heat_pump_power_on_status
+        - binary_sensor.living_room_radiator_power_on_status
+        - binary_sensor.master_bedroom_heat_pump_power_on_status
+        - binary_sensor.office_heat_pump_power_on_status
+        - binary_sensor.office_radiator_power_on_status
+  condition:
+    - condition: template
+      value_template: >
+        {{ trigger.to_state.state == 'off' }}
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.dining_room_heat_pump_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.dining_room_heat_pump', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.dining_room_heat_pump
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.family_room_heat_pump_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.family_room_heat_pump', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.family_room_heat_pump
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.family_room_radiator_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.family_room_heating', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.family_room_heating
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.living_room_heat_pump_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.living_room_heat_pump', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.living_room_heat_pump
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.living_room_radiator_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.living_room_main_heating', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.living_room_main_heating
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.master_bedroom_heat_pump_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.master_bedroom_heat_pump', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.master_bedroom_heat_pump
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.office_heat_pump_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.tinas_office_heat_pump', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.tinas_office_heat_pump
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.office_radiator_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.office', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.office
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.erik_office_heat_pump_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.eriks_office_room', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.eriks_office_room
+
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.ducted_heat_pump_power_on_status
+              state: "off"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ not is_state('climate.ducted_heat_pump', 'off') }}
+            - service: climate.turn_off
+              target:
+                entity_id: climate.ducted_heat_pump
