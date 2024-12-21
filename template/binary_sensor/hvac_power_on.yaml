@@ -8,3 +8,58 @@
     {% else %}
       mdi:power-off
     {% endif %}
+
+- name: "Family Room Heat Pump Power On"
+  unique_id: family_room_heatpump_power_on
+  state: >-
+    {{ states('sensor.family_room_heat_pump_operational_mode') != 'Off' }}
+  icon: >-
+    {% if is_state('binary_sensor.family_room_heat_pump_power_on', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}
+
+- name: "Living Room Heat Pump Power On"
+  unique_id: living_room_heatpump_power_on
+  state: >-
+    {{ states('sensor.living_room_heat_pump_operational_mode') != 'Off' }}
+  icon: >-
+    {% if is_state('binary_sensor.living_room_heat_pump_power_on', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}
+
+- name: "Dining Room Heat Pump Power On"
+  unique_id: dining_room_heatpump_power_on
+  state: >-
+    {{ states('sensor.dining_room_heat_pump_operational_mode') != 'Off' }}
+  icon: >-
+    {% if is_state('binary_sensor.dining_room_heat_pump_power_on', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}
+
+- name: "Master Bedroom Heat Pump Power On"
+  unique_id: master_bedroom_heatpump_power_on
+  state: >-
+    {{ states('sensor.master_bedroom_heat_pump_operational_mode') != 'Off' }}
+  icon: >-
+    {% if is_state('binary_sensor.master_bedroom_heat_pump_power_on', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}
+
+- name: "Erik Office Heat Pump Power On"
+  unique_id: erik_office_heatpump_power_on
+  state: >-
+    {{ states('sensor.erik_office_heat_pump_operational_mode') != 'Off' }}
+  icon: >-
+    {% if is_state('binary_sensor.erik_office_heat_pump_power_on', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}
