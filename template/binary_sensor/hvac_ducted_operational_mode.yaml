@@ -1,0 +1,11 @@
+- name: "Ducted Heat Pump Operational Mode"
+  unique_id: ducted_heat_pump_operational_mode
+  state: >
+    {{ states('sensor.current_nws_outdoor_temperature') | float(0) >=
+       states('input_number.ducted_heatpump_off_threshold') | float(0) }}
+  icon: >-
+    {% if is_state('binary_sensor.ducted_heat_pump_operational_mode', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}

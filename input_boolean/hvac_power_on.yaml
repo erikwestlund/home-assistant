@@ -1,0 +1,41 @@
+office_power_on_control:
+  name: Office Power On Control
+  initial: on
+  icon: mdi:power
+  unique_id: office_power_on_control
+
+family_room_power_on_control:
+  name: Family Room Power On Control
+  initial: on
+  icon: mdi:power
+  unique_id: family_room_power_on_control
+
+living_room_power_on_control:
+  name: Living Room Power On Control
+  initial: on
+  icon: mdi:power
+  unique_id: living_room_power_on_control
+
+dining_room_power_on_control:
+  name: Dining Room Power On Control
+  initial: on
+  icon: mdi:power
+  unique_id: dining_room_power_on_control
+
+master_bedroom_power_on_control:
+  name: Master Bedroom Power On Control
+  initial: on
+  icon: mdi:power
+  unique_id: master_bedroom_power_on_control
+
+erik_office_power_on_control:
+  name: Erik Office Power On Control
+  initial: on
+  icon: mdi:power
+  unique_id: erik_office_power_on_control
+
+ducted_power_on_control:
+  name: Ducted Power On Control
+  initial: on
+  icon: mdi:power
+  unique_id: ducted_power_on_control
