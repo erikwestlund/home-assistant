@@ -9,7 +9,7 @@
     
     {% if is_state('input_boolean.office_early_work_mode', 'on') and early_work_start <= current_time <= apply_start %}
       true
-    {% elif is_state('binary_sensor.nighttime_status', 'on') %}
+    {% elif is_state('binary_sensor.debug_nighttime_status', 'on') %}
       false
     {% elif apply_start <= current_time <= apply_end %}
       {{ is_state('binary_sensor.office_occupied', 'on') }}
