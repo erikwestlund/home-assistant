@@ -1,0 +1,10 @@
+- name: "Office Heat Pump Power On"
+  unique_id: office_heatpump_power_on
+  state: >-
+    {{ states('sensor.office_heat_pump_operational_mode') != 'Off' }}
+  icon: >-
+    {% if is_state('binary_sensor.office_heat_pump_power_on', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}
