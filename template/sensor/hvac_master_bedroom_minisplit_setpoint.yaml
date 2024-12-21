@@ -36,3 +36,36 @@
     {% else %}
       mdi:help-circle
     {% endif %}
+
+- name: "Master Bedroom Mini Split Setpoint Target Temperature"
+  unique_id: master_bedroom_minisplit_setpoint_target_temperature
+  state: >
+    {% set setpoint = states('sensor.master_bedroom_mini_split_setpoint') %}
+    {% if setpoint == "Off" %}
+      None
+    {% elif setpoint == "Daytime" %}
+      {{ states('input_number.master_bedroom_heatpump_comfort_daytime_setpoint') }}
+    {% elif setpoint == "Bedtime" %}
+      {{ states('input_number.master_bedroom_heatpump_comfort_bedtime_setpoint') }}
+    {% elif setpoint == "Sleep" %}
+      {{ states('input_number.master_bedroom_heatpump_comfort_sleep_setpoint') }}
+    {% elif setpoint == "Supplemental Heat" %}
+      {{ states('input_number.master_bedroom_heatpump_supplemental_setpoint') }}
+    {% elif setpoint == "Overheated" %}
+      {{ states('input_number.master_bedroom_heatpump_overheat_setpoint') }}
+    {% elif setpoint == "Override" %}
+      {{ states('input_number.master_bedroom_override_setpoint') }}
+    {% else %}
+      None
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: >-
+    {% if states('sensor.master_bedroom_minisplit_target_setpoint') | float == states('input_number.master_bedroom_heatpump_supplemental_setpoint') | float %}
+      mdi:fire
+    {% elif setpoint == "Overheated" %}
+      mdi:thermometer-alert
+    {% elif setpoint == "Off" %}
+      mdi:power
+    {% else %}
+      mdi:thermometer
+    {% endif %}
