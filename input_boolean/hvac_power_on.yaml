@@ -1,53 +1,44 @@
-#office_radiator_power_on_control:
-#  name: Office Radiator Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: office_radiator_power_on_control
-#
-#family_room_radiator_power_on_control:
-#  name: Family Room Radiator Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: family_room_radiator_power_on_control
-#
-#office_heat_pump_power_on_control:
-#  name: Office Heat Pump Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: office_heat_pump_power_on_control
-#
-#family_room_heat_pump_power_on_control:
-#  name: Family Room Heat Pump Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: family_room_heat_pump_power_on_control
-#
-#living_room_heat_pump_power_on_control:
-#  name: Living Room Heat Pump Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: living_room_heat_pump_power_on_control
-#
-#dining_room_heat_pump_power_on_control:
-#  name: Dining Room Heat Pump Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: dining_room_heat_pump_power_on_control
-#
-#master_bedroom_heat_pump_power_on_control:
-#  name: Master Bedroom Heat Pump Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: master_bedroom_heat_pump_power_on_control
-#
-#erik_office_heat_pump_power_on_control:
-#  name: Erik Office Heat Pump Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: erik_office_heat_pump_power_on_control
-#
-#ducted_heat_pump_power_on_control:
-#  name: Ducted Heat Pump Power On Control
-#  initial: on
-#  icon: mdi:power
-#  unique_id: ducted_heat_pump_power_on_control
+office_radiator_power_on_control:
+  name: Office Radiator Power On Control
+  initial: on
+  icon: mdi:power
+
+family_room_radiator_power_on_control:
+  name: Family Room Radiator Power On Control
+  initial: on
+  icon: mdi:power
+
+office_heat_pump_power_on_control:
+  name: Office Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+family_room_heat_pump_power_on_control:
+  name: Family Room Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+living_room_heat_pump_power_on_control:
+  name: Living Room Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+dining_room_heat_pump_power_on_control:
+  name: Dining Room Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+master_bedroom_heat_pump_power_on_control:
+  name: Master Bedroom Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+erik_office_heat_pump_power_on_control:
+  name: Erik Office Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+ducted_heat_pump_power_on_control:
+  name: Ducted Heat Pump Power On Control
+  initial: on
+  icon: mdi:power

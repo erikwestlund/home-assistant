@@ -1,5 +1,4 @@
 - name: "Office Radiator Operational Mode"
-  unique_id: office_radiator_operational_mode
   state: >
     {% if is_state('input_boolean.office_power_on_control', 'on') %}
       On
@@ -14,7 +13,6 @@
     {% endif %}
 
 - name: "Family Room Radiator Operational Mode"
-  unique_id: family_room_radiator_operational_mode
   state: >
     {% if is_state('input_boolean.family_room_power_on_control', 'on') %}
       On
@@ -29,7 +27,6 @@
     {% endif %}
 
 - name: "Office Heat Pump Operational Mode"
-  unique_id: office_heatpump_operational_mode
   state: >-
     {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
     {% set off_threshold = states('input_number.office_heatpump_off_to_supplement_threshold') | float %}
@@ -52,7 +49,6 @@
     {% endif %}
 
 - name: "Family Room Heat Pump Operational Mode"
-  unique_id: family_room_heatpump_operational_mode
   state: >-
     {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
     {% set off_threshold = states('input_number.family_room_heatpump_off_to_supplement_threshold') | float %}
@@ -75,7 +71,6 @@
     {% endif %}
 
 - name: "Living Room Heat Pump Operational Mode"
-  unique_id: living_room_heatpump_operational_mode
   state: >-
     {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
     {% set off_threshold = states('input_number.living_room_heatpump_off_to_supplement_threshold') | float %}
@@ -98,7 +93,6 @@
     {% endif %}
 
 - name: "Dining Room Heat Pump Operational Mode"
-  unique_id: dining_room_heatpump_operational_mode
   state: >-
     {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
     {% set off_threshold = states('input_number.dining_room_heatpump_off_to_supplement_threshold') | float %}
@@ -121,7 +115,6 @@
     {% endif %}
 
 - name: "Master Bedroom Heat Pump Operational Mode"
-  unique_id: master_bedroom_heatpump_operational_mode
   state: >-
     {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
     {% set off_threshold = states('input_number.master_bedroom_heatpump_off_to_supplement_threshold') | float %}
@@ -144,7 +137,6 @@
     {% endif %}
 
 - name: "Erik Office Heat Pump Operational Mode"
-  unique_id: erik_office_heatpump_operational_mode
   state: >-
     {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
     {% set off_threshold = states('input_number.erik_office_heatpump_off_to_supplement_threshold') | float %}
