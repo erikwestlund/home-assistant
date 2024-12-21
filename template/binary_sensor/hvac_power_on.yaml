@@ -1,3 +1,4 @@
+# Office
 - name: "Office Heat Pump Power On Status"
   unique_id: office_heatpump_power_on_status
   state: >
@@ -15,13 +16,16 @@
       mdi:hvac-off
     {% endif %}
 
-# Office Radiator
 - name: "Office Radiator Power On Status"
   unique_id: office_radiator_power_on_status
   state: >
-    {{ is_state('input_boolean.office_radiator_override_status', 'on') or
-       (is_state('input_boolean.hvac_away_mode', 'on') and is_state('input_boolean.away_office_radiator_on', 'on') and is_state('input_boolean.office_radiator_power_on_control', 'on')) or
-       (is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.office_radiator_power_on_control', 'on')) }}
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.office_override_status', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      {{ is_state('input_boolean.away_office_radiator_on', 'on') and is_state('input_boolean.office_radiator_power_on_control', 'on') }}
+    {% else %}
+      {{ is_state('input_boolean.office_radiator_power_on_control', 'on') }}
+    {% endif %}
   icon: >-
     {% if is_state('binary_sensor.office_radiator_power_on_status', 'on') %}
       mdi:radiator
