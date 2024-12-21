@@ -1,7 +1,7 @@
 - name: "Office Radiator Operational Mode"
   unique_id: office_radiator_operational_mode
   state: >
-    {% if is_state('input_boolean.office_power_on_control', 'on') %}
+    {% if is_state('input_boolean.office_radiator_power_on_control', 'on') %}
       On
     {% else %}
       Off
@@ -16,7 +16,7 @@
 - name: "Family Room Radiator Operational Mode"
   unique_id: family_room_radiator_operational_mode
   state: >
-    {% if is_state('input_boolean.family_room_power_on_control', 'on') %}
+    {% if is_state('input_boolean.family_room_radiator_power_on_control', 'on') %}
       On
     {% else %}
       Off
