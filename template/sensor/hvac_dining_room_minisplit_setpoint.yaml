@@ -41,3 +41,34 @@
     {% else %}
       mdi:sofa
     {% endif %}
+
+- name: "Dining Room Mini Split Setpoint Target Temperature"
+  unique_id: dining_room_minisplit_setpoint_target_temperature
+  state: >
+    {% set setpoint = states('sensor.dining_room_mini_split_setpoint') %}
+    {% if setpoint == "Off" %}
+      None
+    {% elif setpoint == "Night" %}
+      {{ states('input_number.dining_room_heatpump_comfort_night_setpoint') }}
+    {% elif setpoint == "Weekday Occupied" %}
+      {{ states('input_number.dining_room_heatpump_comfort_weekday_occupied_setpoint') }}
+    {% elif setpoint == "Weekday Unoccupied" %}
+      {{ states('input_number.dining_room_heatpump_comfort_weekday_unoccupied_setpoint') }}
+    {% elif setpoint == "Weekend Occupied" %}
+      {{ states('input_number.dining_room_heatpump_comfort_weekend_occupied_setpoint') }}
+    {% elif setpoint == "Weekend Unoccupied" %}
+      {{ states('input_number.dining_room_heatpump_comfort_weekend_unoccupied_setpoint') }}
+    {% elif setpoint == "Supplemental Heat" %}
+      {{ states('input_number.dining_room_heatpump_supplemental_setpoint') }}
+    {% elif setpoint == "Override" %}
+      {{ states('input_number.dining_room_override_setpoint') }}
+    {% else %}
+      None
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: >-
+    {% if states('sensor.dining_room_minisplit_target_setpoint') | float == states('input_number.dining_room_heatpump_supplemental_setpoint') | float %}
+      mdi:fire
+    {% else %}
+      mdi:thermometer
+    {% endif %}
