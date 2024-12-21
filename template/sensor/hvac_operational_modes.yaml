@@ -37,7 +37,7 @@
     {% if outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
-      Supplement
+      Supplemental Heat
     {% else %}
       Comfort
     {% endif %}
@@ -60,7 +60,7 @@
     {% if outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
-      Supplement
+      Supplemental Heat
     {% else %}
       Comfort
     {% endif %}
@@ -83,7 +83,7 @@
     {% if outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
-      Supplement
+      Supplemental Heat
     {% else %}
       Comfort
     {% endif %}
@@ -106,7 +106,7 @@
     {% if outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
-      Supplement
+      Supplemental Heat
     {% else %}
       Comfort
     {% endif %}
@@ -129,7 +129,7 @@
     {% if outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
-      Supplement
+      Supplemental Heat
     {% else %}
       Comfort
     {% endif %}
@@ -152,7 +152,7 @@
     {% if outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
-      Supplement
+      Supplemental Heat
     {% else %}
       Comfort
     {% endif %}
