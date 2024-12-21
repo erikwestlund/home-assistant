@@ -1,0 +1,43 @@
+- name: "Office Mini Split Setpoint"
+  unique_id: office_minisplit_setpoint_selector
+  state: >
+    {% if is_state('input_boolean.office_override_status', 'on') %}
+      "Override"
+    {% elif not is_state('binary_sensor.office_heat_pump_power_on_status', 'on') and not is_state('binary_sensor.office_radiator_power_on_status', 'on') %}
+      "Off"
+    {% elif is_state('binary_sensor.office_overheated', 'on') %}
+      "Overheated"
+    {% elif is_state('sensor.office_heat_pump_operational_mode', 'Supplement') or is_state('sensor.office_radiator_operational_mode', 'Supplement') %}
+      "Supplemental Heat"
+    {% elif is_state('binary_sensor.nighttime_status', 'on') %}
+      "Night"
+    {% elif is_state('binary_sensor.is_weekend', 'on') %}
+      {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
+        "Weekend Occupied"
+      {% else %}
+        "Weekend Unoccupied"
+      {% endif %}
+    {% else %}
+      {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
+        "Weekday Occupied"
+      {% else %}
+        "Weekday Unoccupied"
+      {% endif %}
+    {% endif %}
+  icon: >-
+    {% set state = states('sensor.office_setpoint_selector') %}
+    {% if state == "Override" %}
+      mdi:alert
+    {% elif state == "Off" %}
+      mdi:power
+    {% elif state == "Overheated" %}
+      mdi:thermometer-alert
+    {% elif state == "Supplemental Heat" %}
+      mdi:fire
+    {% elif state == "Night" %}
+      mdi:weather-night
+    {% elif "Occupied" in state %}
+      mdi:chair-rolling
+    {% else %}
+      mdi:sofa
+    {% endif %}
