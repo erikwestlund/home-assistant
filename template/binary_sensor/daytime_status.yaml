@@ -12,4 +12,5 @@
 
 - name: "Nighttime Status"
   unique_id: nighttime_status
-  state: not binary_sensor.daytime_status.state
+  state: >
+    {{ not is_state('binary_sensor.daytime_status', 'on') }}
