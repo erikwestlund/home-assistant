@@ -22,3 +22,4 @@ heatpump_cooling_default_setpoint:
   step: 1
   unit_of_measurement: "°F"
   initial: 71
+
