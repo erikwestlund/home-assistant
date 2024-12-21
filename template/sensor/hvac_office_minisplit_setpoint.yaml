@@ -42,8 +42,8 @@
       mdi:sofa
     {% endif %}
 
-- name: "Office Mini Split Target Setpoint"
-  unique_id: office_minisplit_target_setpoint
+- name: "Office Mini Split Setpoint Target Temperature"
+  unique_id: office_minisplit_setpoint_target_temperature
   state: >
     {% set setpoint = states('sensor.office_mini_split_setpoint') %}
     {% if setpoint == "Off" %}
