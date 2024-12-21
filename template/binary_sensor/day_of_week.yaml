@@ -1,0 +1,22 @@
+- name: "Is Holiday"
+  unique_id: is_holiday
+  state: >
+    {% set today = now().date() %}
+    {% set holidays = [
+      now().replace(month=12, day=25).date(),
+      now().replace(month=1, day=1).date(),
+      now().replace(month=7, day=4).date()
+    ] %}
+    {{ today in holidays }}
+
+- name: "Is Weekend"
+  unique_id: is_weekend
+  state: >
+    {% set today = now().weekday() %}
+    {% set is_regular_weekend = today in [5, 6] %}
+    {{ is_regular_weekend or is_state('binary_sensor.is_holiday', 'on') }}
+
+- name: "Is Weekday"
+  unique_id: is_weekday
+  state: >
+    {{ not is_state('binary_sensor.is_weekend', 'on') }}
