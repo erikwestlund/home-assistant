@@ -2,7 +2,7 @@
 - name: "Office Apply Occupied Setpoints"
   unique_id: office_apply_occupied_setpoints
   state: >
-    {% set current_time = (states('input_datetime.time_override') | as_timestamp(default=None)) or now().timestamp() %}
+    {% set current_time = (states('input_datetime.current_time_debug') | as_timestamp(default=None)) or now().timestamp() %}
     {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_early_work_mode_day_start_time')) %}
     {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_start_time')) %}
     {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_end_time')) %}

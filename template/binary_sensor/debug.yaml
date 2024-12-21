@@ -1,9 +1,20 @@
 - name: "Debug Daytime Status"
   unique_id: debug_daytime_status
   state: >
-    {{ is_state('input_boolean.debug_daytime', 'on') }}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set day_start = today ~ 'T' ~ states('input_datetime.day_start_time') %}
+    {% set night_start = today ~ 'T' ~ states('input_datetime.night_start_time') %}
+    {% set day_start_ts = as_timestamp(strptime(day_start, '%Y-%m-%dT%H:%M:%S')) %}
+    {% set night_start_ts = as_timestamp(strptime(night_start, '%Y-%m-%dT%H:%M:%S')) %}
+    {% set now_ts = (states('input_datetime.current_time_debug') | as_timestamp(default=None)) or now().timestamp() %}
+    
+    {{ day_start_ts <= now_ts < night_start_ts }}
+
+- name: "Nighttime Status"
+  unique_id: nighttime_status
+  state: not binary_sensor.daytime_status.state
+
 
 - name: "Debug Nighttime Status"
   unique_id: debug_nighttime_status
-  state: >
-      {{ is_state('input_boolean.debug_nighttime', 'on') }}
+  state: not binary_sensor.daytime_status.state

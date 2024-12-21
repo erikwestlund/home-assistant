@@ -1,4 +1,0 @@
-debug_daytime:
-  name: Daytime Status Debug
-  initial: off
-  icon: mdi:weather-sunny

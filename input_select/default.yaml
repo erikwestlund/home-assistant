@@ -1,11 +1,3 @@
-day_night_mode:
-  name: Day/Night Mode
-  options:
-    - "Auto"
-    - "Day"
-    - "Night"
-  initial: "Auto"
-
 day_of_week_status:
   name: Day of Week Status
   options:
