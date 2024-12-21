@@ -9,15 +9,15 @@
       {% set time_period = states('sensor.ducted_time_period') %}
       {% if time_period == 'Daytime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
         Heating Kids Room Daytime
-      {% elif time_period == 'Daytime' and is_state('binary_sensor.stairwell_need_heat', 'on') %}
+      {% elif time_period == 'Daytime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
         Heating Stairwell Daytime
       {% elif time_period == 'Bedtime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
         Heating Kids Room Bedtime
-      {% elif time_period == 'Bedtime' and is_state('binary_sensor.stairwell_need_heat', 'on') %}
+      {% elif time_period == 'Bedtime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
         Heating Stairwell Bedtime
       {% elif time_period == 'Sleep' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
         Heating Kids Room Sleep
-      {% elif time_period == 'Sleep' and is_state('binary_sensor.stairwell_need_heat', 'on') %}
+      {% elif time_period == 'Sleep' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
         Heating Stairwell Sleep
       {% else %}
         Idle
