@@ -7,7 +7,7 @@
       Off
     {% elif is_state('binary_sensor.dining_room_overheated', 'on') %}
       Overheated
-    {% elif is_state('sensor.dining_room_heat_pump_operational_mode', 'Supplement') or is_state('sensor.dining_room_heat_pump_operational_mode', 'Supplement') %}
+    {% elif is_state('sensor.dining_room_heat_pump_operational_mode', 'Supplemental Heat') or is_state('sensor.dining_room_heat_pump_operational_mode', 'Supplemental Heat') %}
       Supplemental Heat
     {% elif is_state('binary_sensor.nighttime_status', 'on') %}
       Night

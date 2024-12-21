@@ -45,7 +45,7 @@
     {% set mode = states('sensor.office_heat_pump_operational_mode') %}
     {% if mode == 'Off' %}
       mdi:power-off
-    {% elif mode == 'Supplement' %}
+    {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
     {% else %}
       mdi:thermometer
@@ -68,7 +68,7 @@
     {% set mode = states('sensor.family_room_heat_pump_operational_mode') %}
     {% if mode == 'Off' %}
       mdi:power-off
-    {% elif mode == 'Supplement' %}
+    {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
     {% else %}
       mdi:thermometer
@@ -91,7 +91,7 @@
     {% set mode = states('sensor.living_room_heat_pump_operational_mode') %}
     {% if mode == 'Off' %}
       mdi:power-off
-    {% elif mode == 'Supplement' %}
+    {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
     {% else %}
       mdi:thermometer
@@ -114,7 +114,7 @@
     {% set mode = states('sensor.dining_room_heat_pump_operational_mode') %}
     {% if mode == 'Off' %}
       mdi:power-off
-    {% elif mode == 'Supplement' %}
+    {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
     {% else %}
       mdi:thermometer
@@ -137,7 +137,7 @@
     {% set mode = states('sensor.master_bedroom_heat_pump_operational_mode') %}
     {% if mode == 'Off' %}
       mdi:power-off
-    {% elif mode == 'Supplement' %}
+    {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
     {% else %}
       mdi:thermometer
@@ -160,7 +160,7 @@
     {% set mode = states('sensor.erik_office_heat_pump_operational_mode') %}
     {% if mode == 'Off' %}
       mdi:power-off
-    {% elif mode == 'Supplement' %}
+    {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
     {% else %}
       mdi:thermometer
