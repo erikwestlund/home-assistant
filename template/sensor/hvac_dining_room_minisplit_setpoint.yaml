@@ -3,7 +3,7 @@
   state: >
     {% if is_state('input_boolean.dining_room_override_status', 'on') %}
       Override
-    {% elif is_state('binary_sensor.dining_room_heat_pump_power_on_status', 'on') %}
+    {% elif is_state('binary_sensor.dining_room_heat_pump_power_on_status', 'off') %}
       Off
     {% elif is_state('binary_sensor.dining_room_overheated', 'on') %}
       Overheated
