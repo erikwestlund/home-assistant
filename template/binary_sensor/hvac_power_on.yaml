@@ -1,3 +1,20 @@
+- name: "Office Heat Pump Power On Status"
+  unique_id: office_heatpump_power_on_status
+  state: >
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.office_heatpump_override_status', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      {{ is_state('input_boolean.away_office_heatpump_on', 'on') and is_state('input_boolean.office_heat_pump_power_on_control', 'on') }}
+    {% else %}
+      {{ is_state('input_boolean.office_heat_pump_power_on_control', 'on') and not is_state('sensor.office_heatpump_operational_mode', 'Off') }}
+    {% endif %}
+  icon: >-
+    {% if is_state('binary_sensor.office_heatpump_power_on_status', 'on') %}
+      mdi:hvac
+    {% else %}
+      mdi:hvac-off
+    {% endif %}
+
 # Office Radiator
 - name: "Office Radiator Power On Status"
   unique_id: office_radiator_power_on_status
@@ -26,19 +43,7 @@
       mdi:radiator-off
     {% endif %}
 
-# Office Heat Pump
-- name: "Office Heat Pump Power On Status"
-  unique_id: office_heatpump_power_on_status
-  state: >
-    {{ is_state('input_boolean.office_heatpump_override_status', 'on') or
-       (is_state('input_boolean.hvac_away_mode', 'on') and is_state('input_boolean.away_office_heatpump_on', 'on') and is_state('input_boolean.office_heat_pump_power_on_control', 'on')) or
-       (is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.office_heat_pump_power_on_control', 'on') and not is_state('sensor.office_heatpump_operational_mode', 'Off')) }}
-  icon: >-
-    {% if is_state('binary_sensor.office_heatpump_power_on_status', 'on') %}
-      mdi:hvac
-    {% else %}
-      mdi:hvac-off
-    {% endif %}
+
 
 # Family Room Heat Pump
 - name: "Family Room Heat Pump Power On Status"
