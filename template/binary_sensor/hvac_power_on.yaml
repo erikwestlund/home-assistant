@@ -1,4 +1,5 @@
 - name: "Office Radiator Power On Status"
+  unique_id: office_radiator_power_on_status
   state: >
     {{ is_state('input_boolean.office_power_on_control', 'on') }}
   icon: >-
@@ -9,6 +10,7 @@
     {% endif %}
 
 - name: "Family Room Radiator Power On Status"
+  unique_id: family_room_radiator_power_on_status
   state: >
     {{ is_state('input_boolean.family_room_power_on_control', 'on') }}
   icon: >-
@@ -19,6 +21,7 @@
     {% endif %}
 
 - name: "Office Heat Pump Power On Status"
+  unique_id: office_heatpump_power_on_status
   state: >
     {{ is_state('input_boolean.office_power_on_control', 'on') and not is_state('sensor.office_heatpump_operational_mode', 'Off') }}
   icon: >-
@@ -29,6 +32,7 @@
     {% endif %}
 
 - name: "Family Room Heat Pump Power On Status"
+  unique_id: family_room_heatpump_power_on_status
   state: >
     {{ is_state('input_boolean.family_room_power_on_control', 'on') and not is_state('sensor.family_room_heatpump_operational_mode', 'Off') }}
   icon: >-
@@ -39,6 +43,7 @@
     {% endif %}
 
 - name: "Living Room Heat Pump Power On Status"
+  unique_id: living_room_heatpump_power_on_status
   state: >
     {{ is_state('input_boolean.living_room_power_on_control', 'on') and not is_state('sensor.living_room_heatpump_operational_mode', 'Off') }}
   icon: >-
@@ -49,6 +54,7 @@
     {% endif %}
 
 - name: "Dining Room Heat Pump Power On Status"
+  unique_id: dining_room_heatpump_power_on_status
   state: >
     {{ is_state('input_boolean.dining_room_power_on_control', 'on') and not is_state('sensor.dining_room_heatpump_operational_mode', 'Off') }}
   icon: >-
@@ -59,6 +65,7 @@
     {% endif %}
 
 - name: "Master Bedroom Heat Pump Power On Status"
+  unique_id: master_bedroom_heatpump_power_on_status
   state: >
     {{ is_state('input_boolean.master_bedroom_power_on_control', 'on') and not is_state('sensor.master_bedroom_heatpump_operational_mode', 'Off') }}
   icon: >-
@@ -69,6 +76,7 @@
     {% endif %}
 
 - name: "Erik Office Heat Pump Power On Status"
+  unique_id: erik_office_heatpump_power_on_status
   state: >
     {{ is_state('input_boolean.erik_office_power_on_control', 'on') and not is_state('sensor.erik_office_heatpump_operational_mode', 'Off') }}
   icon: >-
@@ -79,6 +87,7 @@
     {% endif %}
 
 - name: "Ducted Heat Pump Power On Status"
+  unique_id: ducted_heatpump_power_on_status
   state: >
     {{ is_state('input_boolean.ducted_power_on_control', 'on') and not is_state('sensor.ducted_heatpump_operational_mode', 'Off') }}
   icon: >-
