@@ -1,0 +1,40 @@
+- name: "Ducted Heat Pump Setpoint"
+  unique_id: ducted_heatpump_setpoint
+  state: >
+    {% if is_state('input_boolean.ducted_override_status', 'on') %}
+      Override
+    {% elif is_state('binary_sensor.ducted_heat_pump_power_on_status', 'off') %}
+      Off
+    {% else %}
+      {% set time_period = states('sensor.ducted_time_period') %}
+      {% if time_period == 'Daytime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+        Heating Kids Room Daytime
+      {% elif time_period == 'Daytime' and is_state('binary_sensor.stairwell_need_heat', 'on') %}
+        Heating Stairwell Daytime
+      {% elif time_period == 'Bedtime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+        Heating Kids Room Bedtime
+      {% elif time_period == 'Bedtime' and is_state('binary_sensor.stairwell_need_heat', 'on') %}
+        Heating Stairwell Bedtime
+      {% elif time_period == 'Sleep' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+        Heating Kids Room Sleep
+      {% elif time_period == 'Sleep' and is_state('binary_sensor.stairwell_need_heat', 'on') %}
+        Heating Stairwell Sleep
+      {% else %}
+        Idle
+      {% endif %}
+    {% endif %}
+  icon: >-
+    {% set state = states('sensor.ducted_heatpump_setpoint') %}
+    {% if state == "Override" %}
+      mdi:alert
+    {% elif state == "Off" %}
+      mdi:power
+    {% elif "Kids Room" in state %}
+      mdi:home-thermometer-outline
+    {% elif "Stairwell" in state %}
+      mdi:stairs
+    {% elif state == "Idle" %}
+      mdi:power-sleep
+    {% else %}
+      mdi:thermometer
+    {% endif %}
