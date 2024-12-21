@@ -22,7 +22,7 @@
     {% else %}
       mdi:clock
     {% endif %}
-    
+
 # Same logic
 - name: "Family Room Apply Occupied Setpoints"
   unique_id: family_room_apply_occupied_setpoints
