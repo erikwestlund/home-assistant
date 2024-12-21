@@ -103,11 +103,17 @@
       mdi:radiator-off
     {% endif %}
 
-
+# Dining Room
 - name: "Dining Room Heat Pump Power On Status"
   unique_id: dining_room_heatpump_power_on_status
   state: >
-    {{ is_state('input_boolean.dining_room_heat_pump_power_on_control', 'on') and not is_state('sensor.dining_room_heatpump_operational_mode', 'Off') }}
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.dining_room_override_status', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      {{ is_state('input_boolean.away_dining_room_heatpump_on', 'on') and is_state('input_boolean.dining_room_heat_pump_power_on_control', 'on') }}
+    {% else %}
+      {{ is_state('input_boolean.dining_room_heat_pump_power_on_control', 'on') and not is_state('sensor.dining_room_heatpump_operational_mode', 'Off') }}
+    {% endif %}
   icon: >-
     {% if is_state('binary_sensor.dining_room_heatpump_power_on_status', 'on') %}
       mdi:hvac
@@ -115,21 +121,17 @@
       mdi:hvac-off
     {% endif %}
 
-- name: "Master Bedroom Heat Pump Power On Status"
-  unique_id: master_bedroom_heatpump_power_on_status
-  state: >
-    {{ is_state('input_boolean.master_bedroom_heat_pump_power_on_control', 'on') and not is_state('sensor.master_bedroom_heatpump_operational_mode', 'Off') }}
-  icon: >-
-    {% if is_state('binary_sensor.master_bedroom_heatpump_power_on_status', 'on') %}
-      mdi:hvac
-    {% else %}
-      mdi:hvac-off
-    {% endif %}
-
+# Erik Office
 - name: "Erik Office Heat Pump Power On Status"
   unique_id: erik_office_heatpump_power_on_status
   state: >
-    {{ is_state('input_boolean.erik_office_heat_pump_power_on_control', 'on') and not is_state('sensor.erik_office_heatpump_operational_mode', 'Off') }}
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.erik_office_override_status', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      {{ is_state('input_boolean.away_erik_office_heatpump_on', 'on') and is_state('input_boolean.erik_office_heat_pump_power_on_control', 'on') }}
+    {% else %}
+      {{ is_state('input_boolean.erik_office_heat_pump_power_on_control', 'on') and not is_state('sensor.erik_office_heatpump_operational_mode', 'Off') }}
+    {% endif %}
   icon: >-
     {% if is_state('binary_sensor.erik_office_heatpump_power_on_status', 'on') %}
       mdi:hvac
@@ -137,10 +139,35 @@
       mdi:hvac-off
     {% endif %}
 
+# Master Bedroom
+- name: "Master Bedroom Heat Pump Power On Status"
+  unique_id: master_bedroom_heatpump_power_on_status
+  state: >
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.master_bedroom_override_status', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      {{ is_state('input_boolean.away_master_bedroom_heatpump_on', 'on') and is_state('input_boolean.master_bedroom_heat_pump_power_on_control', 'on') }}
+    {% else %}
+      {{ is_state('input_boolean.master_bedroom_heat_pump_power_on_control', 'on') and not is_state('sensor.master_bedroom_heatpump_operational_mode', 'Off') }}
+    {% endif %}
+  icon: >-
+    {% if is_state('binary_sensor.master_bedroom_heatpump_power_on_status', 'on') %}
+      mdi:hvac
+    {% else %}
+      mdi:hvac-off
+    {% endif %}
+
+# Ducted System
 - name: "Ducted Heat Pump Power On Status"
   unique_id: ducted_heatpump_power_on_status
   state: >
-    {{ is_state('input_boolean.ducted_heat_pump_power_on_control', 'on') and not is_state('sensor.ducted_heatpump_operational_mode', 'Off') }}
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.ducted_override_status', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      {{ is_state('input_boolean.away_ducted_heatpump_on', 'on') and is_state('input_boolean.ducted_heat_pump_power_on_control', 'on') }}
+    {% else %}
+      {{ is_state('input_boolean.ducted_heat_pump_power_on_control', 'on') and not is_state('sensor.ducted_heatpump_operational_mode', 'Off') }}
+    {% endif %}
   icon: >-
     {% if is_state('binary_sensor.ducted_heatpump_power_on_status', 'on') %}
       mdi:hvac
