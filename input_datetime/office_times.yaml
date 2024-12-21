@@ -1,0 +1,23 @@
+office_early_work_mode_day_start_time:
+  name: Tina Office Early Work Mode Day Start Time
+  has_time: true
+  has_date: false
+  initial: "03:00:00"
+
+office_apply_occupied_start_time:
+  name: Tina Office Apply Occupied Start Time
+  has_time: true
+  has_date: false
+  initial: "09:00:00"
+
+office_apply_occupied_end_time:
+  name: Tina Office Apply Occupied End Time
+  has_time: true
+  has_date: false
+  initial: "20:59:00"
+
+office_override_until:
+  name: Office Override Until
+  has_time: true
+  has_date: true
+  initial: "2021-01-01T00:00:00"

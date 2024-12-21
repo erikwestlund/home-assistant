@@ -1,0 +1,95 @@
+# Notes
+
+Various notes to ease creating configuration/automations.
+
+## List of Thermostats
+
+```
+# LG ThingQ Mini Splits
+climate.tinas_office_heat_pump
+climate.dining_room_heat_pump
+climate.family_room_heat_pump
+climate.family_room_mini_split_hvac_unit
+climate.living_room_heat_pump
+climate.master_bedroom_heat_pump
+
+# LG ThingQ Ducted System
+climate.ducted_heat_pump
+
+# Flair Puck-controlled Heat Pump
+climate.eriks_office_room
+
+# Ecobee Radiator Thermostats
+climate.living_room_main_heating
+climate.family_room_heating
+climate.office
+```
+
+## List of General Settings
+
+```
+input_boolean.hvac_away_mode
+input_number.heatpump_mode_threshold_offset
+input_number.heatpump_overheated_threshold_offset
+input_number.heatpump_cooling_default_setpoint
+input_number.heatpumps_away_setpoint
+input_number.radiators_away_setpoint
+
+```
+
+## Binary Sensors:
+
+```
+
+binary_sensor.daytime_status
+binary_sensor.ducted_rooms_occupied
+binary_sensor.office_occupancy_detected
+binary_sensor.office_occupied
+binary_sensor.family_room_occupancy_detected
+binary_sensor.family_room_occupied
+binary_sensor.living_room_occupancy_detected
+binary_sensor.living_room_occupied
+binary_sensor.dining_room_occupancy_detected
+binary_sensor.dining_room_occupied
+binary_sensor.master_bedroom_occupancy_detected
+binary_sensor.master_bedroom_occupied
+binary_sensor.tilly_s_room_occupancy_detected
+binary_sensor.tilly_s_room_occupied
+binary_sensor.hank_s_room_occupancy_detected
+binary_sensor.hank_s_room_occupied
+```
+
+## Office Heat Pump
+
+```
+
+# Indoor temperature
+sensor.tina_office_average_temperature
+
+# State:
+input_select.office_heatpump_state
+input_boolean.office_overheated_status
+input_boolean.office_early_work_mode
+
+# Thresholds
+input_number.office_heatpump_off_to_supplement_threshold
+input_number.office_heatpump_supplement_to_comfort_threshold
+input_number.office_overheated_threshold
+
+# Minisplit set points
+input_number.office_heatpump_supplemental_setpoint
+input_number.office_heatpump_overheat_setpoint
+input_number.office_heatpump_comfort_night_setpoint
+input_number.office_heatpump_comfort_weekday_occupied_setpoint
+input_number.office_heatpump_comfort_weekday_unoccupied_setpoint
+input_number.office_heatpump_comfort_weekend_occupied_setpoint
+input_number.office_heatpump_comfort_weekend_unoccupied_setpoint
+
+# Radiator setpoints
+input_number.office_radiator_night_setpoint
+input_number.office_radiator_weekday_occupied_setpoint
+input_number.office_radiator_weekday_unoccupied_setpoint
+input_number.office_radiator_weekend_occupied_setpoint
+input_number.office_radiator_weekend_unoccupied_setpoint
+
+```

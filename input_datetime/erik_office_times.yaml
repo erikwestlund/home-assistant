@@ -1,0 +1,23 @@
+erik_office_early_work_mode_day_start_time:
+  name: Erik Office Early Work Mode Day Start Time
+  has_time: true
+  has_date: false
+  initial: "03:00:00"
+
+erik_office_apply_occupied_start_time:
+  name: Erik Office Apply Occupied Start Time
+  has_time: true
+  has_date: false
+  initial: "09:00:00"
+
+erik_office_apply_occupied_end_time:
+  name: Erik Office Apply Occupied End Time
+  has_time: true
+  has_date: false
+  initial: "20:59:00"
+
+erik_office_override_until:
+  name: Erik Office Override Until
+  has_time: true
+  has_date: true
+  initial: "2021-01-01T00:00:00"

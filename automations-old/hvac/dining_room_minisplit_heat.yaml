@@ -1,0 +1,317 @@
+- id: set_dining_room_heatpump_setpoint
+  alias: "Set Dining Room Mini Split Setpoint (Heat mode)"
+  description: "Adjust the mini split setpoint based on HVAC mode, occupancy, and time of day, ensuring it turns off when the heat pump state is Off."
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.hvac_away_mode
+        - input_select.day_of_week_status
+        - binary_sensor.daytime_status
+        - binary_sensor.dining_room_occupied
+        - input_boolean.dining_room_overheated_status
+        - input_boolean.dining_room_override_status
+        - input_datetime.dining_room_apply_occupied_start_time
+        - input_datetime.dining_room_apply_occupied_end_time
+        - input_datetime.dining_room_override_until
+        - input_select.hvac_mode
+        - input_select.dining_room_heatpump_state
+        - sensor.current_nws_outdoor_temperature
+        - input_number.dining_room_heatpump_supplemental_setpoint
+        - input_number.dining_room_heatpump_overheat_setpoint
+        - input_number.dining_room_heatpump_comfort_night_setpoint
+        - input_number.dining_room_heatpump_comfort_weekday_occupied_setpoint
+        - input_number.dining_room_heatpump_comfort_weekday_unoccupied_setpoint
+        - input_number.dining_room_heatpump_comfort_weekend_occupied_setpoint
+        - input_number.dining_room_heatpump_comfort_weekend_unoccupied_setpoint
+    - platform: time_pattern
+      minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state: "Heat"
+    - condition: state
+      entity_id: input_boolean.hvac_away_mode
+      state: "off"
+  action:
+    - variables:
+        current_time: "{{ now().timestamp() }}"
+        occupied_start: >-
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+          (states('input_datetime.dining_room_apply_occupied_start_time') | default('07:00:00'))) }}
+        occupied_end: >-
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+          (states('input_datetime.dining_room_apply_occupied_end_time') | default('20:59:00'))) }}
+        is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
+        is_occupied: >-
+          {% if occupied_start <= current_time <= occupied_end %}
+            {{ is_state('binary_sensor.dining_room_occupied', 'on') }}
+          {% else %}
+            False
+          {% endif %}
+        is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
+        is_overheated: "{{ is_state('input_boolean.dining_room_overheated_status', 'on') }}"
+        override_active: >-
+          {{ is_state('input_boolean.dining_room_override_status', 'on') and 
+          now().timestamp() < as_timestamp(states('input_datetime.dining_room_override_until')) }}
+        heatpump_mode: "{{ states('input_select.dining_room_heatpump_state') }}"
+    - service: logbook.log
+      data:
+        name: "Dining Room Mini Split Automation"
+        message: >
+          Debugging Variables:
+          current_time={{ current_time }},
+          occupied_start={{ occupied_start }},
+          occupied_end={{ occupied_end }},
+          is_daytime={{ is_daytime }},
+          is_occupied={{ is_occupied }},
+          is_weekday={{ is_weekday }},
+          is_overheated={{ is_overheated }},
+          override_active={{ override_active }},
+          heatpump_mode={{ heatpump_mode }}
+    - choose:
+        # Turn Off logic
+        - conditions:
+            - condition: template
+              value_template: "{{ heatpump_mode == 'Off' }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Automation"
+                message: "Heat pump is Off. Turning off mini split and setting setpoint to Off."
+            - service: climate.turn_off
+              target:
+                entity_id: climate.dining_room_heat_pump
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.dining_room_heatpump_setpoint_current
+                option: "Off"
+        # Ensure Heat Pump is On (Heat Mode) for Other Modes
+        - conditions:
+            - condition: template
+              value_template: "{{ heatpump_mode != 'Off' }}"
+            - condition: state
+              entity_id: climate.dining_room_heat_pump
+              state: "off"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Automation"
+                message: "Heat pump is not Off but was turned off. Setting it to Heat mode."
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.dining_room_heat_pump
+                hvac_mode: "heat"
+        # Override logic
+        - conditions:
+            - condition: template
+              value_template: "{{ override_active }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Automation"
+                message: "Override active. Setting mini split to override setpoint."
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.dining_room_heatpump_setpoint_current
+                option: "Override"
+        # Supplemental mode
+        - conditions:
+            - condition: template
+              value_template: "{{ heatpump_mode == 'Supplement' }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Automation"
+                message: "Supplemental mode detected. Setting mini split to supplemental setpoint."
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.dining_room_heatpump_setpoint_current
+                option: "Supplemental"
+        # Overheating logic
+        - conditions:
+            - condition: template
+              value_template: "{{ is_overheated }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Automation"
+                message: "Overheating detected. Setting mini split to overheated setpoint."
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.dining_room_heatpump_setpoint_current
+                option: "Overheated"
+        # Nighttime logic
+        - conditions:
+            - condition: template
+              value_template: "{{ not is_daytime }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Automation"
+                message: "Nighttime detected. Setting mini split to nighttime setpoint."
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.dining_room_heatpump_setpoint_current
+                option: "Night"
+        # Daytime logic
+        - conditions:
+            - condition: template
+              value_template: "{{ is_daytime }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Automation"
+                message: "Daytime detected. Determining weekday/weekend and occupancy."
+            - choose:
+                # Weekday and Occupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ is_weekday and is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Dining Room Mini Split Automation"
+                        message: "Weekday and occupied. Setting mini split to weekday occupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.dining_room_heatpump_setpoint_current
+                        option: "Weekday Occupied"
+                # Weekday and Unoccupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ is_weekday and not is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Dining Room Mini Split Automation"
+                        message: "Weekday and unoccupied. Setting mini split to weekday unoccupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.dining_room_heatpump_setpoint_current
+                        option: "Weekday Unoccupied"
+                # Weekend and Occupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ not is_weekday and is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Dining Room Mini Split Automation"
+                        message: "Weekend and occupied. Setting mini split to weekend occupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.dining_room_heatpump_setpoint_current
+                        option: "Weekend Occupied"
+                # Weekend and Unoccupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ not is_weekday and not is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Dining Room Mini Split Automation"
+                        message: "Weekend and unoccupied. Setting mini split to weekend unoccupied setpoint."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.dining_room_heatpump_setpoint_current
+                        option: "Weekend Unoccupied"
+  mode: single
+
+- id: update_dining_room_heatpump_temperature
+  alias: "Update Dining Room Mini Split Temperature (Heat mode)"
+  description: "Ensure mini split is on and adjust temperature when the setpoint changes, only if necessary."
+  trigger:
+    - platform: state
+      entity_id:
+        - input_select.dining_room_heatpump_setpoint_current
+        - input_number.dining_room_heatpump_supplemental_setpoint
+        - input_number.dining_room_heatpump_overheat_setpoint
+        - input_number.dining_room_heatpump_comfort_night_setpoint
+        - input_number.dining_room_heatpump_comfort_weekday_occupied_setpoint
+        - input_number.dining_room_heatpump_comfort_weekday_unoccupied_setpoint
+        - input_number.dining_room_heatpump_comfort_weekend_occupied_setpoint
+        - input_number.dining_room_heatpump_comfort_weekend_unoccupied_setpoint
+        - input_boolean.dining_room_override_status
+        - input_number.dining_room_override_setpoint
+    - platform: time_pattern
+      minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state: "Heat"
+    - condition: state
+      entity_id: input_boolean.hvac_away_mode
+      state: "off"
+  action:
+    - variables:
+        current_setpoint: "{{ states('input_select.dining_room_heatpump_setpoint_current') }}"
+        override_setpoint: "{{ states('input_number.dining_room_override_setpoint') | float(0) }}"
+        supplemental_setpoint: "{{ states('input_number.dining_room_heatpump_supplemental_setpoint') | float(0) }}"
+        overheat_setpoint: "{{ states('input_number.dining_room_heatpump_overheat_setpoint') | float(0) }}"
+        night_setpoint: "{{ states('input_number.dining_room_heatpump_comfort_night_setpoint') | float(0) }}"
+        weekday_occupied_setpoint: "{{ states('input_number.dining_room_heatpump_comfort_weekday_occupied_setpoint') | float(0) }}"
+        weekday_unoccupied_setpoint: "{{ states('input_number.dining_room_heatpump_comfort_weekday_unoccupied_setpoint') | float(0) }}"
+        weekend_occupied_setpoint: "{{ states('input_number.dining_room_heatpump_comfort_weekend_occupied_setpoint') | float(0) }}"
+        weekend_unoccupied_setpoint: "{{ states('input_number.dining_room_heatpump_comfort_weekend_unoccupied_setpoint') | float(0) }}"
+        thermostat_temperature: "{{ state_attr('climate.dining_room_heat_pump', 'temperature') | float(0) }}"
+        raw_new_temperature: >-
+          {% if current_setpoint == 'Override' %}
+            {{ override_setpoint }}
+          {% elif current_setpoint == 'Supplemental' %}
+            {{ supplemental_setpoint }}
+          {% elif current_setpoint == 'Overheated' %}
+            {{ overheat_setpoint }}
+          {% elif current_setpoint == 'Night' %}
+            {{ night_setpoint }}
+          {% elif current_setpoint == 'Weekday Occupied' %}
+            {{ weekday_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekday Unoccupied' %}
+            {{ weekday_unoccupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Occupied' %}
+            {{ weekend_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Unoccupied' %}
+            {{ weekend_unoccupied_setpoint }}
+          {% else %}
+            {{ thermostat_temperature }}  # Default to the current thermostat temperature
+          {% endif %}
+        new_temperature: "{{ max(raw_new_temperature, 64.4) }}"
+    - choose:
+        # Check if the mini split is off and turn it on if necessary
+        - conditions:
+            - condition: state
+              entity_id: climate.dining_room_heat_pump
+              state: "off"
+          sequence:
+            - service: climate.turn_on
+              target:
+                entity_id: climate.dining_room_heat_pump
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Setpoint Automation"
+                message: >
+                  Mini split was off and has been turned on.
+    - choose:
+        # Check if the temperature needs updating
+        - conditions:
+            - condition: template
+              value_template: "{{ thermostat_temperature != new_temperature }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.dining_room_heat_pump
+                temperature: "{{ new_temperature }}"
+            - service: logbook.log
+              data:
+                name: "Dining Room Mini Split Setpoint Automation"
+                message: >
+                  Temperature updated to {{ new_temperature }}° 
+                  from {{ thermostat_temperature }}°. 
+                  Setpoint: {{ current_setpoint }}.
+      default:
+        - service: logbook.log
+          data:
+            name: "Dining Room Mini Split Setpoint Automation"
+            message: >
+              No temperature change required. 
+              Current: {{ thermostat_temperature }}°. 
+              Desired: {{ new_temperature }}°.

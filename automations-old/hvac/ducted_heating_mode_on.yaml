@@ -1,0 +1,62 @@
+#- id: manage_ducted_heatpump_on_off
+#  alias: "Manage Ducted Heat Pump On/Off Based on Outdoor Temperature"
+#  description: >
+#    Determines whether the ducted heat pump should be on or off
+#    based on outdoor temperature thresholds and HVAC mode.
+#  trigger:
+#    - platform: state
+#      entity_id: sensor.current_nws_outdoor_temperature
+#    - platform: state
+#      entity_id: input_select.hvac_mode
+#  variables:
+#    current_temp: "{{ states('sensor.current_nws_outdoor_temperature') | float(0) }}"
+#    off_threshold: "{{ states('input_number.ducted_heatpump_off_threshold') | float(0) }}"
+#    hysteresis: "{{ states('input_number.heatpump_mode_threshold_offset') | float(0) }}"
+#  condition:
+#    - condition: state
+#      entity_id: input_select.hvac_mode
+#      state: "Heat"
+#  action:
+#    - choose:
+#        # Turn off the heat pump if outdoor temperature is below the off threshold
+#        - conditions:
+#            - condition: template
+#              value_template: "{{ current_temp < off_threshold }}"
+#          sequence:
+#            - service: input_boolean.turn_off
+#              target:
+#                entity_id: input_boolean.ducted_heatpump_on
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump On/Off Automation"
+#                message: >
+#                  Outdoor temperature is {{ current_temp }}°, below the off threshold ({{ off_threshold }}°).
+#                  Turning the heat pump off.
+#
+#        # Turn on the heat pump if outdoor temperature is above the off threshold + hysteresis
+#        - conditions:
+#            - condition: template
+#              value_template: "{{ current_temp > (off_threshold + hysteresis) }}"
+#          sequence:
+#            - service: input_boolean.turn_on
+#              target:
+#                entity_id: input_boolean.ducted_heatpump_on
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump On/Off Automation"
+#                message: >
+#                  Outdoor temperature is {{ current_temp }}°, above the on threshold ({{ off_threshold + hysteresis }}°).
+#                  Turning the heat pump on.
+#
+#        # Log when no state change is required
+#        - conditions:
+#            - condition: template
+#              value_template: >
+#                {{ current_temp >= off_threshold and current_temp <= (off_threshold + hysteresis) }}
+#          sequence:
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump On/Off Automation"
+#                message: >
+#                  Outdoor temperature is {{ current_temp }}°, within the hysteresis range
+#                  ({{ off_threshold }}° - {{ off_threshold + hysteresis }}°). No state change.

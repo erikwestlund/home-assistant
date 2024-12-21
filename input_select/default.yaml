@@ -6,6 +6,13 @@ day_night_mode:
     - "Night"
   initial: "Auto"
 
+day_of_week_status:
+  name: Day of Week Status
+  options:
+    - "Weekend"
+    - "Weekday"
+  initial: "Weekday"
+
 heatpump_room_tab:
   name: Heat Pump Room Tabs
   options:
@@ -14,15 +21,10 @@ heatpump_room_tab:
     - "Living Room"
     - "Master Bedroom"
     - "Dining Room"
+    - "Erik Office"
     - "Ducted"
+    - "Main Heat Zone"
+    - "Settings"
   initial: "Office"
   icon: mdi:home-group
 
-hvac_mode:
-  name: HVAC Mode
-  options:
-    - "Heat"
-    - "Cool"
-    - "Off"
-  initial: "Off"
-  icon: mdi:thermostat

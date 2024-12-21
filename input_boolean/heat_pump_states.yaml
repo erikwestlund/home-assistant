@@ -1,0 +1,74 @@
+ducted_heatpump_on:
+    name: Ducted Heat On
+    initial: on
+    icon: mdi:heat-pump
+
+office_early_work_mode:
+    name: Office Early Work Mode
+    initial: off
+    icon: mdi:office-building
+
+office_overheated_status:
+    name: Office Overheated
+    initial: off
+    icon: mdi:fire
+
+family_room_overheated_status:
+    name: Family Room Overheated
+    initial: off
+    icon: mdi:fire
+
+living_room_overheated_status:
+    name: Living Room Overheated
+    initial: off
+    icon: mdi:fire
+
+master_bedroom_overheated_status:
+    name: Master Bedroom Overheated
+    initial: off
+    icon: mdi:fire
+
+dining_room_overheated_status:
+    name: Dining Room Overheated
+    initial: off
+    icon: mdi:fire
+
+erik_office_overheated_status:
+    name: Erik Office Overheated
+    initial: off
+    icon: mdi:fire
+
+office_override_status:
+    name: Office Override
+    initial: off
+    icon: mdi:cancel
+
+family_room_override_status:
+    name: Family Room Override
+    initial: off
+    icon: mdi:cancel
+
+living_room_override_status:
+    name: Living Room Override
+    initial: off
+    icon: mdi:cancel
+
+master_bedroom_override_status:
+    name: Master Bedroom Override
+    initial: off
+    icon: mdi:cancel
+
+dining_room_override_status:
+    name: Dining Room Override
+    initial: off
+    icon: mdi:cancel
+
+erik_office_override_status:
+    name: Erik's Office Room Override
+    initial: off
+    icon: mdi:cancel
+
+ducted_override_status:
+    name: Ducted Rooms Override
+    initial: off
+    icon: mdi:cancel

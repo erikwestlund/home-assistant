@@ -1,0 +1,66 @@
+- id: update_ducted_heat_pump_time_period
+  alias: "Update Ducted Heat Pump Time Period"
+  description: >
+    Updates the `ducted_current_time_period` state machine based on the current time 
+    and the configured start times for Daytime, Bedtime, and Sleep.
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"  # Runs every minute
+  action:
+    - variables:
+        day_start: >-
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+          states('input_datetime.ducted_day_start_time')) | default(0) }}
+        bedtime_start: >-
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+          states('input_datetime.ducted_bedtime_start_time')) | default(0) }}
+        sleep_start: >-
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+          states('input_datetime.ducted_sleep_start_time')) | default(0) }}
+        next_day_start: >-
+          {{ as_timestamp((now() + timedelta(days=1)).strftime('%Y-%m-%d') ~ 'T' ~ 
+          states('input_datetime.ducted_day_start_time')) | default(0) }}
+        now_timestamp: "{{ now().timestamp() }}"
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ day_start <= now_timestamp < bedtime_start }}
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.ducted_current_time_period
+                option: "Daytime"
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Time Period"
+                message: >
+                  Time period set to Daytime.
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ bedtime_start <= now_timestamp < sleep_start }}
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.ducted_current_time_period
+                option: "Bedtime"
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Time Period"
+                message: >
+                  Time period set to Bedtime.
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ sleep_start <= now_timestamp < next_day_start }}
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.ducted_current_time_period
+                option: "Sleep"
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Time Period"
+                message: >
+                  Time period set to Sleep.

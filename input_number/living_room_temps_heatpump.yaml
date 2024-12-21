@@ -1,0 +1,55 @@
+living_room_heatpump_supplemental_setpoint:
+  name: Living Room Heat Pump Supplemental Temperature
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+living_room_heatpump_overheat_setpoint:
+  name: Living Room Heat Overheated Temperature
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+living_room_heatpump_comfort_night_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Night)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+living_room_heatpump_comfort_weekday_occupied_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Weekday Occupied)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+living_room_heatpump_comfort_weekday_unoccupied_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Weekday Unoccupied)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+living_room_heatpump_comfort_weekend_occupied_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Weekend Occupied)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+living_room_heatpump_comfort_weekend_unoccupied_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Weekend Unoccupied)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64

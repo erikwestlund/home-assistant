@@ -1,0 +1,55 @@
+ducted_heatpump_default_temp:
+  name: Ducted Heat Pump Default Temperature
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+ducted_heatpump_heating_temp:
+  name: Ducted Heat Pump Heating Temperature
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+ducted_heatpump_off_threshold:
+  name: Ducted Heat Pump Off Temperature Threshold
+  min: -10
+  max: 60
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 15
+
+ducted_setpoint_heat_trigger_threshold_offset:
+    name: Ducted Heat Trigger Threshold Offset
+    min: 0
+    max: 10
+    step: 1
+    unit_of_measurement: "°F"
+    initial: 2
+
+ducted_setpoint_heat_stop_threshold_offset:
+  name: Ducted Heat Stop Threshold Offset
+  min: 0
+  max: 10
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 1
+
+ducted_override_setpoint:
+  name: Ducted Override Temperature
+  min: 60
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 70
+
+ducted_override_for_hours:
+  name: Ducted Override For Hours
+  min: 0.5
+  max: 24
+  step: 0.5
+  unit_of_measurement: "hours"
+  initial: 2

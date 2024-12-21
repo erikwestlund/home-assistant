@@ -1,0 +1,65 @@
+#- id: set_ducted_override_until
+#  alias: "Set Ducted Override Until"
+#  description: "Adjust the override expiration time when override status changes, with detailed logging."
+#  trigger:
+#    - platform: state
+#      entity_id: input_boolean.ducted_override_status
+#  condition:
+#    - condition: state
+#      entity_id: input_boolean.ducted_override_status
+#      state: "on"
+#  action:
+#    - variables:
+#        override_hours: "{{ states('input_number.ducted_override_for_hours') | float(0) }}"
+#        current_time: "{{ now() }}"
+#        override_until: "{{ as_timestamp(current_time) + (override_hours * 3600) }}"
+#    - service: logbook.log
+#      data:
+#        name: "Ducted Override Automation"
+#        message: >
+#          Override status changed to ON. Calculating expiration time.
+#          Current time: {{ current_time }},
+#          Override duration (hours): {{ override_hours }},
+#          Override until: {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
+#    - service: input_datetime.set_datetime
+#      data:
+#        entity_id: input_datetime.ducted_override_until
+#        timestamp: "{{ override_until }}"
+#    - service: logbook.log
+#      data:
+#        name: "Ducted Override Automation"
+#        message: >
+#          Override until time successfully set to
+#          {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
+#
+#- id: turn_off_ducted_override_after_expiration
+#  alias: "Turn Off Ducted Override After Expiration"
+#  description: "Automatically turn off the override status if the expiration time has passed, with detailed logging."
+#  trigger:
+#    - platform: time_pattern
+#      minutes: "/1"
+#  condition:
+#    - condition: state
+#      entity_id: input_boolean.ducted_override_status
+#      state: "on"
+#    - condition: template
+#      value_template: >
+#        {% set override_until = states('input_datetime.ducted_override_until') | as_timestamp(default=None) %}
+#        {{ override_until is not none and now().timestamp() > override_until }}
+#  action:
+#    - service: logbook.log
+#      data:
+#        name: "Ducted Override Automation"
+#        message: >
+#          Current time: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}.
+#          Override expiration time:
+#          {{ states('input_datetime.ducted_override_until') | as_timestamp(default=None) | timestamp_local }}.
+#          Turning off override status.
+#    - service: input_boolean.turn_off
+#      target:
+#        entity_id: input_boolean.ducted_override_status
+#    - service: logbook.log
+#      data:
+#        name: "Ducted Override Automation"
+#        message: >
+#          Override status turned off as the expiration time has passed.

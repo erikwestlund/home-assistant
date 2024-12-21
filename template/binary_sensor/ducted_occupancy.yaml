@@ -1,0 +1,6 @@
+- name: "Ducted Rooms Occupied"
+  unique_id: ducted_rooms_occupied
+  device_class: occupancy
+  state: >
+    {{ is_state('binary_sensor.hank_s_room_occupied', 'on')
+        or is_state('binary_sensor.tilly_s_room_occupied', 'on') }}

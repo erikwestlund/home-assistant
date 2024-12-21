@@ -1,0 +1,67 @@
+- id: manage_erik_office_overheat_status
+  alias: "Manage Erik Office Overheat Status"
+  description: "Toggle Erik Office overheating status based on room temperature and thresholds."
+  trigger:
+    - platform: time_pattern
+      minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state: "Heat"
+  action:
+    - variables:
+        current_temp: "{{ states('sensor.erik_office_average_temperature') | float(0) }}"
+        overheat_threshold: "{{ states('input_number.erik_office_overheated_threshold') | float(0) }}"
+        overheat_offset: "{{ states('input_number.heatpump_overheated_threshold_offset') | float(0) }}"
+        current_status: "{{ is_state('input_boolean.erik_office_overheated_status', 'on') }}"
+    - service: logbook.log
+      data:
+        name: "Erik Office Overheat Automation"
+        message: >
+          Current room temperature: {{ current_temp }}°F, 
+          Overheat threshold: {{ overheat_threshold }}°F,
+          Offset: {{ overheat_offset }}°F,
+          Current overheat status: {{ current_status }}.
+    - choose:
+        # Turn on overheating status if temperature exceeds the threshold
+        - conditions:
+            - condition: template
+              value_template: "{{ current_temp > overheat_threshold }}"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.erik_office_overheated_status
+            - service: logbook.log
+              data:
+                name: "Erik Office Overheat Automation"
+                message: >
+                  Room temperature {{ current_temp }}°F exceeds threshold {{ overheat_threshold }}°F. 
+                  Turning on overheating status.
+        # Turn off overheating status if temperature falls below threshold minus offset
+        - conditions:
+            - condition: template
+              value_template: "{{ current_temp < (overheat_threshold - overheat_offset) }}"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.erik_office_overheated_status
+            - service: logbook.log
+              data:
+                name: "Erik Office Overheat Automation"
+                message: >
+                  Room temperature {{ current_temp }}°F is below threshold minus offset 
+                  ({{ overheat_threshold - overheat_offset }}°F). Turning off overheating status.
+        # Log no changes if conditions are not met
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ not (current_temp > overheat_threshold or 
+                        current_temp < (overheat_threshold - overheat_offset)) }}
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Erik Office Overheat Automation"
+                message: >
+                  Room temperature {{ current_temp }}°F is within normal range. 
+                  Overheating status remains unchanged ({{ current_status }}).
+  mode: single

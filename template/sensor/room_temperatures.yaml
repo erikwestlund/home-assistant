@@ -1,0 +1,126 @@
+- name: "Tina Office Average Temperature"
+  unique_id: tina_office_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.tina_desk_temperature') | float(0),
+      states('sensor.office_bookshelf_temperature') | float(0),
+      states('sensor.office_current_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Living Room Average Temperature"
+  unique_id: living_room_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.living_room_radiator_temperature') | float(0),
+      states('sensor.living_room_main_heating_current_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Family Room Average Temperature"
+  unique_id: family_room_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.family_room_heating_current_temperature') | float(0),
+      states('sensor.bookshelf_temperature') | float(0),
+      states('sensor.lamp_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Dining Room Average Temperature"
+  unique_id: dining_room_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.dining_room_chest_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Master Bedroom Average Temperature"
+  unique_id: master_bedroom_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.master_bedroom_temperature') | float(0),
+      states('sensor.master_bedroom_dresser_temperature') | float(0),
+      states('sensor.master_bedroom_shelf_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Erik Office Average Temperature"
+  unique_id: erik_office_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.erik_office_desk_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Hank's Room Average Temperature"
+  unique_id: hanks_room_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.hanks_room_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Tilly's Room Average Temperature"
+  unique_id: tillys_room_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.tillys_room_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Stairwell Average Temperature"
+  unique_id: stairwell_hallway_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.stairwell_temperature') | float(0),
+      state_attr('climate.ducted_heat_pump', 'current_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Kitchen Average Temperature"
+  unique_id: kitchen_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.kitchen_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Guest Bathroom Average Temperature"
+  unique_id: guest_bathroom_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.guest_bathroom_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Ducted Rooms Average Temperature"
+  unique_id: ducted_rooms_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.tillys_room_temperature') | float(0),
+      states('sensor.hanks_room_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Kids Rooms Average Temperature"
+  unique_id: kids_rooms_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.tillys_room_temperature') | float(0),
+      states('sensor.hanks_room_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}

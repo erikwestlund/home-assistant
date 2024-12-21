@@ -1,0 +1,17 @@
+master_bedroom_current_time_period:
+  name: Master Bedroom Current Time Period
+  options:
+      - "Daytime"
+      - "Bedtime"
+      - "Sleep"
+  initial: "Daytime"
+  icon: mdi:clock-time-four-outline
+
+ducted_current_time_period:
+  name: Ducted Heat Pump Current Time Period
+  options:
+      - "Daytime"
+      - "Bedtime"
+      - "Sleep"
+  initial: "Daytime"
+  icon: mdi:clock-time-four-outline

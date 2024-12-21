@@ -1,0 +1,22 @@
+- name: "Daytime Status"
+  unique_id: daytime_status
+  state: >
+    {% set mode = states('input_select.day_night_mode') %}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set day_start = today ~ 'T' ~ states('input_datetime.day_start_time') %}
+    {% set night_start = today ~ 'T' ~ states('input_datetime.night_start_time') %}
+    {% set day_start_ts = as_timestamp(strptime(day_start, '%Y-%m-%dT%H:%M:%S')) %}
+    {% set night_start_ts = as_timestamp(strptime(night_start, '%Y-%m-%dT%H:%M:%S')) %}
+    {% set now_ts = now().timestamp() %}
+
+    {% if mode == 'Day' %}
+        true
+    {% elif mode == 'Night' %}
+        false
+    {% else %}
+        {{ day_start_ts <= now_ts < night_start_ts }}
+    {% endif %}
+
+- name: "Nighttime Status"
+  unique_id: nighttime_status
+  state: not binary_sensor.daytime_status.state

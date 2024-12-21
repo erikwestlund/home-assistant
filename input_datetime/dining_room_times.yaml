@@ -1,0 +1,17 @@
+dining_room_apply_occupied_start_time:
+  name: Dining Room Apply Occupied Start Time
+  has_time: true
+  has_date: false
+  initial: "06:00:00"
+
+dining_room_apply_occupied_end_time:
+  name: Dining Room Apply Occupied End Time
+  has_time: true
+  has_date: false
+  initial: "20:59:00"
+
+dining_room_override_until:
+  name: Dining Room Override Until
+  has_time: true
+  has_date: true
+  initial: "2021-01-01T00:00:00"

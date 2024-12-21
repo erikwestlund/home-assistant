@@ -1,0 +1,225 @@
+- id: set_family_room_radiator_setpoint
+  alias: "Set Family Room Radiator Setpoint"
+  description: "Determine the current setpoint for the family_room radiator based on mode, time, and occupancy."
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.hvac_away_mode
+        - input_boolean.family_room_override_status
+        - input_select.day_of_week_status
+        - binary_sensor.daytime_status
+        - binary_sensor.family_room_occupied
+        - input_datetime.family_room_apply_occupied_start_time
+        - input_datetime.family_room_apply_occupied_end_time
+        - input_datetime.family_room_override_until
+        - input_select.hvac_mode
+        - sensor.current_nws_outdoor_temperature
+        - input_number.family_room_radiator_night_setpoint
+        - input_number.family_room_radiator_weekday_occupied_setpoint
+        - input_number.family_room_radiator_weekday_unoccupied_setpoint
+        - input_number.family_room_radiator_weekend_occupied_setpoint
+        - input_number.family_room_radiator_weekend_unoccupied_setpoint
+    - platform: time_pattern
+      minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state: "Heat"
+    - condition: state
+      entity_id: input_boolean.hvac_away_mode
+      state: "off"
+  action:
+    - variables:
+        current_time: "{{ now().timestamp() }}"
+        override_until: >-
+          {{ as_timestamp(states('input_datetime.family_room_override_until')) }}
+        occupied_start: >-
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+          (states('input_datetime.family_room_apply_occupied_start_time') | default('09:00:00'))) }}
+        occupied_end: >-
+          {{ as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ 
+          (states('input_datetime.family_room_apply_occupied_end_time') | default('20:59:00'))) }}
+        is_override: >-
+          {{ is_state('input_boolean.family_room_override_status', 'on') and current_time < override_until }}
+        is_daytime: "{{ is_state('binary_sensor.daytime_status', 'on') }}"
+        is_occupied: >-
+          {% if occupied_start <= current_time <= occupied_end %}
+            {{ is_state('binary_sensor.family_room_occupied', 'on') }}
+          {% else %}
+            False
+          {% endif %}
+        is_weekday: "{{ is_state('input_select.day_of_week_status', 'Weekday') }}"
+    - service: logbook.log
+      data:
+        name: "Family Room Radiator Setpoint"
+        message: >
+          Debugging Variables: 
+          current_time={{ current_time }},
+          override_until={{ override_until }},
+          is_override={{ is_override }},
+          is_daytime={{ is_daytime }},
+          is_occupied={{ is_occupied }},
+          is_weekday={{ is_weekday }}.
+    - choose:
+        # Override
+        - conditions:
+            - condition: template
+              value_template: "{{ is_override }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Family Room Radiator Setpoint"
+                message: "Override active. Setting to override."
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.family_room_radiator_setpoint_current
+                option: "Override"
+        # Nighttime
+        - conditions:
+            - condition: template
+              value_template: "{{ not is_daytime }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Family Room Radiator Setpoint"
+                message: "Nighttime detected. Setting to 'Night'."
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.family_room_radiator_setpoint_current
+                option: "Night"
+        # Daytime
+        - conditions:
+            - condition: template
+              value_template: "{{ is_daytime }}"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Family Room Radiator Setpoint"
+                message: "Daytime detected. Determining weekday/weekend and occupancy."
+            - choose:
+                # Weekday and Occupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ is_weekday and is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Family Room Radiator Setpoint"
+                        message: "Weekday and occupied. Setting to 'Weekday Occupied'."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.family_room_radiator_setpoint_current
+                        option: "Weekday Occupied"
+                # Weekday and Unoccupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ is_weekday and not is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Family Room Radiator Setpoint"
+                        message: "Weekday and unoccupied. Setting to 'Weekday Unoccupied'."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.family_room_radiator_setpoint_current
+                        option: "Weekday Unoccupied"
+                # Weekend and Occupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ not is_weekday and is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Family Room Radiator Setpoint"
+                        message: "Weekend and occupied. Setting to 'Weekend Occupied'."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.family_room_radiator_setpoint_current
+                        option: "Weekend Occupied"
+                # Weekend and Unoccupied
+                - conditions:
+                    - condition: template
+                      value_template: "{{ not is_weekday and not is_occupied }}"
+                  sequence:
+                    - service: logbook.log
+                      data:
+                        name: "Family Room Radiator Setpoint"
+                        message: "Weekend and unoccupied. Setting to 'Weekend Unoccupied'."
+                    - service: input_select.select_option
+                      data:
+                        entity_id: input_select.family_room_radiator_setpoint_current
+                        option: "Weekend Unoccupied"
+  mode: single
+
+- id: update_family_room_radiator_temperature
+  alias: "Update Family Room Radiator Temperature"
+  description: "Adjust the radiator temperature when the setpoint changes, only if the thermostat temperature differs."
+  trigger:
+    - platform: state
+      entity_id: input_select.family_room_radiator_setpoint_current
+    - platform: time_pattern
+      minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state: "Heat"
+    - condition: state
+      entity_id: input_boolean.hvac_away_mode
+      state: "off"
+  action:
+    - variables:
+        current_setpoint: "{{ states('input_select.family_room_radiator_setpoint_current') }}"
+        override_setpoint: "{{ states('input_number.family_room_override_setpoint') | float(0) }}"
+        night_setpoint: "{{ states('input_number.family_room_radiator_night_setpoint') | float(0) }}"
+        weekday_occupied_setpoint: "{{ states('input_number.family_room_radiator_weekday_occupied_setpoint') | float(0) }}"
+        weekday_unoccupied_setpoint: "{{ states('input_number.family_room_radiator_weekday_unoccupied_setpoint') | float(0) }}"
+        weekend_occupied_setpoint: "{{ states('input_number.family_room_radiator_weekend_occupied_setpoint') | float(0) }}"
+        weekend_unoccupied_setpoint: "{{ states('input_number.family_room_radiator_weekend_unoccupied_setpoint') | float(0) }}"
+        thermostat_temperature: "{{ state_attr('climate.family_room_heating', 'temperature') | float(0) }}"
+        new_temperature: >-
+          {% if current_setpoint == 'Override' %}
+            {{ override_setpoint }}
+          {% elif current_setpoint == 'Night' %}
+            {{ night_setpoint }}
+          {% elif current_setpoint == 'Weekday Occupied' %}
+            {{ weekday_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekday Unoccupied' %}
+            {{ weekday_unoccupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Occupied' %}
+            {{ weekend_occupied_setpoint }}
+          {% elif current_setpoint == 'Weekend Unoccupied' %}
+            {{ weekend_unoccupied_setpoint }}
+          {% else %}
+            none
+          {% endif %}
+    - service: logbook.log
+      data:
+        name: "Family Room Radiator Setpoint Automation"
+        message: >
+          Current setpoint: {{ current_setpoint }}. 
+          Current thermostat temperature: {{ thermostat_temperature }}°. 
+          New thermostat temperature: {{ new_temperature }}°.
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ thermostat_temperature != new_temperature }}"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.family_room_heating
+                temperature: "{{ new_temperature }}"
+            - service: logbook.log
+              data:
+                name: "Family Room Radiator Setpoint Automation"
+                message: >
+                  Temperature updated to {{ new_temperature }}° 
+                  from {{ thermostat_temperature }}°. 
+                  Setpoint: {{ current_setpoint }}.
+      default:
+        - service: logbook.log
+          data:
+            name: "Family Room Radiator Setpoint Automation"
+            message: >
+              No temperature change required. 
+              Current: {{ thermostat_temperature }}°. 
+              Desired: {{ new_temperature }}°.

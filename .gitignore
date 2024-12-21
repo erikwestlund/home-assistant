@@ -2,9 +2,11 @@
 secrets.yaml
 home-assistant_v2.db
 *.log
+*.log*
 *.db-wal
 *.db-shm
 *.pid
+.idea*
 
 # Ignore backups and cache
 .backups/
@@ -12,9 +14,16 @@ __pycache__/
 deps/
 
 # HACS and custom components
+custom_components/
 .custom_components/
 www/community/
 
 # Temporary files
 *.tmp
 *.swp
+
+.HA_VERSION
+.cloud*
+.storage*
+
+overview.yml

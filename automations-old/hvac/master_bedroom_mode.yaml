@@ -1,0 +1,195 @@
+- id: set_master_bedroom_heatpump_mode
+  alias: "Set Master Bedroom Heat Pump Mode Based on Outdoor Temperature"
+  description: "Automatically adjust the Master Bedroom heat pump state based on outdoor temperature, override, hysteresis, and fallback logic."
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.current_nws_outdoor_temperature
+        - input_boolean.master_bedroom_override_status
+        - input_number.master_bedroom_heatpump_off_to_supplement_threshold
+        - input_number.master_bedroom_heatpump_supplement_to_comfort_threshold
+        - input_number.heatpump_mode_threshold_offset
+  action:
+    - variables:
+        current_temp: "{{ states('sensor.current_nws_outdoor_temperature') | float(0) }}"
+        off_to_supplement: "{{ states('input_number.master_bedroom_heatpump_off_to_supplement_threshold') | float(0) }}"
+        supplement_to_comfort: "{{ states('input_number.master_bedroom_heatpump_supplement_to_comfort_threshold') | float(0) }}"
+        hysteresis: "{{ states('input_number.heatpump_mode_threshold_offset') | float(0) }}"
+        current_mode: "{{ states('input_select.master_bedroom_heatpump_state') }}"
+        override_status: "{{ is_state('input_boolean.master_bedroom_override_status', 'on') }}"
+    - service: logbook.log
+      data:
+        name: "Master Bedroom Heat Pump Mode Automation"
+        message: >
+          Current temperature: {{ current_temp }}°, 
+          Current mode: {{ current_mode }},
+          Override status: {{ override_status }},
+          Off to Supplement: {{ off_to_supplement }}°, 
+          Supplement to Comfort: {{ supplement_to_comfort }}°, 
+          Hysteresis: {{ hysteresis }}°.
+    - choose:
+        # Override logic
+        - conditions:
+            - condition: template
+              value_template: "{{ override_status }}"
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.master_bedroom_heatpump_state
+                option: "Override"
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Mode Automation"
+                message: >
+                  Override active. Switching to Override mode.
+
+        # Turn Off if temperature drops below Off to Supplement threshold
+        - conditions:
+            - condition: template
+              value_template: "{{ current_temp < off_to_supplement }}"
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.master_bedroom_heatpump_state
+                option: "Off"
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Mode Automation"
+                message: >
+                  Temperature below {{ off_to_supplement }}°. Switching to Off mode.
+
+        # Switch to Supplement if temperature rises above Off to Supplement + hysteresis
+        # and is still below or equal to Supplement to Comfort
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ current_temp >= (off_to_supplement + hysteresis) and
+                   current_temp <= supplement_to_comfort and current_mode != 'Supplement' and
+                   not override_status }}
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.master_bedroom_heatpump_state
+                option: "Supplement"
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Mode Automation"
+                message: >
+                  Temperature above {{ off_to_supplement + hysteresis }}° and 
+                  below or equal to {{ supplement_to_comfort }}°. Switching to Supplement mode.
+
+        # Switch to Comfort if temperature rises above Supplement to Comfort + hysteresis
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ current_temp > (supplement_to_comfort + hysteresis) and current_mode != 'Comfort' and not override_status }}
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.master_bedroom_heatpump_state
+                option: "Comfort"
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Mode Automation"
+                message: >
+                  Temperature above {{ supplement_to_comfort + hysteresis }}°. Switching to Comfort mode.
+
+        # Fallback: Ensure the mini-split is not Off when temperature is >= Off to Supplement
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ current_mode == "Off" and current_temp >= off_to_supplement }}
+          sequence:
+            - service: input_select.select_option
+              data:
+                entity_id: input_select.master_bedroom_heatpump_state
+                option: "Supplement"
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Mode Automation"
+                message: >
+                  Fallback logic: Temperature is {{ current_temp }}°, above Off to Supplement threshold. 
+                  Switching to Supplement mode to prevent being Off.
+
+        # Log when the system is in a threshold range and no action is needed
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ not override_status and
+                   ((current_mode == "Off" and current_temp >= off_to_supplement and current_temp < (off_to_supplement + hysteresis)) or
+                    (current_mode == "Supplement" and current_temp > supplement_to_comfort and current_temp <= (supplement_to_comfort + hysteresis)) or
+                    (current_mode == "Comfort" and current_temp >= supplement_to_comfort and current_temp <= (supplement_to_comfort + hysteresis))) }}
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Mode Automation"
+                message: >
+                  No state change: System is in threshold range. 
+                  Current temperature: {{ current_temp }}°, Current mode: {{ current_mode }}.
+
+        # Maintain current state if no changes are required
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ not override_status and
+                   ((current_mode == "Supplement" and current_temp > supplement_to_comfort) or
+                    (current_mode == "Comfort" and current_temp < supplement_to_comfort)) }}
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Mode Automation"
+                message: >
+                  No changes required. Current mode remains: {{ current_mode }}.
+  mode: single
+
+- id: manage_master_bedroom_heatpump_on_off
+  alias: "Manage Master Bedroom Mini Split On/Off Based on Heat Pump State"
+  description: "Turn off Master Bedroom Mini Split when in 'Off' mode and ensure it is set to 'Heat' in 'Supplement' or 'Comfort' modes."
+  trigger:
+    - platform: state
+      entity_id: input_select.master_bedroom_heatpump_state
+    - platform: time_pattern
+      minutes: "/15"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state: "Heat"
+  action:
+    - variables:
+        new_state: "{{ states('input_select.master_bedroom_heatpump_state') }}"
+    - choose:
+        # Turn off mini-split when in "Off" mode
+        - conditions:
+            - condition: template
+              value_template: "{{ new_state == 'Off' }}"
+          sequence:
+            - service: climate.turn_off
+              target:
+                entity_id: climate.master_bedroom_heat_pump
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Automation"
+                message: "Master Bedroom Mini Split turned off because the heat pump state was set to 'Off'."
+        # Set mini-split to "Heat" mode when in "Supplement", "Comfort", or "Override" mode
+        - conditions:
+            - condition: template
+              value_template: "{{ new_state in ['Supplement', 'Comfort', 'Override'] }}"
+          sequence:
+            - service: climate.set_hvac_mode
+              target:
+                entity_id: climate.master_bedroom_heat_pump
+              data:
+                hvac_mode: "heat"
+            - service: logbook.log
+              data:
+                name: "Master Bedroom Heat Pump Automation"
+                message: >
+                  Master Bedroom Mini Split set to 'Heat' because the heat pump state 
+                  was set to '{{ new_state }}'.
+    - service: logbook.log
+      data:
+        name: "Master Bedroom Heat Pump Automation"
+        message: >
+          State transition completed. Master Bedroom Heat Pump state is now 
+          '{{ new_state }}'.
+  mode: single
