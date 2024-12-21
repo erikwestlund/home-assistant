@@ -23,6 +23,11 @@ living_room_heat_pump_power_on_control:
   initial: on
   icon: mdi:power
 
+living_room_radiator_power_on_control:
+  name: Living Room Radiator Power On Control
+  initial: on
+  icon: mdi:power
+
 dining_room_heat_pump_power_on_control:
   name: Dining Room Heat Pump Power On Control
   initial: on
