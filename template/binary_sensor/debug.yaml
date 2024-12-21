@@ -10,11 +10,6 @@
     
     {{ day_start_ts <= now_ts < night_start_ts }}
 
-- name: "Nighttime Status"
-  unique_id: nighttime_status
-  state: not binary_sensor.daytime_status.state
-
-
 - name: "Debug Nighttime Status"
   unique_id: debug_nighttime_status
-  state: not binary_sensor.daytime_status.state
+  state: not binary_sensor.debug_daytime_status.state
