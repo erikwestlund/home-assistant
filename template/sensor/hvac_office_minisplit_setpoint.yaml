@@ -3,7 +3,7 @@
   state: >
     {% if is_state('input_boolean.office_override_status', 'on') %}
       Override
-    {% elif not is_state('binary_sensor.office_heat_pump_power_on_status', 'on') and not is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
+    {% elif is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
       Off
     {% elif is_state('binary_sensor.office_overheated', 'on') %}
       Overheated
