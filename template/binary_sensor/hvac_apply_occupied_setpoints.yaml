@@ -1,3 +1,29 @@
+# Early work mode logic
+- name: "Office Apply Occupied Setpoints"
+  unique_id: office_apply_occupied_setpoints
+  state: >
+    {% set current_time = now().timestamp() %}
+    {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_early_work_mode_day_start_time')) %}
+    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_start_time')) %}
+    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_end_time')) %}
+    
+    {% if is_state('input_boolean.office_early_work_mode', 'on') and early_work_start <= current_time <= apply_start %}
+      true
+    {% elif is_state('binary_sensor.nighttime_status', 'on') %}
+      false
+    {% elif apply_start <= current_time <= apply_end %}
+      {{ is_state('binary_sensor.office_occupied', 'on') }}
+    {% else %}
+      true
+    {% endif %}
+  icon: >-
+    {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
+      mdi:clock-check
+    {% else %}
+      mdi:clock
+    {% endif %}
+    
+# Same logic
 - name: "Family Room Apply Occupied Setpoints"
   unique_id: family_room_apply_occupied_setpoints
   state: >

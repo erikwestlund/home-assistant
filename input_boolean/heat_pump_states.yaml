@@ -1,8 +1,3 @@
-office_early_work_mode:
-    name: Office Early Work Mode
-    initial: off
-    icon: mdi:office-building
-
 office_override_status:
     name: Office Override
     initial: off
