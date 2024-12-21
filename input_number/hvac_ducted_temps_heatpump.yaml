@@ -1,4 +1,4 @@
-ducted_heatpump_stairwell_daytime:
+ducted_heatpump_stairwell_daytime_target:
   name: Ducted Stairwell (Daytime)
   min: 64
   max: 86
@@ -6,7 +6,7 @@ ducted_heatpump_stairwell_daytime:
   unit_of_measurement: "°F"
   initial: 68
 
-ducted_heatpump_stairwell_bedtime:
+ducted_heatpump_stairwell_bedtime_target:
   name: Ducted Stairwell (Bedtime)
   min: 64
   max: 86
@@ -14,7 +14,7 @@ ducted_heatpump_stairwell_bedtime:
   unit_of_measurement: "°F"
   initial: 68
 
-ducted_heatpump_stairwell_sleep:
+ducted_heatpump_stairwell_sleep_target:
   name: Ducted Stairwell (Sleep)
   min: 64
   max: 86
@@ -22,7 +22,7 @@ ducted_heatpump_stairwell_sleep:
   unit_of_measurement: "°F"
   initial: 67
 
-ducted_heatpump_kids_rooms_daytime:
+ducted_heatpump_kids_rooms_daytime_target:
   name: Ducted Kids Room (Daytime)
   min: 64
   max: 86
@@ -30,7 +30,7 @@ ducted_heatpump_kids_rooms_daytime:
   unit_of_measurement: "°F"
   initial: 67
 
-ducted_heatpump_kids_rooms_bedtime:
+ducted_heatpump_kids_rooms_bedtime_target:
   name: Ducted Kids Room (Bedtime)
   min: 64
   max: 86
@@ -38,7 +38,7 @@ ducted_heatpump_kids_rooms_bedtime:
   unit_of_measurement: "°F"
   initial: 68
 
-ducted_heatpump_kids_rooms_sleep:
+ducted_heatpump_kids_rooms_sleep_target:
   name: Ducted Kids Room (Sleep)
   min: 64
   max: 86
