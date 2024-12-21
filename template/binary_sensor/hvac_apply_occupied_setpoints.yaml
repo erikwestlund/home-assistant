@@ -1,0 +1,55 @@
+- name: "Family Room Apply Occupied Setpoints"
+  unique_id: family_room_apply_occupied_setpoints
+  state: >
+    {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.family_room_apply_occupied_start_time')) %}
+    {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.family_room_apply_occupied_end_time')) %}
+    {% set current_time = now().timestamp() %}
+    {{ start_time <= current_time <= end_time }}
+  icon: >-
+    {% if is_state('binary_sensor.family_room_apply_occupied_setpoints', 'on') %}
+      mdi:clock-check
+    {% else %}
+      mdi:clock
+    {% endif %}
+
+- name: "Living Room Apply Occupied Setpoints"
+  unique_id: living_room_apply_occupied_setpoints
+  state: >
+    {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.living_room_apply_occupied_start_time')) %}
+    {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.living_room_apply_occupied_end_time')) %}
+    {% set current_time = now().timestamp() %}
+    {{ start_time <= current_time <= end_time }}
+  icon: >-
+    {% if is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
+      mdi:clock-check
+    {% else %}
+      mdi:clock
+    {% endif %}
+
+- name: "Dining Room Apply Occupied Setpoints"
+  unique_id: dining_room_apply_occupied_setpoints
+  state: >
+    {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.dining_room_apply_occupied_start_time')) %}
+    {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.dining_room_apply_occupied_end_time')) %}
+    {% set current_time = now().timestamp() %}
+    {{ start_time <= current_time <= end_time }}
+  icon: >-
+    {% if is_state('binary_sensor.dining_room_apply_occupied_setpoints', 'on') %}
+      mdi:clock-check
+    {% else %}
+      mdi:clock
+    {% endif %}
+
+- name: "Erik Office Apply Occupied Setpoints"
+  unique_id: erik_office_apply_occupied_setpoints
+  state: >
+    {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.erik_office_apply_occupied_start_time')) %}
+    {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.erik_office_apply_occupied_end_time')) %}
+    {% set current_time = now().timestamp() %}
+    {{ start_time <= current_time <= end_time }}
+  icon: >-
+    {% if is_state('binary_sensor.erik_office_apply_occupied_setpoints', 'on') %}
+      mdi:clock-check
+    {% else %}
+      mdi:clock
+    {% endif %}
