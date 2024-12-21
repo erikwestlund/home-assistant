@@ -1,0 +1,35 @@
+- name: "Office Radiator Setpoint"
+  unique_id: office_radiator_setpoint_selector
+  state: >
+    {% if is_state('input_boolean.office_override_status', 'on') %}
+      Override
+    {% elif is_state('binary_sensor.office_radiator_power_on_status', 'off') %}
+      Off
+    {% elif is_state('binary_sensor.nighttime_status', 'on') %}
+      Night
+    {% elif is_state('binary_sensor.is_weekend', 'on') %}
+      {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
+        Weekend Occupied
+      {% else %}
+        Weekend Unoccupied
+      {% endif %}
+    {% else %}
+      {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
+        Weekday Occupied
+      {% else %}
+        Weekday Unoccupied
+      {% endif %}
+    {% endif %}
+  icon: >-
+    {% set state = states('sensor.office_radiator_setpoint_selector') %}
+    {% if state == "Override" %}
+      mdi:alert
+    {% elif state == "Off" %}
+      mdi:power
+    {% elif state == "Night" %}
+      mdi:weather-night
+    {% elif "Occupied" in state %}
+      mdi:chair-rolling
+    {% else %}
+      mdi:sofa
+    {% endif %}
