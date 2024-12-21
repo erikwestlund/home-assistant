@@ -3,36 +3,6 @@ office_early_work_mode:
     initial: off
     icon: mdi:office-building
 
-office_overheated_status:
-    name: Office Overheated
-    initial: off
-    icon: mdi:fire
-
-family_room_overheated_status:
-    name: Family Room Overheated
-    initial: off
-    icon: mdi:fire
-
-living_room_overheated_status:
-    name: Living Room Overheated
-    initial: off
-    icon: mdi:fire
-
-master_bedroom_overheated_status:
-    name: Master Bedroom Overheated
-    initial: off
-    icon: mdi:fire
-
-dining_room_overheated_status:
-    name: Dining Room Overheated
-    initial: off
-    icon: mdi:fire
-
-erik_office_overheated_status:
-    name: Erik Office Overheated
-    initial: off
-    icon: mdi:fire
-
 office_override_status:
     name: Office Override
     initial: off
