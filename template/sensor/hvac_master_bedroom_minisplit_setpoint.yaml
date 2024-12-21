@@ -1,0 +1,38 @@
+- name: "Master Bedroom Mini Split Setpoint"
+  unique_id: master_bedroom_minisplit_setpoint_selector
+  state: >
+    {% if is_state('input_boolean.master_bedroom_override_status', 'on') %}
+      Override
+    {% elif is_state('binary_sensor.master_bedroom_heat_pump_power_on_status', 'off') %}
+      Off
+    {% elif is_state('binary_sensor.master_bedroom_overheated', 'on') %}
+      Overheated
+    {% elif is_state('sensor.master_bedroom_heat_pump_operational_mode', 'Supplemental Heat') %}
+      Supplemental Heat
+    {% else %}
+      {% set time_period = states('sensor.master_bedroom_time_period') %}
+      {% if time_period in ['Daytime', 'Bedtime', 'Sleep'] %}
+        {{ time_period }}
+      {% else %}
+        Supplemental Heat
+      {% endif %}
+    {% endif %}
+  icon: >-
+    {% set state = states('sensor.master_bedroom_minisplit_setpoint_selector') %}
+    {% if state == "Override" %}
+      mdi:alert
+    {% elif state == "Off" %}
+      mdi:power
+    {% elif state == "Overheated" %}
+      mdi:thermometer-alert
+    {% elif state == "Supplemental Heat" %}
+      mdi:fire
+    {% elif state == "Daytime" %}
+      mdi:weather-sunny
+    {% elif state == "Bedtime" %}
+      mdi:bed
+    {% elif state == "Sleep" %}
+      mdi:sleep
+    {% else %}
+      mdi:help-circle
+    {% endif %}
