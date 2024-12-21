@@ -2,26 +2,26 @@
   unique_id: office_minisplit_setpoint_selector
   state: >
     {% if is_state('input_boolean.office_override_status', 'on') %}
-      "Override"
+      Override
     {% elif not is_state('binary_sensor.office_heat_pump_power_on_status', 'on') and not is_state('binary_sensor.office_radiator_power_on_status', 'on') %}
-      "Off"
+      Off
     {% elif is_state('binary_sensor.office_overheated', 'on') %}
-      "Overheated"
+      Overheated
     {% elif is_state('sensor.office_heat_pump_operational_mode', 'Supplement') or is_state('sensor.office_radiator_operational_mode', 'Supplement') %}
-      "Supplemental Heat"
+      Supplemental Heat
     {% elif is_state('binary_sensor.nighttime_status', 'on') %}
-      "Night"
+      Night
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
       {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
-        "Weekend Occupied"
+        Weekend Occupied
       {% else %}
-        "Weekend Unoccupied"
+        Weekend Unoccupied
       {% endif %}
     {% else %}
       {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
-        "Weekday Occupied"
+        Weekday Occupied
       {% else %}
-        "Weekday Unoccupied"
+        Weekday Unoccupied
       {% endif %}
     {% endif %}
   icon: >-
