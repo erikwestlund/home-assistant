@@ -33,3 +33,32 @@
     {% else %}
       mdi:sofa
     {% endif %}
+
+- name: "Office Radiator Target Setpoint"
+  unique_id: office_radiator_target_setpoint
+  state: >
+    {% set setpoint = states('sensor.office_radiator_setpoint') %}
+    {% if setpoint == "Off" %}
+      {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
+    {% elif setpoint == "Night" %}
+      {{ states('input_number.office_radiator_night_setpoint') }}
+    {% elif setpoint == "Weekday Occupied" %}
+      {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
+    {% elif setpoint == "Weekday Unoccupied" %}
+      {{ states('input_number.office_radiator_weekday_unoccupied_setpoint') }}
+    {% elif setpoint == "Weekend Occupied" %}
+      {{ states('input_number.office_radiator_weekend_occupied_setpoint') }}
+    {% elif setpoint == "Weekend Unoccupied" %}
+      {{ states('input_number.office_radiator_weekend_unoccupied_setpoint') }}
+    {% elif setpoint == "Override" %}
+      {{ states('input_number.office_override_setpoint') }}
+    {% else %}
+      {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: >-
+    {% if states('sensor.office_radiator_target_setpoint') | float == states('input_number.office_radiator_weekday_occupied_setpoint') | float %}
+      mdi:thermometer
+    {% else %}
+      mdi:radiator
+    {% endif %}
