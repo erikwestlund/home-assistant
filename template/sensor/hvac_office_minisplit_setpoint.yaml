@@ -41,3 +41,34 @@
     {% else %}
       mdi:sofa
     {% endif %}
+
+- name: "Office Mini Split Target Setpoint"
+  unique_id: office_minisplit_target_setpoint
+  state: >
+    {% set setpoint = states('sensor.office_mini_split_setpoint') %}
+    {% if setpoint == "Off" %}
+      {{ states('input_number.office_heatpump_supplemental_setpoint') }}
+    {% elif setpoint == "Night" %}
+      {{ states('input_number.office_heatpump_comfort_night_setpoint') }}
+    {% elif setpoint == "Weekday Occupied" %}
+      {{ states('input_number.office_heatpump_comfort_weekday_occupied_setpoint') }}
+    {% elif setpoint == "Weekday Unoccupied" %}
+      {{ states('input_number.office_heatpump_comfort_weekday_unoccupied_setpoint') }}
+    {% elif setpoint == "Weekend Occupied" %}
+      {{ states('input_number.office_heatpump_comfort_weekend_occupied_setpoint') }}
+    {% elif setpoint == "Weekend Unoccupied" %}
+      {{ states('input_number.office_heatpump_comfort_weekend_unoccupied_setpoint') }}
+    {% elif setpoint == "Supplemental Heat" %}
+      {{ states('input_number.office_heatpump_supplemental_setpoint') }}
+    {% elif setpoint == "Override" %}
+      {{ states('input_number.office_override_setpoint') }}
+    {% else %}
+      {{ states('input_number.office_heatpump_supplemental_setpoint') }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: >-
+    {% if states('sensor.office_minisplit_target_setpoint') | float == states('input_number.office_heatpump_supplemental_setpoint') | float %}
+      mdi:fire
+    {% else %}
+      mdi:thermometer
+    {% endif %}
