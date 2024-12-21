@@ -1,0 +1,14 @@
+- id: "turn_off_living_room_heat_pump"
+  alias: "Turn Off Living Room Heat Pump"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.living_room_heat_pump_power_on_status
+      to: "off"
+  condition:
+    - condition: template
+      value_template: >
+        {{ not is_state('climate.living_room_heat_pump', 'off') }}
+  action:
+    - service: climate.turn_off
+      target:
+        entity_id: climate.living_room_heat_pump
