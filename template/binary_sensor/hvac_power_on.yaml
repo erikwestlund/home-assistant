@@ -1,83 +1,83 @@
-- name: "Office Heat Pump Power On"
-  unique_id: office_heat_pump_power_on
-  state: >
-    {{ states('input_boolean.office_power_on_control') == 'on' and
-       states('sensor.office_operational_mode') != 'Off' }}
-  icon: >-
-    {% if is_state('binary_sensor.office_heat_pump_power_on', 'on') %}
-      mdi:power
-    {% else %}
-      mdi:power-off
-    {% endif %}
-
-- name: "Family Room Heat Pump Power On"
-  unique_id: family_room_heat_pump_power_on
-  state: >
-    {{ states('input_boolean.family_room_power_on_control') == 'on' and
-       states('sensor.family_room_operational_mode') != 'Off' }}
-  icon: >-
-    {% if is_state('binary_sensor.family_room_heat_pump_power_on', 'on') %}
-      mdi:power
-    {% else %}
-      mdi:power-off
-    {% endif %}
-
-- name: "Living Room Heat Pump Power On"
-  unique_id: living_room_heat_pump_power_on
-  state: >
-    {{ states('input_boolean.living_room_power_on_control') == 'on' and
-       states('sensor.living_room_operational_mode') != 'Off' }}
-  icon: >-
-    {% if is_state('binary_sensor.living_room_heat_pump_power_on', 'on') %}
-      mdi:power
-    {% else %}
-      mdi:power-off
-    {% endif %}
-
-- name: "Dining Room Heat Pump Power On"
-  unique_id: dining_room_heat_pump_power_on
-  state: >
-    {{ states('input_boolean.dining_room_power_on_control') == 'on' and
-       states('sensor.dining_room_operational_mode') != 'Off' }}
-  icon: >-
-    {% if is_state('binary_sensor.dining_room_heat_pump_power_on', 'on') %}
-      mdi:power
-    {% else %}
-      mdi:power-off
-    {% endif %}
-
-- name: "Master Bedroom Heat Pump Power On"
-  unique_id: master_bedroom_heat_pump_power_on
-  state: >
-    {{ states('input_boolean.master_bedroom_power_on_control') == 'on' and
-       states('sensor.master_bedroom_operational_mode') != 'Off' }}
-  icon: >-
-    {% if is_state('binary_sensor.master_bedroom_heat_pump_power_on', 'on') %}
-      mdi:power
-    {% else %}
-      mdi:power-off
-    {% endif %}
-
-- name: "Erik Office Heat Pump Power On"
-  unique_id: erik_office_heat_pump_power_on
-  state: >
-    {{ states('input_boolean.erik_office_power_on_control') == 'on' and
-       states('sensor.erik_office_operational_mode') != 'Off' }}
-  icon: >-
-    {% if is_state('binary_sensor.erik_office_heat_pump_power_on', 'on') %}
-      mdi:power
-    {% else %}
-      mdi:power-off
-    {% endif %}
-
-- name: "Ducted Heat Pump Power On"
-  unique_id: ducted_heat_pump_power_on
-  state: >
-    {{ states('input_boolean.ducted_power_on_control') == 'on' and
-       is_state('binary_sensor.ducted_heat_pump_operational_mode', 'on') }}
-  icon: >-
-    {% if is_state('binary_sensor.ducted_heat_pump_power_on', 'on') %}
-      mdi:power
-    {% else %}
-      mdi:power-off
-    {% endif %}
+#- name: "Office Heat Pump Power On"
+#  unique_id: office_heat_pump_power_on
+#  state: >
+#    {{ states('input_boolean.office_power_on_control') == 'on' and
+#       states('sensor.office_operational_mode') != 'Off' }}
+#  icon: >-
+#    {% if is_state('binary_sensor.office_heat_pump_power_on', 'on') %}
+#      mdi:power
+#    {% else %}
+#      mdi:power-off
+#    {% endif %}
+#
+#- name: "Family Room Heat Pump Power On"
+#  unique_id: family_room_heat_pump_power_on
+#  state: >
+#    {{ states('input_boolean.family_room_power_on_control') == 'on' and
+#       states('sensor.family_room_operational_mode') != 'Off' }}
+#  icon: >-
+#    {% if is_state('binary_sensor.family_room_heat_pump_power_on', 'on') %}
+#      mdi:power
+#    {% else %}
+#      mdi:power-off
+#    {% endif %}
+#
+#- name: "Living Room Heat Pump Power On"
+#  unique_id: living_room_heat_pump_power_on
+#  state: >
+#    {{ states('input_boolean.living_room_power_on_control') == 'on' and
+#       states('sensor.living_room_operational_mode') != 'Off' }}
+#  icon: >-
+#    {% if is_state('binary_sensor.living_room_heat_pump_power_on', 'on') %}
+#      mdi:power
+#    {% else %}
+#      mdi:power-off
+#    {% endif %}
+#
+#- name: "Dining Room Heat Pump Power On"
+#  unique_id: dining_room_heat_pump_power_on
+#  state: >
+#    {{ states('input_boolean.dining_room_power_on_control') == 'on' and
+#       states('sensor.dining_room_operational_mode') != 'Off' }}
+#  icon: >-
+#    {% if is_state('binary_sensor.dining_room_heat_pump_power_on', 'on') %}
+#      mdi:power
+#    {% else %}
+#      mdi:power-off
+#    {% endif %}
+#
+#- name: "Master Bedroom Heat Pump Power On"
+#  unique_id: master_bedroom_heat_pump_power_on
+#  state: >
+#    {{ states('input_boolean.master_bedroom_power_on_control') == 'on' and
+#       states('sensor.master_bedroom_operational_mode') != 'Off' }}
+#  icon: >-
+#    {% if is_state('binary_sensor.master_bedroom_heat_pump_power_on', 'on') %}
+#      mdi:power
+#    {% else %}
+#      mdi:power-off
+#    {% endif %}
+#
+#- name: "Erik Office Heat Pump Power On"
+#  unique_id: erik_office_heat_pump_power_on
+#  state: >
+#    {{ states('input_boolean.erik_office_power_on_control') == 'on' and
+#       states('sensor.erik_office_operational_mode') != 'Off' }}
+#  icon: >-
+#    {% if is_state('binary_sensor.erik_office_heat_pump_power_on', 'on') %}
+#      mdi:power
+#    {% else %}
+#      mdi:power-off
+#    {% endif %}
+#
+#- name: "Ducted Heat Pump Power On"
+#  unique_id: ducted_heat_pump_power_on
+#  state: >
+#    {{ states('input_boolean.ducted_power_on_control') == 'on' and
+#       is_state('binary_sensor.ducted_heat_pump_operational_mode', 'on') }}
+#  icon: >-
+#    {% if is_state('binary_sensor.ducted_heat_pump_power_on', 'on') %}
+#      mdi:power
+#    {% else %}
+#      mdi:power-off
+#    {% endif %}
