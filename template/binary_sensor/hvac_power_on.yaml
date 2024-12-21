@@ -51,6 +51,23 @@
       mdi:hvac-off
     {% endif %}
 
+- name: "Family Room Radiator Power On Status"
+  unique_id: family_room_radiator_power_on_status
+  state: >
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.family_room_override_status', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      {{ is_state('input_boolean.away_family_room_radiator_on', 'on') and is_state('input_boolean.family_room_radiator_power_on_control', 'on') }}
+    {% else %}
+      {{ is_state('input_boolean.family_room_radiator_power_on_control', 'on') }}
+    {% endif %}
+  icon: >-
+    {% if is_state('binary_sensor.family_room_radiator_power_on_status', 'on') %}
+      mdi:radiator
+    {% else %}
+      mdi:radiator-off
+    {% endif %}
+
 # Living Room
 - name: "Living Room Heat Pump Power On Status"
   unique_id: living_room_heatpump_power_on_status
