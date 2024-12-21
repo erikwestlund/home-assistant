@@ -4,7 +4,9 @@
     {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.family_room_apply_occupied_start_time')) %}
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.family_room_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
-    {{ start_time <= current_time <= end_time }}
+    {{ start_time <= current_time <= end_time and
+       is_state('binary_sensor.family_room_occupied', 'on') and
+       is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.family_room_apply_occupied_setpoints', 'on') %}
       mdi:clock-check
@@ -18,7 +20,9 @@
     {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.living_room_apply_occupied_start_time')) %}
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.living_room_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
-    {{ start_time <= current_time <= end_time }}
+    {{ start_time <= current_time <= end_time and
+       is_state('binary_sensor.living_room_occupied', 'on') and
+       is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
       mdi:clock-check
@@ -32,7 +36,9 @@
     {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.dining_room_apply_occupied_start_time')) %}
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.dining_room_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
-    {{ start_time <= current_time <= end_time }}
+    {{ start_time <= current_time <= end_time and
+       is_state('binary_sensor.dining_room_occupied', 'on') and
+       is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.dining_room_apply_occupied_setpoints', 'on') %}
       mdi:clock-check
@@ -46,7 +52,9 @@
     {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.erik_office_apply_occupied_start_time')) %}
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.erik_office_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
-    {{ start_time <= current_time <= end_time }}
+    {{ start_time <= current_time <= end_time and
+       is_state('binary_sensor.erik_office_occupied', 'on') and
+       is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.erik_office_apply_occupied_setpoints', 'on') %}
       mdi:clock-check
