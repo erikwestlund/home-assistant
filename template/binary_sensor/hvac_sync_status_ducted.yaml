@@ -43,7 +43,7 @@
   state: >
     {% set power_synced = is_state('binary_sensor.ducted_heat_pump_power_on_synced', 'on') %}
     {% set mode_synced = is_state('binary_sensor.ducted_heat_pump_mode_synced', 'on') %}
-    {% set temp_synced = is_state('binary_sensor.ducted_heatpump_temperature_synced', 'on') %}
+    {% set temp_synced = is_state('binary_sensor.ducted_heat_pump_temperature_synced', 'on') %}
     {% set power_off = is_state('binary_sensor.ducted_heat_pump_power_on_status', 'off') %}
     {{ (power_off and power_synced and mode_synced) or (power_synced and mode_synced and temp_synced) }}
   icon: >-
