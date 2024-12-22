@@ -1,79 +1,79 @@
-- id: "turn_off_office_heat_pump"
-  alias: "Turn Off Office Heat Pump"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.office_heat_pump_power_on_status
-      to: "off"
-  condition:
-    - condition: template
-      value_template: >
-        {{ not is_state('climate.tinas_office_heat_pump', 'off') }}
-  action:
-    - service: climate.turn_off
-      target:
-        entity_id: climate.tinas_office_heat_pump
-
-- id: "turn_off_office_radiator"
-  alias: "Turn Off Office Radiator"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.office_radiator_power_on_status
-      to: "off"
-  condition:
-    - condition: template
-      value_template: >
-        {{ not is_state('climate.office', 'off') }}
-  action:
-    - service: climate.turn_off
-      target:
-        entity_id: climate.office
-
-- id: "turn_on_office_heat_pump"
-  alias: "Turn On Office Heat Pump"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.office_heat_pump_power_on_status
-      to: "on"
-  condition:
-    - condition: template
-      value_template: >
-        {{ is_state('climate.tinas_office_heat_pump', 'off') }}
-  action:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: input_select.hvac_mode
-              state: "Heat"
-          sequence:
-            - service: climate.set_hvac_mode
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                hvac_mode: heat
-        - conditions:
-            - condition: state
-              entity_id: input_select.hvac_mode
-              state: "Cool"
-          sequence:
-            - service: climate.set_hvac_mode
-              data:
-                entity_id: climate.tinas_office_heat_pump
-                hvac_mode: cool
-
-- id: "turn_on_office_radiator"
-  alias: "Turn On Office Radiator"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.office_radiator_power_on_status
-      to: "on"
-  condition:
-    - condition: state
-      entity_id: input_select.hvac_mode
-      state: "Heat"
-    - condition: template
-      value_template: >
-        {{ is_state('climate.office', 'off') }}
-  action:
-    - service: climate.set_hvac_mode
-      data:
-        entity_id: climate.office
-        hvac_mode: heat
+#- id: "turn_off_office_heat_pump"
+#  alias: "Turn Off Office Heat Pump"
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.office_heat_pump_power_on_status
+#      to: "off"
+#  condition:
+#    - condition: template
+#      value_template: >
+#        {{ not is_state('climate.tinas_office_heat_pump', 'off') }}
+#  action:
+#    - service: climate.turn_off
+#      target:
+#        entity_id: climate.tinas_office_heat_pump
+#
+#- id: "turn_off_office_radiator"
+#  alias: "Turn Off Office Radiator"
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.office_radiator_power_on_status
+#      to: "off"
+#  condition:
+#    - condition: template
+#      value_template: >
+#        {{ not is_state('climate.office', 'off') }}
+#  action:
+#    - service: climate.turn_off
+#      target:
+#        entity_id: climate.office
+#
+#- id: "turn_on_office_heat_pump"
+#  alias: "Turn On Office Heat Pump"
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.office_heat_pump_power_on_status
+#      to: "on"
+#  condition:
+#    - condition: template
+#      value_template: >
+#        {{ is_state('climate.tinas_office_heat_pump', 'off') }}
+#  action:
+#    - choose:
+#        - conditions:
+#            - condition: state
+#              entity_id: input_select.hvac_mode
+#              state: "Heat"
+#          sequence:
+#            - service: climate.set_hvac_mode
+#              data:
+#                entity_id: climate.tinas_office_heat_pump
+#                hvac_mode: heat
+#        - conditions:
+#            - condition: state
+#              entity_id: input_select.hvac_mode
+#              state: "Cool"
+#          sequence:
+#            - service: climate.set_hvac_mode
+#              data:
+#                entity_id: climate.tinas_office_heat_pump
+#                hvac_mode: cool
+#
+#- id: "turn_on_office_radiator"
+#  alias: "Turn On Office Radiator"
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.office_radiator_power_on_status
+#      to: "on"
+#  condition:
+#    - condition: state
+#      entity_id: input_select.hvac_mode
+#      state: "Heat"
+#    - condition: template
+#      value_template: >
+#        {{ is_state('climate.office', 'off') }}
+#  action:
+#    - service: climate.set_hvac_mode
+#      data:
+#        entity_id: climate.office
+#        hvac_mode: heat
