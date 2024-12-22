@@ -1,0 +1,53 @@
+- id: "set_living_room_mini_split_setpoint"
+  alias: "Set Living Room Mini Split Setpoint"
+  trigger:
+    - platform: state
+      entity_id: sensor.living_room_mini_split_setpoint_target_temperature
+  condition:
+    - condition: template
+      value_template: >
+        {{ states('climate.living_room_heat_pump') != 'off' }}
+    - condition: template
+      value_template: >
+        {{ states('sensor.living_room_mini_split_setpoint_target_temperature') | float(0) != state_attr('climate.living_room_heat_pump', 'temperature') | float(0) }}
+  action:
+    - choose:
+        # Turn on the unit if it's off
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('climate.living_room_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.living_room_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Living Room Mini Split Automation"
+                message: >
+                  Living Room Mini Split was off. Turned on with HVAC mode {{ states('input_select.hvac_mode') }}.
+
+        # Update the temperature if it differs from the current setpoint
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ states('sensor.living_room_mini_split_setpoint_target_temperature') | float(0) != state_attr('climate.living_room_heat_pump', 'temperature') | float(0) }}
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Living Room Mini Split Automation"
+                message: >
+                  Updating Living Room Mini Split target temperature. 
+                  Target temperature: {{ states('sensor.living_room_mini_split_setpoint_target_temperature') }}°F. 
+                  Current thermostat temperature: {{ state_attr('climate.living_room_heat_pump', 'temperature') }}°F.
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.living_room_heat_pump
+                temperature: "{{ states('sensor.living_room_mini_split_setpoint_target_temperature') | float(0) }}"
+  mode: single
