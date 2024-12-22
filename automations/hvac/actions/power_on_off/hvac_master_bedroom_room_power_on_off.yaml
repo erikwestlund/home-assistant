@@ -1,0 +1,76 @@
+- id: "turn_off_master_bedroom_heat_pump"
+  alias: "Turn Off Master Bedroom Heat Pump"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.master_bedroom_heat_pump_power_on_status
+      to: "off"
+  condition:
+    - condition: template
+      value_template: >
+        {{ not is_state('climate.master_bedroom_heat_pump', 'off') }}
+  action:
+    - service: climate.turn_off
+      target:
+        entity_id: climate.master_bedroom_heat_pump
+
+- id: "turn_on_master_bedroom_heat_pump"
+  alias: "Turn On Master Bedroom Heat Pump"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.master_bedroom_heat_pump_power_on_status
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state_not: "Off"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_select.hvac_mode
+              state: "Heat"
+            - condition: template
+              value_template: >
+                {{ is_state('climate.master_bedroom_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.master_bedroom_heat_pump
+                hvac_mode: heat
+
+- id: "turn_on_master_bedroom_heat_pump"
+  alias: "Turn On Master Bedroom Heat Pump"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.master_bedroom_heat_pump_power_on_status
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state_not: "Off"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_select.hvac_mode
+              state: "Heat"
+            - condition: template
+              value_template: >
+                {{ is_state('climate.master_bedroom_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.master_bedroom_heat_pump
+                hvac_mode: heat
+        - conditions:
+            - condition: state
+              entity_id: input_select.hvac_mode
+              state: "Cool"
+            - condition: template
+              value_template: >
+                {{ is_state('climate.master_bedroom_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.master_bedroom_heat_pump
+                hvac_mode: cool

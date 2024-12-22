@@ -1,0 +1,51 @@
+- id: "turn_off_eriks_office_heat_pump"
+  alias: "Turn Off Erik's Office Heat Pump"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.erik_office_heat_pump_power_on_status
+      to: "off"
+  condition:
+    - condition: template
+      value_template: >
+        {{ not is_state('climate.eriks_office_room', 'off') }}
+  action:
+    - service: climate.turn_off
+      target:
+        entity_id: climate.eriks_office_room
+
+- id: "turn_on_erik_office_mini_split"
+  alias: "Turn On Erik Office Mini Split"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.erik_office_heat_pump_power_on_status
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_select.hvac_mode
+      state_not: "Off"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_select.hvac_mode
+              state: "Heat"
+            - condition: template
+              value_template: >
+                {{ is_state('climate.eriks_office_room', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.eriks_office_room
+                hvac_mode: heat
+        - conditions:
+            - condition: state
+              entity_id: input_select.hvac_mode
+              state: "Cool"
+            - condition: template
+              value_template: >
+                {{ is_state('climate.eriks_office_room', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.eriks_office_room
+                hvac_mode: cool
