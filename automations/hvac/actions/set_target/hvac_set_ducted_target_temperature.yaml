@@ -27,6 +27,15 @@
             - service: climate.turn_off
               target:
                 entity_id: climate.ducted_heat_pump
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.ducted_heat_pump
+                temperature: "{{ states('input_number.ducted_heatpump_default_temp') | float(0) }}"
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Automation"
+                message: >
+                  Resetting target temperature to default: {{ states('input_number.ducted_heatpump_default_temp') }}°F.
 
         # Turn the system on and set the temperature
         - conditions:
@@ -69,4 +78,15 @@
                 name: "Ducted Heat Pump Automation"
                 message: >
                   Updating ducted heat pump target temperature to {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
+
+    # Reset temperature to default after updates
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.ducted_heat_pump
+        temperature: "{{ states('input_number.ducted_heatpump_default_temp') | float(0) }}"
+    - service: logbook.log
+      data:
+        name: "Ducted Heat Pump Automation"
+        message: >
+          Final reset of target temperature to default: {{ states('input_number.ducted_heatpump_default_temp') }}°F.
   mode: single
