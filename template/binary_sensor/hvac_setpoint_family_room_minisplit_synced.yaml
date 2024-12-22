@@ -15,7 +15,7 @@
   unique_id: family_room_minisplit_mode_synced
   state: >
     {% set power_on = is_state('binary_sensor.family_room_heat_pump_power_on_status', 'on') %}
-    {% set hvac_mode = states('climate.family_room_heat_pump', 'hvac_mode') %}
+    {% set hvac_mode = states('climate.family_room_heat_pump') %}
     {% set desired_mode = states('input_select.hvac_mode').lower() %}
     {{ not power_on or hvac_mode == desired_mode }}
   icon: >-
@@ -29,7 +29,7 @@
   unique_id: family_room_minisplit_temperature_synced
   state: >
     {% set target_temp = states('sensor.family_room_mini_split_setpoint_target_temperature') %}
-    {% set current_temp = states('climate.family_room_heat_pump', 'temperature') %}
+    {% set current_temp = state_attr('climate.family_room_heat_pump', 'temperature') %}
     {{ target_temp | float(0) == current_temp | float(0) }}
   icon: >-
     {% if is_state('binary_sensor.family_room_mini_split_temperature_synced', 'on') %}

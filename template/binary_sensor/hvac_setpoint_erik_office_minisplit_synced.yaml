@@ -15,14 +15,14 @@
   unique_id: erik_office_minisplit_mode_synced
   state: >
     {% set power_on = is_state('binary_sensor.erik_office_heat_pump_power_on_status', 'on') %}
-    {% set hvac_mode = states('climate.eriks_office_room', 'hvac_mode') %}
+    {% set hvac_mode = states('climate.eriks_office_room') %}
     {% set desired_mode = states('input_select.hvac_mode').lower() %}
     
     # Debugging info:
     {{ not power_on or hvac_mode == desired_mode }}
   icon: >-
     {% set power_on = is_state('binary_sensor.erik_office_heat_pump_power_on_status', 'on') %}
-    {% set hvac_mode = states('climate.eriks_office_room', 'hvac_mode') %}
+    {% set hvac_mode = states('climate.eriks_office_room') %}
     {% set desired_mode = states('input_select.hvac_mode').lower() %}
     mdi:check
     {% if not power_on %}
@@ -36,7 +36,7 @@
   unique_id: erik_office_minisplit_temperature_synced
   state: >
     {% set target_temp = states('sensor.erik_office_mini_split_setpoint_target_temperature') %}
-    {% set current_temp = states('climate.eriks_office_room', 'temperature') %}
+    {% set current_temp = state_attr('climate.eriks_office_room', 'temperature') %}
     {{ target_temp | float(0) == current_temp | float(0) }}
   icon: >-
     {% if is_state('binary_sensor.erik_office_mini_split_temperature_synced', 'on') %}
