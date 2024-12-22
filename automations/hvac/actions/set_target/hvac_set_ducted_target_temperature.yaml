@@ -1,92 +1,92 @@
-- id: "update_ducted_heat_setpoint"
-  alias: "Update Ducted Heat Setpoint"
-  trigger:
-    - platform: state
-      entity_id: sensor.ducted_system_setpoint_target_temperature
-  condition:
-    - condition: template
-      value_template: >
-        {{ states('sensor.ducted_system_setpoint_target_temperature') != "None" }}
-  action:
-    - choose:
-        # Turn the system off if current temperature exceeds target + offset
-        - conditions:
-            - condition: template
-              value_template: >
-                {{ states('climate.ducted_heat_pump') != "off" and
-                   state_attr('climate.ducted_heat_pump', 'current_temperature') | float(0) >
-                   (states('sensor.ducted_system_setpoint_target_temperature') | float(0) + 
-                   states('input_number.ducted_setpoint_heat_stop_threshold_offset') | float(0)) }}
-          sequence:
-            - service: logbook.log
-              data:
-                name: "Ducted Heat Pump Automation"
-                message: >
-                  Current temperature exceeds target + offset.
-                  Turning off the ducted heat pump.
-            - service: climate.turn_off
-              target:
-                entity_id: climate.ducted_heat_pump
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.ducted_heat_pump
-                temperature: "{{ states('input_number.ducted_heatpump_default_temp') | float(0) }}"
-            - service: logbook.log
-              data:
-                name: "Ducted Heat Pump Automation"
-                message: >
-                  Resetting target temperature to default: {{ states('input_number.ducted_heatpump_default_temp') }}°F.
-
-        # Turn the system on and set the temperature
-        - conditions:
-            - condition: template
-              value_template: >
-                {{ states('climate.ducted_heat_pump') == "off" }}
-          sequence:
-            - service: climate.set_hvac_mode
-              data:
-                entity_id: climate.ducted_heat_pump
-                hvac_mode: "heat"
-            - service: logbook.log
-              data:
-                name: "Ducted Heat Pump Automation"
-                message: >
-                  The ducted heat pump was off. Turning it on and setting to heat mode.
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.ducted_heat_pump
-                temperature: "{{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}"
-            - service: logbook.log
-              data:
-                name: "Ducted Heat Pump Automation"
-                message: >
-                  Setting target temperature to {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
-
-        # Update the temperature if the system is already on
-        - conditions:
-            - condition: template
-              value_template: >
-                {{ state_attr('climate.ducted_heat_pump', 'temperature') | float(0) !=
-                   states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}
-          sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.ducted_heat_pump
-                temperature: "{{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}"
-            - service: logbook.log
-              data:
-                name: "Ducted Heat Pump Automation"
-                message: >
-                  Updating ducted heat pump target temperature to {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
-
-    # Reset temperature to default after updates
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.ducted_heat_pump
-        temperature: "{{ states('input_number.ducted_heatpump_default_temp') | float(0) }}"
-    - service: logbook.log
-      data:
-        name: "Ducted Heat Pump Automation"
-        message: >
-          Final reset of target temperature to default: {{ states('input_number.ducted_heatpump_default_temp') }}°F.
-  mode: single
+#- id: "update_ducted_heat_setpoint"
+#  alias: "Update Ducted Heat Setpoint"
+#  trigger:
+#    - platform: state
+#      entity_id: sensor.ducted_system_setpoint_target_temperature
+#  condition:
+#    - condition: template
+#      value_template: >
+#        {{ states('sensor.ducted_system_setpoint_target_temperature') != "None" }}
+#  action:
+#    - choose:
+#        # Turn the system off if current temperature exceeds target + offset
+#        - conditions:
+#            - condition: template
+#              value_template: >
+#                {{ states('climate.ducted_heat_pump') != "off" and
+#                   state_attr('climate.ducted_heat_pump', 'current_temperature') | float(0) >
+#                   (states('sensor.ducted_system_setpoint_target_temperature') | float(0) +
+#                   states('input_number.ducted_setpoint_heat_stop_threshold_offset') | float(0)) }}
+#          sequence:
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump Automation"
+#                message: >
+#                  Current temperature exceeds target + offset.
+#                  Turning off the ducted heat pump.
+#            - service: climate.turn_off
+#              target:
+#                entity_id: climate.ducted_heat_pump
+#            - service: climate.set_temperature
+#              data:
+#                entity_id: climate.ducted_heat_pump
+#                temperature: "{{ states('input_number.ducted_heatpump_default_temp') | float(0) }}"
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump Automation"
+#                message: >
+#                  Resetting target temperature to default: {{ states('input_number.ducted_heatpump_default_temp') }}°F.
+#
+#        # Turn the system on and set the temperature
+#        - conditions:
+#            - condition: template
+#              value_template: >
+#                {{ states('climate.ducted_heat_pump') == "off" }}
+#          sequence:
+#            - service: climate.set_hvac_mode
+#              data:
+#                entity_id: climate.ducted_heat_pump
+#                hvac_mode: "heat"
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump Automation"
+#                message: >
+#                  The ducted heat pump was off. Turning it on and setting to heat mode.
+#            - service: climate.set_temperature
+#              data:
+#                entity_id: climate.ducted_heat_pump
+#                temperature: "{{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}"
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump Automation"
+#                message: >
+#                  Setting target temperature to {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
+#
+#        # Update the temperature if the system is already on
+#        - conditions:
+#            - condition: template
+#              value_template: >
+#                {{ state_attr('climate.ducted_heat_pump', 'temperature') | float(0) !=
+#                   states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}
+#          sequence:
+#            - service: climate.set_temperature
+#              data:
+#                entity_id: climate.ducted_heat_pump
+#                temperature: "{{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}"
+#            - service: logbook.log
+#              data:
+#                name: "Ducted Heat Pump Automation"
+#                message: >
+#                  Updating ducted heat pump target temperature to {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
+#
+#    # Reset temperature to default after updates
+#    - service: climate.set_temperature
+#      data:
+#        entity_id: climate.ducted_heat_pump
+#        temperature: "{{ states('input_number.ducted_heatpump_default_temp') | float(0) }}"
+#    - service: logbook.log
+#      data:
+#        name: "Ducted Heat Pump Automation"
+#        message: >
+#          Final reset of target temperature to default: {{ states('input_number.ducted_heatpump_default_temp') }}°F.
+#  mode: single
