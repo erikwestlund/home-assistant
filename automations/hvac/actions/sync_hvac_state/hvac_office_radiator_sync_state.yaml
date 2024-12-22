@@ -6,6 +6,8 @@
         - binary_sensor.office_radiator_power_on_synced
         - binary_sensor.office_radiator_mode_synced
         - binary_sensor.office_radiator_temperature_synced
+        - input_boolean.office_override_status
+        - input_boolean.hvac_away_mode
       to: "off"
     - platform: time_pattern
       minutes: "/5"
