@@ -1,5 +1,5 @@
-- id: "update_office_radiator_setpoint"
-  alias: "Update Office Radiator Setpoint"
+- id: "set_office_radiator_setpoint"
+  alias: "Set Office Radiator Setpoint"
   trigger:
     - platform: state
       entity_id: sensor.office_radiator_setpoint_target_temperature

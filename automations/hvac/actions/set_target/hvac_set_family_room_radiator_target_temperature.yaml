@@ -1,0 +1,46 @@
+- id: "set_family_room_radiator_setpoint"
+  alias: "Set Family Room Radiator Setpoint"
+  trigger:
+    - platform: state
+      entity_id: sensor.family_room_radiator_setpoint_target_temperature
+  condition:
+    - condition: template
+      value_template: >
+        {{ states('sensor.family_room_radiator_setpoint_target_temperature') != 'None' }}
+  action:
+    - choose:
+        # Check if the radiator is off and needs to be turned on
+        - conditions:
+            - condition: state
+              entity_id: climate.family_room_heating
+              state: "off"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Family Room Radiator Setpoint Automation"
+                message: >
+                  Family Room Radiator is off. Turning it on and setting to heat mode.
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.family_room_heating
+                hvac_mode: "heat"
+
+        # Check if the setpoint differs and needs updating
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ states('sensor.family_room_radiator_setpoint_target_temperature') | float(0) != 
+                   state_attr('climate.family_room_heating', 'temperature') | float(0) }}
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Family Room Radiator Setpoint Automation"
+                message: >
+                  Updating Family Room Radiator setpoint. 
+                  Target temperature: {{ states('sensor.family_room_radiator_setpoint_target_temperature') }}°. 
+                  Current thermostat temperature: {{ state_attr('climate.family_room_heating', 'temperature') }}°.
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.family_room_heating
+                temperature: "{{ states('sensor.family_room_radiator_setpoint_target_temperature') }}"
+  mode: single
