@@ -1,0 +1,12 @@
+- name: "Office Mini Split Setpoint Mismatch"
+  unique_id: office_minisplit_setpoint_mismatch
+  state: >
+    {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
+    {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) %}
+    {{ target_temp != current_temp }}
+  icon: >-
+    {% if is_state('binary_sensor.office_minisplit_setpoint_mismatch', 'on') %}
+      mdi:alert
+    {% else %}
+      mdi:check
+    {% endif %}
