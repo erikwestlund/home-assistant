@@ -1,35 +1,13 @@
-- name: "Office Mini Split Setpoint Synced"
-  unique_id: office_minisplit_setpoint_synced
+- name: "Office Mini Split Power On Synced"
+  unique_id: office_minisplit_power_on_synced
   state: >
-    {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
-    {% set current_temp = state_attr('climate.eriks_office_room', 'temperature') | float(0) %}
     {% set power_on = is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
-    {% set is_off = is_state('climate.eriks_office_room', 'off') %}
-
-    {% if not power_on and is_off %}
-      true
-    {% elif not power_on and not is_off %}
-      false
-    {% elif power_on and target_temp == current_temp %}
-      true
-    {% else %}
-      false
-    {% endif %}
+    {% set is_off = is_state('climate.tinas_office_heat_pump', 'off') %}
+    
+    {{ (power_on and not is_off) or (not power_on and is_off) }}
   icon: >-
-    {% if is_state('binary_sensor.office_minisplit_setpoint_synced', 'on') %}
-      mdi:check-circle
+    {% if is_state('binary_sensor.office_minisplit_power_on_synced', 'on') %}
+      mdi:power
     {% else %}
-      mdi:alert-circle
-    {% endif %}
-
-- name: "Office Mini Split Setpoint Not Synced"
-  unique_id: office_minisplit_setpoint_not_synced
-  state: >
-    {% set synced = is_state('binary_sensor.office_minisplit_setpoint_synced', 'on') %}
-    {{ not synced }}
-  icon: >-
-    {% if is_state('binary_sensor.office_minisplit_setpoint_not_synced', 'on') %}
-      mdi:alert
-    {% else %}
-      mdi:check
+      mdi:power-off
     {% endif %}
