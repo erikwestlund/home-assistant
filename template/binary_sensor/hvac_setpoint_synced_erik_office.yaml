@@ -30,11 +30,14 @@
   state: >
     {% set power_synced = is_state('binary_sensor.office_minisplit_power_on_synced', 'on') %}
     {% set mode_synced = is_state('binary_sensor.office_minisplit_mode_synced', 'on') %}
+    {% set is_off = is_state('climate.tinas_office_heat_pump', 'off') %}
     {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
     {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) %}
     
     {% if not power_synced or not mode_synced %}
-      off
+      false
+    {% elif is_off %}
+      true
     {% else %}
       {{ target_temp == current_temp }}
     {% endif %}
