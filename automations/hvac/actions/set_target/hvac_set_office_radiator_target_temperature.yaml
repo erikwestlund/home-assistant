@@ -1,0 +1,46 @@
+- id: "update_office_radiator_setpoint"
+  alias: "Update Office Radiator Setpoint"
+  trigger:
+    - platform: state
+      entity_id: sensor.office_radiator_setpoint_target_temperature
+  condition:
+    - condition: template
+      value_template: >
+        {{ states('sensor.office_radiator_setpoint_target_temperature') != 'None' }}
+  action:
+    - choose:
+        # Check if the radiator is off and needs to be turned on
+        - conditions:
+            - condition: state
+              entity_id: climate.office
+              state: "off"
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Office Radiator Setpoint Update"
+                message: >
+                  Office Radiator is off. Turning it on and setting to heat mode.
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.office
+                hvac_mode: "heat"
+
+        # Check if the setpoint differs and needs updating
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ states('sensor.office_radiator_setpoint_target_temperature') | float(0) != 
+                   state_attr('climate.office', 'temperature') | float(0) }}
+          sequence:
+            - service: logbook.log
+              data:
+                name: "Office Radiator Setpoint Update"
+                message: >
+                  Updating Office Radiator setpoint. 
+                  Target temperature: {{ states('sensor.office_radiator_setpoint_target_temperature') }}°. 
+                  Current thermostat temperature: {{ state_attr('climate.office', 'temperature') }}°.
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.office
+                temperature: "{{ states('sensor.office_radiator_setpoint_target_temperature') }}"
+  mode: single
