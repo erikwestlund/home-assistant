@@ -5,7 +5,7 @@
     {% set sensors = [
       states('sensor.tina_desk_temperature') | float(0),
       states('sensor.office_bookshelf_temperature') | float(0),
-      states('sensor.office_current_temperature') | float(0)
+      state_attr('climate.office', 'current_temperature') | float(0)
     ] %}
     {{ (sensors | sum / sensors | length) | round(1) }}
 
@@ -14,7 +14,7 @@
   unit_of_measurement: "°F"
   state: >
     {% set sensors = [
-      states('sensor.family_room_heating_current_temperature') | float(0),
+      state_attr('climate.family_room_heating', 'current_temperature') | float(0)
       states('sensor.bookshelf_temperature') | float(0),
       states('sensor.lamp_temperature') | float(0)
     ] %}
@@ -26,7 +26,7 @@
   state: >
     {% set sensors = [
       states('sensor.living_room_radiator_temperature') | float(0),
-      states('sensor.living_room_main_heating_current_temperature') | float(0)
+      state_attr('climate.living_room_main_heating', 'current_temperature') | float(0)
     ] %}
     {{ (sensors | sum / sensors | length) | round(1) }}
 
