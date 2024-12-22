@@ -16,7 +16,7 @@ ducted_heatpump_heating_temp:
 
 ducted_heatpump_off_threshold:
   name: Ducted Heat Pump Off Temperature Threshold
-  min: -10
+  min: -15
   max: 60
   step: 1
   unit_of_measurement: "°F"

@@ -1,6 +1,6 @@
 living_room_heatpump_off_to_supplement_threshold:
   name: Living Room Heat Pump Off Temp
-  min: -10
+  min: -15
   max: 60
   step: 1
   unit_of_measurement: "°F"
@@ -8,7 +8,7 @@ living_room_heatpump_off_to_supplement_threshold:
 
 living_room_heatpump_supplement_to_comfort_threshold:
   name: Living Room Heat Pump Comfort Temp
-  min: -10
+  min: -15
   max: 60
   step: 1
   unit_of_measurement: "°F"
