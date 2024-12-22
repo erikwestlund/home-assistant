@@ -50,22 +50,10 @@
       None
     {% elif setpoint == "Default" %}
       {{ states('input_number.ducted_heatpump_default_temp') }}
-    {% elif setpoint == "Heating Kids Room Daytime" %}
-      {{ states('input_number.ducted_heatpump_kids_rooms_daytime_target') }}
-    {% elif setpoint == "Heating Kids Room Bedtime" %}
-      {{ states('input_number.ducted_heatpump_kids_rooms_bedtime_target') }}
-    {% elif setpoint == "Heating Kids Room Sleep" %}
-      {{ states('input_number.ducted_heatpump_kids_rooms_sleep_target') }}
-    {% elif setpoint == "Heating Stairwell Daytime" %}
-      {{ states('input_number.ducted_heatpump_stairwell_daytime_target') }}
-    {% elif setpoint == "Heating Stairwell Bedtime" %}
-      {{ states('input_number.ducted_heatpump_stairwell_bedtime_target') }}
-    {% elif setpoint == "Heating Stairwell Sleep" %}
-      {{ states('input_number.ducted_heatpump_stairwell_sleep_target') }}
     {% elif setpoint == "Override" %}
       {{ states('input_number.ducted_override_setpoint') }}
     {% else %}
-      {{ states('input_number.ducted_heatpump_default_temp') }}
+      {{ states('input_number.ducted_heatpump_heating_temp') }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: >-
