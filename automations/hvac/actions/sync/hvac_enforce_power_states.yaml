@@ -1,0 +1,192 @@
+- id: "enforce_mini_split_power_states"
+  alias: "Enforce Mini Split Power States"
+  trigger:
+    - platform: time_pattern
+      minutes: "/5"
+  action:
+    - choose:
+        # Office Mini Split
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.office_heat_pump_power_on_status', 'off') and
+                   not is_state('climate.tinas_office_heat_pump', 'off') }}
+          sequence:
+            - service: climate.turn_off
+              target:
+                entity_id: climate.tinas_office_heat_pump
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned off Office Mini Split to match power_on_status.
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.office_heat_pump_power_on_status', 'on') and
+                   is_state('climate.tinas_office_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned on Office Mini Split to match power_on_status.
+
+        # Family Room Mini Split
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.family_room_heat_pump_power_on_status', 'off') and
+                   not is_state('climate.family_room_heat_pump', 'off') }}
+          sequence:
+            - service: climate.turn_off
+              target:
+                entity_id: climate.family_room_heat_pump
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned off Family Room Mini Split to match power_on_status.
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.family_room_heat_pump_power_on_status', 'on') and
+                   is_state('climate.family_room_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.family_room_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned on Family Room Mini Split to match power_on_status.
+
+        # Living Room Mini Split
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.living_room_heat_pump_power_on_status', 'off') and
+                   not is_state('climate.living_room_heat_pump', 'off') }}
+          sequence:
+            - service: climate.turn_off
+              target:
+                entity_id: climate.living_room_heat_pump
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned off Living Room Mini Split to match power_on_status.
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.living_room_heat_pump_power_on_status', 'on') and
+                   is_state('climate.living_room_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.living_room_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned on Living Room Mini Split to match power_on_status.
+
+        # Dining Room Mini Split
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.dining_room_heat_pump_power_on_status', 'off') and
+                   not is_state('climate.dining_room_heat_pump', 'off') }}
+          sequence:
+            - service: climate.turn_off
+              target:
+                entity_id: climate.dining_room_heat_pump
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned off Dining Room Mini Split to match power_on_status.
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.dining_room_heat_pump_power_on_status', 'on') and
+                   is_state('climate.dining_room_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.dining_room_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned on Dining Room Mini Split to match power_on_status.
+
+        # Master Bedroom Mini Split
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.master_bedroom_heat_pump_power_on_status', 'off') and
+                   not is_state('climate.master_bedroom_heat_pump', 'off') }}
+          sequence:
+            - service: climate.turn_off
+              target:
+                entity_id: climate.master_bedroom_heat_pump
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned off Master Bedroom Mini Split to match power_on_status.
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('binary_sensor.master_bedroom_heat_pump_power_on_status', 'on') and
+                   is_state('climate.master_bedroom_heat_pump', 'off') }}
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.master_bedroom_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Mini Split Enforcement"
+                message: >
+                  Turned on Master Bedroom Mini Split to match power_on_status.
+  mode: queued
