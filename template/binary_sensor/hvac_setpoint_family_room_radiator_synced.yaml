@@ -1,0 +1,54 @@
+- name: "Family Room Radiator Power On Synced"
+  unique_id: family_room_radiator_power_on_synced
+  state: >
+    {% set power_on = is_state('binary_sensor.family_room_radiator_power_on_status', 'on') %}
+    {% set is_off = is_state('climate.family_room_heating', 'off') %}
+    {{ (power_on and not is_off) or (not power_on and is_off) }}
+  icon: >-
+    {% if is_state('binary_sensor.family_room_radiator_power_on_synced', 'on') %}
+      mdi:power
+    {% else %}
+      mdi:power-off
+    {% endif %}
+
+- name: "Family Room Radiator Mode Synced"
+  unique_id: family_room_radiator_mode_synced
+  state: >
+    {% set power_on = is_state('binary_sensor.family_room_radiator_power_on_status', 'on') %}
+    {% set hvac_mode = state_attr('climate.family_room_heating', 'hvac_mode') %}
+    {% set desired_mode = states('input_select.hvac_mode').lower() %}
+    {{ not power_on or hvac_mode == desired_mode }}
+  icon: >-
+    {% if is_state('binary_sensor.family_room_radiator_mode_synced', 'on') %}
+      mdi:check
+    {% else %}
+      mdi:alert
+    {% endif %}
+
+- name: "Family Room Radiator Temperature Synced"
+  unique_id: family_room_radiator_temperature_synced
+  state: >
+    {% set target_temp = states('sensor.family_room_radiator_setpoint_target_temperature') %}
+    {% set current_temp = state_attr('climate.family_room_heating', 'temperature') %}
+    {{ target_temp | float(0) == current_temp | float(0) }}
+  icon: >-
+    {% if is_state('binary_sensor.family_room_radiator_temperature_synced', 'on') %}
+      mdi:thermometer-check
+    {% else %}
+      mdi:thermometer-alert
+    {% endif %}
+
+- name: "Family Room Radiator In Correct State"
+  unique_id: family_room_radiator_in_correct_state
+  state: >
+    {% set power_synced = is_state('binary_sensor.family_room_radiator_power_on_synced', 'on') %}
+    {% set mode_synced = is_state('binary_sensor.family_room_radiator_mode_synced', 'on') %}
+    {% set temp_synced = is_state('binary_sensor.family_room_radiator_temperature_synced', 'on') %}
+    {% set power_off = is_state('binary_sensor.family_room_radiator_power_on_status', 'off') %}
+    {{ (power_off and power_synced and mode_synced) or (power_synced and mode_synced and temp_synced) }}
+  icon: >-
+    {% if is_state('binary_sensor.family_room_radiator_in_correct_state', 'on') %}
+      mdi:check-circle
+    {% else %}
+      mdi:alert-circle
+    {% endif %}
