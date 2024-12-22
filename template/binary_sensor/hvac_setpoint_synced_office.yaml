@@ -38,8 +38,10 @@
       false
     {% elif is_off %}
       true
+    {% elif target_temp == current_temp %}
+      true
     {% else %}
-      {{ target_temp == current_temp }}
+      false
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.office_minisplit_temperature_synced', 'on') %}
