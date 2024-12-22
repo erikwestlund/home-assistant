@@ -1,14 +1,14 @@
 ducted_heatpump_default_temp:
   name: Ducted Heat Pump Default Temperature
-  min: 64
+  min: 62
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 66
+  initial: 62
 
 ducted_heatpump_heating_temp:
   name: Ducted Heat Pump Heating Temperature
-  min: 64
+  min: 62
   max: 86
   step: 1
   unit_of_measurement: "°F"

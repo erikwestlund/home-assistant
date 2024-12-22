@@ -4,12 +4,14 @@
     {% set current_temp = states('sensor.kids_rooms_average_temperature') | float(0) %}
     {% set time_period = states('sensor.ducted_time_period') %}
     {% set trigger_offset = states('input_number.ducted_setpoint_heat_trigger_threshold_offset') | float(0) %}
+    {% set stop_offset = states('input_number.ducted_setpoint_heat_stop_threshold_offset') | float(0) %}
     {% set target_temp = {
       'Daytime': states('input_number.ducted_heatpump_kids_rooms_daytime_target') | float(0),
       'Bedtime': states('input_number.ducted_heatpump_kids_rooms_bedtime_target') | float(0),
       'Sleep': states('input_number.ducted_heatpump_kids_rooms_sleep_target') | float(0)
     }.get(time_period, 0) %}
-    {{ current_temp < (target_temp - trigger_offset) }}
+    {% set is_heating = is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+    {{ current_temp < (target_temp - trigger_offset) if not is_heating else current_temp < (target_temp + stop_offset) }}
   icon: >-
     {% if is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
       mdi:thermometer-alert
@@ -23,12 +25,14 @@
     {% set current_temp = states('sensor.stairwell_average_temperature') | float(0) %}
     {% set time_period = states('sensor.ducted_time_period') %}
     {% set trigger_offset = states('input_number.ducted_setpoint_heat_trigger_threshold_offset') | float(0) %}
+    {% set stop_offset = states('input_number.ducted_setpoint_heat_stop_threshold_offset') | float(0) %}
     {% set target_temp = {
       'Daytime': states('input_number.ducted_heatpump_stairwell_daytime_target') | float(0),
       'Bedtime': states('input_number.ducted_heatpump_stairwell_bedtime_target') | float(0),
       'Sleep': states('input_number.ducted_heatpump_stairwell_sleep_target') | float(0)
     }.get(time_period, 0) %}
-    {{ current_temp < (target_temp - trigger_offset) }}
+    {% set is_heating = is_state('binary_sensor.stairwell_need_heat', 'on') %}
+    {{ current_temp < (target_temp - trigger_offset) if not is_heating else current_temp < (target_temp + stop_offset) }}
   icon: >-
     {% if is_state('binary_sensor.stairwell_need_heat', 'on') %}
       mdi:thermometer-alert
