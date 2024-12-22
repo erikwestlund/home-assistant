@@ -1,0 +1,89 @@
+- id: "sync_ducted_system_heat_pump_power_mode_temperature"
+  alias: "Sync Ducted System Heat Pump Power, Mode, and Temperature"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.ducted_heat_pump_power_on_synced
+        - binary_sensor.ducted_heat_pump_mode_synced
+        - binary_sensor.ducted_heat_pump_temperature_synced
+      to: "off"
+  action:
+    - choose:
+        # Correct power state
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.ducted_heat_pump_power_on_synced
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.ducted_heat_pump
+                hvac_mode: >
+                  {% if is_state('binary_sensor.ducted_heat_pump_power_on_status', 'on') %}
+                    {% if is_state('input_select.hvac_mode', 'Heat') %}
+                      heat
+                    {% else %}
+                      cool
+                    {% endif %}
+                  {% else %}
+                    off
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Sync Automation"
+                message: >
+                  Power state corrected. HVAC mode set to:
+                  {% if is_state('binary_sensor.ducted_heat_pump_power_on_status', 'on') %}
+                    {% if is_state('input_select.hvac_mode', 'Heat') %}
+                      heat
+                    {% else %}
+                      cool
+                    {% endif %}
+                  {% else %}
+                    off
+                  {% endif %}.
+
+        # Correct mode
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.ducted_heat_pump_mode_synced
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.ducted_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Sync Automation"
+                message: >
+                  Mode corrected to:
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}.
+
+        # Correct temperature
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.ducted_heat_pump_temperature_synced
+              state: "off"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.ducted_heat_pump
+                temperature: >
+                  {{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Sync Automation"
+                message: >
+                  Temperature set to:
+                  {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
+  mode: single
