@@ -1,72 +1,77 @@
-- id: "sync_office_mini_split"
-  alias: "Sync Office Mini Split"
+- id: "sync_office_mini_split_power_mode_temperature"
+  alias: "Sync Office Mini Split Power, Mode, and Temperature"
   trigger:
     - platform: state
-      entity_id: binary_sensor.office_mini_split_in_correct_state
+      entity_id:
+        - binary_sensor.office_mini_split_power_on_synced
+        - binary_sensor.office_mini_split_mode_synced
+        - binary_sensor.office_mini_split_temperature_synced
       to: "off"
   action:
-    # Correct power state if needed
-    - condition: state
-      entity_id: binary_sensor.office_mini_split_power_on_synced
-      state: "off"
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Sync"
-        message: >
-          Power state out of sync. Correcting power state.
-    - service: climate.turn_on
-      target:
-        entity_id: climate.tinas_office_heat_pump
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Sync"
-        message: >
-          Power state corrected.
+    - choose:
+        # Correct power state
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.office_mini_split_power_on_synced
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                hvac_mode: >
+                  {% if is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
+                    {% if is_state('input_select.hvac_mode', 'Heat') %}
+                      heat
+                    {% else %}
+                      cool
+                    {% endif %}
+                  {% else %}
+                    off
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Sync Automation"
+                message: >
+                  Power state corrected. HVAC mode set to:
+                  {{ states('input_select.hvac_mode') }}.
 
-    # Correct mode state if needed
-    - condition: state
-      entity_id: binary_sensor.office_mini_split_mode_synced
-      state: "off"
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Sync"
-        message: >
-          Mode state out of sync. Correcting mode state.
-    - service: climate.set_hvac_mode
-      data:
-        entity_id: climate.tinas_office_heat_pump
-        hvac_mode: >
-          {{ states('input_select.hvac_mode').lower() }}
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Sync"
-        message: >
-          Mode state corrected. Set to {{ states('input_select.hvac_mode').lower() }}.
+        # Correct mode
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.office_mini_split_mode_synced
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Sync Automation"
+                message: >
+                  Mode corrected to:
+                  {{ states('input_select.hvac_mode') }}.
 
-    # Correct temperature state if needed
-    - condition: state
-      entity_id: binary_sensor.office_mini_split_temperature_synced
-      state: "off"
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Sync"
-        message: >
-          Temperature state out of sync. Correcting temperature.
-          Target: {{ states('sensor.office_mini_split_setpoint_target_temperature') }}°F.
-          Current: {{ state_attr('climate.tinas_office_heat_pump', 'temperature') }}°F.
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.tinas_office_heat_pump
-        temperature: "{{ states('sensor.office_mini_split_setpoint_target_temperature') | float(0) }}"
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Sync"
-        message: >
-          Temperature set to {{ states('sensor.office_mini_split_setpoint_target_temperature') }}°F.
-
-    - service: logbook.log
-      data:
-        name: "Office Mini Split Sync"
-        message: >
-          Office Mini Split synchronization completed.
+        # Correct temperature
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.office_mini_split_temperature_synced
+              state: "off"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: >
+                  {{ states('sensor.office_mini_split_setpoint_target_temperature') | float(0) }}
+            - service: logbook.log
+              data:
+                name: "Office Mini Split Sync Automation"
+                message: >
+                  Temperature set to:
+                  {{ states('sensor.office_mini_split_setpoint_target_temperature') }}°F.
   mode: single
