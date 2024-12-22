@@ -1,41 +1,38 @@
-- id: "set_ducted_unit_setpoint"
-  alias: "Set Ducted Unit Setpoint"
+- id: "update_ducted_heat_setpoint"
+  alias: "Update Ducted Heat Setpoint"
   trigger:
     - platform: state
       entity_id: sensor.ducted_system_setpoint_target_temperature
-    - platform: state
-      entity_id: climate.ducted_heat_pump
-      attribute: current_temperature
   condition:
     - condition: template
       value_template: >
-        {{ states('sensor.ducted_system_setpoint_target_temperature') != 'None' }}
+        {{ states('sensor.ducted_system_setpoint_target_temperature') != "None" }}
   action:
-    - variables:
-        target_temperature: "{{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}"
-        current_temperature: "{{ state_attr('climate.ducted_heat_pump', 'current_temperature') | float(0) }}"
-        offset: "{{ states('input_number.ducted_setpoint_heat_stop_threshold_offset') | float(0) }}"
     - choose:
-        # Turn off the ducted system if the current temperature exceeds target + offset
+        # Turn the system off if current temperature exceeds target + offset
         - conditions:
             - condition: template
               value_template: >
-                {{ current_temperature > (target_temperature + offset) }}
+                {{ states('climate.ducted_heat_pump') != "off" and
+                   state_attr('climate.ducted_heat_pump', 'current_temperature') | float(0) >
+                   (states('sensor.ducted_system_setpoint_target_temperature') | float(0) + 
+                   states('input_number.ducted_setpoint_heat_stop_threshold_offset') | float(0)) }}
           sequence:
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Automation"
+                message: >
+                  Current temperature exceeds target + offset.
+                  Turning off the ducted heat pump.
             - service: climate.turn_off
               target:
                 entity_id: climate.ducted_heat_pump
-            - service: logbook.log
-              data:
-                name: "Ducted Unit Automation"
-                message: >
-                  Ducted system turned off. Current temperature: {{ current_temperature }}°F
-                  exceeded threshold of {{ target_temperature + offset }}°F.
-        # Turn on the ducted system if it's off and within the allowable range
+
+        # Turn the system on and set the temperature
         - conditions:
             - condition: template
               value_template: >
-                {{ is_state('climate.ducted_heat_pump', 'off') and current_temperature <= (target_temperature + offset) }}
+                {{ states('climate.ducted_heat_pump') == "off" }}
           sequence:
             - service: climate.set_hvac_mode
               data:
@@ -43,22 +40,33 @@
                 hvac_mode: "heat"
             - service: logbook.log
               data:
-                name: "Ducted Unit Automation"
+                name: "Ducted Heat Pump Automation"
                 message: >
-                  Ducted system turned on. Current temperature: {{ current_temperature }}°F.
-        # Update the temperature if the target temperature changes
+                  The ducted heat pump was off. Turning it on and setting to heat mode.
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.ducted_heat_pump
+                temperature: "{{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}"
+            - service: logbook.log
+              data:
+                name: "Ducted Heat Pump Automation"
+                message: >
+                  Setting target temperature to {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
+
+        # Update the temperature if the system is already on
         - conditions:
             - condition: template
               value_template: >
-                {{ state_attr('climate.ducted_heat_pump', 'temperature') | float(0) != target_temperature }}
+                {{ state_attr('climate.ducted_heat_pump', 'temperature') | float(0) !=
+                   states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}
           sequence:
             - service: climate.set_temperature
               data:
                 entity_id: climate.ducted_heat_pump
-                temperature: "{{ target_temperature }}"
+                temperature: "{{ states('sensor.ducted_system_setpoint_target_temperature') | float(0) }}"
             - service: logbook.log
               data:
-                name: "Ducted Unit Automation"
-              message: >
-                Updated ducted system target temperature to {{ target_temperature }}°F.
+                name: "Ducted Heat Pump Automation"
+                message: >
+                  Updating ducted heat pump target temperature to {{ states('sensor.ducted_system_setpoint_target_temperature') }}°F.
   mode: single
