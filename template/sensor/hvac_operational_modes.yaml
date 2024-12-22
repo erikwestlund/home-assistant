@@ -31,10 +31,13 @@
 - name: "Office Heat Pump Operational Mode"
   unique_id: office_heatpump_operational_mode
   state: >-
+    {% set override = is_state('input_boolean.office_override_status', 'on') %}
     {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
     {% set off_threshold = states('input_number.office_heatpump_off_to_supplement_threshold') | float %}
     {% set comfort_threshold = states('input_number.office_heatpump_supplement_to_comfort_threshold') | float %}
-    {% if outdoor_temp < off_threshold %}
+    {% if override %}
+      Override
+    {% elif outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
       Supplemental Heat
@@ -47,6 +50,8 @@
       mdi:power-off
     {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
+    {% elif mode == 'Override' %}
+      mdi:alert
     {% else %}
       mdi:thermometer
     {% endif %}
