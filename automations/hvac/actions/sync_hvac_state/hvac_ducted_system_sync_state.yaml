@@ -7,6 +7,8 @@
         - binary_sensor.ducted_heat_pump_mode_synced
         - binary_sensor.ducted_heat_pump_temperature_synced
       to: "off"
+    - platform: time_pattern
+      minutes: "/5"
   action:
     - choose:
         # Correct power state

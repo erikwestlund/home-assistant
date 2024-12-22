@@ -6,6 +6,8 @@
         - binary_sensor.living_room_radiator_power_on_synced
         - binary_sensor.living_room_radiator_mode_synced
       to: "off"
+    - platform: time_pattern
+      minutes: "/5"
   action:
     - choose:
         # Correct power state
