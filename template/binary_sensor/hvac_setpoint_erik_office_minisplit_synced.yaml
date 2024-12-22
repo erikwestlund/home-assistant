@@ -17,19 +17,12 @@
     {% set power_on = is_state('binary_sensor.erik_office_heat_pump_power_on_status', 'on') %}
     {% set hvac_mode = states('climate.eriks_office_room') %}
     {% set desired_mode = states('input_select.hvac_mode').lower() %}
-    
-    # Debugging info:
     {{ not power_on or hvac_mode == desired_mode }}
   icon: >-
-    {% set power_on = is_state('binary_sensor.erik_office_heat_pump_power_on_status', 'on') %}
-    {% set hvac_mode = states('climate.eriks_office_room') %}
-    {% set desired_mode = states('input_select.hvac_mode').lower() %}
-    mdi:check
-    {% if not power_on %}
-      mdi:alert
+    {% if is_state('binary_sensor.erik_office_mini_split_mode_synced', 'on') %}
+      mdi:check
     {% else %}
-      mdi:thermometer-check
-      Desired Mode: {{ desired_mode }} | HVAC Mode: {{ hvac_mode }}
+      mdi:alert
     {% endif %}
 
 - name: "Erik Office Mini Split Temperature Synced"
