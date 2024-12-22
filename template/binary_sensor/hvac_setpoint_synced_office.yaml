@@ -30,12 +30,8 @@
   state: >
     {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') %}
     {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') %}
-    
-    {% if target_temp in ['unknown', 'None'] or current_temp in ['unknown', 'None', None] %}
-      false
-    {% else %}
-      {{ target_temp | float(0) == current_temp | float(0) }}
-    {% endif %}
+
+    {{ target_temp | float(0) == current_temp | float(0) }}
   icon: >-
     {% if is_state('binary_sensor.office_minisplit_temperature_synced', 'on') %}
       mdi:thermometer-check
@@ -46,9 +42,9 @@
 - name: "Office Mini Split In Correct State"
   unique_id: office_minisplit_in_correct_state
   state: >
-    {% set power_synced = is_state('binary_sensor.office_mini_split_power_on_synced', 'on') %}
-    {% set mode_synced = is_state('binary_sensor.office_mini_split_mode_synced', 'on') %}
-    {% set temp_synced = is_state('binary_sensor.office_mini_split_temperature_synced', 'on') %}
+    {% set power_synced = is_state('binary_sensor.office_minisplit_power_on_synced', 'on') %}
+    {% set mode_synced = is_state('binary_sensor.office_minisplit_mode_synced', 'on') %}
+    {% set temp_synced = is_state('binary_sensor.office_minisplit_temperature_synced', 'on') %}
     {% set power_off = is_state('binary_sensor.office_heat_pump_power_on_status', 'off') %}
     
     {{ (power_off and power_synced and mode_synced) or (power_synced and mode_synced and temp_synced) }}
