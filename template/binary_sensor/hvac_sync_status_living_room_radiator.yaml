@@ -25,27 +25,13 @@
       mdi:alert
     {% endif %}
 
-- name: "Living Room Radiator Temperature Synced"
-  unique_id: living_room_radiator_temperature_synced
-  state: >
-    {% set target_temp = states('sensor.living_room_radiator_setpoint_target_temperature') %}
-    {% set current_temp = state_attr('climate.living_room_main_heating', 'temperature') %}
-    {{ target_temp | float(0) == current_temp | float(0) }}
-  icon: >-
-    {% if is_state('binary_sensor.living_room_radiator_temperature_synced', 'on') %}
-      mdi:thermometer-check
-    {% else %}
-      mdi:thermometer-alert
-    {% endif %}
-
 - name: "Living Room Radiator In Correct State"
   unique_id: living_room_radiator_in_correct_state
   state: >
     {% set power_synced = is_state('binary_sensor.living_room_radiator_power_on_synced', 'on') %}
     {% set mode_synced = is_state('binary_sensor.living_room_radiator_mode_synced', 'on') %}
-    {% set temp_synced = is_state('binary_sensor.living_room_radiator_temperature_synced', 'on') %}
     {% set power_off = is_state('binary_sensor.living_room_radiator_power_on_status', 'off') %}
-    {{ (power_off and power_synced and mode_synced) or (power_synced and mode_synced and temp_synced) }}
+    {{ (power_off and power_synced and mode_synced) or (power_synced and mode_synced) }}
   icon: >-
     {% if is_state('binary_sensor.living_room_radiator_in_correct_state', 'on') %}
       mdi:check-circle
