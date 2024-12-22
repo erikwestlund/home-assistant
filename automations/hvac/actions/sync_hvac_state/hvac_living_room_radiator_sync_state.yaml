@@ -1,0 +1,52 @@
+- id: "sync_living_room_radiator_power_mode"
+  alias: "Sync Living Room Radiator Power and Mode"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.living_room_radiator_power_on_synced
+        - binary_sensor.living_room_radiator_mode_synced
+      to: "off"
+  action:
+    - choose:
+        # Correct power state
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.living_room_radiator_power_on_synced
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.living_room_main_heating
+                hvac_mode: >
+                  {% if is_state('binary_sensor.living_room_radiator_power_on_status', 'on') %}
+                    heat
+                  {% else %}
+                    off
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "Living Room Radiator Sync Automation"
+                message: >
+                  Power state corrected. HVAC mode set to:
+                  {% if is_state('binary_sensor.living_room_radiator_power_on_status', 'on') %}
+                    heat
+                  {% else %}
+                    off
+                  {% endif %}.
+
+        # Correct mode
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.living_room_radiator_mode_synced
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.living_room_main_heating
+                hvac_mode: heat
+            - service: logbook.log
+              data:
+                name: "Living Room Radiator Sync Automation"
+                message: >
+                  Mode corrected to heat.
+  mode: single
