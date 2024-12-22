@@ -43,7 +43,7 @@
 - name: "Ducted System Setpoint Target Temperature"
   unique_id: ducted_setpoint_target_temperature
   state: >
-    {% set setpoint = states('sensor.ducted_system_setpoint') %}
+    {% set setpoint = states('sensor.ducted_heat_pump_setpoint') %}
     {% if setpoint == "Off" %}
       None
     {% elif setpoint == "Idle" %}
