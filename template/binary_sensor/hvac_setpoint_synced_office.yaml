@@ -28,7 +28,7 @@
 - name: "Office Mini Split Temperature Synced"
   unique_id: office_minisplit_temperature_synced
   state: >
-      {% set power_synced = is_state('binary_sensor.office_mini_split_power_on_synced', 'on') %}
+    {% set power_synced = is_state('binary_sensor.office_mini_split_power_on_synced', 'on') %}
     {% set mode_synced = is_state('binary_sensor.office_mini_split_mode_synced', 'on') %}
     {% set is_off = is_state('climate.tinas_office_heat_pump', 'off') %}
     {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
