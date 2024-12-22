@@ -3,7 +3,6 @@
   state: >
     {% set power_on = is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
     {% set is_off = is_state('climate.tinas_office_heat_pump', 'off') %}
-    
     {{ (power_on and not is_off) or (not power_on and is_off) }}
   icon: >-
     {% if is_state('binary_sensor.office_minisplit_power_on_synced', 'on') %}
@@ -16,15 +15,14 @@
   unique_id: office_minisplit_mode_synced
   state: >
     {% set power_on = is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
-    {% set hvac_mode = states('input_select.hvac_mode') | lower %}
-    {% set current_mode = state_attr('climate.tinas_office_heat_pump', 'hvac_mode') %}
-    
-    {{ not power_on or hvac_mode == current_mode }}
+    {% set hvac_mode = state_attr('climate.tinas_office_heat_pump', 'hvac_mode') %}
+    {% set desired_mode = states('input_select.hvac_mode').lower() %}
+    {{ not power_on or hvac_mode == desired_mode }}
   icon: >-
     {% if is_state('binary_sensor.office_minisplit_mode_synced', 'on') %}
-      mdi:check-circle
+      mdi:check
     {% else %}
-      mdi:alert-circle
+      mdi:alert
     {% endif %}
     
 - name: "Office Mini Split Temperature Synced"
@@ -33,11 +31,17 @@
     {% set power_on = is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
     {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
     {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) %}
-    
-    {{ not power_on or (current_temp == target_temp) }}
-  icon: >-
-    {% if is_state('binary_sensor.office_minisplit_temperature_synced', 'on') %}
-      mdi:thermometer-check
+    {% if not power_on %}
+      None
     {% else %}
+      {{ target_temp == current_temp }}
+    {% endif %}
+  icon: >-
+    {% set state = states('binary_sensor.office_minisplit_temperature_synced') %}
+    {% if state == 'on' %}
+      mdi:thermometer-check
+    {% elif state == 'off' %}
       mdi:thermometer-alert
+    {% else %}
+      mdi:thermometer-remove
     {% endif %}
