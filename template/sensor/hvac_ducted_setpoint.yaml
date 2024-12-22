@@ -20,7 +20,7 @@
       {% elif time_period == 'Sleep' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
         Heating Stairwell Sleep
       {% else %}
-        Idle
+        Default
       {% endif %}
     {% endif %}
   icon: >-
@@ -48,6 +48,8 @@
       None
     {% elif setpoint == "Idle" %}
       None
+    {% elif setpoint == "Default" %}
+      {{ states('input_number.ducted_heatpump_default_temp') }}
     {% elif setpoint == "Heating Kids Room Daytime" %}
       {{ states('input_number.ducted_heatpump_kids_rooms_daytime_target') }}
     {% elif setpoint == "Heating Kids Room Bedtime" %}
@@ -63,7 +65,7 @@
     {% elif setpoint == "Override" %}
       {{ states('input_number.ducted_override_setpoint') }}
     {% else %}
-      None
+      {{ states('input_number.ducted_heatpump_default_temp') }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: >-
