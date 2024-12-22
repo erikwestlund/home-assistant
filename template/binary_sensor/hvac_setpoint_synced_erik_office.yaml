@@ -28,20 +28,19 @@
 - name: "Office Mini Split Temperature Synced"
   unique_id: office_minisplit_temperature_synced
   state: >
-    {% set power_on = is_state('binary_sensor.office_heat_pump_power_on_status', 'on') %}
+    {% set power_synced = is_state('binary_sensor.office_minisplit_power_on_synced', 'on') %}
+    {% set mode_synced = is_state('binary_sensor.office_minisplit_mode_synced', 'on') %}
     {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
     {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) %}
-    {% if not power_on %}
-      None
+    
+    {% if not power_synced or not mode_synced %}
+      off
     {% else %}
       {{ target_temp == current_temp }}
     {% endif %}
   icon: >-
-    {% set state = states('binary_sensor.office_minisplit_temperature_synced') %}
-    {% if state == 'on' %}
+    {% if is_state('binary_sensor.office_minisplit_temperature_synced', 'on') %}
       mdi:thermometer-check
-    {% elif state == 'off' %}
-      mdi:thermometer-alert
     {% else %}
-      mdi:thermometer-remove
+      mdi:thermometer-alert
     {% endif %}
