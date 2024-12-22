@@ -28,11 +28,16 @@
 - name: "Office Mini Split Temperature Synced"
   unique_id: office_minisplit_temperature_synced
   state: >
-    {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
-    {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) %}
-    {{ target_temp == current_temp }}
+    {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') %}
+    {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') %}
+    
+    {% if target_temp in ['unknown', 'None'] or current_temp in ['unknown', 'None', None] %}
+      false
+    {% else %}
+      {{ target_temp | float(0) == current_temp | float(0) }}
+    {% endif %}
   icon: >-
-    {% if is_state('binary_sensor.office_mini_split_temperature_synced', 'on') %}
+    {% if is_state('binary_sensor.office_minisplit_temperature_synced', 'on') %}
       mdi:thermometer-check
     {% else %}
       mdi:thermometer-alert
@@ -41,24 +46,14 @@
 - name: "Office Mini Split In Correct State"
   unique_id: office_minisplit_in_correct_state
   state: >
-    {% set power_synced = is_state('binary_sensor.office_mini_split_power_on_synced', 'on') %}
-    {% set mode_synced = is_state('binary_sensor.office_mini_split_mode_synced', 'on') %}
-    {% set is_off = is_state('climate.tinas_office_heat_pump', 'off') %}
-    {% set target_temp = states('sensor.office_mini_split_setpoint_target_temperature') | float(0) %}
-    {% set current_temp = state_attr('climate.tinas_office_heat_pump', 'temperature') | float(0) %}
+    {% set power_synced = is_state('binary_sensor.office_minisplit_power_on_synced', 'on') %}
+    {% set mode_synced = is_state('binary_sensor.office_minisplit_mode_synced', 'on') %}
+    {% set temp_synced = is_state('binary_sensor.office_minisplit_temperature_synced', 'on') %}
     
-    {% if not power_synced or not mode_synced %}
-      false
-    {% elif is_off %}
-      true
-    {% elif target_temp == current_temp %}
-      true
-    {% else %}
-      false
-    {% endif %}
+    {{ power_synced and mode_synced and temp_synced }}
   icon: >-
     {% if is_state('binary_sensor.office_minisplit_in_correct_state', 'on') %}
-      mdi:check
+      mdi:check-circle
     {% else %}
-      mdi:alert
+      mdi:alert-circle
     {% endif %}
