@@ -9,7 +9,7 @@
     {% if is_state(apple_watch, 'not_home') %}
       false
     {% else %}
-      'home' in other_trackers | map('states') | list or is_state(apple_watch, 'home')
+      other_trackers | map('states') | select('eq', 'home') | list | length > 0 or is_state(apple_watch, 'home')
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.erik_home', 'on') %}
@@ -29,7 +29,7 @@
     {% if is_state(apple_watch, 'not_home') %}
       false
     {% else %}
-      'home' in other_trackers | map('states') | list or is_state(apple_watch, 'home')
+      other_trackers | map('states') | select('eq', 'home') | list | length > 0 or is_state(apple_watch, 'home')
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.tina_home', 'on') %}
