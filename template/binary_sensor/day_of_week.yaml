@@ -40,6 +40,7 @@
     ] + november_holidays + december_holidays %}
     
     {{ today in holidays }}
+
 - name: "Is Holiday"
   unique_id: is_holiday
   state: >
