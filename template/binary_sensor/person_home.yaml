@@ -1,19 +1,51 @@
-- name: "Erik at Home"
-  unique_id: erik_at_home
-  state: "on"
+- name: "Erik Home"
+  unique_id: erik_home
+  device_class: occupancy
+  state: >
+    {% set apple_watch = 'device_tracker.eriks_apple_watch' %}
+    {% set other_trackers = [
+      'device_tracker.eriks_iphone_2'
+    ] %}
+    {% if is_state(apple_watch, 'not_home') %}
+      false
+    {% else %}
+      'home' in other_trackers | map('states') | list or is_state(apple_watch, 'home')
+    {% endif %}
   icon: >-
-    {% if is_state('binary_sensor.erik_at_home', 'on') %}
-      mdi:home-account
+    {% if is_state('binary_sensor.erik_home', 'on') %}
+      mdi:account
     {% else %}
       mdi:account-off
     {% endif %}
 
-- name: "Tina at Home"
-  unique_id: tina_at_home
-  state: "on"
+- name: "Tina Home"
+  unique_id: tina_home
+  device_class: occupancy
+  state: >
+    {% set apple_watch = 'device_tracker.christinas_apple_watch' %}
+    {% set other_trackers = [
+      'device_tracker.tinas_iphone_12'
+    ] %}
+    {% if is_state(apple_watch, 'not_home') %}
+      false
+    {% else %}
+      'home' in other_trackers | map('states') | list or is_state(apple_watch, 'home')
+    {% endif %}
   icon: >-
-    {% if is_state('binary_sensor.tina_at_home', 'on') %}
-      mdi:home-account
+    {% if is_state('binary_sensor.tina_home', 'on') %}
+      mdi:account
     {% else %}
       mdi:account-off
+    {% endif %}
+    
+- name: "Someone Home"
+  unique_id: someone_home
+  device_class: occupancy
+  state: >
+    {{ is_state('binary_sensor.erik_home', 'on') or is_state('binary_sensor.tina_home', 'on') }}
+  icon: >-
+    {% if is_state('binary_sensor.someone_home', 'on') %}
+      mdi:home-account
+    {% else %}
+      mdi:home-outline
     {% endif %}
