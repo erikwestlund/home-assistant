@@ -83,7 +83,7 @@
               data:
                 entity_id: climate.dining_room_heat_pump
                 temperature: >
-                  {{ states('sensor.dining_room_mini_split_setpoint_target_temperature') | float(0) }}
+                  {{ [states('sensor.dining_room_mini_split_setpoint_target_temperature') | float(0), 64.4] | max }}
             - service: logbook.log
               data:
                 name: "Dining Room Mini Split Sync Automation"

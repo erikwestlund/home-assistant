@@ -83,7 +83,7 @@
               data:
                 entity_id: climate.eriks_office_room
                 temperature: >
-                  {{ states('sensor.erik_office_mini_split_setpoint_target_temperature') | float(0) }}
+                  {{ [states('sensor.erik_office_mini_split_setpoint_target_temperature') | float(0), 64.4] | max }}
             - service: logbook.log
               data:
                 name: "Erik Office Mini Split Sync Automation"

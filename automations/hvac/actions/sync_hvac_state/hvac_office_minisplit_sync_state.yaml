@@ -71,7 +71,7 @@
               data:
                 entity_id: climate.tinas_office_heat_pump
                 temperature: >
-                  {{ states('sensor.office_mini_split_setpoint_target_temperature') | float(0) }}
+                  {{ [states('sensor.office_mini_split_setpoint_target_temperature') | float(0), 64.4] | max }}
             - service: logbook.log
               data:
                 name: "Office Mini Split Sync Automation"

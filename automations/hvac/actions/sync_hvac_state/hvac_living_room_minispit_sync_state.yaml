@@ -83,7 +83,7 @@
               data:
                 entity_id: climate.living_room_heat_pump
                 temperature: >
-                  {{ states('sensor.living_room_mini_split_setpoint_target_temperature') | float(0) }}
+                  {{ [states('sensor.living_room_mini_split_setpoint_target_temperature') | float(0), 64.4] | max }}
             - service: logbook.log
               data:
                 name: "Living Room Mini Split Sync Automation"

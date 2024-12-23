@@ -83,7 +83,7 @@
               data:
                 entity_id: climate.master_bedroom_heat_pump
                 temperature: >
-                  {{ states('sensor.master_bedroom_mini_split_setpoint_target_temperature') | float(0) }}
+                  {{ [states('sensor.master_bedroom_mini_split_setpoint_target_temperature') | float(0), 64.4] | max }}
             - service: logbook.log
               data:
                 name: "Master Bedroom Mini Split Sync Automation"
