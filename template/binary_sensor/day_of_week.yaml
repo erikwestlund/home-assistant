@@ -3,19 +3,16 @@
   state: >
     {% set today = now().date() %}
     
-    {# Add Veterans Day (November 11) #}
     {% set veterans_day = now().replace(month=11, day=11).date() %}
     
-    {# Add December holidays range (December 23–31) #}
     {% set december_start = now().replace(month=12, day=23).date() %}
     {% set december_end = now().replace(month=12, day=31).date() %}
     {% set is_december_holiday = december_start <= today <= december_end %}
     
-    {# Combine fixed holidays #}
     {% set holidays = [
-      now().replace(month=1, day=1).date(),  # New Year's Day
-      now().replace(month=7, day=4).date(),  # Independence Day
-      veterans_day  # Veterans Day
+      now().replace(month=1, day=1).date(),
+      now().replace(month=7, day=4).date(),
+      veterans_day
     ] %}
     
     {{ today in holidays or is_december_holiday }}
