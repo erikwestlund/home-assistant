@@ -8,8 +8,10 @@
     ] %}
     {% if is_state(apple_watch, 'not_home') %}
       false
+    {% elif is_state(apple_watch, 'home') %}
+      true
     {% else %}
-      other_trackers | map('states') | select('eq', 'home') | list | length > 0 or is_state(apple_watch, 'home')
+      other_trackers | map('states') | select('eq', 'home') | list | length > 0
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.erik_home', 'on') %}
@@ -28,8 +30,10 @@
     ] %}
     {% if is_state(apple_watch, 'not_home') %}
       false
+    {% elif is_state(apple_watch, 'home') %}
+      true
     {% else %}
-      other_trackers | map('states') | select('eq', 'home') | list | length > 0 or is_state(apple_watch, 'home')
+      other_trackers | map('states') | select('eq', 'home') | list | length > 0
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.tina_home', 'on') %}
