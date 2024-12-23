@@ -9,23 +9,25 @@
       Overheated
     {% elif is_state('sensor.living_room_heat_pump_operational_mode', 'Supplemental Heat') %}
       Supplemental Heat
-    {% elif is_state('binary_sensor.nighttime_status', 'on') %}
-      Night
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
-      {% if is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
+      {% if is_state('binary_sensor.nighttime_status', 'on') %}
+        Weekend Night
+      {% elif is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
         Weekend Occupied
       {% else %}
         Weekend Unoccupied
       {% endif %}
     {% else %}
-      {% if is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
+      {% if is_state('binary_sensor.nighttime_status', 'on') %}
+        Weekday Night
+      {% elif is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
         Weekday Occupied
       {% else %}
         Weekday Unoccupied
       {% endif %}
     {% endif %}
   icon: >-
-    {% set state = states('sensor.living_room_setpoint_selector') %}
+    {% set state = states('sensor.living_room_mini_split_setpoint') %}
     {% if state == "Override" %}
       mdi:alert
     {% elif state == "Off" %}
@@ -34,7 +36,7 @@
       mdi:thermometer-alert
     {% elif state == "Supplemental Heat" %}
       mdi:fire
-    {% elif state == "Night" %}
+    {% elif "Night" in state %}
       mdi:weather-night
     {% elif "Occupied" in state %}
       mdi:chair-rolling
@@ -48,8 +50,10 @@
     {% set setpoint = states('sensor.living_room_mini_split_setpoint') %}
     {% if setpoint == "Off" %}
       None
-    {% elif setpoint == "Night" %}
-      {{ states('input_number.living_room_heatpump_comfort_night_setpoint') }}
+    {% elif setpoint == "Weekday Night" %}
+      {{ states('input_number.living_room_heatpump_comfort_weekday_night_setpoint') }}
+    {% elif setpoint == "Weekend Night" %}
+      {{ states('input_number.living_room_heatpump_comfort_weekend_night_setpoint') }}
     {% elif setpoint == "Weekday Occupied" %}
       {{ states('input_number.living_room_heatpump_comfort_weekday_occupied_setpoint') }}
     {% elif setpoint == "Weekday Unoccupied" %}
@@ -60,6 +64,8 @@
       {{ states('input_number.living_room_heatpump_comfort_weekend_unoccupied_setpoint') }}
     {% elif setpoint == "Supplemental Heat" %}
       {{ states('input_number.living_room_heatpump_supplemental_setpoint') }}
+    {% elif setpoint == "Overheated" %}
+      {{ states('input_number.living_room_heatpump_overheat_setpoint') }}
     {% elif setpoint == "Override" %}
       {{ states('input_number.living_room_override_setpoint') }}
     {% else %}
@@ -67,7 +73,9 @@
     {% endif %}
   unit_of_measurement: "°F"
   icon: >-
-    {% if states('sensor.living_room_minisplit_target_setpoint') | float == states('input_number.living_room_heatpump_supplemental_setpoint') | float %}
+    {% if setpoint == "Overheated" %}
+      mdi:thermometer-alert
+    {% elif states('sensor.living_room_minisplit_target_setpoint') | float == states('input_number.living_room_heatpump_supplemental_setpoint') | float %}
       mdi:fire
     {% else %}
       mdi:thermometer

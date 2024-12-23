@@ -5,16 +5,18 @@
       Override
     {% elif is_state('binary_sensor.office_radiator_power_on_status', 'off') %}
       Off
-    {% elif is_state('binary_sensor.nighttime_status', 'on') %}
-      Night
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
-      {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
+      {% if is_state('binary_sensor.nighttime_status', 'on') %}
+        Weekend Night
+      {% elif is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
         Weekend Occupied
       {% else %}
         Weekend Unoccupied
       {% endif %}
     {% else %}
-      {% if is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
+      {% if is_state('binary_sensor.nighttime_status', 'on') %}
+        Weekday Night
+      {% elif is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
         Weekday Occupied
       {% else %}
         Weekday Unoccupied
@@ -26,7 +28,7 @@
       mdi:alert
     {% elif state == "Off" %}
       mdi:power
-    {% elif state == "Night" %}
+    {% elif "Night" in state %}
       mdi:weather-night
     {% elif "Occupied" in state %}
       mdi:chair-rolling
@@ -40,8 +42,10 @@
     {% set setpoint = states('sensor.office_radiator_setpoint') %}
     {% if setpoint == "Off" %}
       {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
-    {% elif setpoint == "Night" %}
-      {{ states('input_number.office_radiator_night_setpoint') }}
+    {% elif setpoint == "Weekday Night" %}
+      {{ states('input_number.office_radiator_weekday_night_setpoint') }}
+    {% elif setpoint == "Weekend Night" %}
+      {{ states('input_number.office_radiator_weekend_night_setpoint') }}
     {% elif setpoint == "Weekday Occupied" %}
       {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
     {% elif setpoint == "Weekday Unoccupied" %}
