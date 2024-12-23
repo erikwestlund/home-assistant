@@ -1,0 +1,19 @@
+- name: "Erik at Home"
+  unique_id: erik_at_home
+  state: "on"
+  icon: >-
+    {% if is_state('binary_sensor.erik_at_home', 'on') %}
+      mdi:home-account
+    {% else %}
+      mdi:account-off
+    {% endif %}
+
+- name: "Tina at Home"
+  unique_id: tina_at_home
+  state: "on"
+  icon: >-
+    {% if is_state('binary_sensor.tina_at_home', 'on') %}
+      mdi:home-account
+    {% else %}
+      mdi:account-off
+    {% endif %}

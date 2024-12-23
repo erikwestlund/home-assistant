@@ -22,6 +22,22 @@ family_room_heatpump_comfort_night_setpoint:
   unit_of_measurement: "°F"
   initial: 66
 
+family_room_heatpump_comfort_weekday_night_setpoint:
+  name: Family Room Heat Pump Comfort Temperature (Weekday Night)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+family_room_heatpump_comfort_weekend_night_setpoint:
+  name: Family Room Heat Pump Comfort Temperature (Weekend Night)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 68
+
 family_room_heatpump_comfort_weekday_occupied_setpoint:
   name: Family Room Heat Pump Comfort Temperature (Weekday Occupied)
   min: 64
