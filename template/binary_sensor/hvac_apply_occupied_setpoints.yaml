@@ -32,15 +32,19 @@
       mdi:clock
     {% endif %}
 
-# Same logic
 - name: "Family Room Apply Occupied Setpoints"
   unique_id: family_room_apply_occupied_setpoints
   state: >
     {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.family_room_apply_occupied_start_time')) %}
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.family_room_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
+    {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
+    
     {{ start_time <= current_time <= end_time and
-       is_state('binary_sensor.family_room_occupied', 'on') and
+       (
+         (is_weekend and is_state('binary_sensor.someone_home', 'on')) or
+         (not is_weekend and is_state('binary_sensor.family_room_occupied', 'on'))
+       ) and
        is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.family_room_apply_occupied_setpoints', 'on') %}
@@ -55,8 +59,13 @@
     {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.living_room_apply_occupied_start_time')) %}
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.living_room_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
+    {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
+    
     {{ start_time <= current_time <= end_time and
-       is_state('binary_sensor.living_room_occupied', 'on') and
+       (
+         (is_weekend and is_state('binary_sensor.someone_home', 'on')) or
+         (not is_weekend and is_state('binary_sensor.living_room_occupied', 'on'))
+       ) and
        is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
