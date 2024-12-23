@@ -3,39 +3,31 @@
   state: >
     {% set today = now().date() %}
 
-    {# Fixed-date holidays #}
     {% set fixed_holidays = [
-      now().replace(month=6, day=19).date(),  # Juneteenth
-      now().replace(month=7, day=4).date(),  # Independence Day
-      now().replace(month=11, day=11).date()  # Veterans Day
+      now().replace(month=6, day=19).date(),
+      now().replace(month=7, day=4).date(),
+      now().replace(month=11, day=11).date()
     ] %}
 
-    {# Calculating "third Monday in January" for MLK Day #}
     {% set mlk_day = (now().replace(month=1, day=1) + timedelta(days=(0 - now().replace(month=1, day=1).weekday() + 7 * 2 + 7))).date() if now().replace(month=1, day=1).weekday() != 0 else now().replace(month=1, day=15).date() %}
 
-    {# Calculating "last Monday in May" for Memorial Day #}
     {% set memorial_day = (now().replace(month=5, day=31) - timedelta(days=(now().replace(month=5, day=31).weekday()))).date() %}
 
-    {# Calculating "first Monday in September" for Labor Day #}
     {% set labor_day = (now().replace(month=9, day=1) + timedelta(days=(0 - now().replace(month=9, day=1).weekday()))).date() if now().replace(month=9, day=1).weekday() != 0 else now().replace(month=9, day=1).date() %}
 
-    {# Calculating "fourth Thursday in November" for Thanksgiving and adjacent days #}
     {% set thanksgiving_day = (now().replace(month=11, day=1) + timedelta(days=(3 - now().replace(month=11, day=1).weekday()) % 7 + 21)).date() %}
     {% set november_holidays = [
-      thanksgiving_day - timedelta(days=1),  # Day before Thanksgiving
-      thanksgiving_day,                      # Thanksgiving Day
-      thanksgiving_day + timedelta(days=1)   # Day after Thanksgiving
+      thanksgiving_day - timedelta(days=1),
+      thanksgiving_day,
+      thanksgiving_day + timedelta(days=1)
     ] %}
 
-    {# Generating December holidays using a range #}
     {% set december_holidays = [
       (now().replace(month=12, day=23) + timedelta(days=i)).date() for i in range(9)
     ] %}
 
-    {# Combine all holidays into a single list #}
     {% set all_holidays = fixed_holidays + [mlk_day, memorial_day, labor_day] + november_holidays + december_holidays %}
     
-    {# Check if today is a holiday #}
     {{ today in all_holidays }}
   icon: >-
     {% if is_state('sensor.is_holiday', 'on') %}
