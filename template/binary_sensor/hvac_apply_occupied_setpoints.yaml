@@ -72,7 +72,7 @@
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.dining_room_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
     {{ start_time <= current_time <= end_time and
-       is_state('binary_sensor.dining_room_occupied', 'on') and
+       is_state('binary_sensor.someone_home', 'on') and
        is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.dining_room_apply_occupied_setpoints', 'on') %}
@@ -87,8 +87,12 @@
     {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.erik_office_apply_occupied_start_time')) %}
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.erik_office_apply_occupied_end_time')) %}
     {% set current_time = now().timestamp() %}
+    {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
+    {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
+    
     {{ start_time <= current_time <= end_time and
-       is_state('binary_sensor.erik_office_occupied', 'on') and
+       (is_weekday and is_state('binary_sensor.erik_home', 'on') or
+        is_weekend and is_state('binary_sensor.erik_office_occupied', 'on')) and
        is_state('binary_sensor.nighttime_status', 'off') }}
   icon: >-
     {% if is_state('binary_sensor.erik_office_apply_occupied_setpoints', 'on') %}
