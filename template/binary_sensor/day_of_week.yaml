@@ -1,47 +1,47 @@
 - name: "Is Holiday"
   unique_id: is_holiday
   state: >
-  {% set today = now().date() %}
-
-  {% set new_years_day = now().replace(month=1, day=1).date() %}
-  {% set independence_day = now().replace(month=7, day=4).date() %}
-  {% set juneteenth = now().replace(month=6, day=19).date() %}
-  {% set veterans_day = now().replace(month=11, day=11).date() %}
-
-  {% set mlk_day = (now().replace(month=1, day=1) + timedelta(days=(0 - now().replace(month=1, day=1).weekday() + 14) % 7)).date() %}
-  {% set memorial_day = (now().replace(month=5, day=31) - timedelta(days=now().replace(month=5, day=31).weekday())).date() %}
-  {% set labor_day = (now().replace(month=9, day=1) + timedelta(days=(0 - now().replace(month=9, day=1).weekday()))).date() %}
-
-  {% set thanksgiving = (now().replace(month=11, day=1) + timedelta(days=(3 - now().replace(month=11, day=1).weekday() + 21) % 7)).date() %}
-  {% set day_before_thanksgiving = thanksgiving - timedelta(days=1) %}
-  {% set day_after_thanksgiving = thanksgiving + timedelta(days=1) %}
-
-  {% set november_holidays = [day_before_thanksgiving, thanksgiving, day_after_thanksgiving] %}
-
-  {% set december_holidays = [
-    now().replace(month=12, day=23).date(),
-    now().replace(month=12, day=24).date(),
-    now().replace(month=12, day=25).date(),
-    now().replace(month=12, day=26).date(),
-    now().replace(month=12, day=27).date(),
-    now().replace(month=12, day=28).date(),
-    now().replace(month=12, day=29).date(),
-    now().replace(month=12, day=30).date(),
-    now().replace(month=12, day=31).date()
-  ] %}
-
-  {% set holidays = [
-    new_years_day,
-    independence_day,
-    juneteenth,
-    veterans_day,
-    mlk_day,
-    memorial_day,
-    labor_day
-  ] + november_holidays + december_holidays %}
-
-  {{ today in holidays }}
+    {% set today = now().date() %}
   
+    {% set new_years_day = now().replace(month=1, day=1).date() %}
+    {% set independence_day = now().replace(month=7, day=4).date() %}
+    {% set juneteenth = now().replace(month=6, day=19).date() %}
+    {% set veterans_day = now().replace(month=11, day=11).date() %}
+  
+    {% set mlk_day = (now().replace(month=1, day=1) + timedelta(days=(0 - now().replace(month=1, day=1).weekday() + 14) % 7)).date() %}
+    {% set memorial_day = (now().replace(month=5, day=31) - timedelta(days=now().replace(month=5, day=31).weekday())).date() %}
+    {% set labor_day = (now().replace(month=9, day=1) + timedelta(days=(0 - now().replace(month=9, day=1).weekday()))).date() %}
+  
+    {% set thanksgiving = (now().replace(month=11, day=1) + timedelta(days=(3 - now().replace(month=11, day=1).weekday() + 21) % 7)).date() %}
+    {% set day_before_thanksgiving = thanksgiving - timedelta(days=1) %}
+    {% set day_after_thanksgiving = thanksgiving + timedelta(days=1) %}
+  
+    {% set november_holidays = [day_before_thanksgiving, thanksgiving, day_after_thanksgiving] %}
+  
+    {% set december_holidays = [
+      now().replace(month=12, day=23).date(),
+      now().replace(month=12, day=24).date(),
+      now().replace(month=12, day=25).date(),
+      now().replace(month=12, day=26).date(),
+      now().replace(month=12, day=27).date(),
+      now().replace(month=12, day=28).date(),
+      now().replace(month=12, day=29).date(),
+      now().replace(month=12, day=30).date(),
+      now().replace(month=12, day=31).date()
+    ] %}
+  
+    {% set holidays = [
+      new_years_day,
+      independence_day,
+      juneteenth,
+      veterans_day,
+      mlk_day,
+      memorial_day,
+      labor_day
+    ] + november_holidays + december_holidays %}
+  
+    {{ today in holidays }}
+
 - name: "Is Weekend"
   unique_id: is_weekend
   state: >
