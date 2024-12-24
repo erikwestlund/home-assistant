@@ -49,6 +49,16 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  unique_id: stairwell_occupancy_detected_last_hour
+  name: "Stairwell Occupancy Detected Last Hour"
+  entity_id: binary_sensor.stairwell_occupancy_detected
+  state: "on"
+  type: count
+  duration:
+    minutes: 60
+  end: "{{ now() }}"
+
+- platform: history_stats
   unique_id: master_bedroom_occupancy_detected_last_hour
   name: "Master Bedroom Occupancy Detected Last Hour"
   entity_id: binary_sensor.master_bedroom_occupancy_detected
@@ -72,6 +82,16 @@
   unique_id: hanks_room_occupancy_detected_last_hour
   name: "Hank's Room Occupancy Detected Last Hour"
   entity_id: binary_sensor.hank_s_room_occupancy_detected
+  state: "on"
+  type: count
+  duration:
+    minutes: 60
+  end: "{{ now() }}"
+
+- platform: history_stats
+  unique_id: basement_occupancy_detected_last_hour
+  name: "Basement Occupancy Detected Last Hour"
+  entity_id: binary_sensor.basement_occupancy_detected
   state: "on"
   type: count
   duration:

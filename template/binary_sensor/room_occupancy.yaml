@@ -48,12 +48,12 @@
     {% set occupancy_in_last_hour = states('sensor.living_room_occupancy_detected_last_hour') | float(0) > 0 %}
     {{ recent_occupancy or occupancy_in_last_hour }}
 
-# Dining Room; update later when we get the correct sensor
+# Dining Room
 - name: "Dining Room Occupancy Detected"
   unique_id: dining_room_occupancy_detected
   device_class: occupancy
   state: >
-    {{ is_state('binary_sensor.living_room_main_heating_occupancy', 'on') }}
+    {{ is_state('binary_sensor.dining_room_occupancy', 'on') }}
 
 - name: "Dining Room Occupied"
   unique_id: dining_room_occupied
@@ -67,7 +67,7 @@
   unique_id: kitchen_occupancy_detected
   device_class: occupancy
   state: >
-    {{ is_state('binary_sensor.living_room_main_heating_occupancy', 'on') }}
+    {{ is_state('binary_sensor.kitchen_occupancy', 'on') }}
 
 - name: "Kitchen Occupied"
   unique_id: kitchen_occupied
@@ -75,6 +75,20 @@
   state: >
     {% set recent_occupancy = is_state('binary_sensor.kitchen_occupancy_detected', 'on') %}
     {% set occupancy_in_last_hour = states('sensor.kitchen_occupancy_detected_last_hour') | float(0) > 0 %}
+    {{ recent_occupancy or occupancy_in_last_hour }}
+
+- name: "Stairwell Occupancy Detected"
+  unique_id: stairwell_occupancy_detected
+  device_class: occupancy
+  state: >
+    {{ is_state('binary_sensor.stairwell_top_occupancy', 'on') }}
+
+- name: "Stairwell Occupied"
+  unique_id: stairwell_occupied
+  device_class: occupancy
+  state: >
+    {% set recent_occupancy = is_state('binary_sensor.stairwell_occupancy_detected', 'on') %}
+    {% set occupancy_in_last_hour = states('sensor.stairwell_occupancy_detected_last_hour') | float(0) > 0 %}
     {{ recent_occupancy or occupancy_in_last_hour }}
 
 # Master Bedroom
@@ -135,4 +149,18 @@
   state: >
     {% set recent_occupancy = is_state('binary_sensor.hank_s_room_occupancy_detected', 'on') %}
     {% set occupancy_in_last_hour = states('sensor.hank_s_room_occupancy_detected_last_hour') | float(0) > 0 %}
+    {{ recent_occupancy or occupancy_in_last_hour }}
+
+- name: "Basement Occupancy Detected"
+  unique_id: basement_occupancy_detected
+  device_class: occupancy
+  state: >
+    {{ is_state('binary_sensor.basement_playroom_occupancy', 'on') }}
+
+- name: "Basement Occupied"
+  unique_id: basement_occupied
+  device_class: occupancy
+  state: >
+    {% set recent_occupancy = is_state('binary_sensor.basement_occupancy_detected', 'on') %}
+    {% set occupancy_in_last_hour = states('sensor.basement_occupancy_detected_last_hour') | float(0) > 0 %}
     {{ recent_occupancy or occupancy_in_last_hour }}

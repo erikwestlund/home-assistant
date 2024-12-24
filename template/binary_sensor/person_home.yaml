@@ -2,17 +2,8 @@
   unique_id: erik_home
   device_class: occupancy
   state: >
-    {% set apple_watch = 'device_tracker.erik_apple_watch_network' %}
-    {% set other_trackers = [
-      'device_tracker.eriks_iphone_network'
-    ] %}
-    {% if is_state(apple_watch, 'not_home') %}
-      false
-    {% elif is_state(apple_watch, 'home') %}
-      true
-    {% else %}
-      other_trackers | map('states') | select('eq', 'home') | list | length > 0
-    {% endif %}
+    {% set phone_tracker = 'device_tracker.erik_iphone_network' %}
+    {{ is_state(phone_tracker, 'home') }}
   icon: >-
     {% if is_state('binary_sensor.erik_home', 'on') %}
       mdi:account
@@ -24,19 +15,10 @@
   unique_id: tina_home
   device_class: occupancy
   state: >
-    {% set apple_watch = 'device_tracker.christinas_apple_watch' %}
-    {% set other_trackers = [
-      'device_tracker.tinas_iphone_12'
-    ] %}
-    {% if is_state(apple_watch, 'not_home') %}
-      false
-    {% elif is_state(apple_watch, 'home') %}
-      true
-    {% else %}
-      other_trackers | map('states') | select('eq', 'home') | list | length > 0
-    {% endif %}
+    {% set phone_tracker = 'device_tracker.tina_iphone_network' %}
+    {{ is_state(phone_tracker, 'home') }}
   icon: >-
-    {% if is_state('binary_sensor.tina_home', 'on') %}
+    {% if is_state('binary_sensor.erik_home', 'on') %}
       mdi:account
     {% else %}
       mdi:account-off
