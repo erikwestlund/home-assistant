@@ -47,7 +47,7 @@ living_room_override_for_hours:
   initial: 2
 
 living_room_boost_target:
-  name: Living Room Boost Heat Trigger Threshold Offset
+  name: Living Room Boost Mode Heating Temperature
   min: 64
   max: 80
   step: 1
