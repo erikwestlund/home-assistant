@@ -2,9 +2,9 @@
   unique_id: erik_home
   device_class: occupancy
   state: >
-    {% set apple_watch = 'device_tracker.eriks_apple_watch' %}
+    {% set apple_watch = 'device_tracker.erik_apple_watch_network' %}
     {% set other_trackers = [
-      'device_tracker.eriks_iphone_2'
+      'device_tracker.eriks_iphone_network'
     ] %}
     {% if is_state(apple_watch, 'not_home') %}
       false
