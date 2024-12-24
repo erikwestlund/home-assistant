@@ -69,3 +69,27 @@ living_room_heatpump_comfort_weekend_unoccupied_setpoint:
   step: 1
   unit_of_measurement: "°F"
   initial: 64
+
+living_room_heatpump_boost_daytime_occupied_setpoint:
+  name: Living Room Heat Pump Boost Temperature (Daytime Occupied)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 69
+
+living_room_heatpump_boost_daytime_unoccupied_setpoint:
+  name: Living Room Heat Pump Boost Temperature (Daytime Unoccupied)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 68
+
+living_room_heatpump_boost_night_setpoint:
+  name: Living Room Heat Pump Boost Temperature (Night)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 68
