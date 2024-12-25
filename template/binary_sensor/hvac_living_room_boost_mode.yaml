@@ -1,29 +1,27 @@
-template:
-  - binary_sensor:
-      - name: Living Room Boost Mode Active
-        unique_id: living_room_boost_mode_active
-        state: >
-          {% set boost_enabled = is_state('input_boolean.living_room_boost_mode_enabled', 'on') %}
-          {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float(0) %}
-          {% set boost_off_threshold = states('input_number.living_room_heatpump_boost_off_threshold') | float(22) %}
-          {% set off_to_supplement_threshold = states('input_number.living_room_heatpump_off_to_supplement_threshold') | float(37) %}
-          {% set room_temp = states('sensor.living_room_average_temperature') | float(0) %}
-          
-          {% set is_temp_valid = boost_off_threshold <= outdoor_temp < off_to_supplement_threshold %}
-          
-          {% set is_night = is_state('binary_sensor.nighttime_status', 'on') %}
-          {% set is_daytime = not is_night %}
-          {% set is_occupied = is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
-          
-          {% set target_temp = 
-             states('input_number.living_room_heatpump_boost_night_setpoint') | float(68) if is_night else
-             states('input_number.living_room_heatpump_boost_daytime_occupied_setpoint') | float(69) if is_daytime and is_occupied else
-             states('input_number.living_room_heatpump_boost_daytime_unoccupied_setpoint') | float(68) %}
-          
-          {% set trigger_offset = states('input_number.living_room_boost_setpoint_heat_trigger_threshold_offset') | float(2) %}
-          {% set stop_offset = states('input_number.living_room_boost_setpoint_heat_stop_threshold_offset') | float(1) %}
-          
-          {% set should_enable = room_temp < (target_temp - trigger_offset) %}
-          {% set should_disable = room_temp > (target_temp + stop_offset) %}
-          
-          {{ boost_enabled and is_temp_valid and should_enable and not should_disable }}
+- name: Living Room Boost Mode Active
+  unique_id: living_room_boost_mode_active
+  state: >
+    {% set boost_enabled = is_state('input_boolean.living_room_boost_mode_enabled', 'on') %}
+    {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float(0) %}
+    {% set boost_off_threshold = states('input_number.living_room_heatpump_boost_off_threshold') | float(22) %}
+    {% set off_to_supplement_threshold = states('input_number.living_room_heatpump_off_to_supplement_threshold') | float(37) %}
+    {% set room_temp = states('sensor.living_room_average_temperature') | float(0) %}
+    
+    {% set is_temp_valid = boost_off_threshold <= outdoor_temp < off_to_supplement_threshold %}
+    
+    {% set is_night = is_state('binary_sensor.nighttime_status', 'on') %}
+    {% set is_daytime = not is_night %}
+    {% set is_occupied = is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
+    
+    {% set target_temp = 
+       states('input_number.living_room_heatpump_boost_night_setpoint') | float(68) if is_night else
+       states('input_number.living_room_heatpump_boost_daytime_occupied_setpoint') | float(69) if is_daytime and is_occupied else
+       states('input_number.living_room_heatpump_boost_daytime_unoccupied_setpoint') | float(68) %}
+    
+    {% set trigger_offset = states('input_number.living_room_boost_setpoint_heat_trigger_threshold_offset') | float(2) %}
+    {% set stop_offset = states('input_number.living_room_boost_setpoint_heat_stop_threshold_offset') | float(1) %}
+    
+    {% set should_enable = room_temp < (target_temp - trigger_offset) %}
+    {% set should_disable = room_temp > (target_temp + stop_offset) %}
+    
+    {{ boost_enabled and is_temp_valid and should_enable and not should_disable }}
