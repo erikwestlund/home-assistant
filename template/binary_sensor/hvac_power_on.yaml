@@ -77,7 +77,9 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       {{ is_state('input_boolean.away_living_room_heatpump_on', 'on') and is_state('input_boolean.living_room_heat_pump_power_on_control', 'on') }}
     {% else %}
-      {{ is_state('input_boolean.living_room_heat_pump_power_on_control', 'on') and not is_state('sensor.living_room_heat_pump_operational_mode', 'Off') }}
+      {{ is_state('input_boolean.living_room_heat_pump_power_on_control', 'on') and 
+          (not is_state('sensor.living_room_heat_pump_operational_mode', 'Off') or 
+           is_state('binary_sensor.living_room_boost_mode_active', 'on')) }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.living_room_heatpump_power_on_status', 'on') %}
