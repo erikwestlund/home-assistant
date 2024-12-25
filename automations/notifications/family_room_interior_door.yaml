@@ -1,5 +1,5 @@
-- alias: "Family Room Door Open Too Long"
-  unique_id: family_room_interior_door_open_too_long
+- id: family_room_interior_door_open_too_long
+  alias: "Family Room Door Open Too Long"
   description: "Send a notification if the family room interior door is open for more than 5 minutes."
   trigger:
     - platform: state
