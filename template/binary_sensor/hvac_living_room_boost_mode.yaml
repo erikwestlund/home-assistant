@@ -11,12 +11,15 @@
     
     {% set is_night = is_state('binary_sensor.nighttime_status', 'on') %}
     {% set is_daytime = not is_night %}
+    {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
     {% set is_occupied = is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
     
     {% set target_temp = 
        states('input_number.living_room_heatpump_boost_night_setpoint') | float(68) if is_night else
-       states('input_number.living_room_heatpump_boost_daytime_occupied_setpoint') | float(69) if is_daytime and is_occupied else
-       states('input_number.living_room_heatpump_boost_daytime_unoccupied_setpoint') | float(68) %}
+       (states('input_number.living_room_heatpump_boost_weekday_occupied_setpoint') | float(69) if is_weekday and is_occupied else
+        states('input_number.living_room_heatpump_boost_weekday_unoccupied_setpoint') | float(68) if is_weekday else
+        states('input_number.living_room_heatpump_boost_weekend_occupied_setpoint') | float(69) if is_occupied else
+        states('input_number.living_room_heatpump_boost_weekend_unoccupied_setpoint') | float(68)) %}
     
     {% set trigger_offset = states('input_number.living_room_boost_setpoint_heat_trigger_threshold_offset') | float(2) %}
     {% set stop_offset = states('input_number.living_room_boost_setpoint_heat_stop_threshold_offset') | float(1) %}
