@@ -15,7 +15,6 @@
   state: >
     {% set sensors = [
       state_attr('climate.family_room_heating', 'current_temperature') | float(0),
-      states('sensor.toyshelf_temperature') | float(0),
       states('sensor.bookshelf_temperature') | float(0),
       states('sensor.lamp_temperature') | float(0)
     ] %}
