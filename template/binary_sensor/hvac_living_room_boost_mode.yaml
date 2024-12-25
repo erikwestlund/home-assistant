@@ -15,7 +15,8 @@
     {% set is_occupied = is_state('binary_sensor.living_room_apply_occupied_setpoints', 'on') %}
     
     {% set target_temp = 
-       states('input_number.living_room_heatpump_boost_night_setpoint') | float(68) if is_night else
+       (states('input_number.living_room_heatpump_boost_weekday_night_setpoint') | float(68) if is_weekday else
+        states('input_number.living_room_heatpump_boost_weekend_night_setpoint') | float(68)) if is_night else
        (states('input_number.living_room_heatpump_boost_weekday_occupied_setpoint') | float(69) if is_weekday and is_occupied else
         states('input_number.living_room_heatpump_boost_weekday_unoccupied_setpoint') | float(68) if is_weekday else
         states('input_number.living_room_heatpump_boost_weekend_occupied_setpoint') | float(69) if is_occupied else
