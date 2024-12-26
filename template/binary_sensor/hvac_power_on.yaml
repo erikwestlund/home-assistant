@@ -33,6 +33,24 @@
       mdi:radiator-off
     {% endif %}
 
+# Office Space Heater
+- name: "Office Space Heater Power On Status"
+  unique_id: office_space_heater_power_on_status
+  state: >
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.office_space_heater_override', 'on') %}
+      true
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      false
+    {% else %}
+      {{ is_state('input_boolean.office_space_heater_power_on_control', 'on') and not is_state('binary_sensor.office_space_heater_active', 'on') }}
+    {% endif %}
+  icon: >-
+    {% if is_state('binary_sensor.ducted_heatpump_power_on_status', 'on') %}
+      mdi:hvac
+    {% else %}
+      mdi:hvac-off
+    {% endif %}
+
 # Family Room
 - name: "Family Room Heat Pump Power On Status"
   unique_id: family_room_heatpump_power_on_status
@@ -176,3 +194,4 @@
     {% else %}
       mdi:hvac-off
     {% endif %}
+    
