@@ -3,7 +3,7 @@
   description: "Send a notification if the family room interior door is open for more than 5 minutes."
   trigger:
     - platform: state
-      entity_id: binary_sensor.family_room_interior_door_opening
+      entity_id: binary_sensor.family_room_interior_door_contact
       to: "on"
       for: "00:05:00"
   action:
