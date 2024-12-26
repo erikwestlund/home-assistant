@@ -1,0 +1,23 @@
+office_space_heater_trigger_threshold_offset:
+  name: Office Space Heater Trigger Threshold Offset
+  min: 0
+  max: 10
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 2
+
+office_space_heater_stop_threshold_offset:
+  name: Office Space Heater Stop Threshold Offset
+  min: 0
+  max: 10
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 1
+
+office_space_heater_target:
+  name: Office Space Heater
+  min: 62
+  max: 86
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 69

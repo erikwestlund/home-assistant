@@ -47,3 +47,8 @@ ducted_heat_pump_power_on_control:
   name: Ducted Heat Pump Power On Control
   initial: on
   icon: mdi:power
+
+office_space_heater_power_on_control:
+  name: Office Space Heater Power On Control
+  initial: on
+  icon: mdi:power
