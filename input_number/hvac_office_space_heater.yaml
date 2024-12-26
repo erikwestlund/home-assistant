@@ -21,3 +21,11 @@ office_space_heater_target:
   step: 0.5
   unit_of_measurement: "°F"
   initial: 69
+
+office_space_heater_override_for_hours:
+  name: Office Space Heater Override For Hours
+  min: 0.25
+  max: 24
+  step: 0.25
+  unit_of_measurement: "hours"
+  initial: 0.25

@@ -1,4 +1,4 @@
-office_space_heater_override:
+office_space_heater_override_status:
   name: Office Space Heater Override
   initial: off
   icon: mdi:power
