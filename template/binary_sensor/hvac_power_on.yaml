@@ -42,7 +42,7 @@
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       false
     {% else %}
-      {{ is_state('input_boolean.office_space_heater_power_on_control', 'on') and not is_state('binary_sensor.office_space_heater_active', 'on') }}
+      {{ is_state('input_boolean.office_space_heater_power_on_control', 'on') and is_state('binary_sensor.office_space_heater_active', 'on') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.ducted_heatpump_power_on_status', 'on') %}
