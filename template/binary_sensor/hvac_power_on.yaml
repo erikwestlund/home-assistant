@@ -37,7 +37,7 @@
 - name: "Office Space Heater Power On Status"
   unique_id: office_space_heater_power_on_status
   state: >
-    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.office_space_heater_override', 'on') %}
+    {% if is_state('input_boolean.hvac_away_mode', 'off') and is_state('input_boolean.office_space_heater_override_status', 'on') %}
       true
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       false
