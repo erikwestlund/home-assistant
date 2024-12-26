@@ -1,0 +1,46 @@
+- id: "sync_office_space_heater_power_state"
+  alias: "Sync Office Space Heater Power State"
+  description: "Synchronize the power state of the office space heater with its active status."
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.office_space_heater_active
+    - platform: time_pattern
+      minutes: "/5"
+  action:
+    - choose:
+        # Turn the space heater off if it shouldn't be active
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.office_space_heater_active
+              state: "off"
+            - condition: state
+              entity_id: switch.tina_office_space_heater
+              state: "on"
+          sequence:
+            - service: switch.turn_off
+              target:
+                entity_id: switch.tina_office_space_heater
+            - service: logbook.log
+              data:
+                name: "Office Space Heater Sync Automation"
+                message: >
+                  Space heater turned off as it is not active.
+
+        # Turn the space heater on if it should be active
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.office_space_heater_active
+              state: "on"
+            - condition: state
+              entity_id: switch.tina_office_space_heater
+              state: "off"
+          sequence:
+            - service: switch.turn_on
+              target:
+                entity_id: switch.tina_office_space_heater
+            - service: logbook.log
+              data:
+                name: "Office Space Heater Sync Automation"
+                message: >
+                  Space heater turned on as it is active.
+  mode: single
