@@ -32,15 +32,15 @@
   description: "Send a notification if the master bedroom interior door is open for more than 5 minutes during bedtime hours."
   trigger:
     - platform: state
-      entity_id: binary_sensor.master_bedroom_door_contact
+      entity_id: binary_sensor.master_bedroom_interior_door_contact
       to: "on"
       for: "00:05:00"
   condition:
     - condition: template
       value_template: >
-        {% set now_time = now().time() %}
-        {% set bedtime = states('input_datetime.master_bedroom_bedtime_start_time') | as_datetime().time() %}
-        {% set sleeptime = states('input_datetime.master_bedroom_sleep_start_time') | as_datetime().time() %}
+        {% set now_time = now().strftime('%H:%M:%S') %}
+        {% set bedtime = states('input_datetime.master_bedroom_bedtime_start_time') %}
+        {% set sleeptime = states('input_datetime.master_bedroom_sleep_start_time') %}
         {{ bedtime <= now_time <= sleeptime }}
   action:
     - service: notify.mobile_app_eriks_iphone
