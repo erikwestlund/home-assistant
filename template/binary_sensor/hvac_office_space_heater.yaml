@@ -1,9 +1,12 @@
 - name: "Office Space Heater Enabled"
   unique_id: office_space_heater_enabled
   state: >
-    {{ is_state('binary_sensor.office_apply_occupied_setpoints', 'on') and
+    {% set override = is_state('input_boolean.office_space_heater_override_status', 'on') %}
+    {{ override or (
+       is_state('binary_sensor.office_apply_occupied_setpoints', 'on') and
        is_state('binary_sensor.tina_home', 'on') and
-       is_state('binary_sensor.tina_desk_motion', 'on') }}
+       is_state('binary_sensor.tina_desk_motion', 'on')
+    ) }}
 
 - name: "Office Space Heater Active"
   unique_id: office_space_heater_active
