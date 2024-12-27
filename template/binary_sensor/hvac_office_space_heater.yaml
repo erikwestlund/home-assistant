@@ -3,7 +3,7 @@
   state: >
     {{ is_state('binary_sensor.office_apply_occupied_setpoints', 'on') and
        is_state('binary_sensor.tina_home', 'on') and
-       is_state('binary_sensor.tina_desk_motion, 'on') }}
+       is_state('binary_sensor.tina_desk_motion', 'on') }}
 
 - name: "Office Space Heater Active"
   unique_id: office_space_heater_active
