@@ -1,0 +1,89 @@
+# Interior doors
+- id: family_room_interior_door_open_too_long
+  alias: "Family Room Door Open Too Long"
+  description: "Send a notification if the family room interior door is open for more than 5 minutes."
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.family_room_interior_door_contact
+      to: "on"
+      for: "00:05:00"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "Family Room Interior Door Open Alert"
+        message: "The family room interior door has been open for over 5 minutes. Please check."
+
+- id: mudroom_interior_door_open_too_long
+  alias: "Mudroom Door Open Too Long"
+  description: "Send a notification if the mudroom interior door is open for more than 5 minutes."
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.mudroom_interior_door_contact
+      to: "on"
+      for: "00:05:00"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "Mudroom Interior Door Open Alert"
+        message: "The mudroom interior door has been open for over 5 minutes. Please check."
+
+- id: master_bedroom_interior_door_open_too_long
+  alias: "Master Bedroom Door Open Too Long"
+  description: "Send a notification if the master bedroom interior door is open for more than 5 minutes during bedtime hours."
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.master_bedroom_interior_door_contact
+      to: "on"
+      for: "00:05:00"
+  condition:
+    - condition: time
+      after: "{{ states('input_datetime.master_bedroom_bedtime_start_time') }}"
+      before: "{{ states('input_datetime.master_bedroom_sleep_start_time') }}"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "Master Bedroom Interior Door Open Alert"
+        message: "The master bedroom interior door has been open for over 5 minutes. Please check."
+
+# Exterior doors
+- id: side_door_open_too_long
+  alias: "Side Door Open Too Long"
+  description: "Send a notification if the side door is open for more than 5 minutes."
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.side_door_contact
+      to: "on"
+      for: "00:05:00"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "Side Door Open Alert"
+        message: "The side door has been open for over 5 minutes. Please check."
+
+- id: front_door_open_too_long
+  alias: "Front Door Open Too Long"
+  description: "Send a notification if the front door is open for more than 5 minutes."
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_contact
+      to: "on"
+      for: "00:05:00"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "Front Door Open Alert"
+        message: "The front door has been open for over 5 minutes. Please check."
+
+- id: attic_door_open_too_long
+  alias: "Attic Door Open Too Long"
+  description: "Send a notification if the attic door is open for more than 5 minutes."
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.attic_door_contact
+      to: "on"
+      for: "00:05:00"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "Attic Door Open Alert"
+        message: "The attic door has been open for over 5 minutes. Please check."
