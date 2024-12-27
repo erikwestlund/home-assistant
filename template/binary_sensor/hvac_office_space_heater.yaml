@@ -3,7 +3,7 @@
   state: >
     {% set override = is_state('input_boolean.office_space_heater_override_status', 'on') %}
     {{ override or (
-       is_state('binary_sensor.office_apply_occupied_setpoints', 'on') and
+       is_state('binary_sensor.is_work_hours', 'on') and
        is_state('binary_sensor.tina_home', 'on') and
        is_state('binary_sensor.tina_desk_motion', 'on')
     ) }}
