@@ -52,8 +52,6 @@
     {% set setpoint = states('sensor.erik_office_mini_split_setpoint') %}
     {% if setpoint == "Off" %}
       None
-#    {% elif setpoint == "Away" %}
-#      {{ states('input_number.away_erik_office_heatpump_setpoint') }}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.erik_office_heatpump_comfort_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}
