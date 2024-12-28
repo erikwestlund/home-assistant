@@ -26,7 +26,7 @@
       {% endif %}
     {% endif %}
   icon: >-
-    {% set state = states('sensor.ducted_heatpump_setpoint') %}
+    {% set state = states('sensor.ducted_heatpump_setpoint') }}
     {% if state == "Override" %}
       mdi:alert
     {% elif state == "Off" %}
@@ -49,7 +49,7 @@
     {% if setpoint == "Off" %}
       None
     {% elif setpoint == "Away" %}
-      {% states('input_number.away_ducted_heatpump_setpoint') %}
+      {{ states('input_number.away_ducted_heatpump_setpoint') }}
     {% elif setpoint == "Idle" %}
       None
     {% elif setpoint == "Default" %}

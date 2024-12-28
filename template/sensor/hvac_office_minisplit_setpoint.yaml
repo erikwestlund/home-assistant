@@ -60,7 +60,7 @@
     {% if setpoint == "Off" %}
       None
     {% elif setpoint == "Away" %}
-      {% states('input_number.away_office_heatpump_setpoint') %}
+      {{ states('input_number.away_office_heatpump_setpoint') }}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.office_heatpump_comfort_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}

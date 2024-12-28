@@ -46,7 +46,7 @@
     {% if setpoint == "Off" %}
       None
     {% elif setpoint == "Away" %}
-      {% states('input_number.away_master_bedroom_heatpump_setpoint') %}
+      {{ states('input_number.away_master_bedroom_heatpump_setpoint') }}
     {% elif setpoint == "Daytime" %}
       {{ states('input_number.master_bedroom_heatpump_comfort_daytime_setpoint') }}
     {% elif setpoint == "Bedtime" %}

@@ -45,7 +45,7 @@
     {% if setpoint == "Off" %}
       {{ states('input_number.family_room_radiator_weekday_occupied_setpoint') }}
     {% elif setpoint == "Away" %}
-      {% states('input_number.away_family_room_radiator_setpoint') %}
+      {{ states('input_number.away_family_room_radiator_setpoint') %}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.family_room_radiator_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}
