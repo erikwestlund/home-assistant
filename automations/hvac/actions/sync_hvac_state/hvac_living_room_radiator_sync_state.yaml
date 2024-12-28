@@ -62,4 +62,12 @@
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_room_main_heating
-                temperature
+                temperature: >
+                  {{ states('input_number.away_living_room_radiator_setpoint') | float(0) }}
+            - service: logbook.log
+              data:
+                name: "Living Room Radiator Sync Automation"
+                message: >
+                  Away mode temperature corrected to:
+                  {{ states('input_number.away_living_room_radiator_setpoint') }}°F.
+  mode: single
