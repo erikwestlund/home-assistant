@@ -5,12 +5,12 @@
       entity_id:
         - binary_sensor.living_room_radiator_power_on_synced
         - binary_sensor.living_room_radiator_mode_synced
+        - input_boolean.hvac_away_mode
       to: "off"
     - platform: time_pattern
       minutes: "/5"
   action:
     - choose:
-        # Correct power state
         - conditions:
             - condition: state
               entity_id: binary_sensor.living_room_radiator_power_on_synced
@@ -35,8 +35,6 @@
                   {% else %}
                     off
                   {% endif %}.
-
-        # Correct mode and set temperature if needed
         - conditions:
             - condition: state
               entity_id: binary_sensor.living_room_radiator_mode_synced
@@ -50,7 +48,6 @@
               data:
                 name: "Living Room Radiator Sync Automation"
                 message: "Mode corrected to heat."
-            # Set the temperature if hvac_away_mode is on
             - choose:
                 - conditions:
                     - condition: state
