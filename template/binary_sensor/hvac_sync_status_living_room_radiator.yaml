@@ -25,13 +25,28 @@
       mdi:alert
     {% endif %}
 
+- name: "Living Room Correct Away Mode Temperature"
+  unique_id: living_room_correct_away_mode_temperature
+  state: >
+    {% set away_mode_active = is_state('input_boolean.hvac_away_mode', 'on') %}
+    {% set target_temp = state_attr('climate.living_room_main_heating', 'temperature') | float(0) %}
+    {% set away_setpoint = states('input_number.away_living_room_radiator_setpoint') | float(0) %}
+    {{ not away_mode_active or target_temp == away_setpoint }}
+  icon: >-
+    {% if is_state('binary_sensor.correct_away_mode_sensor', 'on') %}
+      mdi:thermometer-check
+    {% else %}
+      mdi:thermometer-alert
+    {% endif %}
+
 - name: "Living Room Radiator In Correct State"
   unique_id: living_room_radiator_in_correct_state
   state: >
     {% set power_synced = is_state('binary_sensor.living_room_radiator_power_on_synced', 'on') %}
     {% set mode_synced = is_state('binary_sensor.living_room_radiator_mode_synced', 'on') %}
     {% set power_off = is_state('binary_sensor.living_room_radiator_power_on_status', 'off') %}
-    {{ (power_off and power_synced and mode_synced) or (power_synced and mode_synced) }}
+    {% set correct_away_mode = is_state('binary_sensor.living_room_correct_away_mode_temperature', 'on') %}
+    {{ ((power_off and power_synced and mode_synced) or (power_synced and mode_synced)) and correct_away_mode }}
   icon: >-
     {% if is_state('binary_sensor.living_room_radiator_in_correct_state', 'on') %}
       mdi:check-circle

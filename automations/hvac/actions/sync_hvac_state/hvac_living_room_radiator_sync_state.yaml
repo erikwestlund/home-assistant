@@ -5,12 +5,14 @@
       entity_id:
         - binary_sensor.living_room_radiator_power_on_synced
         - binary_sensor.living_room_radiator_mode_synced
+        - binary_sensor.living_room_correct_away_mode_temperature
+        - binary_sensor.living_room_radiator_in_correct_state
+        - input_boolean.hvac_away_mode
       to: "off"
     - platform: time_pattern
       minutes: "/5"
   action:
     - choose:
-        # Correct power state
         - conditions:
             - condition: state
               entity_id: binary_sensor.living_room_radiator_power_on_synced
@@ -35,8 +37,6 @@
                   {% else %}
                     off
                   {% endif %}.
-
-        # Correct mode
         - conditions:
             - condition: state
               entity_id: binary_sensor.living_room_radiator_mode_synced
@@ -49,6 +49,21 @@
             - service: logbook.log
               data:
                 name: "Living Room Radiator Sync Automation"
-                message: >
-                  Mode corrected to heat.
+                message: "Mode corrected to heat."
+            - choose:
+                - conditions:
+                    - condition: state
+                      entity_id: input_boolean.hvac_away_mode
+                      state: "on"
+                  sequence:
+                    - service: climate.set_temperature
+                      data:
+                        entity_id: climate.living_room_main_heating
+                        temperature: "{{ states('input_number.away_living_room_radiator_setpoint') | float }}"
+                    - service: logbook.log
+                      data:
+                        name: "Living Room Radiator Sync Automation"
+                        message: >
+                          HVAC Away Mode active. Temperature set to
+                          {{ states('input_number.away_living_room_radiator_setpoint') }}°.
   mode: single
