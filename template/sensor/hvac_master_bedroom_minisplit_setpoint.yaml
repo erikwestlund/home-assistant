@@ -10,13 +10,18 @@
     {% elif is_state('binary_sensor.master_bedroom_overheated', 'on') %}
       Overheated
     {% elif is_state('sensor.master_bedroom_heat_pump_operational_mode', 'Supplemental Heat') %}
-      Supplemental Heat
+      {% set time_period = states('sensor.master_bedroom_time_period') %}
+      {% if time_period in ['Daytime', 'Bedtime', 'Sleep'] %}
+        Supplemental Heat {{ time_period }}
+      {% else %}
+        Supplemental Heat Daytime
+      {% endif %}
     {% else %}
       {% set time_period = states('sensor.master_bedroom_time_period') %}
       {% if time_period in ['Daytime', 'Bedtime', 'Sleep'] %}
         {{ time_period }}
       {% else %}
-        Supplemental Heat
+        Daytime
       {% endif %}
     {% endif %}
   icon: >-
@@ -27,7 +32,7 @@
       mdi:power
     {% elif state == "Overheated" %}
       mdi:thermometer-alert
-    {% elif state == "Supplemental Heat" %}
+    {% elif "Supplemental Heat" in state %}
       mdi:fire
     {% elif state == "Daytime" %}
       mdi:weather-sunny
@@ -53,8 +58,12 @@
       {{ states('input_number.master_bedroom_heatpump_comfort_bedtime_setpoint') }}
     {% elif setpoint == "Sleep" %}
       {{ states('input_number.master_bedroom_heatpump_comfort_sleep_setpoint') }}
-    {% elif setpoint == "Supplemental Heat" %}
-      {{ states('input_number.master_bedroom_heatpump_supplemental_setpoint') }}
+    {% elif setpoint == "Supplemental Heat Daytime" %}
+      {{ states('input_number.master_bedroom_heatpump_supplemental_heat_daytime_setpoint') }}
+    {% elif setpoint == "Supplemental Heat Bedtime" %}
+      {{ states('input_number.master_bedroom_heatpump_supplemental_heat_bedtime_setpoint') }}
+    {% elif setpoint == "Supplemental Heat Sleep" %}
+      {{ states('input_number.master_bedroom_heatpump_supplemental_heat_sleep_setpoint') }}
     {% elif setpoint == "Overheated" %}
       {{ states('input_number.master_bedroom_heatpump_overheat_setpoint') }}
     {% elif setpoint == "Override" %}
@@ -64,7 +73,7 @@
     {% endif %}
   unit_of_measurement: "°F"
   icon: >-
-    {% if states('sensor.master_bedroom_minisplit_target_setpoint') | float == states('input_number.master_bedroom_heatpump_supplemental_setpoint') | float %}
+    {% if setpoint in ["Supplemental Heat Daytime", "Supplemental Heat Bedtime", "Supplemental Heat Sleep"] %}
       mdi:fire
     {% elif setpoint == "Overheated" %}
       mdi:thermometer-alert

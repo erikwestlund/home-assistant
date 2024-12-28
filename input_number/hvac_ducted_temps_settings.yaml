@@ -30,14 +30,6 @@ ducted_heatpump_heating_temp:
   unit_of_measurement: "°F"
   initial: 72
 
-ducted_heatpump_off_threshold:
-  name: Ducted Heat Pump Off Temperature Threshold
-  min: -15
-  max: 60
-  step: 1
-  unit_of_measurement: "°F"
-  initial: 15
-
 ducted_setpoint_heat_trigger_threshold_offset:
     name: Ducted Heat Trigger Threshold Offset
     min: 0
