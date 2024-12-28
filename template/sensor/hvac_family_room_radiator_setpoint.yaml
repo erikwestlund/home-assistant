@@ -5,6 +5,8 @@
       Override
     {% elif is_state('binary_sensor.family_room_radiator_power_on_status', 'off') %}
       Off
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
       {% if is_state('binary_sensor.nighttime_status', 'on') %}
         Weekend Night
@@ -42,6 +44,8 @@
     {% set setpoint = states('sensor.family_room_radiator_setpoint') %}
     {% if setpoint == "Off" %}
       {{ states('input_number.family_room_radiator_weekday_occupied_setpoint') }}
+    {% elif setpoint == "Away" %}
+      {% states('input_number.away_family_room_radiator_setpoint') %}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.family_room_radiator_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}

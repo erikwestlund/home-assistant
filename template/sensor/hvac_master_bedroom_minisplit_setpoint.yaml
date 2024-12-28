@@ -5,6 +5,8 @@
       Override
     {% elif is_state('binary_sensor.master_bedroom_heat_pump_power_on_status', 'off') %}
       Off
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif is_state('binary_sensor.master_bedroom_overheated', 'on') %}
       Overheated
     {% elif is_state('sensor.master_bedroom_heat_pump_operational_mode', 'Supplemental Heat') %}
@@ -43,6 +45,8 @@
     {% set setpoint = states('sensor.master_bedroom_mini_split_setpoint') %}
     {% if setpoint == "Off" %}
       None
+    {% elif setpoint == "Away" %}
+      {% states('input_number.away_master_bedroom_heatpump_setpoint') %}
     {% elif setpoint == "Daytime" %}
       {{ states('input_number.master_bedroom_heatpump_comfort_daytime_setpoint') }}
     {% elif setpoint == "Bedtime" %}

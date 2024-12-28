@@ -5,6 +5,8 @@
       Override
     {% elif is_state('binary_sensor.dining_room_heat_pump_power_on_status', 'off') %}
       Off
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif is_state('binary_sensor.dining_room_overheated', 'on') %}
       Overheated
     {% elif is_state('sensor.dining_room_heat_pump_operational_mode', 'Supplemental Heat') %}
@@ -50,6 +52,8 @@
     {% set setpoint = states('sensor.dining_room_mini_split_setpoint') %}
     {% if setpoint == "Off" %}
       None
+    {% elif setpoint == "Away" %}
+      {% states('input_number.away_dining_room_heatpump_setpoint') %}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.dining_room_heatpump_comfort_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}

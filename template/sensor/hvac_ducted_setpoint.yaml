@@ -5,6 +5,8 @@
       Override
     {% elif is_state('binary_sensor.ducted_heat_pump_power_on_status', 'off') %}
       Off
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% else %}
       {% set time_period = states('sensor.ducted_time_period') %}
       {% if time_period == 'Daytime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
@@ -46,6 +48,8 @@
     {% set setpoint = states('sensor.ducted_heat_pump_setpoint') %}
     {% if setpoint == "Off" %}
       None
+    {% elif setpoint == "Away" %}
+      {% states('input_number.away_ducted_heatpump_setpoint') %}
     {% elif setpoint == "Idle" %}
       None
     {% elif setpoint == "Default" %}

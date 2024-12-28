@@ -10,6 +10,8 @@
       Override
     {% elif is_state('binary_sensor.office_radiator_power_on_status', 'off') %}
       Off
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif is_state('input_boolean.office_early_work_mode', 'on') and is_state('binary_sensor.office_apply_occupied_setpoints', 'on') and early_work_start <= current_time <= apply_start %}
       Weekday Occupied
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
@@ -49,6 +51,8 @@
     {% set setpoint = states('sensor.office_radiator_setpoint') %}
     {% if setpoint == "Off" %}
       {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
+    {% elif setpoint == "Away" %}
+      {% states('input_number.away_office_radiator_setpoint') %}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.office_radiator_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}

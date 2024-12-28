@@ -3,6 +3,8 @@
   state: >
     {% if is_state('input_boolean.office_override_status', 'on') %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif is_state('input_boolean.office_radiator_power_on_control', 'on') %}
       On
     {% else %}
@@ -23,6 +25,8 @@
   state: >
     {% if is_state('input_boolean.family_room_override_status', 'on') %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif is_state('input_boolean.family_room_radiator_power_on_control', 'on') %}
       On
     {% else %}
@@ -47,6 +51,8 @@
     {% set comfort_threshold = states('input_number.office_heatpump_supplement_to_comfort_threshold') | float %}
     {% if override %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
@@ -75,6 +81,8 @@
     {% set comfort_threshold = states('input_number.family_room_heatpump_supplement_to_comfort_threshold') | float %}
     {% if override_status %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif outdoor_temp < off_threshold %}
       Off
     {% elif outdoor_temp <= comfort_threshold %}
@@ -86,6 +94,8 @@
     {% set mode = states('sensor.family_room_heatpump_operational_mode') %}
     {% if mode == 'Off' %}
       mdi:power-off
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% elif mode == 'Supplemental Heat' %}
       mdi:leaf
     {% elif mode == 'Override' %}
@@ -99,6 +109,8 @@
   state: >-
     {% if is_state('input_boolean.living_room_override_status', 'on') %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% else %}
       {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
       {% set off_threshold = states('input_number.living_room_heatpump_off_to_supplement_threshold') | float %}
@@ -128,6 +140,8 @@
   state: >-
     {% if is_state('input_boolean.dining_room_override_status', 'on') %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% else %}
       {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
       {% set off_threshold = states('input_number.dining_room_heatpump_off_to_supplement_threshold') | float %}
@@ -157,6 +171,8 @@
   state: >-
     {% if is_state('input_boolean.master_bedroom_override_status', 'on') %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% else %}
       {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
       {% set off_threshold = states('input_number.master_bedroom_heatpump_off_to_supplement_threshold') | float %}
@@ -186,6 +202,8 @@
   state: >-
     {% if is_state('input_boolean.erik_office_override_status', 'on') %}
       Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
     {% else %}
       {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
       {% set off_threshold = states('input_number.erik_office_heatpump_off_to_supplement_threshold') | float %}
