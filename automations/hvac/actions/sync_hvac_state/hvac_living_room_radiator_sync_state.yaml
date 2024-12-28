@@ -53,7 +53,7 @@
                 message: >
                   Mode corrected to heat.
 
-        # Correct temperature for away mode
+        # Correct temperature
         - conditions:
             - condition: state
               entity_id: binary_sensor.living_room_correct_away_mode_temperature
@@ -63,11 +63,19 @@
               data:
                 entity_id: climate.living_room_main_heating
                 temperature: >
-                  {{ states('input_number.away_living_room_radiator_setpoint') | float(0) }}
+                  {% if is_state('input_boolean.hvac_away_mode', 'on') %}
+                    {{ states('input_number.away_living_room_radiator_setpoint') | float(0) }}
+                  {% else %}
+                    {{ states('input_number.living_room_radiator_default_setpoint') | float(0) }}
+                  {% endif %}
             - service: logbook.log
               data:
                 name: "Living Room Radiator Sync Automation"
                 message: >
-                  Away mode temperature corrected to:
-                  {{ states('input_number.away_living_room_radiator_setpoint') }}°F.
+                  Temperature corrected to:
+                  {% if is_state('input_boolean.hvac_away_mode', 'on') %}
+                    {{ states('input_number.away_living_room_radiator_setpoint') }}°F (Away Mode).
+                  {% else %}
+                    {{ states('input_number.living_room_radiator_default_setpoint') }}°F (Default Mode).
+                  {% endif %}
   mode: single

@@ -31,9 +31,9 @@
     {% set away_mode_active = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set target_temp = state_attr('climate.living_room_main_heating', 'temperature') | float(0) %}
     {% set away_setpoint = states('input_number.away_living_room_radiator_setpoint') | float(0) %}
-    {{ not away_mode_active or target_temp == away_setpoint }}
+    {{ (away_mode_active and target_temp == away_setpoint) or (not away_mode_active and target_temp != away_setpoint) }}
   icon: >-
-    {% if is_state('binary_sensor.correct_away_mode_sensor', 'on') %}
+    {% if is_state('binary_sensor.living_room_correct_away_mode_temperature', 'on') %}
       mdi:thermometer-check
     {% else %}
       mdi:thermometer-alert
