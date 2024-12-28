@@ -9,7 +9,7 @@ away_for_days:
 # Office Radiator
 away_office_radiator_setpoint:
   name: Away Office Radiator Setpoint
-  min: 60
+  min: 55
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -27,7 +27,7 @@ away_office_heatpump_setpoint:
 # Family Room Radiator
 away_family_room_radiator_setpoint:
   name: Away Family Room Radiator Setpoint
-  min: 60
+  min: 55
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -45,7 +45,7 @@ away_family_room_heatpump_setpoint:
 # Living Room Radiator
 away_living_room_radiator_setpoint:
   name: Away Living Room Radiator Setpoint
-  min: 60
+  min: 55
   max: 80
   step: 1
   unit_of_measurement: "°F"
