@@ -1,3 +1,19 @@
+ducted_heatpump_off_to_supplement_threshold:
+  name: Ducted Heat Pump Off Temp
+  min: -15
+  max: 60
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 22
+
+ducted_heatpump_supplement_to_comfort_threshold:
+  name: Ducted Heat Pump Comfort Temp
+  min: -15
+  max: 60
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 40
+
 ducted_heatpump_default_temp:
   name: Ducted Heat Pump Default Temperature
   min: 62

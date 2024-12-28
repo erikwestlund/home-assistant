@@ -9,20 +9,38 @@
       Away
     {% else %}
       {% set time_period = states('sensor.ducted_time_period') %}
-      {% if time_period == 'Daytime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
-        Heating Kids Room Daytime
-      {% elif time_period == 'Daytime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
-        Heating Stairwell Daytime
-      {% elif time_period == 'Bedtime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
-        Heating Kids Room Bedtime
-      {% elif time_period == 'Bedtime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
-        Heating Stairwell Bedtime
-      {% elif time_period == 'Sleep' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
-        Heating Kids Room Sleep
-      {% elif time_period == 'Sleep' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
-        Heating Stairwell Sleep
+      {% if is_state('sensor.ducted_heat_pump_operational_mode', 'Supplemental Heat') %}
+        {% if time_period == 'Daytime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+          Supplemental Heat Kids Room Daytime
+        {% elif time_period == 'Daytime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
+          Supplemental Heat Stairwell Daytime
+        {% elif time_period == 'Bedtime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+          Supplemental Heat Kids Room Bedtime
+        {% elif time_period == 'Bedtime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
+          Supplemental Heat Stairwell Bedtime
+        {% elif time_period == 'Sleep' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+          Supplemental Heat Kids Room Sleep
+        {% elif time_period == 'Sleep' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
+          Supplemental Heat Stairwell Sleep
+        {% else %}
+          Default
+        {% endif %}
       {% else %}
-        Default
+        {% if time_period == 'Daytime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+          Heating Kids Room Daytime
+        {% elif time_period == 'Daytime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
+          Heating Stairwell Daytime
+        {% elif time_period == 'Bedtime' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+          Heating Kids Room Bedtime
+        {% elif time_period == 'Bedtime' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
+          Heating Stairwell Bedtime
+        {% elif time_period == 'Sleep' and is_state('binary_sensor.kids_rooms_need_heat', 'on') %}
+          Heating Kids Room Sleep
+        {% elif time_period == 'Sleep' and is_state('binary_sensor.stairwell_needs_heat', 'on') %}
+          Heating Stairwell Sleep
+        {% else %}
+          Default
+        {% endif %}
       {% endif %}
     {% endif %}
   icon: >-
@@ -31,16 +49,21 @@
       mdi:alert
     {% elif state == "Off" %}
       mdi:power
+    {% elif state == "Away" %}
+      mdi:walk
+    {% elif "Supplemental Heat Kids Room" in state %}
+      mdi:home-thermometer-outline
+    {% elif "Supplemental Heat Stairwell" in state %}
+      mdi:stairs
     {% elif "Kids Room" in state %}
       mdi:home-thermometer-outline
     {% elif "Stairwell" in state %}
       mdi:stairs
-    {% elif state == "Idle" %}
-      mdi:power-sleep
+    {% elif "Supplemental Heat" in state %}
+      mdi:fire
     {% else %}
       mdi:thermometer
-    {% endif %}
-    
+    {% endif %}    
 
 - name: "Ducted System Setpoint Target Temperature"
   unique_id: ducted_setpoint_target_temperature

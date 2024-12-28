@@ -227,3 +227,34 @@
     {% else %}
       mdi:thermometer
     {% endif %}
+
+- name: "Ducted Heat Pump Operational Mode"
+  unique_id: ducted_heat_pump_operational_mode
+  state: >-
+    {% if is_state('input_boolean.ducted_override_status', 'on') %}
+      Override
+    {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
+      Away
+    {% else %}
+      {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
+      {% set off_threshold = states('input_number.ducted_heatpump_off_to_supplement_threshold') | float %}
+      {% set comfort_threshold = states('input_number.ducted_heatpump_supplement_to_comfort_threshold') | float %}
+      {% if outdoor_temp < off_threshold %}
+        Off
+      {% elif outdoor_temp <= comfort_threshold %}
+        Supplemental Heat
+      {% else %}
+        Comfort
+      {% endif %}
+    {% endif %}
+  icon: >-
+    {% set mode = states('sensor.ducted_heat_pump_operational_mode') %}
+    {% if mode == 'Off' %}
+      mdi:power-off
+    {% elif mode == 'Supplemental Heat' %}
+      mdi:leaf
+    {% elif mode == 'Override' %}
+      mdi:alert
+    {% else %}
+      mdi:thermometer
+    {% endif %}

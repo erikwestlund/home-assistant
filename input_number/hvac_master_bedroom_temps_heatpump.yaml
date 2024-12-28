@@ -37,3 +37,27 @@ master_bedroom_heatpump_comfort_daytime_setpoint:
   step: 1
   unit_of_measurement: "°F"
   initial: 64
+
+master_bedroom_heatpump_supplemental_heat_sleep_setpoint:
+  name: Master Bedroom Heat Pump Supplemental Heat Temperature (Sleep)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 71
+
+master_bedroom_heatpump_supplemental_heat_bedtime_setpoint:
+  name: Master Bedroom Heat Pump Supplemental Heat Temperature (Bed Time)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+master_bedroom_heatpump_supplemental_heat_daytime_setpoint:
+  name: Master Bedroom Heat Pump Supplemental Heat Temperature (Day Time)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
