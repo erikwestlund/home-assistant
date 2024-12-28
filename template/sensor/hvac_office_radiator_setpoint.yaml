@@ -52,7 +52,7 @@
     {% if setpoint == "Off" %}
       {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
     {% elif setpoint == "Away" %}
-      {{ states('input_number.away_office_radiator_setpoint') }}
+      {{ states('input_number.f') }}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.office_radiator_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}
