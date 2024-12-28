@@ -49,32 +49,7 @@
 - name: "Erik Office Mini Split Setpoint Target Temperature"
   unique_id: erik_office_minisplit_setpoint_target_temperature
   state: >
-    {% set setpoint = states('sensor.erik_office_mini_split_setpoint') %}
-    {% if setpoint == "Off" %}
-      None
-    {% elif setpoint == "Away" %}
-      {{ states('input_number.away_erik_office_heatpump_setpoint') }}
-    {% elif setpoint == "Weekday Night" %}
-      {{ states('input_number.erik_office_heatpump_comfort_weekday_night_setpoint') }}
-    {% elif setpoint == "Weekend Night" %}
-      {{ states('input_number.erik_office_heatpump_comfort_weekend_night_setpoint') }}
-    {% elif setpoint == "Weekday Occupied" %}
-      {{ states('input_number.erik_office_heatpump_comfort_weekday_occupied_setpoint') }}
-    {% elif setpoint == "Weekday Unoccupied" %}
-      {{ states('input_number.erik_office_heatpump_comfort_weekday_unoccupied_setpoint') }}
-    {% elif setpoint == "Weekend Occupied" %}
-      {{ states('input_number.erik_office_heatpump_comfort_weekend_occupied_setpoint') }}
-    {% elif setpoint == "Weekend Unoccupied" %}
-      {{ states('input_number.erik_office_heatpump_comfort_weekend_unoccupied_setpoint') }}
-    {% elif setpoint == "Supplemental Heat" %}
-      {{ states('input_number.erik_office_heatpump_supplemental_setpoint') }}
-    {% elif setpoint == "Overheated" %}
-      {{ states('input_number.erik_office_heatpump_overheat_setpoint') }}
-    {% elif setpoint == "Override" %}
-      {{ states('input_number.erik_office_override_setpoint') }}
-    {% else %}
-      None
-    {% endif %}
+    None
   unit_of_measurement: "°F"
   icon: >-
     {% set setpoint = states('sensor.erik_office_mini_split_setpoint') %}
@@ -87,3 +62,44 @@
     {% else %}
       mdi:thermometer
     {% endif %}
+#- name: "Erik Office Mini Split Setpoint Target Temperature"
+#  unique_id: erik_office_minisplit_setpoint_target_temperature
+#  state: >
+#    {% set setpoint = states('sensor.erik_office_mini_split_setpoint') %}
+#    {% if setpoint == "Off" %}
+#      None
+#    {% elif setpoint == "Away" %}
+#      {{ states('input_number.away_erik_office_heatpump_setpoint') }}
+#    {% elif setpoint == "Weekday Night" %}
+#      {{ states('input_number.erik_office_heatpump_comfort_weekday_night_setpoint') }}
+#    {% elif setpoint == "Weekend Night" %}
+#      {{ states('input_number.erik_office_heatpump_comfort_weekend_night_setpoint') }}
+#    {% elif setpoint == "Weekday Occupied" %}
+#      {{ states('input_number.erik_office_heatpump_comfort_weekday_occupied_setpoint') }}
+#    {% elif setpoint == "Weekday Unoccupied" %}
+#      {{ states('input_number.erik_office_heatpump_comfort_weekday_unoccupied_setpoint') }}
+#    {% elif setpoint == "Weekend Occupied" %}
+#      {{ states('input_number.erik_office_heatpump_comfort_weekend_occupied_setpoint') }}
+#    {% elif setpoint == "Weekend Unoccupied" %}
+#      {{ states('input_number.erik_office_heatpump_comfort_weekend_unoccupied_setpoint') }}
+#    {% elif setpoint == "Supplemental Heat" %}
+#      {{ states('input_number.erik_office_heatpump_supplemental_setpoint') }}
+#    {% elif setpoint == "Overheated" %}
+#      {{ states('input_number.erik_office_heatpump_overheat_setpoint') }}
+#    {% elif setpoint == "Override" %}
+#      {{ states('input_number.erik_office_override_setpoint') }}
+#    {% else %}
+#      None
+#    {% endif %}
+#  unit_of_measurement: "°F"
+#  icon: >-
+#    {% set setpoint = states('sensor.erik_office_mini_split_setpoint') %}
+#    {% if setpoint == "Overheated" %}
+#      mdi:thermometer-alert
+#    {% elif setpoint == "Supplemental Heat" %}
+#      mdi:fire
+#    {% elif setpoint == "Override" %}
+#      mdi:alert
+#    {% else %}
+#      mdi:thermometer
+#    {% endif %}
