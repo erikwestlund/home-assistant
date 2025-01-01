@@ -12,7 +12,7 @@
     {% if is_state('input_boolean.office_early_work_mode', 'on') %}
       {{ early_work_start <= current_time <= early_work_end and is_state('binary_sensor.tina_home', 'on') }}
     {% else %}
-      {{ work_start <= current_time <= work_end }}
+      {{ work_start <= current_time <= work_end and is_state('binary_sensor.is_weekday', 'on') }}
     {% endif %}
   icon: >-
     {% if is_state('binary_sensor.work_hours_sensor', 'on') %}
