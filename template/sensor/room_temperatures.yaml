@@ -133,3 +133,16 @@
       states('sensor.hanks_room_temperature') | float(0)
     ] %}
     {{ (sensors | sum / sensors | length) | round(1) }}
+
+- name: "Kids Rooms + Master Bedroom Average Temperature"
+  unique_id: kids_rooms_master_bedroom_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.tillys_room_temperature') | float(0),
+      states('sensor.hanks_room_temperature') | float(0),
+      states('sensor.master_bedroom_chair_endtable_temperature') | float(0),
+      states('sensor.master_bedroom_dresser_temperature') | float(0),
+      states('sensor.master_bedroom_tina_endtable_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
