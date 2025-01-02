@@ -134,8 +134,8 @@
     ] %}
     {{ (sensors | sum / sensors | length) | round(1) }}
 
-- name: "Kids Rooms + Master Bedroom Average Temperature"
-  unique_id: kids_rooms_master_bedroom_average_temperature
+- name: "Bedrooms Average Temperature"
+  unique_id: bedrooms_average_temperature
   unit_of_measurement: "°F"
   state: >
     {% set sensors = [
