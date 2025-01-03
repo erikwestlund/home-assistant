@@ -19,9 +19,8 @@
 - name: "Family Room Occupancy Detected"
   unique_id: family_room_occupancy_detected
   device_class: occupancy
-  state: >
-    {{ is_state('binary_sensor.family_room_heating_occupancy', 'on')
-      or is_state('binary_sensor.bookshelf_occupancy', 'on')
+  state: > # removed is_state('binary_sensor.family_room_heating_occupancy', 'on') bc false positive
+    {{ is_state('binary_sensor.bookshelf_occupancy', 'on')
       or is_state('binary_sensor.lamp_occupancy', 'on') }}
 
 - name: "Family Room Occupied"
