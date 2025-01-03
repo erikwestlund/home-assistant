@@ -96,7 +96,9 @@
   unique_id: master_bedroom_occupancy_detected
   device_class: occupancy
   state: >
-    {{ is_state('binary_sensor.master_bedroom_occupancy', 'on') }}
+    {{ is_state('binary_sensor.master_bedroom_dresser_occupancy', 'on')
+          or is_state('binary_sensor.master_bedroom_chair_endtable_occupancy', 'on')
+          or is_state('binary_sensor.master_bedroom_tina_endtable_occupancy', 'on') }}
 
 - name: "Master Bedroom Occupied"
   unique_id: master_bedroom_occupied
