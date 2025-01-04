@@ -111,6 +111,8 @@
       Override
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       Away
+    {% elif is_state('binary_sensor.living_room_boost_mode_active', 'on') %}
+      Boost
     {% else %}
       {% set outdoor_temp = states('sensor.current_nws_outdoor_temperature') | float %}
       {% set off_threshold = states('input_number.living_room_heatpump_off_to_supplement_threshold') | float %}
