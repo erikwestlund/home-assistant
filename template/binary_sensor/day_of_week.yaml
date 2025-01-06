@@ -7,12 +7,17 @@
     {% set independence_day = now().replace(month=7, day=4).date() %}
     {% set juneteenth = now().replace(month=6, day=19).date() %}
     {% set veterans_day = now().replace(month=11, day=11).date() %}
-  
-    {% set mlk_day = (now().replace(month=1, day=1) + timedelta(days=(0 - now().replace(month=1, day=1).weekday() + 14) % 7)).date() %}
+
+    {% set jan_first = now().replace(month=1, day=1) %}
+    {% set offset = (0 - jan_first.weekday() + 7) % 7 %}
+    {% set mlk_day = (jan_first + timedelta(days=offset + 14)).date() %}      
+
     {% set memorial_day = (now().replace(month=5, day=31) - timedelta(days=now().replace(month=5, day=31).weekday())).date() %}
     {% set labor_day = (now().replace(month=9, day=1) + timedelta(days=(0 - now().replace(month=9, day=1).weekday()))).date() %}
   
-    {% set thanksgiving = (now().replace(month=11, day=1) + timedelta(days=(3 - now().replace(month=11, day=1).weekday() + 21) % 7)).date() %}
+    {% set nov_first = now().replace(month=11, day=1) %}
+    {% set offset = (3 - nov_first.weekday() + 7) % 7 %}
+    {% set thanksgiving = (nov_first + timedelta(days=offset + 21)).date() %}
     {% set day_before_thanksgiving = thanksgiving - timedelta(days=1) %}
     {% set day_after_thanksgiving = thanksgiving + timedelta(days=1) %}
   
