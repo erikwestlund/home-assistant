@@ -2,7 +2,7 @@ office_early_work_mode_day_start_time:
   name: Tina Office Early Work Mode Day Start Time
   has_time: true
   has_date: false
-  initial: "03:00:00"
+  initial: "03:30:00"
 
 office_early_work_mode_day_end_time:
   name: Tina Office Early Work Mode Day End Time
@@ -14,7 +14,7 @@ office_apply_occupied_start_time:
   name: Tina Office Apply Occupied Start Time
   has_time: true
   has_date: false
-  initial: "09:00:00"
+  initial: "08:00:00"
 
 office_apply_occupied_end_time:
   name: Tina Office Apply Occupied End Time

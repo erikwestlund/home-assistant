@@ -4,7 +4,7 @@ family_room_heatpump_supplemental_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 65
+  initial: 64
 
 family_room_heatpump_overheat_setpoint:
   name: Family Room Heat Overheated Temperature
@@ -12,7 +12,7 @@ family_room_heatpump_overheat_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 65
+  initial: 64
 
 family_room_heatpump_comfort_night_setpoint:
   name: Family Room Heat Pump Comfort Temperature (Night)
@@ -44,7 +44,7 @@ family_room_heatpump_comfort_weekday_occupied_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 67
+  initial: 66
 
 family_room_heatpump_comfort_weekday_unoccupied_setpoint:
   name: Family Room Heat Pump Comfort Temperature (Weekday Unoccupied)
@@ -60,7 +60,7 @@ family_room_heatpump_comfort_weekend_occupied_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 69
+  initial: 68
 
 family_room_heatpump_comfort_weekend_unoccupied_setpoint:
   name: Family Room Heat Pump Comfort Temperature (Weekend Unoccupied)

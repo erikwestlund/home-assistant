@@ -4,7 +4,7 @@ living_room_heatpump_off_to_supplement_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 22
+  initial: 50
 
 living_room_heatpump_supplement_to_comfort_threshold:
   name: Living Room Heat Pump Comfort Temp
@@ -12,7 +12,7 @@ living_room_heatpump_supplement_to_comfort_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 40
+  initial: 50
 
 living_room_heatpump_boost_off_threshold:
   name: Living Room Boost Off Temp
@@ -60,7 +60,7 @@ living_room_boost_setpoint_heat_trigger_threshold_offset:
   max: 10
   step: 0.5
   unit_of_measurement: "°F"
-  initial: 2
+  initial: 1
 
 living_room_boost_setpoint_heat_stop_threshold_offset:
   name: Living Room Boost Heat Stop Threshold Offset
@@ -68,4 +68,4 @@ living_room_boost_setpoint_heat_stop_threshold_offset:
   max: 10
   step: 0.5
   unit_of_measurement: "°F"
-  initial: 1
+  initial: 0.5

@@ -4,7 +4,7 @@ family_room_heatpump_off_to_supplement_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 22
+  initial: 33
 
 family_room_heatpump_supplement_to_comfort_threshold:
   name: Family Room Heat Pump Comfort Temp
@@ -12,7 +12,7 @@ family_room_heatpump_supplement_to_comfort_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 37
+  initial: 39
 
 family_room_overheated_threshold:
   name: Family Room Overheat Threshold

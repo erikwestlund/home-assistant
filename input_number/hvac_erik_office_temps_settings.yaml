@@ -4,7 +4,7 @@ erik_office_heatpump_off_to_supplement_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 22
+  initial: -13
 
 erik_office_heatpump_supplement_to_comfort_threshold:
   name: Erik Office Heat Pump Comfort Temp
@@ -12,7 +12,7 @@ erik_office_heatpump_supplement_to_comfort_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 32
+  initial: -10
 
 erik_office_overheated_threshold:
   name: Erik Office Overheat Threshold

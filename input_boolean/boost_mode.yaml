@@ -1,4 +1,4 @@
 living_room_boost_mode_enabled:
   name: Boost Mode Enabled
-  initial: off
+  initial: on
   icon: mdi:cancel

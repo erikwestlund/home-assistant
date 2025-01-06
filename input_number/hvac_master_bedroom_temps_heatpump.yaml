@@ -20,7 +20,7 @@ master_bedroom_heatpump_comfort_sleep_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 71
+  initial: 75
 
 master_bedroom_heatpump_comfort_bedtime_setpoint:
   name: Master Bedroom Heat Pump Comfort Temperature (Bed Time)
@@ -28,7 +28,7 @@ master_bedroom_heatpump_comfort_bedtime_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 66
+  initial: 75
 
 master_bedroom_heatpump_comfort_daytime_setpoint:
   name: Master Bedroom Heat Pump Comfort Temperature (Day Time)
@@ -36,7 +36,7 @@ master_bedroom_heatpump_comfort_daytime_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  initial: 72
 
 master_bedroom_heatpump_supplemental_heat_sleep_setpoint:
   name: Master Bedroom Heat Pump Supplemental Heat Temperature (Sleep)
@@ -44,7 +44,7 @@ master_bedroom_heatpump_supplemental_heat_sleep_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 71
+  initial: 75
 
 master_bedroom_heatpump_supplemental_heat_bedtime_setpoint:
   name: Master Bedroom Heat Pump Supplemental Heat Temperature (Bed Time)
@@ -52,7 +52,7 @@ master_bedroom_heatpump_supplemental_heat_bedtime_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 66
+  initial: 75
 
 master_bedroom_heatpump_supplemental_heat_daytime_setpoint:
   name: Master Bedroom Heat Pump Supplemental Heat Temperature (Day Time)
@@ -60,4 +60,4 @@ master_bedroom_heatpump_supplemental_heat_daytime_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  initial: 70

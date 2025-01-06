@@ -4,7 +4,7 @@ master_bedroom_heatpump_off_to_supplement_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 22
+  initial: -13
 
 master_bedroom_heatpump_supplement_to_comfort_threshold:
   name: Master Bedroom Heat Pump Comfort Temp

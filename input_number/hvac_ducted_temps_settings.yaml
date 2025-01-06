@@ -4,7 +4,7 @@ ducted_heatpump_off_to_supplement_threshold:
   max: 60
   step: 1
   unit_of_measurement: "°F"
-  initial: 22
+  initial: -13
 
 ducted_heatpump_supplement_to_comfort_threshold:
   name: Ducted Heat Pump Comfort Temp
@@ -31,12 +31,12 @@ ducted_heatpump_heating_temp:
   initial: 72
 
 ducted_setpoint_heat_trigger_threshold_offset:
-    name: Ducted Heat Trigger Threshold Offset
-    min: 0
-    max: 10
-    step: 0.5
-    unit_of_measurement: "°F"
-    initial: 2
+  name: Ducted Heat Trigger Threshold Offset
+  min: 0
+  max: 10
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 1
 
 ducted_setpoint_heat_stop_threshold_offset:
   name: Ducted Heat Stop Threshold Offset
@@ -52,7 +52,7 @@ ducted_override_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 72
 
 ducted_override_for_hours:
   name: Ducted Override For Hours

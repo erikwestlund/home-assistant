@@ -18,7 +18,7 @@ away_office_radiator_setpoint:
 # Office Heat Pump
 away_office_heatpump_setpoint:
   name: Away Office Heat Pump Setpoint
-  min: 60
+  min: 64
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -36,7 +36,7 @@ away_family_room_radiator_setpoint:
 # Family Room Heat Pump
 away_family_room_heatpump_setpoint:
   name: Away Family Room Heat Pump Setpoint
-  min: 60
+  min: 64
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -54,7 +54,7 @@ away_living_room_radiator_setpoint:
 # Living Room Heat Pump
 away_living_room_heatpump_setpoint:
   name: Away Living Room Heat Pump Setpoint
-  min: 60
+  min: 64
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -63,7 +63,7 @@ away_living_room_heatpump_setpoint:
 # Dining Room Heat Pump
 away_dining_room_heatpump_setpoint:
   name: Away Dining Room Heat Pump Setpoint
-  min: 60
+  min: 64
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -72,7 +72,7 @@ away_dining_room_heatpump_setpoint:
 # Erik Office Heat Pump
 away_erik_office_heatpump_setpoint:
   name: Away Erik Office Heat Pump Setpoint
-  min: 60
+  min: 64
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -81,7 +81,7 @@ away_erik_office_heatpump_setpoint:
 # Master Bedroom Heat Pump
 away_master_bedroom_heatpump_setpoint:
   name: Away Master Bedroom Heat Pump Setpoint
-  min: 60
+  min: 64
   max: 80
   step: 1
   unit_of_measurement: "°F"
@@ -90,7 +90,7 @@ away_master_bedroom_heatpump_setpoint:
 # Ducted System
 away_ducted_heatpump_setpoint:
   name: Away Ducted Heat Pump Setpoint
-  min: 60
+  min: 61
   max: 80
   step: 1
   unit_of_measurement: "°F"
