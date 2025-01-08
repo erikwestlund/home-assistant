@@ -72,7 +72,7 @@ hvac_master_bedroom_mini_split_away_setpoint:
 
 hvac_kids_rooms_ducted_away_setpoint:
   name: HVAC Kids Rooms Ducted Away Setpoint
-  min: 64
+  min: 62
   max: 86
   step: 1
   unit_of_measurement: "°F"
