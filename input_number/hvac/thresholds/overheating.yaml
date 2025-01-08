@@ -1,4 +1,4 @@
-hvac_living_room_mini_split_overheated_threshold:
+hvac_mini_split_overheated_threshold_living_room:
   name: HVAC Living Room Mini Split Overheated Threshold
   min: -20
   max: 120

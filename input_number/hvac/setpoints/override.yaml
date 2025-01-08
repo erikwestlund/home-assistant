@@ -1,5 +1,5 @@
 # Office (Mini Split)
-hvac_office_mini_split_override_setpoint:
+hvac_mini_split_override_setpoint_office:
   name: HVAC Office Mini Split Override Setpoint
   min: 64
   max: 86
@@ -8,7 +8,7 @@ hvac_office_mini_split_override_setpoint:
   initial: 72
 
 # Office (Radiator)
-hvac_office_radiator_override_setpoint:
+hvac_radiator_override_setpoint_office:
   name: HVAC Office Radiator Override Setpoint
   min: 64
   max: 86
@@ -17,7 +17,7 @@ hvac_office_radiator_override_setpoint:
   initial: 72
 
 # Family Room (Mini Split)
-hvac_family_room_mini_split_override_setpoint:
+hvac_mini_split_override_setpoint_family_room:
   name: HVAC Family Room Mini Split Override Setpoint
   min: 64
   max: 86
@@ -26,7 +26,7 @@ hvac_family_room_mini_split_override_setpoint:
   initial: 72
 
 # Family Room (Radiator)
-hvac_family_room_radiator_override_setpoint:
+hvac_radiator_override_setpoint_family_room:
   name: HVAC Family Room Radiator Override Setpoint
   min: 64
   max: 86
@@ -35,7 +35,7 @@ hvac_family_room_radiator_override_setpoint:
   initial: 72
 
 # Living Room (Mini Split)
-hvac_living_room_mini_split_override_setpoint:
+hvac_mini_split_override_setpoint_living_room:
   name: HVAC Living Room Mini Split Override Setpoint
   min: 64
   max: 86
@@ -44,7 +44,7 @@ hvac_living_room_mini_split_override_setpoint:
   initial: 72
 
 # Main Zone (Radiator)
-hvac_main_zone_radiator_override_setpoint:
+hvac_radiator_override_setpoint_main_zone:
   name: HVAC Main Zone Radiator Override Setpoint
   min: 64
   max: 86
@@ -53,7 +53,7 @@ hvac_main_zone_radiator_override_setpoint:
   initial: 72
 
 # Dining Room (Mini Split)
-hvac_dining_room_mini_split_override_setpoint:
+hvac_mini_split_override_setpoint_dining_room:
   name: HVAC Dining Room Mini Split Override Setpoint
   min: 64
   max: 86
@@ -62,7 +62,7 @@ hvac_dining_room_mini_split_override_setpoint:
   initial: 72
 
 # Erik Office (Mini Split)
-hvac_erik_office_mini_split_override_setpoint:
+hvac_mini_split_override_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Override Setpoint
   min: 64
   max: 86
@@ -71,7 +71,7 @@ hvac_erik_office_mini_split_override_setpoint:
   initial: 72
 
 # Master Bedroom (Mini Split)
-hvac_master_bedroom_mini_split_override_setpoint:
+hvac_mini_split_override_setpoint_master_bedroom:
   name: HVAC Master Bedroom Mini Split Override Setpoint
   min: 64
   max: 86

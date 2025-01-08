@@ -1,4 +1,4 @@
-hvac_office_override_duration_hours:
+hvac_override_duration_hours_office:
   name: HVAC Office Override Duration
   min: 0
   max: 24
@@ -6,7 +6,7 @@ hvac_office_override_duration_hours:
   unit_of_measurement: "hours"
   initial: 1
 
-hvac_family_room_override_duration_hours:
+hvac_override_duration_hours_family_room:
   name: HVAC Family Room Override Duration
   min: 0
   max: 24
@@ -14,7 +14,7 @@ hvac_family_room_override_duration_hours:
   unit_of_measurement: "hours"
   initial: 1
 
-hvac_living_room_override_duration_hours:
+hvac_override_duration_hours_living_room:
   name: HVAC Living Room Override Duration
   min: 0
   max: 24
@@ -22,7 +22,7 @@ hvac_living_room_override_duration_hours:
   unit_of_measurement: "hours"
   initial: 1
 
-hvac_dining_room_override_duration_hours:
+hvac_override_duration_hours_dining_room:
   name: HVAC Dining Room Override Duration
   min: 0
   max: 24
@@ -30,7 +30,7 @@ hvac_dining_room_override_duration_hours:
   unit_of_measurement: "hours"
   initial: 1
 
-hvac_erik_office_override_duration_hours:
+hvac_override_duration_hours_erik_office:
   name: HVAC Erik Office Override Duration
   min: 0
   max: 24
@@ -38,7 +38,7 @@ hvac_erik_office_override_duration_hours:
   unit_of_measurement: "hours"
   initial: 1
 
-hvac_master_bedroom_override_duration_hours:
+hvac_override_duration_hours_master_bedroom:
   name: HVAC Master Bedroom Override Duration
   min: 0
   max: 24
@@ -46,7 +46,7 @@ hvac_master_bedroom_override_duration_hours:
   unit_of_measurement: "hours"
   initial: 1
 
-hvac_kids_rooms_override_duration_hours:
+hvac_override_duration_hours_kids_rooms:
   name: HVAC Kids Rooms Override Duration
   min: 0
   max: 24

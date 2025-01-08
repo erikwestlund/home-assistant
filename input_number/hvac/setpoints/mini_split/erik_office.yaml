@@ -1,4 +1,4 @@
-hvac_erik_office_mini_split_weekday_occupied_setpoint:
+hvac_mini_split_weekday_occupied_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Weekday Occupied Setpoint
   min: 64
   max: 86
@@ -6,7 +6,7 @@ hvac_erik_office_mini_split_weekday_occupied_setpoint:
   unit_of_measurement: "°F"
   initial: 70
 
-hvac_erik_office_mini_split_weekday_unoccupied_setpoint:
+hvac_mini_split_weekday_unoccupied_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Weekday Unoccupied Setpoint
   min: 64
   max: 86
@@ -14,7 +14,7 @@ hvac_erik_office_mini_split_weekday_unoccupied_setpoint:
   unit_of_measurement: "°F"
   initial: 68
 
-hvac_erik_office_mini_split_weekend_setpoint:
+hvac_mini_split_weekend_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Weekend Setpoint
   min: 64
   max: 86
@@ -22,7 +22,7 @@ hvac_erik_office_mini_split_weekend_setpoint:
   unit_of_measurement: "°F"
   initial: 64
 
-hvac_erik_office_mini_split_night_setpoint:
+hvac_mini_split_night_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Night Setpoint
   min: 64
   max: 86

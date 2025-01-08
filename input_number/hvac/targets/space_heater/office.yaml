@@ -1,4 +1,4 @@
-hvac_office_space_heater_target:
+hvac_target_office_space_heater:
   name: HVAC Office Radiator Night Target
   min: 64
   max: 86

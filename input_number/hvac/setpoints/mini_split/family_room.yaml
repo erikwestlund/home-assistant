@@ -1,4 +1,4 @@
-hvac_family_room_mini_split_weekday_day_setpoint:
+hvac_mini_split_weekday_day_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekday Daytime Setpoint
   min: 64
   max: 86
@@ -6,7 +6,7 @@ hvac_family_room_mini_split_weekday_day_setpoint:
   unit_of_measurement: "°F"
   initial: 70
 
-hvac_family_room_mini_split_weekend_day_setpoint:
+hvac_mini_split_weekend_day_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekend Daytime Setpoint
   min: 64
   max: 86
@@ -14,7 +14,7 @@ hvac_family_room_mini_split_weekend_day_setpoint:
   unit_of_measurement: "°F"
   initial: 72
 
-hvac_family_room_mini_split_weekday_night_setpoint:
+hvac_mini_split_weekday_night_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekday Nighttime Setpoint
   min: 64
   max: 86
@@ -22,7 +22,7 @@ hvac_family_room_mini_split_weekday_night_setpoint:
   unit_of_measurement: "°F"
   initial: 66
 
-hvac_family_room_mini_split_weekend_night_setpoint:
+hvac_mini_split_weekend_night_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekend Nighttime Setpoint
   min: 64
   max: 86

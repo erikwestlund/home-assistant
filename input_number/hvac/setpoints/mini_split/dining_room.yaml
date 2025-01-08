@@ -1,4 +1,4 @@
-hvac_dining_room_mini_split_day_setpoint:
+hvac_mini_split_day_setpoint_dining_room:
   name: HVAC Dining Room Mini Split Day Setpoint
   min: 64
   max: 86
@@ -6,7 +6,7 @@ hvac_dining_room_mini_split_day_setpoint:
   unit_of_measurement: "°F"
   initial: 72
 
-hvac_dining_room_mini_split_night_setpoint:
+hvac_mini_split_night_setpoint_dining_room:
   name: HVAC Dining Room Mini Split Night Setpoint
   min: 64
   max: 86

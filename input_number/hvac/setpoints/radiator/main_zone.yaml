@@ -1,4 +1,4 @@
-hvac_main_zone_radiator_weekday_setpoint:
+hvac_radiator_weekday_setpoint_main_zone:
   name: HVAC Main Zone Radiator Weekday Setpoint
   min: 64
   max: 86
@@ -6,7 +6,7 @@ hvac_main_zone_radiator_weekday_setpoint:
   unit_of_measurement: "°F"
   initial: 68
 
-hvac_main_zone_radiator_weekend_setpoint:
+hvac_radiator_weekend_setpoint_main_zone:
   name: HVAC Main Zone Radiator Weekend Setpoint
   min: 64
   max: 86
@@ -14,7 +14,7 @@ hvac_main_zone_radiator_weekend_setpoint:
   unit_of_measurement: "°F"
   initial: 69
 
-hvac_main_zone_radiator_night_setpoint:
+hvac_radiator_night_setpoint_main_zone:
   name: HVAC Main Zone Radiator Night Setpoint
   min: 64
   max: 86
