@@ -1,8 +1,8 @@
-- platform: rest
-  unique_id: "openweather_hourly_forecast"
-  name: "OpenWeather Hourly Forecast"
-  resource: !secret openweather_api_url
-  scan_interval: 300
-  value_template: "{{ value_json.current.temp }}"
-  json_attributes:
-    - hourly
+#- platform: rest
+#  unique_id: "openweather_hourly_forecast"
+#  name: "OpenWeather Hourly Forecast"
+#  resource: !secret openweather_api_url
+#  scan_interval: 300
+#  value_template: "{{ value_json.current.temp }}"
+#  json_attributes:
+#    - hourly
