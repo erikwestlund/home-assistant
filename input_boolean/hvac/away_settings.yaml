@@ -10,9 +10,9 @@ hvac_away_radiator_on_office:
   initial: on
   icon: mdi:radiator
 
-# Office Heat Pump
-hvac_away_heatpump_on_office:
-  name: HVAC Away Office Heat Pump On
+# Office Mini Split
+hvac_away_mini_split_on_office:
+  name: HVAC Away Office Mini Split On
   initial: off
   icon: mdi:radiator
 
@@ -22,9 +22,9 @@ hvac_away_radiator_on_family_room:
   initial: on
   icon: mdi:radiator
 
-# Family Room Heat Pump
-hvac_away_heatpump_on_family_room:
-  name: HVAC Away Family Room Heat Pump On
+# Family Room Mini Split
+hvac_away_mini_split_on_family_room:
+  name: HVAC Away Family Room Mini Split On
   initial: off
   icon: mdi:radiator
 
@@ -34,32 +34,32 @@ hvac_away_radiator_on_living_room:
   initial: on
   icon: mdi:radiator
 
-# Living Room Heat Pump
-hvac_away_heatpump_on_living_room:
-  name: HVAC Away Living Room Heat Pump On
+# Living Room Mini Split
+hvac_away_mini_split_on_living_room:
+  name: HVAC Away Living Room Mini Split On
   initial: off
   icon: mdi:radiator
 
-# Dining Room Heat Pump
-hvac_away_heatpump_on_dining_room:
-  name: HVAC Away Dining Room Heat Pump On
+# Dining Room Mini Split
+hvac_away_mini_split_on_dining_room:
+  name: HVAC Away Dining Room Mini Split On
   initial: off
   icon: mdi:radiator
 
-# Erik Office Heat Pump
-hvac_away_heatpump_on_erik_office:
-  name: HVAC Away Erik Office Heat Pump On
+# Erik Office Mini Split
+hvac_away_mini_split_on_erik_office:
+  name: HVAC Away Erik Office Mini Split On
   initial: off
   icon: mdi:radiator
 
-# Master Bedroom Heat Pump
-hvac_away_heatpump_on_master_bedroom:
-  name: HVAC Away Master Bedroom Heat Pump On
+# Master Bedroom Mini Split
+hvac_away_mini_split_on_master_bedroom:
+  name: HVAC Away Master Bedroom Mini Split On
   initial: off
   icon: mdi:radiator
 
 # Ducted System
-hvac_away_heatpump_on_ducted:
-  name: HVAC Away Ducted Heat Pump On
+hvac_away_mini_split_on_ducted:
+  name: HVAC Away Ducted Mini Split On
   initial: off
   icon: mdi:radiator
