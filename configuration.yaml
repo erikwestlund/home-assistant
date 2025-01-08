@@ -26,5 +26,4 @@ lovelace:
       title: "HVAC"
       icon: mdi:desktop-classic
       show_in_sidebar: true
-      mode: yaml
-      filename: dashboards/hvac.yaml
+      mode: storage
