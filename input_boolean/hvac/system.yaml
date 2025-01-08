@@ -1,0 +1,4 @@
+hvac_control:
+  name: Home Assistant HVAC Control
+  initial: on
+  icon: mdi:cancel
