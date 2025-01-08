@@ -3,6 +3,11 @@ hvac_override_status_office:
   initial: off
   icon: mdi:cancel
 
+hvac_override_status_office_space_heater:
+  name: HVAC Office Space Heater Override
+  initial: off
+  icon: mdi:cancel
+
 hvac_override_status_family_room:
   name: HVAC Family Room Override
   initial: off
