@@ -1,0 +1,15 @@
+hvac_master_bedroom_mini_split_day_setpoint:
+  name: HVAC Master Bedroom Mini Split Day Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+hvac_master_bedroom_mini_split_night_setpoint:
+  name: HVAC Master Bedroom Mini Split Night Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 78

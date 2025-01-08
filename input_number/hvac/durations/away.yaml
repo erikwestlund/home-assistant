@@ -1,0 +1,7 @@
+hvac_away_duration_days:
+  name: HVAC Away Duration Days
+  min: 0
+  max: 30
+  step: 0.5
+  unit_of_measurement: "days"
+  initial: 3

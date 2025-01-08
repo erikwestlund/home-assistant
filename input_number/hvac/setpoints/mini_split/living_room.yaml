@@ -1,0 +1,23 @@
+hvac_living_room_mini_split_weekday_setpoint:
+  name: HVAC Living Room Mini Split Weekday Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 68
+
+hvac_living_room_mini_split_weekend_setpoint:
+  name: HVAC Living Room Mini Split Weekend Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 70
+
+hvac_living_room_mini_split_night_setpoint:
+  name: HVAC Living Room Mini Split Night Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66

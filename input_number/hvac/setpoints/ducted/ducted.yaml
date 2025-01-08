@@ -1,0 +1,15 @@
+hvac_ducted_off_setpoint:
+  name: HVAC Ducted Off Setpoint
+  min: 50
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 62
+
+hvac_ducted_active_setpoint:
+  name: HVAC Ducted Active Setpoint
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72

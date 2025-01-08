@@ -1,6 +1,0 @@
-sensor.hvac_mode:
-  templates:
-    icon_color: >
-      if (state === 'Heat') return 'red';
-      if (state === 'Cool') return 'blue';
-      return 'grey';

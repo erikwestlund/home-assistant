@@ -1,0 +1,7 @@
+hvac_office_space_heater_target:
+  name: HVAC Office Radiator Night Target
+  min: 64
+  max: 86
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 67

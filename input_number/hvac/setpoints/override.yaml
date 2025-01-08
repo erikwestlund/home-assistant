@@ -1,0 +1,89 @@
+# Office (Mini Split)
+hvac_office_mini_split_override_setpoint:
+  name: HVAC Office Mini Split Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Office (Radiator)
+hvac_office_radiator_override_setpoint:
+  name: HVAC Office Radiator Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Family Room (Mini Split)
+hvac_family_room_mini_split_override_setpoint:
+  name: HVAC Family Room Mini Split Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Family Room (Radiator)
+hvac_family_room_radiator_override_setpoint:
+  name: HVAC Family Room Radiator Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Living Room (Mini Split)
+hvac_living_room_mini_split_override_setpoint:
+  name: HVAC Living Room Mini Split Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Main Zone (Radiator)
+hvac_main_zone_radiator_override_setpoint:
+  name: HVAC Main Zone Radiator Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Dining Room (Mini Split)
+hvac_dining_room_mini_split_override_setpoint:
+  name: HVAC Dining Room Mini Split Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Erik Office (Mini Split)
+hvac_erik_office_mini_split_override_setpoint:
+  name: HVAC Erik Office Mini Split Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Master Bedroom (Mini Split)
+hvac_master_bedroom_mini_split_override_setpoint:
+  name: HVAC Master Bedroom Mini Split Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Kids Rooms (Ducted)
+hvac_kids_rooms_ducted_override_setpoint:
+  name: HVAC Kids Rooms Ducted Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72

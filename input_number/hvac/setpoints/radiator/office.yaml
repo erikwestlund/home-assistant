@@ -1,0 +1,31 @@
+hvac_office_radiator_weekday_occupied_setpoint:
+  name: HVAC Office Radiator Weekday Occupied Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+hvac_office_radiator_weekday_unoccupied_setpoint:
+  name: HVAC Office Radiator Weekday Unoccupied Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66
+
+hvac_office_radiator_weekend_setpoint:
+  name: HVAC Office Radiator Weekend Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 69
+
+hvac_office_radiator_night_setpoint:
+  name: HVAC Office Radiator Night Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66

@@ -1,0 +1,15 @@
+hvac_kids_rooms_day_target:
+  name: HVAC Kids Rooms Day Target
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 70
+
+hvac_kids_rooms_night_target:
+  name: HVAC Kids Rooms Night Target
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 66

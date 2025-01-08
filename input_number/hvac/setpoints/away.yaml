@@ -1,0 +1,79 @@
+hvac_office_mini_split_away_setpoint:
+  name: HVAC Office Mini Split Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+hvac_office_radiator_away_setpoint:
+  name: HVAC Office Radiator Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
+hvac_family_room_mini_split_away_setpoint:
+  name: HVAC Family Room Mini Split Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+hvac_family_room_radiator_away_setpoint:
+  name: HVAC Family Room Radiator Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
+hvac_living_room_mini_split_away_setpoint:
+  name: HVAC Living Room Mini Split Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+hvac_main_zone_radiator_away_setpoint:
+  name: HVAC Main Zone Radiator Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
+hvac_dining_room_mini_split_away_setpoint:
+  name: HVAC Dining Room Mini Split Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+hvac_erik_office_mini_split_away_setpoint:
+  name: HVAC Erik Office Mini Split Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+hvac_master_bedroom_mini_split_away_setpoint:
+  name: HVAC Master Bedroom Mini Split Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 64
+
+hvac_kids_rooms_ducted_away_setpoint:
+  name: HVAC Kids Rooms Ducted Away Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 62

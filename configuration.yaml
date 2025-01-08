@@ -19,6 +19,3 @@ template:
   - binary_sensor: !include_dir_merge_list template/binary_sensor/
 
 sensor: !include_dir_merge_list sensors/
-
-homeassistant:
-  customize: !include customize.yaml

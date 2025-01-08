@@ -1,0 +1,31 @@
+hvac_ducted_under_target_start_threshold:
+  name: HVAC Ducted Under Target Start Threshold
+  min: 0
+  max: 5
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 1
+
+hvac_ducted_over_target_stop_threshold:
+  name: HVAC Ducted Over Target Stop Threshold
+  min: 0
+  max: 5
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 1
+
+hvac_office_space_heater_under_target_start_threshold:
+  name: HVAC Office Space Heater Under Target Start Threshold
+  min: 0
+  max: 5
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 1
+
+hvac_office_space_heater_over_target_stop_threshold:
+  name: HVAC Office Space Heater Over Target Stop Threshold
+  min: -2
+  max: 5
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 0
