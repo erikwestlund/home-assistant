@@ -1,0 +1,13 @@
+- platform: rest
+  unique_id: "pirate_weather_date"
+  name: "Pirate Weather"
+  resource: !secret pirate_weather_api_url
+  scan_interval: 300
+  value_template: "{{ value_json.currently.temperature if value_json is not none else 'unavailable' }}"
+  json_attributes:
+    - currently
+    - minutely
+    - hourly
+    - daily
+    - alerts
+    - flags
