@@ -1,5 +1,5 @@
-hvac_target_office_space_heater:
-  name: HVAC Office Radiator Night Target
+hvac_space_heater_target_office:
+  name: HVAC Space Heater Office Target
   min: 64
   max: 86
   step: 0.5

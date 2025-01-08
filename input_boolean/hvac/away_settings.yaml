@@ -28,9 +28,9 @@ hvac_away_mini_split_on_family_room:
   initial: off
   icon: mdi:radiator
 
-# Living Room Radiator
-hvac_away_radiator_on_living_room:
-  name: HVAC Away Living Room Radiator On
+# Main Zone Radiators
+hvac_away_radiator_on_main_zone:
+  name: HVAC Away Main Zone Radiators On
   initial: on
   icon: mdi:radiator
 
