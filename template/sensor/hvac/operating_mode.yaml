@@ -5,5 +5,5 @@
     {% set threshold = states('input_number.hvac_heat_to_cool_threshold') | float %}
     {{ 'Heat' if avg_temp < threshold else 'Cool' }}
   icon: >
-    {% set mode = states('sensor.hvac_mode_selector') %}
+    {% set mode = states('sensor.hvac_mode') %}
     {{ 'mdi:fire' if mode == 'Heat' else 'mdi:snowflake' }}
