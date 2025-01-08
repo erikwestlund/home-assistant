@@ -4,7 +4,7 @@ hvac_mini_split_weekday_occupied_setpoint_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  initial: 76
 
 hvac_mini_split_weekday_unoccupied_setpoint_office:
   name: HVAC Office Mini Split Weekday Unoccupied Setpoint
@@ -20,7 +20,7 @@ hvac_mini_split_weekend_setpoint_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 72
 
 hvac_mini_split_night_setpoint_office:
   name: HVAC Office Mini Split Night Setpoint
