@@ -8,7 +8,7 @@ hvac_office_mini_split_away_setpoint:
 
 hvac_office_radiator_away_setpoint:
   name: HVAC Office Radiator Away Setpoint
-  min: 64
+  min: 50
   max: 86
   step: 1
   unit_of_measurement: "°F"
@@ -24,7 +24,7 @@ hvac_family_room_mini_split_away_setpoint:
 
 hvac_family_room_radiator_away_setpoint:
   name: HVAC Family Room Radiator Away Setpoint
-  min: 64
+  min: 50
   max: 86
   step: 1
   unit_of_measurement: "°F"
@@ -40,7 +40,7 @@ hvac_living_room_mini_split_away_setpoint:
 
 hvac_main_zone_radiator_away_setpoint:
   name: HVAC Main Zone Radiator Away Setpoint
-  min: 64
+  min: 50
   max: 86
   step: 1
   unit_of_measurement: "°F"
