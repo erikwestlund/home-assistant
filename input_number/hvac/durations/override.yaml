@@ -7,7 +7,7 @@ hvac_override_duration_hours_office:
   initial: 1
 
 hvac_override_duration_hours_office_space_heater:
-  name: HVAC Office Override Duration
+  name: HVAC Office Space Heater Override Duration
   min: 0
   max: 6
   step: 0.25
