@@ -1,0 +1,34 @@
+hvac_override_status_office:
+  name: HVAC Office Override
+  initial: off
+  icon: mdi:cancel
+
+hvac_fami_override_statusly_room:
+  name: HVAC Family Room Override
+  initial: off
+  icon: mdi:cancel
+
+hvac_livi_override_statusng_room:
+  name: HVAC Living Room Override
+  initial: off
+  icon: mdi:cancel
+
+hvac_master__override_statusbedroom:
+  name: HVAC Master Bedroom Override
+  initial: off
+  icon: mdi:cancel
+
+hvac_dini_override_statusng_room:
+  name: HVAC Dining Room Override
+  initial: off
+  icon: mdi:cancel
+
+hvac_erik_override_status_office:
+  name: HVAC Erik's Office Room Override
+  initial: off
+  icon: mdi:cancel
+
+hvac_override_status_ducted:
+  name: HVAC Ducted Rooms Override
+  initial: off
+  icon: mdi:cancel
