@@ -1,4 +1,5 @@
 - name: "Daytime Max Temperature"
+  unique_id: daytime_max_temperature
   unit_of_measurement: "°F"
   state: >
     {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
@@ -7,6 +8,7 @@
     {{ daytime_temps | max if daytime_temps | length > 0 else 'unavailable' }}
 
 - name: "Daytime Min Temperature"
+  unique_id: daytime_min_temperature
   unit_of_measurement: "°F"
   state: >
     {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
@@ -15,6 +17,7 @@
     {{ daytime_temps | min if daytime_temps | length > 0 else 'unavailable' }}
 
 - name: "Daytime Average Temperature"
+  unique_id: daytime_average_temperature
   unit_of_measurement: "°F"
   state: >
     {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
@@ -23,6 +26,7 @@
     {{ (daytime_temps | sum / daytime_temps | length) | round(2) if daytime_temps | length > 0 else 'unavailable' }}
 
 - name: "Nighttime Max Temperature"
+  unique_id: nighttime_max_temperature
   unit_of_measurement: "°F"
   state: >
     {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
@@ -31,6 +35,7 @@
     {{ nighttime_temps | max if nighttime_temps | length > 0 else 'unavailable' }}
 
 - name: "Nighttime Min Temperature"
+  unique_id: nighttime_min_temperature
   unit_of_measurement: "°F"
   state: >
     {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
@@ -39,6 +44,7 @@
     {{ nighttime_temps | min if nighttime_temps | length > 0 else 'unavailable' }}
 
 - name: "Nighttime Average Temperature"
+  unique_id: nighttime_average_temperature
   unit_of_measurement: "°F"
   state: >
     {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
