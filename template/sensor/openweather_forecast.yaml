@@ -1,0 +1,47 @@
+- name: "Daytime Max Temperature"
+  unit_of_measurement: "°F"
+  state: >
+    {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
+    {% set daytime_forecast = forecast | selectattr('dt', '>=', 1736341200) | selectattr('dt', '<=', 1736374800) | list %}
+    {% set daytime_temps = daytime_forecast | map(attribute='temp') | list %}
+    {{ daytime_temps | max if daytime_temps | length > 0 else 'unavailable' }}
+
+- name: "Daytime Min Temperature"
+  unit_of_measurement: "°F"
+  state: >
+    {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
+    {% set daytime_forecast = forecast | selectattr('dt', '>=', 1736341200) | selectattr('dt', '<=', 1736374800) | list %}
+    {% set daytime_temps = daytime_forecast | map(attribute='temp') | list %}
+    {{ daytime_temps | min if daytime_temps | length > 0 else 'unavailable' }}
+
+- name: "Daytime Average Temperature"
+  unit_of_measurement: "°F"
+  state: >
+    {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
+    {% set daytime_forecast = forecast | selectattr('dt', '>=', 1736341200) | selectattr('dt', '<=', 1736374800) | list %}
+    {% set daytime_temps = daytime_forecast | map(attribute='temp') | list %}
+    {{ (daytime_temps | sum / daytime_temps | length) | round(2) if daytime_temps | length > 0 else 'unavailable' }}
+
+- name: "Nighttime Max Temperature"
+  unit_of_measurement: "°F"
+  state: >
+    {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
+    {% set nighttime_forecast = forecast | rejectattr('dt', '>=', 1736341200) | rejectattr('dt', '<=', 1736374800) | list %}
+    {% set nighttime_temps = nighttime_forecast | map(attribute='temp') | list %}
+    {{ nighttime_temps | max if nighttime_temps | length > 0 else 'unavailable' }}
+
+- name: "Nighttime Min Temperature"
+  unit_of_measurement: "°F"
+  state: >
+    {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
+    {% set nighttime_forecast = forecast | rejectattr('dt', '>=', 1736341200) | rejectattr('dt', '<=', 1736374800) | list %}
+    {% set nighttime_temps = nighttime_forecast | map(attribute='temp') | list %}
+    {{ nighttime_temps | min if nighttime_temps | length > 0 else 'unavailable' }}
+
+- name: "Nighttime Average Temperature"
+  unit_of_measurement: "°F"
+  state: >
+    {% set forecast = state_attr('sensor.openweather_hourly_forecast', 'hourly') %}
+    {% set nighttime_forecast = forecast | rejectattr('dt', '>=', 1736341200) | rejectattr('dt', '<=', 1736374800) | list %}
+    {% set nighttime_temps = nighttime_forecast | map(attribute='temp') | list %}
+    {{ (nighttime_temps | sum / nighttime_temps | length) | round(2) if nighttime_temps | length > 0 else 'unavailable' }}
