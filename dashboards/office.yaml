@@ -1,0 +1,8 @@
+title: "Office"
+views:
+  - title: "HVAC Controls"
+    path: "hvac"
+    cards:
+      - type: entities
+        entities:
+          - entity: climate.tinas_office_heat_pump
