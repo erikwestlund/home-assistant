@@ -1,7 +1,7 @@
 - platform: rest
-  unique_id: openweather_hourly_forecast
+  unique_id: "openweather_hourly_forecast"
   name: "OpenWeather Hourly Forecast"
-  resource: "https://api.openweathermap.org/data/3.0/onecall?lat=42.2495&lon=-71.0662&appid=!secret openweather_api_key&units=imperial"
+  resource: "https://api.openweathermap.org/data/3.0/onecall?lat=42.2495&lon=-71.0662&appid={{ secrets.openweather_api_key }}&units=imperial"
   scan_interval: 300
   value_template: "{{ value_json.current.temp }}"
   json_attributes:
