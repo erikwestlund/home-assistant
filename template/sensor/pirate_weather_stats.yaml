@@ -2,7 +2,8 @@
   unique_id: current_temperature
   unit_of_measurement: "°F"
   state: >
-    {{ state_attr('sensor.pirate_weather', 'currently')['temperature'] | round(2) if state_attr('sensor.pirate_weather', 'currently') else 'unavailable' }}
+    {{ state_attr('sensor.pirate_weather', 'currently')['temperature'] | round(1) if state_attr('sensor.pirate_weather', 'currently') else 'unavailable' }}
+  icon: mdi:thermometer
 
 - name: "Daily High Temperature"
   unique_id: daily_high_temperature
@@ -10,6 +11,7 @@
   state: >
     {% set daily = state_attr('sensor.pirate_weather', 'daily')['data'] %}
     {{ daily[0]['temperatureHigh'] if daily else 'unavailable' }}
+  icon: mdi:thermometer-chevron-up
 
 - name: "Daily Low Temperature"
   unique_id: daily_low_temperature
@@ -17,6 +19,7 @@
   state: >
     {% set daily = state_attr('sensor.pirate_weather', 'daily')['data'] %}
     {{ daily[0]['temperatureLow'] if daily else 'unavailable' }}
+  icon: mdi:thermometer-chevron-down
 
 - name: "Daily Average Temperature"
   unique_id: daily_average_temperature
@@ -26,7 +29,8 @@
     {% set today_start = now().replace(hour=0, minute=0, second=0, microsecond=0).timestamp() %}
     {% set today_end = (now() + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0).timestamp() %}
     {% set daily_temps = forecast | selectattr('time', '>=', today_start) | selectattr('time', '<=', today_end) | map(attribute='temperature') | list %}
-    {{ (daily_temps | sum / daily_temps | length) | round(2) if daily_temps | length > 0 else 'unavailable' }}
+    {{ (daily_temps | sum / daily_temps | length) | round(1) if daily_temps | length > 0 else 'unavailable' }}
+  icon: mdi:thermometer-lines
 
 - name: "Daytime High Temperature"
   unique_id: daytime_high_temperature
@@ -37,6 +41,7 @@
     {% set end_day = now().replace(hour=19, minute=0, second=0, microsecond=0).timestamp() %}
     {% set daytime_temps = forecast | selectattr('time', '>=', start_day) | selectattr('time', '<=', end_day) | map(attribute='temperature') | list %}
     {{ daytime_temps | max if daytime_temps | length > 0 else 'unavailable' }}
+  icon: mdi:white-balance-sunny
 
 - name: "Daytime Low Temperature"
   unique_id: daytime_low_temperature
@@ -47,6 +52,7 @@
     {% set end_day = now().replace(hour=19, minute=0, second=0, microsecond=0).timestamp() %}
     {% set daytime_temps = forecast | selectattr('time', '>=', start_day) | selectattr('time', '<=', end_day) | map(attribute='temperature') | list %}
     {{ daytime_temps | min if daytime_temps | length > 0 else 'unavailable' }}
+  icon: mdi:weather-sunset-up
 
 - name: "Daytime Average Temperature"
   unique_id: daytime_average_temperature
@@ -56,7 +62,8 @@
     {% set start_day = now().replace(hour=7, minute=0, second=0, microsecond=0).timestamp() %}
     {% set end_day = now().replace(hour=19, minute=0, second=0, microsecond=0).timestamp() %}
     {% set daytime_temps = forecast | selectattr('time', '>=', start_day) | selectattr('time', '<=', end_day) | map(attribute='temperature') | list %}
-    {{ (daytime_temps | sum / daytime_temps | length) | round(2) if daytime_temps | length > 0 else 'unavailable' }}
+    {{ (daytime_temps | sum / daytime_temps | length) | round(1) if daytime_temps | length > 0 else 'unavailable' }}
+  icon: mdi:thermometer-lines
 
 - name: "Nighttime High Temperature"
   unique_id: nighttime_high_temperature
@@ -67,6 +74,7 @@
     {% set end_night = (now() + timedelta(days=1)).replace(hour=7, minute=0, second=0, microsecond=0).timestamp() %}
     {% set nighttime_temps = forecast | selectattr('time', '>=', start_night) | selectattr('time', '<=', end_night) | map(attribute='temperature') | list %}
     {{ nighttime_temps | max if nighttime_temps | length > 0 else 'unavailable' }}
+  icon: mdi:moon-waxing-crescent
 
 - name: "Nighttime Low Temperature"
   unique_id: nighttime_low_temperature
@@ -77,6 +85,7 @@
     {% set end_night = (now() + timedelta(days=1)).replace(hour=7, minute=0, second=0, microsecond=0).timestamp() %}
     {% set nighttime_temps = forecast | selectattr('time', '>=', start_night) | selectattr('time', '<=', end_night) | map(attribute='temperature') | list %}
     {{ nighttime_temps | min if nighttime_temps | length > 0 else 'unavailable' }}
+  icon: mdi:weather-night
 
 - name: "Nighttime Average Temperature"
   unique_id: nighttime_average_temperature
@@ -86,4 +95,5 @@
     {% set start_night = now().replace(hour=19, minute=0, second=0, microsecond=0).timestamp() %}
     {% set end_night = (now() + timedelta(days=1)).replace(hour=7, minute=0, second=0, microsecond=0).timestamp() %}
     {% set nighttime_temps = forecast | selectattr('time', '>=', start_night) | selectattr('time', '<=', end_night) | map(attribute='temperature') | list %}
-    {{ (nighttime_temps | sum / nighttime_temps | length) | round(2) if nighttime_temps | length > 0 else 'unavailable' }}
+    {{ (nighttime_temps | sum / nighttime_temps | length) | round(1) if nighttime_temps | length > 0 else 'unavailable' }}
+  icon: mdi:thermometer-lines
