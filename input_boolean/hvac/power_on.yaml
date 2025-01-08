@@ -48,7 +48,7 @@ hvac_mini_split_power_on_control_ducted:
   initial: on
   icon: mdi:power
 
-office_space_heater_power_on_control:
+hvac_space_heater_power_on_control_office:
   name: HVAC Office Space Heater Power On Control
   initial: on
   icon: mdi:power
