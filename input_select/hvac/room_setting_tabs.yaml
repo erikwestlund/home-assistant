@@ -1,0 +1,13 @@
+hvac_room_setting_tabs:
+  name: HVAC Room Setting Tabs
+  options:
+    - "Office"
+    - "Family Room"
+    - "Living Room"
+    - "Master Bedroom"
+    - "Dining Room"
+    - "Erik Office"
+    - "Ducted"
+    - "Main Radiator Zone"
+  initial: "Office"
+  icon: mdi:home-group
