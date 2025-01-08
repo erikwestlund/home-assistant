@@ -1,0 +1,7 @@
+hvac_heat_to_cool_threshold:
+  name: "HVAC Heat to Cool Threshold"
+  min: 50
+  max: 80
+  step: 0.5
+  unit_of_measurement: "°F"
+  icon: "mdi:thermometer"
