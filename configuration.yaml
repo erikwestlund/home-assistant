@@ -27,4 +27,4 @@ lovelace:
       icon: mdi:desktop-classic
       show_in_sidebar: true
       mode: yaml
-      filename: dashboards/office_dashboard.yaml
+      filename: dashboards/office.yaml
