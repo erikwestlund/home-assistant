@@ -1,0 +1,7 @@
+- platform: rest
+  name: OpenWeather Hourly Forecast
+  resource: "https://api.openweathermap.org/data/3.0/onecall?lat=42.2495&lon=-71.0662&appid=03a3c8a59a55f1cceb964536bb989909&units=imperial"
+  scan_interval: 300
+  value_template: "{{ value_json.current.temp }}"
+  json_attributes:
+    - hourly
