@@ -1,5 +1,5 @@
-hvac_room_setting_tabs:
-  name: HVAC Room Setting Tabs
+hvac_room_settings_tabs:
+  name: HVAC Room Settings Tabs
   options:
     - "Office"
     - "Family Room"
