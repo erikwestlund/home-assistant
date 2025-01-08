@@ -1,5 +1,5 @@
 hvac_early_work_mode_office:
-  name: Office Early Work Mode
+  name: HVAC Office Early Work Mode
   initial: off
   icon: mdi:office-building
 

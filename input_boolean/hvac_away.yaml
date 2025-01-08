@@ -1,8 +1,3 @@
-hvac_away_mode:
-  name: Away/Vacation Mode
-  initial: off
-  icon: mdi:airplane
-
 # Office Radiator
 away_office_radiator_on:
   name: Away Office Radiator On

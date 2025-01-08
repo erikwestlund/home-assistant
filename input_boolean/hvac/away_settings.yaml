@@ -1,0 +1,65 @@
+# General mode
+hvac_hvac_away_mode:
+  name: HVAC Away/Vacation Mode
+  initial: off
+  icon: mdi:airplane
+
+# Office Radiator
+hvac_away_radiator_on_office:
+  name: HVAC Away Office Radiator On
+  initial: on
+  icon: mdi:radiator
+
+# Office Heat Pump
+hvac_away_heatpump_on_office:
+  name: HVAC Away Office Heat Pump On
+  initial: off
+  icon: mdi:radiator
+
+# Family Room Radiator
+hvac_away_radiator_on_family_room:
+  name: HVAC Away Family Room Radiator On
+  initial: on
+  icon: mdi:radiator
+
+# Family Room Heat Pump
+hvac_away_heatpump_on_family_room:
+  name: HVAC Away Family Room Heat Pump On
+  initial: off
+  icon: mdi:radiator
+
+# Living Room Radiator
+hvac_away_radiator_on_living_room:
+  name: HVAC Away Living Room Radiator On
+  initial: on
+  icon: mdi:radiator
+
+# Living Room Heat Pump
+hvac_away_heatpump_on_living_room:
+  name: HVAC Away Living Room Heat Pump On
+  initial: off
+  icon: mdi:radiator
+
+# Dining Room Heat Pump
+hvac_away_heatpump_on_dining_room:
+  name: HVAC Away Dining Room Heat Pump On
+  initial: off
+  icon: mdi:radiator
+
+# Erik Office Heat Pump
+hvac_away_heatpump_on_erik_office:
+  name: HVAC Away Erik Office Heat Pump On
+  initial: off
+  icon: mdi:radiator
+
+# Master Bedroom Heat Pump
+hvac_away_heatpump_on_master_bedroom:
+  name: HVAC Away Master Bedroom Heat Pump On
+  initial: off
+  icon: mdi:radiator
+
+# Ducted System
+hvac_away_heatpump_on_ducted:
+  name: HVAC Away Ducted Heat Pump On
+  initial: off
+  icon: mdi:radiator

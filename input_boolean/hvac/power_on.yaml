@@ -1,0 +1,54 @@
+hvac_radiator_power_on_control_office:
+  name: HVAC Office Radiator Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_radiator_power_on_control_family_room:
+  name: HVAC Family Room Radiator Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_mini_split_power_on_control_office:
+  name: HVAC Office Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_mini_split_power_on_control_family_room:
+  name: HVAC Family Room Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_mini_split_power_on_control_living_room:
+  name: HVAC Living Room Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_radiator_power_on_control_main_zone:
+  name: HVAC Main Zone Radiators Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_mini_split_power_on_control_dining_room:
+  name: HVAC Dining Room Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_mini_split_power_on_control_master_bedroom:
+  name: HVAC Master Bedroom Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_mini_split_power_on_control_erik_office:
+  name: HVAC Erik Office Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+hvac_mini_split_power_on_control_ducted:
+  name: HVAC Ducted Heat Pump Power On Control
+  initial: on
+  icon: mdi:power
+
+office_space_heater_power_on_control:
+  name: HVAC Office Space Heater Power On Control
+  initial: on
+  icon: mdi:power

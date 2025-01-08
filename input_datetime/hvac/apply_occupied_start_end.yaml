@@ -1,0 +1,23 @@
+hvac_apply_occupied_start_time_office:
+  name: HVAC Tina Office Apply Occupied Start Time
+  has_time: true
+  has_date: false
+  initial: "08:00:00"
+
+hvac_apply_occupied_end_time_office:
+  name: HVAC Tina Office Apply Occupied End Time
+  has_time: true
+  has_date: false
+  initial: "17:59:00"
+
+hvac_apply_occupied_start_time_erik_office:
+  name: HVAC Erik Office Apply Occupied Start Time
+  has_time: true
+  has_date: false
+  initial: "08:00:00"
+
+hvac_apply_occupied_end_time_erik_office:
+  name: HVAC Erik Office Apply Occupied End Time
+  has_time: true
+  has_date: false
+  initial: "17:30:00"

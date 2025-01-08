@@ -1,0 +1,11 @@
+hvac_early_work_mode_start_time_office:
+  name: HVAC Tina Office Early Work Mode Start Time
+  has_time: true
+  has_date: false
+  initial: "03:30:00"
+
+hvac_early_work_mode_end_time_office:
+  name: HVAC Tina Office Early Work Mode End Time
+  has_time: true
+  has_date: false
+  initial: "06:30:00"
