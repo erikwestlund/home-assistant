@@ -1,0 +1,43 @@
+template:
+  - sensor:
+      - name: "Daytime Low Temp"
+        unit_of_measurement: "°F"
+        state: >
+          {% set forecast = state_attr('weather.openweather', 'forecast') %}
+          {% set day_forecast = forecast[7:19] %}
+          {{ ((day_forecast | map(attribute='temperature') | min) * 1.8) + 32 }}
+
+      - name: "Daytime High Temp"
+        unit_of_measurement: "°F"
+        state: >
+          {% set forecast = state_attr('weather.openweather', 'forecast') %}
+          {% set day_forecast = forecast[7:19] %}
+          {{ ((day_forecast | map(attribute='temperature') | max) * 1.8) + 32 }}
+
+      - name: "Daytime Avg Temp"
+        unit_of_measurement: "°F"
+        state: >
+          {% set forecast = state_attr('weather.openweather', 'forecast') %}
+          {% set day_forecast = forecast[7:19] %}
+          {{ (((day_forecast | map(attribute='temperature') | sum) / day_forecast | length) * 1.8) + 32 }}
+
+      - name: "Nighttime Low Temp"
+        unit_of_measurement: "°F"
+        state: >
+          {% set forecast = state_attr('weather.openweather', 'forecast') %}
+          {% set night_forecast = forecast[19:] + forecast[:7] %}
+          {{ ((night_forecast | map(attribute='temperature') | min) * 1.8) + 32 }}
+
+      - name: "Nighttime High Temp"
+        unit_of_measurement: "°F"
+        state: >
+          {% set forecast = state_attr('weather.openweather', 'forecast') %}
+          {% set night_forecast = forecast[19:] + forecast[:7] %}
+          {{ ((night_forecast | map(attribute='temperature') | max) * 1.8) + 32 }}
+
+      - name: "Nighttime Avg Temp"
+        unit_of_measurement: "°F"
+        state: >
+          {% set forecast = state_attr('weather.openweather', 'forecast') %}
+          {% set night_forecast = forecast[19:] + forecast[:7] %}
+          {{ (((night_forecast | map(attribute='temperature') | sum) / night_forecast | length) * 1.8) + 32 }}
