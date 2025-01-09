@@ -1,0 +1,65 @@
+- id: set_hvac_away_until
+  alias: "Set HVAC Away Mode Until"
+  description: "Adjust the away mode expiration time when away status changes, with detailed logging."
+  trigger:
+    - platform: state
+      entity_id: input_boolean.hvac_away_mode
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_away_mode
+      state: "on"
+  action:
+    - variables:
+        away_days: "{{ states('input_number.hvac_away_duration_days') | float(0) }}"
+        current_time: "{{ now() }}"
+        away_until: "{{ as_timestamp(current_time) + (away_days * 86400) }}"
+    - service: logbook.log
+      data:
+        name: "HVAC Away Mode Automation"
+        message: >
+          Away mode status changed to ON. Calculating expiration time.
+          Current time: {{ current_time }},
+          Away duration (days): {{ away_days }},
+          Away until: {{ away_until | timestamp_custom('%b %d, %I:%M %p') }}.
+    - service: input_datetime.set_datetime
+      data:
+        entity_id: input_datetime.hvac_away_until
+        timestamp: "{{ away_until }}"
+    - service: logbook.log
+      data:
+        name: "HVAC Away Mode Automation"
+        message: >
+          Away mode expiration time successfully set to 
+          {{ away_until | timestamp_custom('%b %d, %I:%M %p') }}.
+          
+- id: turn_off_hvac_away_after_expiration
+  alias: "Turn Off HVAC Away Mode After Expiration"
+  description: "Automatically turn off the away mode status if the expiration time has passed, with detailed logging."
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_away_mode
+      state: "on"
+    - condition: template
+      value_template: >
+        {% set away_until = states('input_datetime.hvac_away_until') | as_timestamp(default=None) %}
+        {{ away_until is not none and now().timestamp() > away_until }}
+  action:
+    - service: logbook.log
+      data:
+        name: "HVAC Away Mode Automation"
+        message: >
+          Current time: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}.
+          Away mode expiration time: 
+          {{ states('input_datetime.hvac_away_until') | as_timestamp(default=None) | timestamp_local }}.
+          Turning off away mode status.
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.hvac_away_mode
+    - service: logbook.log
+      data:
+        name: "HVAC Away Mode Automation"
+        message: >
+          Away mode status turned off as the expiration time has passed.
