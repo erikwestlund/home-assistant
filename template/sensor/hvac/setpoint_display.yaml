@@ -6,7 +6,7 @@
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
       {{ "Off" }}
     {% else %}
-      {{ (value | float | round(0)) | string}} }}
+      {{ (value | float | round(0)) | string }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
