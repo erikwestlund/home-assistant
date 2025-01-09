@@ -14,8 +14,16 @@ hvac_radiator_weekend_setpoint_main_zone:
   unit_of_measurement: "°F"
   initial: 69
 
-hvac_radiator_night_setpoint_main_zone:
-  name: HVAC Main Zone Radiator Night Setpoint
+hvac_radiator_bedtime_setpoint_main_zone:
+  name: HVAC Main Zone Radiator Bedtmie Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 69
+
+hvac_radiator_sleep_setpoint_main_zone:
+  name: HVAC Main Zone Radiator Sleep Setpoint
   min: 64
   max: 86
   step: 1
