@@ -1,0 +1,34 @@
+- name: "HVAC Comfort Setting Ducted"
+  unique_id: hvac_comfort_setting_ducted
+  state: >
+    {% set is_override = is_state('input_boolean.hvac_override_status_ducted', 'on') %}
+    {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
+    {% set is_night = is_state('binary_sensor.hvac_nighttime_active_ducted', 'on') %}
+    {% set is_daytime = is_state('binary_sensor.hvac_daytime_active_ducted', 'on') %}
+
+    {# 1. Override Check #}
+    {% if is_override %}
+      Override
+    {# 2. Away Mode Check #}
+    {% elif is_away_mode %}
+      Away
+    {# 3. Nighttime Check #}
+    {% elif is_night %}
+      Night
+    {# 4. Daytime Check #}
+    {% elif is_daytime %}
+      Day
+    {% else %}
+      Day
+    {% endif %}
+  icon: >-
+    {% set state = states('sensor.hvac_comfort_setting_ducted') %}
+    {% if state == "Override" %}
+      mdi:alert
+    {% elif state == "Away" %}
+      mdi:airplane
+    {% elif state == "Night" %}
+      mdi:weather-night
+    {% else %}
+      mdi:white-balance-sunny
+    {% endif %}

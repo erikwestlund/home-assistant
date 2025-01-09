@@ -4,7 +4,8 @@
     {% set is_override = is_state('input_boolean.hvac_override_status_family_room', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
-    {% set is_night = is_state('binary_sensor.hvac_nighttime_in_window_family_room', 'on') %}
+    {% set is_daytime = is_state('binary_sensor.hvac_daytime_active_family_room', 'on') %}
+    {% set is_night = is_state('binary_sensor.hvac_nighttime_active_family_room', 'on') %}
 
     {# 1. Override Check #}
     {% if is_override %}
@@ -14,24 +15,32 @@
       Away
     {# 3. Nighttime Check #}
     {% elif is_night %}
-      Weekend Night if is_weekend else Weekday Night
-    {# 4. Weekend Logic #}
-    {% elif is_weekend %}
-      Weekend Daytime
-    {# 5. Weekday Logic #}
+      {% if is_weekend %}
+        Weekend Night
+      {% else %}
+        Weekday Night
+      {% endif %}
+    {# 4. Daytime Check #}
+    {% elif is_daytime %}
+      {% if is_weekend %}
+        Weekend Daytime
+      {% else %}
+        Weekday Daytime
+      {% endif %}
     {% else %}
+      {# If it's neither night nor daytime, assume weekday daytime #}
       Weekday Daytime
     {% endif %}
   icon: >-
     {% set state = states('sensor.hvac_comfort_setting_family_room') %}
     {% if state == "Override" %}
       mdi:alert
-    {% elif state == "Off" %}
-      mdi:power
     {% elif state == "Away" %}
       mdi:airplane
-    {% elif "Night" in state %}
+    {% elif state == "Night" %}
       mdi:weather-night
+    {% elif "Daytime" in state %}
+      mdi:weather-sunny
     {% else %}
       mdi:sofa
     {% endif %}

@@ -4,8 +4,8 @@
     {% set is_override = is_state('input_boolean.hvac_override_status_main_radiator_zone', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
-    {% set is_bedtime = is_state('binary_sensor.hvac_bedtime_in_window_main_radiator_zone', 'on') %}
-    {% set is_sleep = is_state('binary_sensor.hvac_sleep_in_window_main_radiator_zone', 'on') %}
+    {% set is_bedtime = is_state('binary_sensor.hvac_main_radiator_zone_bedtime_in_window', 'on') %}
+    {% set is_sleep = is_state('binary_sensor.hvac_main_radiator_zone_sleep_in_window', 'on') %}
 
     {# 1. Override Check #}
     {% if is_override %}
@@ -30,8 +30,6 @@
     {% set state = states('sensor.hvac_comfort_setting_main_radiator_zone') %}
     {% if state == "Override" %}
       mdi:alert
-    {% elif state == "Off" %}
-      mdi:power
     {% elif state == "Away" %}
       mdi:airplane
     {% elif state == "Sleep" %}
