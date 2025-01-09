@@ -43,4 +43,5 @@
     {% else %}
       Off
     {% endif %}
+  unit_of_measurement: "°F"
   icon: mdi:thermometer
