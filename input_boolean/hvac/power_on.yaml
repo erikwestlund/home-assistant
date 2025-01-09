@@ -1,5 +1,10 @@
-hvac_systems_on:
-  name: HVAC Systems On
+hvac_mini_splits_enabled:
+  name: HVAC Mini Splits Enabled
+  initial: on
+  icon: mdi:power
+
+hvac_radiator_enabled:
+  name: HVAC Radiators Enabled
   initial: on
   icon: mdi:power
 
