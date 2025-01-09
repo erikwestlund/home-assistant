@@ -1,41 +1,107 @@
+# Day
 - name: "HVAC Daytime Active Office"
   state: >
-    {% set daytime_start = states('input_datetime.hvac_daytime_start_time_office') %}
-    {% set current_time = now().strftime('%H:%M:%S') %}
-    {{ current_time >= daytime_start }}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_office')) %}
+    {% set nighttime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_nighttime_start_time_office')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time < nighttime_start }}
   icon: mdi:weather-sunny
 
 - name: "HVAC Daytime Active Family Room"
   state: >
-    {% set daytime_start = states('input_datetime.hvac_daytime_start_time_family_room') %}
-    {% set current_time = now().strftime('%H:%M:%S') %}
-    {{ current_time >= daytime_start }}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_family_room')) %}
+    {% set nighttime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_nighttime_start_time_family_room')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time < nighttime_start }}
   icon: mdi:weather-sunny
 
 - name: "HVAC Daytime Active Living Room"
   state: >
-    {% set daytime_start = states('input_datetime.hvac_daytime_start_time_living_room') %}
-    {% set current_time = now().strftime('%H:%M:%S') %}
-    {{ current_time >= daytime_start }}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_living_room')) %}
+    {% set nighttime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_nighttime_start_time_living_room')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time < nighttime_start }}
   icon: mdi:weather-sunny
 
 - name: "HVAC Daytime Active Dining Room"
   state: >
-    {% set daytime_start = states('input_datetime.hvac_daytime_start_time_dining_room') %}
-    {% set current_time = now().strftime('%H:%M:%S') %}
-    {{ current_time >= daytime_start }}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_dining_room')) %}
+    {% set nighttime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_nighttime_start_time_dining_room')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time < nighttime_start }}
   icon: mdi:weather-sunny
 
 - name: "HVAC Daytime Active Master Bedroom"
   state: >
-    {% set daytime_start = states('input_datetime.hvac_daytime_start_time_master_bedroom') %}
-    {% set current_time = now().strftime('%H:%M:%S') %}
-    {{ current_time >= daytime_start }}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_master_bedroom')) %}
+    {% set nighttime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_nighttime_start_time_master_bedroom')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time < nighttime_start }}
   icon: mdi:weather-sunny
 
 - name: "HVAC Daytime Active Erik Office"
   state: >
-    {% set daytime_start = states('input_datetime.hvac_daytime_start_time_erik_office') %}
-    {% set current_time = now().strftime('%H:%M:%S') %}
-    {{ current_time >= daytime_start }}
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_erik_office')) %}
+    {% set nighttime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_nighttime_start_time_erik_office')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time < nighttime_start }}
   icon: mdi:weather-sunny
+
+- name: "HVAC Daytime Active Ducted"
+  state: >
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_ducted')) %}
+    {% set nighttime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_nighttime_start_time_ducted')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time < nighttime_start }}
+  icon: mdi:weather-sunny
+
+
+# Night Helpers
+- name: "HVAC Nighttime Active Office"
+  state: >
+    {{ is_state('binary_sensor.hvac_daytime_active_office', 'off') }}
+  icon: mdi:weather-night
+
+- name: "HVAC Nighttime Active Family Room"
+  state: >
+    {{ is_state('binary_sensor.hvac_daytime_active_family_room', 'off') }}
+  icon: mdi:weather-night
+
+- name: "HVAC Nighttime Active Living Room"
+  state: >
+    {{ is_state('binary_sensor.hvac_daytime_active_living_room', 'off') }}
+  icon: mdi:weather-night
+
+- name: "HVAC Nighttime Active Dining Room"
+  state: >
+    {{ is_state('binary_sensor.hvac_daytime_active_dining_room', 'off') }}
+  icon: mdi:weather-night
+
+- name: "HVAC Nighttime Active Master Bedroom"
+  state: >
+    {{ is_state('binary_sensor.hvac_daytime_active_master_bedroom', 'off') }}
+  icon: mdi:weather-night
+
+- name: "HVAC Nighttime Active Erik Office"
+  state: >
+    {{ is_state('binary_sensor.hvac_daytime_active_erik_office', 'off') }}
+  icon: mdi:weather-night
+
+- name: "HVAC Nighttime Active Ducted"
+  state: >
+    {{ is_state('binary_sensor.hvac_daytime_active_ducted', 'off') }}
+  icon: mdi:weather-night

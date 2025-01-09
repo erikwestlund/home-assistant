@@ -1,0 +1,45 @@
+- name: "HVAC Comfort Setting Main Radiator Zone"
+  unique_id: hvac_comfort_setting_main_radiator_zone
+  state: >
+    {% set is_override = is_state('input_boolean.hvac_override_status_main_radiator_zone', 'on') %}
+    {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
+    {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
+    {% set is_bedtime = is_state('binary_sensor.hvac_bedtime_in_window_main_radiator_zone', 'on') %}
+    {% set is_sleep = is_state('binary_sensor.hvac_sleep_in_window_main_radiator_zone', 'on') %}
+
+    {# 1. Override Check #}
+    {% if is_override %}
+      Override
+    {# 2. Away Mode Check #}
+    {% elif is_away_mode %}
+      Away
+    {# 3. Sleep Logic #}
+    {% elif is_sleep %}
+      Sleep
+    {# 4. Bedtime Logic #}
+    {% elif is_bedtime %}
+      Bedtime
+    {# 5. Weekend Logic #}
+    {% elif not is_weekday %}
+      Weekend
+    {# 6. Weekday Logic #}
+    {% else %}
+      Weekday
+    {% endif %}
+  icon: >-
+    {% set state = states('sensor.hvac_comfort_setting_main_radiator_zone') %}
+    {% if state == "Override" %}
+      mdi:alert
+    {% elif state == "Off" %}
+      mdi:power
+    {% elif state == "Away" %}
+      mdi:airplane
+    {% elif state == "Sleep" %}
+      mdi:bed
+    {% elif state == "Bedtime" %}
+      mdi:weather-night
+    {% elif state == "Weekend" %}
+      mdi:calendar-weekend
+    {% else %}
+      mdi:calendar-weekday
+    {% endif %}

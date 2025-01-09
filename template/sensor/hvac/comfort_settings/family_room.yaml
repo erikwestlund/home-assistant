@@ -1,0 +1,37 @@
+- name: "HVAC Comfort Setting Family Room"
+  unique_id: hvac_comfort_setting_family_room
+  state: >
+    {% set is_override = is_state('input_boolean.hvac_override_status_family_room', 'on') %}
+    {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
+    {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
+    {% set is_night = is_state('binary_sensor.hvac_nighttime_in_window_family_room', 'on') %}
+
+    {# 1. Override Check #}
+    {% if is_override %}
+      Override
+    {# 2. Away Mode Check #}
+    {% elif is_away_mode %}
+      Away
+    {# 3. Nighttime Check #}
+    {% elif is_night %}
+      Weekend Night if is_weekend else Weekday Night
+    {# 4. Weekend Logic #}
+    {% elif is_weekend %}
+      Weekend Daytime
+    {# 5. Weekday Logic #}
+    {% else %}
+      Weekday Daytime
+    {% endif %}
+  icon: >-
+    {% set state = states('sensor.hvac_comfort_setting_family_room') %}
+    {% if state == "Override" %}
+      mdi:alert
+    {% elif state == "Off" %}
+      mdi:power
+    {% elif state == "Away" %}
+      mdi:airplane
+    {% elif "Night" in state %}
+      mdi:weather-night
+    {% else %}
+      mdi:sofa
+    {% endif %}
