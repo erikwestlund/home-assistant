@@ -1,5 +1,5 @@
 # General mode
-hvac_hvac_away_mode:
+hvac_away_mode:
   name: HVAC Away/Vacation Mode
   initial: off
   icon: mdi:airplane
