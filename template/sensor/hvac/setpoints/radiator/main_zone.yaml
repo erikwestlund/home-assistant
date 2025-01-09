@@ -24,6 +24,6 @@
     {% elif comfort_setting == "Wake Up" %}
       {{ states('input_number.hvac_radiator_wakeup_setpoint_main_zone') }}
     {% else %}
-      None
+      Off
     {% endif %}
   icon: mdi:radiator

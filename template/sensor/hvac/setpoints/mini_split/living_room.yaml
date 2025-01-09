@@ -6,9 +6,9 @@
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_living_room') %}
     
-    {# If Power is Off, return None #}
+    {# If Power is Off, return Off #}
     {% if is_power_off %}
-      None
+      Off
     {# If Override is Active, use Override Setpoint #}
     {% elif is_override %}
       {{ states('input_number.hvac_mini_split_override_setpoint_living_room') }}
@@ -24,7 +24,7 @@
       {% elif is_state('sensor.hvac_comfort_setting_living_room', 'Night') %}
         {{ states('input_number.hvac_mini_split_night_freezing_setpoint_living_room') }}
       {% else %}
-        None
+        Off
       {% endif %}
     {% elif comfort_mode == "Cold" %}
       {% if is_state('sensor.hvac_comfort_setting_living_room', 'Weekday') %}
@@ -34,7 +34,7 @@
       {% elif is_state('sensor.hvac_comfort_setting_living_room', 'Night') %}
         {{ states('input_number.hvac_mini_split_night_cold_setpoint_living_room') }}
       {% else %}
-        None
+        Off
       {% endif %}
     {% elif comfort_mode == "Hot" %}
       {% if is_state('sensor.hvac_comfort_setting_living_room', 'Weekday') %}
@@ -44,9 +44,9 @@
       {% elif is_state('sensor.hvac_comfort_setting_living_room', 'Night') %}
         {{ states('input_number.hvac_mini_split_night_hot_setpoint_living_room') }}
       {% else %}
-        None
+        Off
       {% endif %}
     {% else %}
-      None
+      Off
     {% endif %}
   icon: mdi:thermometer

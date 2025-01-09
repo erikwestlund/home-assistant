@@ -21,6 +21,6 @@
     {% elif comfort_setting == "Weekend Nighttime" %}
       {{ states('input_number.hvac_radiator_weekend_night_setpoint_family_room') }}
     {% else %}
-      None
+      Off
     {% endif %}
   icon: mdi:radiator
