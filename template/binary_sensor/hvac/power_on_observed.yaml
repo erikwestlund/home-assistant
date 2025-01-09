@@ -1,0 +1,52 @@
+# Radiators
+- name: "HVAC Radiator Powered On Office"
+  unique_id: hvac_radiator_powered_on_office
+  state: >
+    {{ states('climate.office') != 'off' }}
+
+- name: "HVAC Radiator Powered On Family Room"
+  unique_id: hvac_radiator_powered_on_family_room
+  state: >
+    {{ states('climate.family_room_heating') != 'off' }}
+
+- name: "HVAC Radiator Powered On Main Zone"
+  unique_id: hvac_radiator_powered_on_main_zone
+  state: >
+    {{ states('climate.living_room_main_heating') != 'off' }}
+
+# Mini Splits
+- name: "HVAC Mini Split Powered On Tina Office"
+  unique_id: hvac_mini_split_powered_on_tina_office
+  state: >
+    {{ states('climate.tinas_office_mini_split_hvac_unit') != 'off' }}
+
+- name: "HVAC Mini Split Powered On Erik Office"
+  unique_id: hvac_mini_split_powered_on_erik_office
+  state: >
+    {{ states('climate.eriks_office_mini_split_hvac_unit') != 'off' }}
+
+- name: "HVAC Mini Split Powered On Family Room"
+  unique_id: hvac_mini_split_powered_on_family_room
+  state: >
+    {{ states('climate.family_room_mini_split_hvac_unit') != 'off' }}
+
+- name: "HVAC Mini Split Powered On Living Room"
+  unique_id: hvac_mini_split_powered_on_living_room
+  state: >
+    {{ states('climate.living_room_mini_split_hvac_unit') != 'off' }}
+
+- name: "HVAC Mini Split Powered On Dining Room"
+  unique_id: hvac_mini_split_powered_on_dining_room
+  state: >
+    {{ states('climate.dining_room_heat_pump') != 'off' }}
+
+- name: "HVAC Mini Split Powered On Master Bedroom"
+  unique_id: hvac_mini_split_powered_on_master_bedroom
+  state: >
+    {{ states('climate.master_bedroom_heat_pump') != 'off' }}
+
+# Space Heater
+- name: "HVAC Space Heater Powered On Tina Office"
+  unique_id: hvac_space_heater_powered_on_tina_office
+  state: >
+    {{ is_state('switch.tina_office_space_heater', 'on') }}
