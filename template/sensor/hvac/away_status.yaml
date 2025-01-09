@@ -1,9 +1,14 @@
 - name: "HVAC Away Badge"
   state: >
     {% if is_state('input_boolean.hvac_away_mode', 'on') %}
-      Until {{ states('sensor.hvac_away_until') }}
+      {% set away_until = states('input_datetime.hvac_away_until') %}
+      {% if away_until != 'unknown' and away_until != 'unavailable' %}
+        Until {{ as_timestamp(away_until) | timestamp_custom('%Y-%m-%d %I:%M %p') }}
+      {% else %}
+        No End Time Set
+      {% endif %}
     {% else %}
-      Off
+    Off
     {% endif %}
   icon: >
     {% if is_state('input_boolean.hvac_away_mode', 'on') %}
