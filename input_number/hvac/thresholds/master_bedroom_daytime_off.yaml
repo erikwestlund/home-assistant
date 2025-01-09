@@ -1,0 +1,7 @@
+hvac_master_bedroom_daytime_off_threshold:
+  name: HVAC Master Bedroom Daytime Off Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 30
