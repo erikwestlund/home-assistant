@@ -16,23 +16,23 @@
     {# 3. Daytime Mode #}
     {% elif is_day %}
       {% if hvac_mode == 'Heat' %}
-        {{ states('input_number.hvac_target_day_heat_kids_rooms') }}
+        {{ states('input_number.hvac_target_day_heat_ducted') }}
       {% else %}
-        {{ states('input_number.hvac_target_day_cool_kids_rooms') }}
+        {{ states('input_number.hvac_target_day_cool_ducted') }}
       {% endif %}
     {# 4. Nighttime Mode #}
     {% elif is_night %}
       {% if hvac_mode == 'Heat' %}
-        {{ states('input_number.hvac_target_night_heat_kids_rooms') }}
+        {{ states('input_number.hvac_target_night_heat_ducted') }}
       {% else %}
-        {{ states('input_number.hvac_target_night_cool_kids_rooms') }}
+        {{ states('input_number.hvac_target_night_cool_ducted') }}
       {% endif %}
     {# 5. Default Value (Day Heat) #}
     {% else %}
       {% if hvac_mode == 'Heat' %}
-        {{ states('input_number.hvac_target_day_heat_kids_rooms') }}
+        {{ states('input_number.hvac_target_day_heat_ducted') }}
       {% else %}
-        {{ states('input_number.hvac_target_day_cool_kids_rooms') }}
+        {{ states('input_number.hvac_target_day_cool_ducted') }}
       {% endif %}
     {% endif %}
   icon: mdi:thermostat
