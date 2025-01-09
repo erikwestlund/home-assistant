@@ -54,8 +54,8 @@ hvac_override_duration_hours_master_bedroom:
   unit_of_measurement: "hours"
   initial: 1
 
-hvac_override_duration_hours_kids_rooms:
-  name: HVAC Kids Rooms Override Duration
+hvac_override_duration_hours_ducted_system:
+  name: HVAC Ducted System Override Duration
   min: 0
   max: 24
   step: 0.25
