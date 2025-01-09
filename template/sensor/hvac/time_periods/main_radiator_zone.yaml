@@ -1,12 +1,16 @@
 - name: "HVAC Main Radiator Zone Time Period"
   unique_id: hvac_main_radiator_zone_time_period
   state: >
+    {% set wake_up_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_wakeup_start_time_main_radiator_zone')) %}
     {% set day_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_main_radiator_zone')) %}
     {% set bedtime_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_bedtime_start_time_main_radiator_zone')) %}
     {% set sleep_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_sleep_start_time_main_radiator_zone')) %}
     {% set next_day_start = day_start + 86400 %}
     {% set current_time = now().timestamp() %}
-    {% if day_start <= current_time < bedtime_start %}
+    
+    {% if wake_up_start <= current_time < day_start %}
+      Wake Up
+    {% elif day_start <= current_time < bedtime_start %}
       Daytime
     {% elif bedtime_start <= current_time < sleep_start %}
       Bedtime

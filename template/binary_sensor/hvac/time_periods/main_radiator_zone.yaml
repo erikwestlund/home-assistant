@@ -1,3 +1,11 @@
+- name: "HVAC Main Radiator Zone Wake Up In Window"
+  unique_id: hvac_main_radiator_zone_wake_up_in_window
+  state: >
+    {% set wake_up_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_wakeup_start_time_main_radiator_zone')) %}
+    {% set day_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_main_radiator_zone')) %}
+    {% set current_time = now().timestamp() %}
+    {{ wake_up_start <= current_time < day_start }}
+
 - name: "HVAC Main Radiator Zone Daytime In Window"
   unique_id: hvac_main_radiator_zone_daytime_in_window
   state: >

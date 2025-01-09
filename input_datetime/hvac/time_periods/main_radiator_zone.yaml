@@ -1,8 +1,14 @@
+hvac_wakeup_start_time_main_radiator_zone:
+  name: HVAC Main Radiator Zone Wake Up Start Time
+  has_time: true
+  has_date: false
+  initial: "05:00:00"
+
 hvac_daytime_start_time_main_radiator_zone:
   name: HVAC Main Radiator Zone Daytime Start Time
   has_time: true
   has_date: false
-  initial: "06:00:00"
+  initial: "07:00:00"
 
 hvac_bedtime_start_time_main_radiator_zone:
   name: HVAC Main Radiator Zone Bedtime Start Time

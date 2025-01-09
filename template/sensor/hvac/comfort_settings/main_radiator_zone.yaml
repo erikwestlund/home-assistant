@@ -6,6 +6,7 @@
     {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
     {% set is_bedtime = is_state('binary_sensor.hvac_main_radiator_zone_bedtime_in_window', 'on') %}
     {% set is_sleep = is_state('binary_sensor.hvac_main_radiator_zone_sleep_in_window', 'on') %}
+    {% set is_wakeup = is_state('binary_sensor.hvac_main_radiator_zone_wakeup_in_window', 'on') %}
 
     {# 1. Override Check #}
     {% if is_override %}
@@ -13,16 +14,19 @@
     {# 2. Away Mode Check #}
     {% elif is_away_mode %}
       Away
-    {# 3. Sleep Logic #}
+    {# 3. Wake Up Logic #}
+    {% elif is_wakeup %}
+      Wake Up
+    {# 4. Sleep Logic #}
     {% elif is_sleep %}
       Sleep
-    {# 4. Bedtime Logic #}
+    {# 5. Bedtime Logic #}
     {% elif is_bedtime %}
       Bedtime
-    {# 5. Weekend Logic #}
+    {# 6. Weekend Logic #}
     {% elif not is_weekday %}
       Weekend
-    {# 6. Weekday Logic #}
+    {# 7. Weekday Logic #}
     {% else %}
       Weekday
     {% endif %}
@@ -38,6 +42,8 @@
       mdi:weather-night
     {% elif state == "Weekend" %}
       mdi:calendar-weekend
+    {% elif state == "Wake Up" %}
+      mdi:alarm
     {% else %}
       mdi:calendar-weekday
     {% endif %}

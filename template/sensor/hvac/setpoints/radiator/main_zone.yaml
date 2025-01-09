@@ -20,6 +20,9 @@
       {{ states('input_number.hvac_radiator_bedtime_setpoint_main_zone') }}
     {% elif comfort_setting == "Sleep" %}
       {{ states('input_number.hvac_radiator_sleep_setpoint_main_zone') }}
+    {# Wake Up Logic #}
+    {% elif comfort_setting == "Wake Up" %}
+      {{ states('input_number.hvac_radiator_wakeup_setpoint_main_zone') }}
     {% else %}
       None
     {% endif %}
