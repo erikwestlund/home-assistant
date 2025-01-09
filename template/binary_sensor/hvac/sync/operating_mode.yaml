@@ -1,102 +1,58 @@
-# Radiators
-- name: "HVAC Radiator Expected Mode Office"
-  unique_id: hvac_radiator_expected_mode_office
+# Radiators Mode Synced
+- name: "HVAC Radiator Mode Synced Office"
+  unique_id: hvac_radiator_mode_synced_office
   state: >
-    {% if is_state('binary_sensor.hvac_radiator_power_status_office', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_radiator_expected_mode_office', states('sensor.hvac_radiator_observed_mode_office')) }}
 
-- name: "HVAC Radiator Expected Mode Family Room"
-  unique_id: hvac_radiator_expected_mode_family_room
+- name: "HVAC Radiator Mode Synced Family Room"
+  unique_id: hvac_radiator_mode_synced_family_room
   state: >
-    {% if is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_radiator_expected_mode_family_room', states('sensor.hvac_radiator_observed_mode_family_room')) }}
 
-- name: "HVAC Radiator Expected Mode Main Zone"
-  unique_id: hvac_radiator_expected_mode_main_zone
+- name: "HVAC Radiator Mode Synced Main Zone"
+  unique_id: hvac_radiator_mode_synced_main_zone
   state: >
-    {% if is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_radiator_expected_mode_main_zone', states('sensor.hvac_radiator_observed_mode_main_zone')) }}
 
-# Mini Splits
-- name: "HVAC Mini Split Expected Mode Office"
-  unique_id: hvac_mini_split_expected_mode_office
+# Mini Splits Mode Synced
+- name: "HVAC Mini Split Mode Synced Office"
+  unique_id: hvac_mini_split_mode_synced_office
   state: >
-    {% if is_state('binary_sensor.hvac_mini_split_power_status_office', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_mini_split_expected_mode_office', states('sensor.hvac_mini_split_observed_mode_office')) }}
 
-- name: "HVAC Mini Split Expected Mode Erik Office"
-  unique_id: hvac_mini_split_expected_mode_erik_office
+- name: "HVAC Mini Split Mode Synced Erik Office"
+  unique_id: hvac_mini_split_mode_synced_erik_office
   state: >
-    {% if is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_mini_split_expected_mode_erik_office', states('sensor.hvac_mini_split_observed_mode_erik_office')) }}
 
-- name: "HVAC Mini Split Expected Mode Family Room"
-  unique_id: hvac_mini_split_expected_mode_family_room
+- name: "HVAC Mini Split Mode Synced Family Room"
+  unique_id: hvac_mini_split_mode_synced_family_room
   state: >
-    {% if is_state('binary_sensor.hvac_mini_split_power_status_family_room', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_mini_split_expected_mode_family_room', states('sensor.hvac_mini_split_observed_mode_family_room')) }}
 
-- name: "HVAC Mini Split Expected Mode Living Room"
-  unique_id: hvac_mini_split_expected_mode_living_room
+- name: "HVAC Mini Split Mode Synced Living Room"
+  unique_id: hvac_mini_split_mode_synced_living_room
   state: >
-    {% if is_state('binary_sensor.hvac_mini_split_power_status_living_room', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_mini_split_expected_mode_living_room', states('sensor.hvac_mini_split_observed_mode_living_room')) }}
 
-- name: "HVAC Mini Split Expected Mode Dining Room"
-  unique_id: hvac_mini_split_expected_mode_dining_room
+- name: "HVAC Mini Split Mode Synced Dining Room"
+  unique_id: hvac_mini_split_mode_synced_dining_room
   state: >
-    {% if is_state('binary_sensor.hvac_mini_split_power_status_dining_room', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_mini_split_expected_mode_dining_room', states('sensor.hvac_mini_split_observed_mode_dining_room')) }}
 
-- name: "HVAC Mini Split Expected Mode Master Bedroom"
-  unique_id: hvac_mini_split_expected_mode_master_bedroom
+- name: "HVAC Mini Split Mode Synced Master Bedroom"
+  unique_id: hvac_mini_split_mode_synced_master_bedroom
   state: >
-    {% if is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_mini_split_expected_mode_master_bedroom', states('sensor.hvac_mini_split_observed_mode_master_bedroom')) }}
 
-# Ducted
-- name: "HVAC Ducted Expected Mode"
-  unique_id: hvac_ducted_expected_mode
+# Ducted Mode Synced
+- name: "HVAC Ducted Mode Synced"
+  unique_id: hvac_ducted_mode_synced
   state: >
-    {% if is_state('binary_sensor.hvac_ducted_power_status', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_ducted_expected_mode', states('sensor.hvac_ducted_observed_mode')) }}
 
-# Space Heater
-- name: "HVAC Space Heater Expected Mode Office"
-  unique_id: hvac_space_heater_expected_mode_office
+# Space Heater Mode Synced
+- name: "HVAC Space Heater Mode Synced Office"
+  unique_id: hvac_space_heater_mode_synced_office
   state: >
-    {% if is_state('binary_sensor.hvac_space_heater_enabled_office', 'on') %}
-      {{ states('sensor.hvac_mode') | capitalize }}
-    {% else %}
-      Off
-    {% endif %}
+    {{ is_state('sensor.hvac_space_heater_expected_mode_office', states('sensor.hvac_space_heater_observed_mode_office')) }}
