@@ -1,0 +1,42 @@
+# Radiator
+- name: "HVAC Radiator Expected Setpoint Office"
+  unique_id: hvac_radiator_expected_setpoint_office
+  state: "{{ states('sensor.hvac_radiator_setpoint_office') }}"
+
+- name: "HVAC Radiator Expected Setpoint Family Room"
+  unique_id: hvac_radiator_expected_setpoint_family_room
+  state: "{{ states('sensor.hvac_radiator_setpoint_family_room') }}"
+
+- name: "HVAC Radiator Expected Setpoint Main Zone"
+  unique_id: hvac_radiator_expected_setpoint_main_zone
+  state: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
+
+# Mini Split
+- name: "HVAC Mini Split Expected Setpoint Tina Office"
+  unique_id: hvac_mini_split_expected_setpoint_tina_office
+  state: "{{ states('sensor.hvac_mini_split_setpoint_tina_office') }}"
+
+- name: "HVAC Mini Split Expected Setpoint Erik Office"
+  unique_id: hvac_mini_split_expected_setpoint_erik_office
+  state: "{{ states('sensor.hvac_mini_split_setpoint_erik_office') }}"
+
+- name: "HVAC Mini Split Expected Setpoint Family Room"
+  unique_id: hvac_mini_split_expected_setpoint_family_room
+  state: "{{ states('sensor.hvac_mini_split_setpoint_family_room') }}"
+
+- name: "HVAC Mini Split Expected Setpoint Living Room"
+  unique_id: hvac_mini_split_expected_setpoint_living_room
+  state: "{{ states('sensor.hvac_mini_split_setpoint_living_room') }}"
+
+- name: "HVAC Mini Split Expected Setpoint Dining Room"
+  unique_id: hvac_mini_split_expected_setpoint_dining_room
+  state: "{{ states('sensor.hvac_mini_split_setpoint_dining_room') }}"
+
+- name: "HVAC Mini Split Expected Setpoint Master Bedroom"
+  unique_id: hvac_mini_split_expected_setpoint_master_bedroom
+  state: "{{ states('sensor.hvac_mini_split_setpoint_master_bedroom') }}"
+
+# Ducted
+- name: "HVAC Ducted Expected Setpoint"
+  unique_id: hvac_ducted_expected_setpoint
+  state: "{{ states('sensor.hvac_target_ducted') }}"

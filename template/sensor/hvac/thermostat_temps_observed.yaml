@@ -44,3 +44,9 @@
   unique_id: hvac_mini_split_observed_setpoint_master_bedroom
   state: >
     {{ state_attr('climate.master_bedroom_heat_pump', 'temperature') }}
+
+# Ducted
+- name: "HVAC Ducted Observed Setpoint"
+  unique_id: hvac_ducted_observed_setpoint
+  state: >
+    {{ state_attr('climate.ducted_heat_pump', 'temperature') }}

@@ -45,6 +45,12 @@
   state: >
     {{ states('climate.master_bedroom_heat_pump') != 'off' }}
 
+# Ducted
+- name: "HVAC Ducted Observed Power Status"
+  unique_id: hvac_ducted_observed_power_status
+  state: >
+    {{ states('climate.ducted_heat_pump') != 'off' }}
+
 # Space Heater
 - name: "HVAC Space Heater Observed Power Status Tina Office"
   unique_id: hvac_space_heater_observed_power_status_tina_office

@@ -1,0 +1,16 @@
+- name: "HVAC Calling for Heat Ducted"
+  unique_id: hvac_calling_for_heat_ducted
+  state: >
+    {% set current_temp = states('sensor.kids_rooms_average_temperature') | float(64) %}
+    {% set target_temp = states('sensor.hvac_target_ducted') | float(64) %}
+    {% set under_offset = states('input_number.hvac_under_target_start_threshold_ducted') | float(1) %}
+    {% set over_offset = states('input_number.hvac_over_target_stop_threshold_ducted') | float(1) %}
+    {% set is_heating = is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+
+    {{ current_temp < (target_temp - under_offset) if not is_heating else current_temp < (target_temp + over_offset) }}
+  icon: >-
+    {% if is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+      mdi:thermometer-alert
+    {% else %}
+      mdi:thermometer
+    {% endif %}
