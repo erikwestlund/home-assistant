@@ -1,0 +1,65 @@
+- id: set_office_space_heater_override_until
+  alias: "Set Office Space Heater Override Until"
+  description: "Adjust the override expiration time for the office space heater when override status changes, with detailed logging."
+  trigger:
+    - platform: state
+      entity_id: input_boolean.hvac_override_status_office_space_heater
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_override_status_office_space_heater
+      state: "on"
+  action:
+    - variables:
+        override_hours: "{{ states('input_number.hvac_override_duration_hours_office_space_heater') | float(0) }}"
+        current_time: "{{ now() }}"
+        override_until: "{{ as_timestamp(current_time) + (override_hours * 3600) }}"
+    - service: logbook.log
+      data:
+        name: "Office Space Heater Override Automation"
+        message: >
+          Override status changed to ON. Calculating expiration time.
+          Current time: {{ current_time }},
+          Override duration (hours): {{ override_hours }},
+          Override until: {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
+    - service: input_datetime.set_datetime
+      data:
+        entity_id: input_datetime.hvac_override_until_office_space_heater
+        timestamp: "{{ override_until }}"
+    - service: logbook.log
+      data:
+        name: "Office Space Heater Override Automation"
+        message: >
+          Override until time successfully set to
+          {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
+
+- id: turn_off_office_space_heater_override_after_expiration
+  alias: "Turn Off Office Space Heater Override After Expiration"
+  description: "Automatically turn off the office space heater override status if the expiration time has passed, with detailed logging."
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_override_status_office_space_heater
+      state: "on"
+    - condition: template
+      value_template: >
+        {% set override_until = states('input_datetime.hvac_override_until_office_space_heater') | as_timestamp(default=None) %}
+        {{ override_until is not none and now().timestamp() > override_until }}
+  action:
+    - service: logbook.log
+      data:
+        name: "Office Space Heater Override Automation"
+        message: >
+          Current time: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}.
+          Override expiration time:
+          {{ states('input_datetime.hvac_override_until_office_space_heater') | as_timestamp(default=None) | timestamp_local }}.
+          Turning off override status.
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.hvac_override_status_office_space_heater
+    - service: logbook.log
+      data:
+        name: "Office Space Heater Override Automation"
+        message: >
+          Override status turned off as the expiration time has passed.
