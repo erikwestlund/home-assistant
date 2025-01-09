@@ -14,7 +14,7 @@
   state: >
     {{ states('climate.living_room_main_heating') | capitalize }}
 
-# MIni Splits
+# Mini Splits
 - name: "HVAC Mini Split Observed Mode Office"
   unique_id: hvac_mini_split_observed_mode_office
   state: >
@@ -44,6 +44,12 @@
   unique_id: hvac_mini_split_observed_mode_master_bedroom
   state: >
     {{ states('climate.master_bedroom_heat_pump') | capitalize }}
+
+# Ducted
+- name: "HVAC Ducted Observed Mode"
+  unique_id: hvac_ducted_observed_mode
+  state: >
+    {{ states('climate.ducted_heat_pump') | capitalize }}
 
 # Space Heater
 - name: "HVAC Space Heater Observed Mode Office"
