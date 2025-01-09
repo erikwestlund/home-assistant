@@ -1,5 +1,5 @@
 # Mini Split Setpoint Office Display
-- name: "HVAC Mini Split Setpoint Office Display"
+- name: "HVAC Mini Split Setpoint Office Display 24"
   unique_id: hvac_mini_split_setpoint_office_display
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_office') %}
