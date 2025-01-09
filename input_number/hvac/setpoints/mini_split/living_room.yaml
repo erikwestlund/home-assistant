@@ -1,23 +1,74 @@
-hvac_mini_split_weekday_setpoint_living_room:
-  name: HVAC Living Room Mini Split Weekday Setpoint
+# Weekday Setpoints
+hvac_mini_split_weekday_freezing_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekday Setpoint (Freezing)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74
+
+hvac_mini_split_weekday_cold_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekday Setpoint (Cold)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 68
 
-hvac_mini_split_weekend_setpoint_living_room:
-  name: HVAC Living Room Mini Split Weekend Setpoint
+hvac_mini_split_weekday_hot_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekday Setpoint (Hot)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Weekend Setpoints
+hvac_mini_split_weekend_freezing_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekend Setpoint (Freezing)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 76
+
+hvac_mini_split_weekend_cold_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekend Setpoint (Cold)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 70
 
-hvac_mini_split_night_setpoint_living_room:
-  name: HVAC Living Room Mini Split Night Setpoint
+hvac_mini_split_weekend_hot_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekend Setpoint (Hot)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Night Setpoints
+hvac_mini_split_night_freezing_setpoint_living_room:
+  name: HVAC Living Room Mini Split Night Setpoint (Freezing)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+hvac_mini_split_night_cold_setpoint_living_room:
+  name: HVAC Living Room Mini Split Night Setpoint (Cold)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 66
+
+hvac_mini_split_night_hot_setpoint_living_room:
+  name: HVAC Living Room Mini Split Night Setpoint (Hot)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74

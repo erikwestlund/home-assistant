@@ -1,0 +1,15 @@
+hvac_mini_split_freezing_to_cold_threshold_master_bedroom:
+  name: HVAC Mini Split Freezing to Cold Threshold Master Bedroom
+  min: -20
+  max: 50
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 37
+
+hvac_mini_split_cold_to_hot_threshold_master_bedroom:
+  name: HVAC Mini Split Cold to Hot Threshold Master Bedroom
+  min: 50
+  max: 90
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 60

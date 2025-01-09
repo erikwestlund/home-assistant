@@ -1,0 +1,15 @@
+hvac_mini_split_freezing_to_cold_threshold_dining_room:
+  name: HVAC Mini Split Freezing to Cold Threshold Dining Room
+  min: -20
+  max: 50
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 37
+
+hvac_mini_split_cold_to_hot_threshold_dining_room:
+  name: HVAC Mini Split Cold to Hot Threshold Dining Room
+  min: 50
+  max: 90
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 60

@@ -1,15 +1,49 @@
-hvac_mini_split_day_setpoint_master_bedroom:
-  name: HVAC Master Bedroom Mini Split Day Setpoint
+# Day Setpoints
+hvac_mini_split_day_freezing_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Day Setpoint (Freezing)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 72
 
-hvac_mini_split_night_setpoint_master_bedroom:
-  name: HVAC Master Bedroom Mini Split Night Setpoint
+hvac_mini_split_day_cold_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Day Setpoint (Cold)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 68
+
+hvac_mini_split_day_hot_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Day Setpoint (Hot)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
+
+# Night Setpoints
+hvac_mini_split_night_freezing_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Night Setpoint (Freezing)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 78
+
+hvac_mini_split_night_cold_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Night Setpoint (Cold)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74
+
+hvac_mini_split_night_hot_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Night Setpoint (Hot)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 68
