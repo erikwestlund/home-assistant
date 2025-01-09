@@ -1,3 +1,4 @@
+# Kill switches
 hvac_mini_splits_enabled:
   name: HVAC Mini Splits Enabled
   initial: on
@@ -8,6 +9,7 @@ hvac_radiator_enabled:
   initial: on
   icon: mdi:power
 
+# Radiators
 hvac_radiator_power_on_control_office:
   name: HVAC Office Radiator Power On Control
   initial: on
@@ -18,6 +20,12 @@ hvac_radiator_power_on_control_family_room:
   initial: on
   icon: mdi:power
 
+hvac_radiator_power_on_control_main_zone:
+  name: HVAC Main Zone Radiators Power On Control
+  initial: on
+  icon: mdi:power
+
+# Mini Splits
 hvac_mini_split_power_on_control_office:
   name: HVAC Office Heat Pump Power On Control
   initial: on
@@ -30,11 +38,6 @@ hvac_mini_split_power_on_control_family_room:
 
 hvac_mini_split_power_on_control_living_room:
   name: HVAC Living Room Heat Pump Power On Control
-  initial: on
-  icon: mdi:power
-
-hvac_radiator_power_on_control_main_zone:
-  name: HVAC Main Zone Radiators Power On Control
   initial: on
   icon: mdi:power
 
@@ -53,7 +56,7 @@ hvac_mini_split_power_on_control_erik_office:
   initial: on
   icon: mdi:power
 
-hvac_mini_split_power_on_control_ducted:
+hvac_power_on_control_ducted:
   name: HVAC Ducted Heat Pump Power On Control
   initial: on
   icon: mdi:power
