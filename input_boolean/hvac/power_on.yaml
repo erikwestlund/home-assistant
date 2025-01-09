@@ -9,6 +9,11 @@ hvac_radiator_enabled:
   initial: on
   icon: mdi:power
 
+hvac_ducted_enabled:
+  name: HVAC Ducted Enabled
+  initial: on
+  icon: mdi:power
+
 # Radiators
 hvac_radiator_power_on_control_office:
   name: HVAC Office Radiator Power On Control
