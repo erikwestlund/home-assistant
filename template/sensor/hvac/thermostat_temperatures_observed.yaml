@@ -1,46 +1,46 @@
 # Radiators
-- name: "HVAC Radiator Setpoint Office"
-  unique_id: hvac_radiator_setpoint_office
+- name: "HVAC Radiator Observed Setpoint Office"
+  unique_id: hvac_radiator_observed_setpoint_office
   state: >
     {{ state_attr('climate.office', 'temperature') }}
 
-- name: "HVAC Radiator Setpoint Family Room"
-  unique_id: hvac_radiator_setpoint_family_room
+- name: "HVAC Radiator Observed Setpoint Family Room"
+  unique_id: hvac_radiator_observed_setpoint_family_room
   state: >
     {{ state_attr('climate.family_room_heating', 'temperature') }}
 
-- name: "HVAC Radiator Setpoint Main Zone"
-  unique_id: hvac_radiator_setpoint_main_zone
+- name: "HVAC Radiator Observed Setpoint Main Zone"
+  unique_id: hvac_radiator_observed_setpoint_main_zone
   state: >
     {{ state_attr('climate.living_room_main_heating', 'temperature') }}
     
 # Mini Splits
-- name: "HVAC Mini Split Setpoint Tina Office"
-  unique_id: hvac_mini_split_setpoint_tina_office
+- name: "HVAC Mini Split Observed Setpoint Tina Office"
+  unique_id: hvac_mini_split_observed_setpoint_tina_office
   state: >
     {{ state_attr('climate.tinas_office_mini_split_hvac_unit', 'temperature') }}
 
-- name: "HVAC Mini Split Setpoint Erik Office"
-  unique_id: hvac_mini_split_setpoint_erik_office
+- name: "HVAC Mini Split Observed Setpoint Erik Office"
+  unique_id: hvac_mini_split_observed_setpoint_erik_office
   state: >
     {{ state_attr('climate.eriks_office_mini_split_hvac_unit', 'temperature') }}
 
-- name: "HVAC Mini Split Setpoint Family Room"
-  unique_id: hvac_mini_split_setpoint_family_room
+- name: "HVAC Mini Split Observed Setpoint Family Room"
+  unique_id: hvac_mini_split_observed_setpoint_family_room
   state: >
     {{ state_attr('climate.family_room_mini_split_hvac_unit', 'temperature') }}
 
-- name: "HVAC Mini Split Setpoint Living Room"
-  unique_id: hvac_mini_split_setpoint_living_room
+- name: "HVAC Mini Split Observed Setpoint Living Room"
+  unique_id: hvac_mini_split_observed_setpoint_living_room
   state: >
     {{ state_attr('climate.living_room_mini_split_hvac_unit', 'temperature') }}
 
-- name: "HVAC Mini Split Setpoint Dining Room"
-  unique_id: hvac_mini_split_setpoint_dining_room
+- name: "HVAC Mini Split Observed Setpoint Dining Room"
+  unique_id: hvac_mini_split_observed_setpoint_dining_room
   state: >
     {{ state_attr('climate.dining_room_heat_pump', 'temperature') }}
 
-- name: "HVAC Mini Split Setpoint Master Bedroom"
-  unique_id: hvac_mini_split_setpoint_master_bedroom
+- name: "HVAC Mini Split Observed Setpoint Master Bedroom"
+  unique_id: hvac_mini_split_observed_setpoint_master_bedroom
   state: >
     {{ state_attr('climate.master_bedroom_heat_pump', 'temperature') }}

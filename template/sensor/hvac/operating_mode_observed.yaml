@@ -1,52 +1,52 @@
 # Radiators
-- name: "HVAC Radiator Mode Office"
-  unique_id: hvac_radiator_mode_office
+- name: "HVAC Radiator Observed Mode Office"
+  unique_id: hvac_radiator_observed_mode_office
   state: >
     {{ states('climate.office') | capitalize }}
 
-- name: "HVAC Radiator Mode Family Room"
-  unique_id: hvac_radiator_mode_family_room
+- name: "HVAC Radiator Observed Mode Family Room"
+  unique_id: hvac_radiator_observed_mode_family_room
   state: >
     {{ states('climate.family_room_heating') | capitalize }}
 
-- name: "HVAC Radiator Mode Main Zone"
-  unique_id: hvac_radiator_mode_main_zone
+- name: "HVAC Radiator Observed Mode Main Zone"
+  unique_id: hvac_radiator_observed_mode_main_zone
   state: >
     {{ states('climate.living_room_main_heating') | capitalize }}
 
 # MIni Splits
-- name: "HVAC Mini Split Mode Office"
-  unique_id: hvac_mini_split_mode_office
+- name: "HVAC Mini Split Observed Mode Office"
+  unique_id: hvac_mini_split_observed_mode_office
   state: >
     {{ states('climate.tinas_office_mini_split_hvac_unit') | capitalize }}
 
-- name: "HVAC Mini Split Mode Erik Office"
-  unique_id: hvac_mini_split_mode_erik_office
+- name: "HVAC Mini Split Observed Mode Erik Office"
+  unique_id: hvac_mini_split_observed_mode_erik_office
   state: >
     {{ states('climate.eriks_office_mini_split_hvac_unit') | capitalize }}
 
-- name: "HVAC Mini Split Mode Family Room"
-  unique_id: hvac_mini_split_mode_family_room
+- name: "HVAC Mini Split Observed Mode Family Room"
+  unique_id: hvac_mini_split_observed_mode_family_room
   state: >
     {{ states('climate.family_room_mini_split_hvac_unit') | capitalize }}
 
-- name: "HVAC Mini Split Mode Living Room"
-  unique_id: hvac_mini_split_mode_living_room
+- name: "HVAC Mini Split Observed Mode Living Room"
+  unique_id: hvac_mini_split_observed_mode_living_room
   state: >
     {{ states('climate.living_room_mini_split_hvac_unit') | capitalize }}
 
-- name: "HVAC Mini Split Mode Dining Room"
-  unique_id: hvac_mini_split_mode_dining_room
+- name: "HVAC Mini Split Observed Mode Dining Room"
+  unique_id: hvac_mini_split_observed_mode_dining_room
   state: >
     {{ states('climate.dining_room_heat_pump') | capitalize }}
 
-- name: "HVAC Mini Split Mode Master Bedroom"
-  unique_id: hvac_mini_split_mode_master_bedroom
+- name: "HVAC Mini Split Observed Mode Master Bedroom"
+  unique_id: hvac_mini_split_observed_mode_master_bedroom
   state: >
     {{ states('climate.master_bedroom_heat_pump') | capitalize }}
 
 # Space Heater
-- name: "HVAC Space Heater Mode Tina Office"
-  unique_id: hvac_space_heater_mode_tina_office
+- name: "HVAC Space Heater Observed Mode Tina Office"
+  unique_id: hvac_space_heater_observed_mode_tina_office
   state: >
     {{ 'On' if is_state('switch.tina_office_space_heater', 'on') else 'Off' }}
