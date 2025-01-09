@@ -1,4 +1,4 @@
-- name: "HVAC Radiator Setpoint Noneice"
+- name: "HVAC Radiator Setpoint Office"
   unique_id: hvac_radiator_setpoint_office
   state: >
     {% set is_override = is_state('input_boolean.hvac_override_status_office', 'on') %}
