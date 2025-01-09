@@ -1,0 +1,38 @@
+- name: "HVAC Ducted Target"
+  unique_id: hvac_ducted_target
+  state: >
+    {% set is_override = is_state('input_boolean.hvac_override_status_ducted', 'on') %}
+    {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
+    {% set hvac_mode = states('sensor.hvac_mode') %}
+    {% set is_day = is_state('binary_sensor.hvac_daytime_active_ducted', 'on') %}
+    {% set is_night = is_state('binary_sensor.hvac_nighttime_active_ducted', 'on') %}
+
+    {# 1. Override Mode #}
+    {% if is_override %}
+      {{ states('input_number.hvac_kids_rooms_ducted_override_setpoint') }}
+    {# 2. Away Mode #}
+    {% elif is_away_mode %}
+      {{ states('input_number.hvac_kids_rooms_ducted_away_setpoint') }}
+    {# 3. Daytime Mode #}
+    {% elif is_day %}
+      {% if hvac_mode == 'Heat' %}
+        {{ states('input_number.hvac_target_day_heat_kids_rooms') }}
+      {% else %}
+        {{ states('input_number.hvac_target_day_cool_kids_rooms') }}
+      {% endif %}
+    {# 4. Nighttime Mode #}
+    {% elif is_night %}
+      {% if hvac_mode == 'Heat' %}
+        {{ states('input_number.hvac_target_night_heat_kids_rooms') }}
+      {% else %}
+        {{ states('input_number.hvac_target_night_cool_kids_rooms') }}
+      {% endif %}
+    {# 5. Default Value (Day Heat) #}
+    {% else %}
+      {% if hvac_mode == 'Heat' %}
+        {{ states('input_number.hvac_target_day_heat_kids_rooms') }}
+      {% else %}
+        {{ states('input_number.hvac_target_day_cool_kids_rooms') }}
+      {% endif %}
+    {% endif %}
+  icon: mdi:thermostat
