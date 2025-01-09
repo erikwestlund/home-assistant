@@ -1,9 +1,8 @@
-input_datetime:
-  hvac_daytime_start_time_master_bedroom:
-    name: HVAC Master Bedroom Daytime Start Time
-    has_time: true
-    has_date: false
-    initial: "07:30:00"
+hvac_daytime_start_time_master_bedroom:
+  name: HVAC Master Bedroom Daytime Start Time
+  has_time: true
+  has_date: false
+  initial: "07:30:00"
 
 hvac_nighttime_start_time_master_bedroom:
   name: HVAC Master Bedroom Nighttime Start Time
