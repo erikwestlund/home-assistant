@@ -9,5 +9,6 @@ hvac_room_settings_tabs:
     - "Erik Office"
     - "Ducted"
     - "Main Radiator Zone"
+    - "Settings"
   initial: "Office"
   icon: mdi:home-group
