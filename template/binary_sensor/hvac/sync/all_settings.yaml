@@ -1,0 +1,69 @@
+# Radiators Settings Synced
+- name: "HVAC Radiator Settings Synced Office"
+  unique_id: hvac_radiator_settings_synced_office
+  state: >
+    {{ is_state('binary_sensor.hvac_radiator_power_synced_office', 'on') and is_state('binary_sensor.hvac_radiator_mode_synced_office', 'on') and is_state('binary_sensor.hvac_radiator_setpoint_synced_office', 'on') }}
+  icon: mdi:check
+
+- name: "HVAC Radiator Settings Synced Family Room"
+  unique_id: hvac_radiator_settings_synced_family_room
+  state: >
+    {{ is_state('binary_sensor.hvac_radiator_power_synced_family_room', 'on') and is_state('binary_sensor.hvac_radiator_mode_synced_family_room', 'on') and is_state('binary_sensor.hvac_radiator_setpoint_synced_family_room', 'on') }}
+  icon: mdi:check
+
+- name: "HVAC Radiator Settings Synced Main Zone"
+  unique_id: hvac_radiator_settings_synced_main_zone
+  state: >
+    {{ is_state('binary_sensor.hvac_radiator_power_synced_main_zone', 'on') and is_state('binary_sensor.hvac_radiator_mode_synced_main_zone', 'on') and is_state('binary_sensor.hvac_radiator_setpoint_synced_main_zone', 'on') }}
+  icon: mdi:check
+
+# Mini Split Settings Synced
+- name: "HVAC Mini Split Settings Synced Office"
+  unique_id: hvac_mini_split_settings_synced_office
+  state: >
+    {{ is_state('binary_sensor.hvac_mini_split_power_synced_office', 'on') and is_state('binary_sensor.hvac_mini_split_mode_synced_office', 'on') and is_state('binary_sensor.hvac_mini_split_setpoint_synced_office', 'on') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Settings Synced Erik Office"
+  unique_id: hvac_mini_split_settings_synced_erik_office
+  state: >
+    {{ is_state('binary_sensor.hvac_mini_split_power_synced_erik_office', 'on') and is_state('binary_sensor.hvac_mini_split_mode_synced_erik_office', 'on') and is_state('binary_sensor.hvac_mini_split_setpoint_synced_erik_office', 'on') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Settings Synced Family Room"
+  unique_id: hvac_mini_split_settings_synced_family_room
+  state: >
+    {{ is_state('binary_sensor.hvac_mini_split_power_synced_family_room', 'on') and is_state('binary_sensor.hvac_mini_split_mode_synced_family_room', 'on') and is_state('binary_sensor.hvac_mini_split_setpoint_synced_family_room', 'on') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Settings Synced Living Room"
+  unique_id: hvac_mini_split_settings_synced_living_room
+  state: >
+    {{ is_state('binary_sensor.hvac_mini_split_power_synced_living_room', 'on') and is_state('binary_sensor.hvac_mini_split_mode_synced_living_room', 'on') and is_state('binary_sensor.hvac_mini_split_setpoint_synced_living_room', 'on') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Settings Synced Dining Room"
+  unique_id: hvac_mini_split_settings_synced_dining_room
+  state: >
+    {{ is_state('binary_sensor.hvac_mini_split_power_synced_dining_room', 'on') and is_state('binary_sensor.hvac_mini_split_mode_synced_dining_room', 'on') and is_state('binary_sensor.hvac_mini_split_setpoint_synced_dining_room', 'on') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Settings Synced Master Bedroom"
+  unique_id: hvac_mini_split_settings_synced_master_bedroom
+  state: >
+    {{ is_state('binary_sensor.hvac_mini_split_power_synced_master_bedroom', 'on') and is_state('binary_sensor.hvac_mini_split_mode_synced_master_bedroom', 'on') and is_state('binary_sensor.hvac_mini_split_setpoint_synced_master_bedroom', 'on') }}
+  icon: mdi:check
+
+# Ducted Settings Synced
+- name: "HVAC Ducted Settings Synced"
+  unique_id: hvac_ducted_settings_synced
+  state: >
+    {{ is_state('binary_sensor.hvac_ducted_power_synced', 'on') and is_state('binary_sensor.hvac_ducted_mode_synced', 'on') and is_state('binary_sensor.hvac_ducted_setpoint_synced', 'on') }}
+  icon: mdi:check
+
+# Space Heater Settings Synced
+- name: "HVAC Space Heater Settings Synced Office"
+  unique_id: hvac_space_heater_settings_synced_office
+  state: >
+    {{ is_state('binary_sensor.hvac_space_heater_power_synced_office', 'on') and is_state('binary_sensor.hvac_space_heater_mode_synced_office', 'on') }}
+  icon: mdi:check
