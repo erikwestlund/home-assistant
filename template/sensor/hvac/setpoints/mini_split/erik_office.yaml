@@ -1,4 +1,4 @@
-- name: "HVAC Mini Split Setpoint Erik Office"
+- name: "HVAC Mini Split Setpoint Erik Noneice"
   unique_id: hvac_mini_split_setpoint_erik_office
   state: >
     {% set is_power_off = is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'off') %}
@@ -6,9 +6,9 @@
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_erik_office') %}
     
-    {# If Power is Off, return Off #}
+    {# If Power is None, return None #}
     {% if is_power_off %}
-      Off
+      None
     {# If Override is Active, use Override Setpoint #}
     {% elif is_override %}
       {{ states('input_number.hvac_mini_split_override_setpoint_erik_office') }}
@@ -26,7 +26,7 @@
       {% elif is_state('sensor.hvac_comfort_setting_erik_office', 'Night') %}
         {{ states('input_number.hvac_mini_split_night_freezing_setpoint_erik_office') }}
       {% else %}
-        Off
+        None
       {% endif %}
     {% elif comfort_mode == "Cold" %}
       {% if is_state('sensor.hvac_comfort_setting_erik_office', 'Weekday Occupied') %}
@@ -38,7 +38,7 @@
       {% elif is_state('sensor.hvac_comfort_setting_erik_office', 'Night') %}
         {{ states('input_number.hvac_mini_split_night_cold_setpoint_erik_office') }}
       {% else %}
-        Off
+        None
       {% endif %}
     {% elif comfort_mode == "Hot" %}
       {% if is_state('sensor.hvac_comfort_setting_erik_office', 'Weekday Occupied') %}
@@ -50,10 +50,10 @@
       {% elif is_state('sensor.hvac_comfort_setting_erik_office', 'Night') %}
         {{ states('input_number.hvac_mini_split_night_hot_setpoint_erik_office') }}
       {% else %}
-        Off
+        None
       {% endif %}
     {% else %}
-      Off
+      None
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer

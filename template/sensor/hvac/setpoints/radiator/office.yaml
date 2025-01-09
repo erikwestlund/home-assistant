@@ -1,4 +1,4 @@
-- name: "HVAC Radiator Setpoint Office"
+- name: "HVAC Radiator Setpoint Noneice"
   unique_id: hvac_radiator_setpoint_office
   state: >
     {% set is_override = is_state('input_boolean.hvac_override_status_office', 'on') %}
@@ -21,7 +21,7 @@
     {% elif comfort_setting == "Night" %}
       {{ states('input_number.hvac_radiator_night_setpoint_office') }}
     {% else %}
-      Off
+      None
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:radiator
