@@ -2,10 +2,12 @@
 - name: "HVAC Setpoint Ducted Celsius-Fahrenheit Mismatch"
   unique_id: hvac_setpoint_ducted_celsius_fahrenheit_mismatch
   state: >
-    {% if states('sensor.hvac_setpoint_ducted') == 'unavailable' or states('sensor.hvac_setpoint_ducted_rounded_back') == 'unavailable' %}
+    {% set original = states('sensor.hvac_setpoint_ducted') %}
+    {% set rounded_back = states('sensor.hvac_setpoint_ducted_rounded_back') %}
+    {% if original in ['unavailable', 'unknown', 'Off'] or rounded_back in ['unavailable', 'unknown', 'Off'] %}
       false
     {% else %}
-      {{ states('sensor.hvac_setpoint_ducted') | float != states('sensor.hvac_setpoint_ducted_rounded_back') | float }}
+      {{ original | float != rounded_back | float }}
     {% endif %}
   icon: mdi:alert
 
@@ -13,10 +15,12 @@
 - name: "HVAC Mini Split Setpoint Dining Room Celsius-Fahrenheit Mismatch"
   unique_id: hvac_mini_split_setpoint_dining_room_celsius_fahrenheit_mismatch
   state: >
-    {% if states('sensor.hvac_mini_split_setpoint_dining_room') == 'unavailable' or states('sensor.hvac_mini_split_setpoint_dining_room_rounded_back') == 'unavailable' %}
+    {% set original = states('sensor.hvac_mini_split_setpoint_dining_room') %}
+    {% set rounded_back = states('sensor.hvac_mini_split_setpoint_dining_room_rounded_back') %}
+    {% if original in ['unavailable', 'unknown', 'Off'] or rounded_back in ['unavailable', 'unknown', 'Off'] %}
       false
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_dining_room') | float != states('sensor.hvac_mini_split_setpoint_dining_room_rounded_back') | float }}
+      {{ original | float != rounded_back | float }}
     {% endif %}
   icon: mdi:alert
 
@@ -24,10 +28,12 @@
 - name: "HVAC Mini Split Setpoint Erik Office Celsius-Fahrenheit Mismatch"
   unique_id: hvac_mini_split_setpoint_erik_office_celsius_fahrenheit_mismatch
   state: >
-    {% if states('sensor.hvac_mini_split_setpoint_erik_office') == 'unavailable' or states('sensor.hvac_mini_split_setpoint_erik_office_rounded_back') == 'unavailable' %}
+    {% set original = states('sensor.hvac_mini_split_setpoint_erik_office') %}
+    {% set rounded_back = states('sensor.hvac_mini_split_setpoint_erik_office_rounded_back') %}
+    {% if original in ['unavailable', 'unknown', 'Off'] or rounded_back in ['unavailable', 'unknown', 'Off'] %}
       false
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_erik_office') | float != states('sensor.hvac_mini_split_setpoint_erik_office_rounded_back') | float }}
+      {{ original | float != rounded_back | float }}
     {% endif %}
   icon: mdi:alert
 
@@ -35,10 +41,12 @@
 - name: "HVAC Mini Split Setpoint Family Room Celsius-Fahrenheit Mismatch"
   unique_id: hvac_mini_split_setpoint_family_room_celsius_fahrenheit_mismatch
   state: >
-    {% if states('sensor.hvac_mini_split_setpoint_family_room') == 'unavailable' or states('sensor.hvac_mini_split_setpoint_family_room_rounded_back') == 'unavailable' %}
+    {% set original = states('sensor.hvac_mini_split_setpoint_family_room') %}
+    {% set rounded_back = states('sensor.hvac_mini_split_setpoint_family_room_rounded_back') %}
+    {% if original in ['unavailable', 'unknown', 'Off'] or rounded_back in ['unavailable', 'unknown', 'Off'] %}
       false
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_family_room') | float != states('sensor.hvac_mini_split_setpoint_family_room_rounded_back') | float }}
+      {{ original | float != rounded_back | float }}
     {% endif %}
   icon: mdi:alert
 
@@ -46,10 +54,12 @@
 - name: "HVAC Mini Split Setpoint Living Room Celsius-Fahrenheit Mismatch"
   unique_id: hvac_mini_split_setpoint_living_room_celsius_fahrenheit_mismatch
   state: >
-    {% if states('sensor.hvac_mini_split_setpoint_living_room') == 'unavailable' or states('sensor.hvac_mini_split_setpoint_living_room_rounded_back') == 'unavailable' %}
+    {% set original = states('sensor.hvac_mini_split_setpoint_living_room') %}
+    {% set rounded_back = states('sensor.hvac_mini_split_setpoint_living_room_rounded_back') %}
+    {% if original in ['unavailable', 'unknown', 'Off'] or rounded_back in ['unavailable', 'unknown', 'Off'] %}
       false
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_living_room') | float != states('sensor.hvac_mini_split_setpoint_living_room_rounded_back') | float }}
+      {{ original | float != rounded_back | float }}
     {% endif %}
   icon: mdi:alert
 
@@ -57,10 +67,12 @@
 - name: "HVAC Mini Split Setpoint Master Bedroom Celsius-Fahrenheit Mismatch"
   unique_id: hvac_mini_split_setpoint_master_bedroom_celsius_fahrenheit_mismatch
   state: >
-    {% if states('sensor.hvac_mini_split_setpoint_master_bedroom') == 'unavailable' or states('sensor.hvac_mini_split_setpoint_master_bedroom_rounded_back') == 'unavailable' %}
+    {% set original = states('sensor.hvac_mini_split_setpoint_master_bedroom') %}
+    {% set rounded_back = states('sensor.hvac_mini_split_setpoint_master_bedroom_rounded_back') %}
+    {% if original in ['unavailable', 'unknown', 'Off'] or rounded_back in ['unavailable', 'unknown', 'Off'] %}
       false
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_master_bedroom') | float != states('sensor.hvac_mini_split_setpoint_master_bedroom_rounded_back') | float }}
+      {{ original | float != rounded_back | float }}
     {% endif %}
   icon: mdi:alert
 
@@ -68,9 +80,11 @@
 - name: "HVAC Mini Split Setpoint Office Celsius-Fahrenheit Mismatch"
   unique_id: hvac_mini_split_setpoint_office_celsius_fahrenheit_mismatch
   state: >
-    {% if states('sensor.hvac_mini_split_setpoint_office') == 'unavailable' or states('sensor.hvac_mini_split_setpoint_office_rounded_back') == 'unavailable' %}
+    {% set original = states('sensor.hvac_mini_split_setpoint_office') %}
+    {% set rounded_back = states('sensor.hvac_mini_split_setpoint_office_rounded_back') %}
+    {% if original in ['unavailable', 'unknown', 'Off'] or rounded_back in ['unavailable', 'unknown', 'Off'] %}
       false
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_office') | float != states('sensor.hvac_mini_split_setpoint_office_rounded_back') | float }}
+      {{ original | float != rounded_back | float }}
     {% endif %}
   icon: mdi:alert
