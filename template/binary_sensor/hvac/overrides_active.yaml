@@ -1,4 +1,4 @@
-- name: "Any HVAC Override Active"
+- name: "HVAC Has Override Active"
   state: >
     {{ 
       is_state('input_boolean.hvac_override_status_office', 'on') or
