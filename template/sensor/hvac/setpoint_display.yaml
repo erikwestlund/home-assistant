@@ -120,4 +120,10 @@
   unique_id: hvac_radiator_setpoint_office_display
   state: >
     {% set value = states('sensor.hvac_radiator_setpoint_office') %}
-    {% if value in ['None', '
+    {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
+      "Off"
+    {% else %}
+      "{{ (value | float | round(0)) }}"
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
