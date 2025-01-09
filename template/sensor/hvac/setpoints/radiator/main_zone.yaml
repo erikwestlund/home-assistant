@@ -1,5 +1,5 @@
-- name: "HVAC Main Zone Radiator Setpoint"
-  unique_id: hvac_main_zone_radiator_setpoint
+- name: "HVAC Radiator Setpoint Main Zone"
+  unique_id: hvac_radiator_setpoint_main_zone
   state: >
     {% set is_override = is_state('input_boolean.hvac_override_status_main_zone', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}

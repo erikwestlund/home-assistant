@@ -1,5 +1,5 @@
-- name: "HVAC Dining Room Mini Split Setpoint"
-  unique_id: hvac_dining_room_mini_split_setpoint
+- name: "HVAC Mini Split Setpoint Dining Room"
+  unique_id: hvac_mini_split_setpoint_dining_room
   state: >
     {% set is_power_off = is_state('binary_sensor.hvac_mini_split_power_status_dining_room', 'off') %}
     {% set is_override = is_state('input_boolean.hvac_override_status_dining_room', 'on') %}

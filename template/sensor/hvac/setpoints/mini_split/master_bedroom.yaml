@@ -1,5 +1,5 @@
-- name: "HVAC Master Bedroom Mini Split Setpoint"
-  unique_id: hvac_master_bedroom_mini_split_setpoint
+- name: "HVAC Mini Split Setpoint Master Bedroom"
+  unique_id: hvac_mini_split_setpoint_master_bedroom
   state: >
     {% set is_power_off = is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'off') %}
     {% set is_override = is_state('input_boolean.hvac_override_status_master_bedroom', 'on') %}

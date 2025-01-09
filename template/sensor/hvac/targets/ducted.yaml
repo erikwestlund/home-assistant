@@ -1,5 +1,5 @@
-- name: "HVAC Ducted Target"
-  unique_id: hvac_ducted_target
+- name: "HVAC Target Ducted"
+  unique_id: hvac_target_ducted
   state: >
     {% set is_override = is_state('input_boolean.hvac_override_status_ducted', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
