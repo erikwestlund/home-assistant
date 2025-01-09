@@ -4,9 +4,9 @@
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_office') %}
     {% if value in ['None', 'unknown', 'unavailable'] %}
-      "Off"
+      'Off'
     {% else %}
-      "{{ value | float | round(0) }}"
+      (value | float | round(0)) | string
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
