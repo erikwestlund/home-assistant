@@ -1,0 +1,101 @@
+# Office
+- name: "HVAC Mini Split Comfort Setting Mode Office"
+  unique_id: hvac_mini_split_comfort_setting_mode_office
+  state: >
+    {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set freezing_to_cold = states('input_number.hvac_mini_split_freezing_to_cold_threshold_office') | float %}
+    {% set cold_to_hot = states('input_number.hvac_mini_split_cold_to_hot_threshold_office') | float %}
+
+    {% if current_temp < freezing_to_cold %}
+      Freezing
+    {% elif current_temp > cold_to_hot %}
+      Hot
+    {% else %}
+      Cold
+    {% endif %}
+  icon: mdi:thermometer
+
+# Family Room
+- name: "HVAC Mini Split Comfort Setting Mode Family Room"
+  unique_id: hvac_mini_split_comfort_setting_mode_family_room
+  state: >
+    {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set freezing_to_cold = states('input_number.hvac_mini_split_freezing_to_cold_threshold_family_room') | float %}
+    {% set cold_to_hot = states('input_number.hvac_mini_split_cold_to_hot_threshold_family_room') | float %}
+    
+    {% if current_temp < freezing_to_cold %}
+      Freezing
+    {% elif current_temp > cold_to_hot %}
+      Hot
+    {% else %}
+      Cold
+    {% endif %}
+  icon: mdi:thermometer
+
+# Living Room
+- name: "HVAC Mini Split Comfort Setting Mode Living Room"
+  unique_id: hvac_mini_split_comfort_setting_mode_living_room
+  state: >
+    {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set freezing_to_cold = states('input_number.hvac_mini_split_freezing_to_cold_threshold_living_room') | float %}
+    {% set cold_to_hot = states('input_number.hvac_mini_split_cold_to_hot_threshold_living_room') | float %}
+    
+    {% if current_temp < freezing_to_cold %}
+      Freezing
+    {% elif current_temp > cold_to_hot %}
+      Hot
+    {% else %}
+      Cold
+    {% endif %}
+  icon: mdi:thermometer
+
+# Dining Room
+- name: "HVAC Mini Split Comfort Setting Mode Dining Room"
+  unique_id: hvac_mini_split_comfort_setting_mode_dining_room
+  state: >
+    {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set freezing_to_cold = states('input_number.hvac_mini_split_freezing_to_cold_threshold_dining_room') | float %}
+    {% set cold_to_hot = states('input_number.hvac_mini_split_cold_to_hot_threshold_dining_room') | float %}
+    
+    {% if current_temp < freezing_to_cold %}
+      Freezing
+    {% elif current_temp > cold_to_hot %}
+      Hot
+    {% else %}
+      Cold
+    {% endif %}
+  icon: mdi:thermometer
+
+# Erik Office
+- name: "HVAC Mini Split Comfort Setting Mode Erik Office"
+  unique_id: hvac_mini_split_comfort_setting_mode_erik_office
+  state: >
+    {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set freezing_to_cold = states('input_number.hvac_mini_split_freezing_to_cold_threshold_erik_office') | float %}
+    {% set cold_to_hot = states('input_number.hvac_mini_split_cold_to_hot_threshold_erik_office') | float %}
+    
+    {% if current_temp < freezing_to_cold %}
+      Freezing
+    {% elif current_temp > cold_to_hot %}
+      Hot
+    {% else %}
+      Cold
+    {% endif %}
+  icon: mdi:thermometer
+
+# Master Bedroom
+- name: "HVAC Mini Split Comfort Setting Mode Master Bedroom"
+  unique_id: hvac_mini_split_comfort_setting_mode_master_bedroom
+  state: >
+    {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set freezing_to_cold = states('input_number.hvac_mini_split_freezing_to_cold_threshold_master_bedroom') | float %}
+    {% set cold_to_hot = states('input_number.hvac_mini_split_cold_to_hot_threshold_master_bedroom') | float %}
+    
+    {% if current_temp < freezing_to_cold %}
+      Freezing
+    {% elif current_temp > cold_to_hot %}
+      Hot
+    {% else %}
+      Cold
+    {% endif %}
+  icon: mdi:thermometer
