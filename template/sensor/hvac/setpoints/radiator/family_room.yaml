@@ -1,4 +1,4 @@
-- name: "HVAC Radiator Setpoint  Family Room"
+- name: "HVAC Radiator Setpoint Family Room"
   unique_id: hvac_radiator_setpoint_family_room
   state: >
     {% set is_override = is_state('input_boolean.hvac_override_status_family_room', 'on') %}
