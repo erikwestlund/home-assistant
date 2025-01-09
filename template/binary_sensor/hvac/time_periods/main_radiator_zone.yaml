@@ -1,0 +1,23 @@
+- name: "HVAC Main Radiator Zone Daytime In Window"
+  unique_id: hvac_main_radiator_zone_daytime_in_window
+  state: >
+    {% set day_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_main_radiator_zone')) %}
+    {% set bedtime_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_bedtime_start_time_main_radiator_zone')) %}
+    {% set current_time = now().timestamp() %}
+    {{ day_start <= current_time < bedtime_start }}
+
+- name: "HVAC Main Radiator Zone Bedtime In Window"
+  unique_id: hvac_main_radiator_zone_bedtime_in_window
+  state: >
+    {% set bedtime_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_bedtime_start_time_main_radiator_zone')) %}
+    {% set sleep_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_sleep_start_time_main_radiator_zone')) %}
+    {% set current_time = now().timestamp() %}
+    {{ bedtime_start <= current_time < sleep_start }}
+
+- name: "HVAC Main Radiator Zone Sleep In Window"
+  unique_id: hvac_main_radiator_zone_sleep_in_window
+  state: >
+    {% set sleep_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_sleep_start_time_main_radiator_zone')) %}
+    {% set day_start = as_timestamp((now() + timedelta(days=1)).strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_main_radiator_zone')) %}
+    {% set current_time = now().timestamp() %}
+    {{ sleep_start <= current_time < day_start }}

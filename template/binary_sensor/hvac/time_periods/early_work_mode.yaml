@@ -1,0 +1,12 @@
+- name: "HVAC Office Early Work Mode Time In Window"
+  unique_id: hvac_office_early_work_mode_time_in_window
+  state: >
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set start_time = today ~ 'T' ~ states('input_datetime.hvac_early_work_mode_start_time_office') %}
+    {% set end_time = today ~ 'T' ~ states('input_datetime.hvac_early_work_mode_end_time_office') %}
+    {% set start_time_ts = as_timestamp(strptime(start_time, '%Y-%m-%dT%H:%M:%S')) %}
+    {% set end_time_ts = as_timestamp(strptime(end_time, '%Y-%m-%dT%H:%M:%S')) %}
+    {% set now_ts = now().timestamp() %}
+    
+    {{ start_time_ts <= now_ts < end_time_ts }}
+    

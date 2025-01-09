@@ -1,0 +1,7 @@
+- name: "HVAC General Daytime Status"
+  unique_id: hvac_general_daytime_status
+  state: >
+    {% set day_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_day_start_time')) %}
+    {% set night_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_night_start_time')) %}
+    {% set current_time = now().timestamp() %}
+    {{ day_start <= current_time < night_start }}
