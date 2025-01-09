@@ -1,0 +1,125 @@
+# Ducted System Setpoint (Celsius, Rounded)
+- name: "HVAC Setpoint Ducted (Celsius)"
+  unique_id: hvac_setpoint_ducted_celsius
+  state: >
+    {% set f = states('sensor.hvac_setpoint_ducted') | float %}
+    {{ ((f - 32) / 1.8) | round(0) if f != 'Off' else 'Off' }}
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Dining Room (Celsius, Rounded)
+- name: "HVAC Mini Split Setpoint Dining Room (Celsius)"
+  unique_id: hvac_mini_split_setpoint_dining_room_celsius
+  state: >
+    {% set f = states('sensor.hvac_mini_split_setpoint_dining_room') | float %}
+    {{ ((f - 32) / 1.8) | round(0) if f != 'Off' else 'Off' }}
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Erik Office (Celsius, Rounded)
+- name: "HVAC Mini Split Setpoint Erik Office (Celsius)"
+  unique_id: hvac_mini_split_setpoint_erik_office_celsius
+  state: >
+    {% set f = states('sensor.hvac_mini_split_setpoint_erik_office') | float %}
+    {{ ((f - 32) / 1.8) | round(0) if f != 'Off' else 'Off' }}
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Family Room (Celsius, Rounded)
+- name: "HVAC Mini Split Setpoint Family Room (Celsius)"
+  unique_id: hvac_mini_split_setpoint_family_room_celsius
+  state: >
+    {% set f = states('sensor.hvac_mini_split_setpoint_family_room') | float %}
+    {{ ((f - 32) / 1.8) | round(0) if f != 'Off' else 'Off' }}
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Living Room (Celsius, Rounded)
+- name: "HVAC Mini Split Setpoint Living Room (Celsius)"
+  unique_id: hvac_mini_split_setpoint_living_room_celsius
+  state: >
+    {% set f = states('sensor.hvac_mini_split_setpoint_living_room') | float %}
+    {{ ((f - 32) / 1.8) | round(0) if f != 'Off' else 'Off' }}
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Master Bedroom (Celsius, Rounded)
+- name: "HVAC Mini Split Setpoint Master Bedroom (Celsius)"
+  unique_id: hvac_mini_split_setpoint_master_bedroom_celsius
+  state: >
+    {% set f = states('sensor.hvac_mini_split_setpoint_master_bedroom') | float %}
+    {{ ((f - 32) / 1.8) | round(0) if f != 'Off' else 'Off' }}
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Office (Celsius, Rounded)
+- name: "HVAC Mini Split Setpoint Office (Celsius)"
+  unique_id: hvac_mini_split_setpoint_office_celsius
+  state: >
+    {% set f = states('sensor.hvac_mini_split_setpoint_office') | float %}
+    {{ ((f - 32) / 1.8) | round(0) if f != 'Off' else 'Off' }}
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer
+
+# Ducted System Setpoint (Fahrenheit, Rounded Back)
+- name: "HVAC Setpoint Ducted (Rounded Back)"
+  unique_id: hvac_setpoint_ducted_rounded_back
+  state: >
+    {% set c = states('sensor.hvac_setpoint_ducted_celsius') | float %}
+    {{ (c * 1.8 + 32) | round(0) if c != 'Off' else 'Off' }}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Dining Room (Fahrenheit, Rounded Back)
+- name: "HVAC Mini Split Setpoint Dining Room (Rounded Back)"
+  unique_id: hvac_mini_split_setpoint_dining_room_rounded_back
+  state: >
+    {% set c = states('sensor.hvac_mini_split_setpoint_dining_room_celsius') | float %}
+    {{ (c * 1.8 + 32) | round(0) if c != 'Off' else 'Off' }}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Erik Office (Fahrenheit, Rounded Back)
+- name: "HVAC Mini Split Setpoint Erik Office (Rounded Back)"
+  unique_id: hvac_mini_split_setpoint_erik_office_rounded_back
+  state: >
+    {% set c = states('sensor.hvac_mini_split_setpoint_erik_office_celsius') | float %}
+    {{ (c * 1.8 + 32) | round(0) if c != 'Off' else 'Off' }}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Family Room (Fahrenheit, Rounded Back)
+- name: "HVAC Mini Split Setpoint Family Room (Rounded Back)"
+  unique_id: hvac_mini_split_setpoint_family_room_rounded_back
+  state: >
+    {% set c = states('sensor.hvac_mini_split_setpoint_family_room_celsius') | float %}
+    {{ (c * 1.8 + 32) | round(0) if c != 'Off' else 'Off' }}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Living Room (Fahrenheit, Rounded Back)
+- name: "HVAC Mini Split Setpoint Living Room (Rounded Back)"
+  unique_id: hvac_mini_split_setpoint_living_room_rounded_back
+  state: >
+    {% set c = states('sensor.hvac_mini_split_setpoint_living_room_celsius') | float %}
+    {{ (c * 1.8 + 32) | round(0) if c != 'Off' else 'Off' }}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Master Bedroom (Fahrenheit, Rounded Back)
+- name: "HVAC Mini Split Setpoint Master Bedroom (Rounded Back)"
+  unique_id: hvac_mini_split_setpoint_master_bedroom_rounded_back
+  state: >
+    {% set c = states('sensor.hvac_mini_split_setpoint_master_bedroom_celsius') | float %}
+    {{ (c * 1.8 + 32) | round(0) if c != 'Off' else 'Off' }}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Mini Split Setpoint Office (Fahrenheit, Rounded Back)
+- name: "HVAC Mini Split Setpoint Office (Rounded Back)"
+  unique_id: hvac_mini_split_setpoint_office_rounded_back
+  state: >
+    {% set c = states('sensor.hvac_mini_split_setpoint_office_celsius') | float %}
+    {{ (c * 1.8 + 32) | round(0) if c != 'Off' else 'Off' }}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer

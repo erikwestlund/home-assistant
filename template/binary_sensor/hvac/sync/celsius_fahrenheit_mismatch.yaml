@@ -1,0 +1,48 @@
+# Ducted Setpoint Celsius-Fahrenheit Mismatch
+- name: "HVAC Setpoint Ducted Celsius-Fahrenheit Mismatch"
+  unique_id: hvac_setpoint_ducted_celsius_fahrenheit_mismatch
+  state: >
+    {{ states('sensor.hvac_setpoint_ducted') | float != states('sensor.hvac_setpoint_ducted_rounded_back') | float }}
+  icon: mdi:alert
+
+# Mini Split Dining Room Celsius-Fahrenheit Mismatch
+- name: "HVAC Mini Split Setpoint Dining Room Celsius-Fahrenheit Mismatch"
+  unique_id: hvac_mini_split_setpoint_dining_room_celsius_fahrenheit_mismatch
+  state: >
+    {{ states('sensor.hvac_mini_split_setpoint_dining_room') | float != states('sensor.hvac_mini_split_setpoint_dining_room_rounded_back') | float }}
+  icon: mdi:alert
+
+# Mini Split Erik Office Celsius-Fahrenheit Mismatch
+- name: "HVAC Mini Split Setpoint Erik Office Celsius-Fahrenheit Mismatch"
+  unique_id: hvac_mini_split_setpoint_erik_office_celsius_fahrenheit_mismatch
+  state: >
+    {{ states('sensor.hvac_mini_split_setpoint_erik_office') | float != states('sensor.hvac_mini_split_setpoint_erik_office_rounded_back') | float }}
+  icon: mdi:alert
+
+# Mini Split Family Room Celsius-Fahrenheit Mismatch
+- name: "HVAC Mini Split Setpoint Family Room Celsius-Fahrenheit Mismatch"
+  unique_id: hvac_mini_split_setpoint_family_room_celsius_fahrenheit_mismatch
+  state: >
+    {{ states('sensor.hvac_mini_split_setpoint_family_room') | float != states('sensor.hvac_mini_split_setpoint_family_room_rounded_back') | float }}
+  icon: mdi:alert
+
+# Mini Split Living Room Celsius-Fahrenheit Mismatch
+- name: "HVAC Mini Split Setpoint Living Room Celsius-Fahrenheit Mismatch"
+  unique_id: hvac_mini_split_setpoint_living_room_celsius_fahrenheit_mismatch
+  state: >
+    {{ states('sensor.hvac_mini_split_setpoint_living_room') | float != states('sensor.hvac_mini_split_setpoint_living_room_rounded_back') | float }}
+  icon: mdi:alert
+
+# Mini Split Master Bedroom Celsius-Fahrenheit Mismatch
+- name: "HVAC Mini Split Setpoint Master Bedroom Celsius-Fahrenheit Mismatch"
+  unique_id: hvac_mini_split_setpoint_master_bedroom_celsius_fahrenheit_mismatch
+  state: >
+    {{ states('sensor.hvac_mini_split_setpoint_master_bedroom') | float != states('sensor.hvac_mini_split_setpoint_master_bedroom_rounded_back') | float }}
+  icon: mdi:alert
+
+# Mini Split Office Celsius-Fahrenheit Mismatch
+- name: "HVAC Mini Split Setpoint Office Celsius-Fahrenheit Mismatch"
+  unique_id: hvac_mini_split_setpoint_office_celsius_fahrenheit_mismatch
+  state: >
+    {{ states('sensor.hvac_mini_split_setpoint_office') | float != states('sensor.hvac_mini_split_setpoint_office_rounded_back') | float }}
+  icon: mdi:alert
