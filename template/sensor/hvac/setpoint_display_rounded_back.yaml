@@ -1,89 +1,62 @@
+# Ducted System Setpoint (Rounded Back Display)
 - name: "HVAC Setpoint Ducted Display (Rounded Back)"
   unique_id: hvac_setpoint_ducted_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_setpoint_ducted_celsius') %}
-    {% if c in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      "Off"
-    {% else %}
-      "{{ ((c | float * 1.8 + 32) | round(0)) }}"
-    {% endif %}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
-# Mini Split Setpoint Dining Room Display (Rounded Back)
+# Mini Split Setpoint Dining Room (Rounded Back Display)
 - name: "HVAC Mini Split Setpoint Dining Room Display (Rounded Back)"
   unique_id: hvac_mini_split_setpoint_dining_room_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_dining_room_celsius') %}
-    {% if c in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      "Off"
-    {% else %}
-      "{{ ((c | float * 1.8 + 32) | round(0)) }}"
-    {% endif %}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
-# Mini Split Setpoint Erik Office Display (Rounded Back)
+# Mini Split Setpoint Erik Office (Rounded Back Display)
 - name: "HVAC Mini Split Setpoint Erik Office Display (Rounded Back)"
   unique_id: hvac_mini_split_setpoint_erik_office_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_erik_office_celsius') %}
-    {% if c in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      "Off"
-    {% else %}
-      "{{ ((c | float * 1.8 + 32) | round(0)) }}"
-    {% endif %}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
-# Mini Split Setpoint Family Room Display (Rounded Back)
+# Mini Split Setpoint Family Room (Rounded Back Display)
 - name: "HVAC Mini Split Setpoint Family Room Display (Rounded Back)"
   unique_id: hvac_mini_split_setpoint_family_room_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_family_room_celsius') %}
-    {% if c in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      "Off"
-    {% else %}
-      "{{ ((c | float * 1.8 + 32) | round(0)) }}"
-    {% endif %}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
-# Mini Split Setpoint Living Room Display (Rounded Back)
+# Mini Split Setpoint Living Room (Rounded Back Display)
 - name: "HVAC Mini Split Setpoint Living Room Display (Rounded Back)"
   unique_id: hvac_mini_split_setpoint_living_room_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_living_room_celsius') %}
-    {% if c in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      "Off"
-    {% else %}
-      "{{ ((c | float * 1.8 + 32) | round(0)) }}"
-    {% endif %}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
-# Mini Split Setpoint Master Bedroom Display (Rounded Back)
+# Mini Split Setpoint Master Bedroom (Rounded Back Display)
 - name: "HVAC Mini Split Setpoint Master Bedroom Display (Rounded Back)"
   unique_id: hvac_mini_split_setpoint_master_bedroom_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_master_bedroom_celsius') %}
-    {% if c in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      "Off"
-    {% else %}
-      "{{ ((c | float * 1.8 + 32) | round(0)) }}"
-    {% endif %}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
-# Mini Split Setpoint Office Display (Rounded Back)
+# Mini Split Setpoint Office (Rounded Back Display)
 - name: "HVAC Mini Split Setpoint Office Display (Rounded Back)"
   unique_id: hvac_mini_split_setpoint_office_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_office_celsius') %}
-    {% if c in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      "Off"
-    {% else %}
-      "{{ ((c | float * 1.8 + 32) | round(0)) }}"
-    {% endif %}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
