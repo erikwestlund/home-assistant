@@ -1,5 +1,5 @@
-- id: set_main_radiator_zone_override_until
-  alias: "Set Main Radiator Zone Override Until"
+- id: hvac_set_main_radiator_zone_override_until
+  alias: "HVAC Set Main Radiator Zone Override Until"
   description: "Adjust the override expiration time for the Main Radiator Zone when override status changes, with detailed logging."
   trigger:
     - platform: state
@@ -32,8 +32,8 @@
           Override until time successfully set to 
           {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
 
-- id: turn_off_main_radiator_zone_override_after_expiration
-  alias: "Turn Off Main Radiator Zone Override After Expiration"
+- id: hvac_turn_off_main_radiator_zone_override_after_expiration
+  alias: "HVAC Turn Off Main Radiator Zone Override After Expiration"
   description: "Automatically turn off the override status for the Main Radiator Zone if the expiration time has passed, with detailed logging."
   trigger:
     - platform: time_pattern

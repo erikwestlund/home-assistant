@@ -1,5 +1,5 @@
-- id: set_master_bedroom_override_until
-  alias: "Set Master Bedroom Override Until"
+- id: hvac_set_master_bedroom_override_until
+  alias: "HVAC Set Master Bedroom Override Until"
   description: "Adjust the override expiration time when override status changes, with detailed logging."
   trigger:
     - platform: state
@@ -32,8 +32,8 @@
           Override until time successfully set to 
           {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
 
-- id: turn_off_master_bedroom_override_after_expiration
-  alias: "Turn Off Master Bedroom Override After Expiration"
+- id: hvac_turn_off_master_bedroom_override_after_expiration
+  alias: "HVAC Turn Off Master Bedroom Override After Expiration"
   description: "Automatically turn off the override status if the expiration time has passed, with detailed logging."
   trigger:
     - platform: time_pattern

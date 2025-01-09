@@ -1,5 +1,5 @@
-- id: set_ducted_override_until
-  alias: "Set Ducted Override Until"
+- id: hvac_set_ducted_override_until
+  alias: "HVAC Set Ducted Override Until"
   description: "Adjust the override expiration time when override status changes, with detailed logging."
   trigger:
     - platform: state
@@ -32,8 +32,8 @@
           Override until time successfully set to
           {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
 
-- id: turn_off_ducted_override_after_expiration
-  alias: "Turn Off Ducted Override After Expiration"
+- id: hvac_turn_off_ducted_override_after_expiration
+  alias: "HVAC Turn Off Ducted Override After Expiration"
   description: "Automatically turn off the override status if the expiration time has passed, with detailed logging."
   trigger:
     - platform: time_pattern

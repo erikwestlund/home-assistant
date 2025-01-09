@@ -5,6 +5,12 @@ hvac_override_until_office:
   has_date: true
   initial: "2025-01-01T00:00:00"
 
+hvac_override_until_office_space_heater:
+  name: HVAC Office Override Until
+  has_time: true
+  has_date: true
+  initial: "2025-01-01T00:00:00"
+
 # Family Room
 hvac_override_until_family_room:
   name: HVAC Family Room Override Until

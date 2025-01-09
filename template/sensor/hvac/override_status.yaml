@@ -1,0 +1,80 @@
+- name: "HVAC Office Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_office') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Office Space Heater Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_office_space_heater') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Family Room Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_family_room') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Living Room Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_living_room') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Dining Room Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_dining_room') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Erik Office Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_erik_office') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Master Bedroom Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_master_bedroom') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Ducted Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_ducted') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}
+
+- name: "HVAC Main Radiator Zone Override Until"
+  state: >
+    {% set override_time = states('input_datetime.hvac_override_until_main_radiator_zone') %}
+    {% if override_time != 'unknown' %}
+      {{ override_time | as_datetime | timestamp_custom('%b %d, %I:%M %p') }}
+    {% else %}
+      Not Set
+    {% endif %}

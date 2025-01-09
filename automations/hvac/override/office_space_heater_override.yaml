@@ -29,7 +29,7 @@
       data:
         name: "Office Space Heater Override Automation"
         message: >
-          Override until time successfully set to
+          Override until time successfully set to 
           {{ override_until | timestamp_custom('%Y-%m-%d %H:%M:%S') }}.
 
 - id: turn_off_office_space_heater_override_after_expiration
@@ -52,7 +52,7 @@
         name: "Office Space Heater Override Automation"
         message: >
           Current time: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}.
-          Override expiration time:
+          Override expiration time: 
           {{ states('input_datetime.hvac_override_until_office_space_heater') | as_timestamp(default=None) | timestamp_local }}.
           Turning off override status.
     - service: input_boolean.turn_off
