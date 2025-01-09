@@ -1,16 +1,15 @@
 # Mini Split Setpoint Office Display
-- name: "HVAC Mini Split Setpoint Office Display 24"
-  unique_id: hvac_mini_split_setpoint_office_display_24
+- name: "HVAC Mini Split Setpoint Office Display"
+  unique_id: hvac_mini_split_setpoint_office_display
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_office') %}
     {% if value in ['None', 'unknown', 'unavailable'] %}
-      'Off'
+      Off
     {% else %}
-      (value | float | round(0)) | string
+      {{ value | float | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
-
 #- name: "HVAC Ducted Setpoint Display"
 #  unique_id: hvac_setpoint_ducted_display
 #  state: >
