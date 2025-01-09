@@ -2,51 +2,61 @@
 - name: "HVAC Radiator Observed Setpoint Office"
   unique_id: hvac_radiator_observed_setpoint_office
   state: >
-    {{ state_attr('climate.office', 'temperature') }}
+    {% set temp = state_attr('climate.office', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Radiator Observed Setpoint Family Room"
   unique_id: hvac_radiator_observed_setpoint_family_room
   state: >
-    {{ state_attr('climate.family_room_heating', 'temperature') }}
+    {% set temp = state_attr('climate.family_room_heating', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Radiator Observed Setpoint Main Zone"
   unique_id: hvac_radiator_observed_setpoint_main_zone
   state: >
-    {{ state_attr('climate.living_room_main_heating', 'temperature') }}
-    
+    {% set temp = state_attr('climate.living_room_main_heating', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
+
 # Mini Splits
-- name: "HVAC Mini Split Observed Setpoint Tina Office"
-  unique_id: hvac_mini_split_observed_setpoint_tina_office
+- name: "HVAC Mini Split Observed Setpoint Office"
+  unique_id: hvac_mini_split_observed_setpoint_office
   state: >
-    {{ state_attr('climate.office', 'temperature') }}
+    {% set temp = state_attr('climate.office', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Mini Split Observed Setpoint Erik Office"
   unique_id: hvac_mini_split_observed_setpoint_erik_office
   state: >
-    {{ state_attr('climate.eriks_office_room', 'temperature') }}
+    {% set temp = state_attr('climate.eriks_office_room', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Mini Split Observed Setpoint Family Room"
   unique_id: hvac_mini_split_observed_setpoint_family_room
   state: >
-    {{ state_attr('climate.family_room_heat_pump', 'temperature') }}
+    {% set temp = state_attr('climate.family_room_heat_pump', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Mini Split Observed Setpoint Living Room"
   unique_id: hvac_mini_split_observed_setpoint_living_room
   state: >
-    {{ state_attr('climate.living_room_heat_pump', 'temperature') }}
+    {% set temp = state_attr('climate.living_room_heat_pump', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Mini Split Observed Setpoint Dining Room"
   unique_id: hvac_mini_split_observed_setpoint_dining_room
   state: >
-    {{ state_attr('climate.dining_room_heat_pump', 'temperature') }}
+    {% set temp = state_attr('climate.dining_room_heat_pump', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Mini Split Observed Setpoint Master Bedroom"
   unique_id: hvac_mini_split_observed_setpoint_master_bedroom
   state: >
-    {{ state_attr('climate.master_bedroom_heat_pump', 'temperature') }}
+    {% set temp = state_attr('climate.master_bedroom_heat_pump', 'temperature') %}
+    {{ temp | float(default='unavailable') }}
 
 # Ducted
 - name: "HVAC Ducted Observed Setpoint"
   unique_id: hvac_ducted_observed_setpoint
   state: >
-    {{ state_attr('climate.ducted_heat_pump', 'temperature') }}
+    {% set temp = state_attr('climate.ducted_heat_pump', 'temperature') %}
+    {{ temp | float(default='unavailable') }}

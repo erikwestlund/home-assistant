@@ -1,0 +1,62 @@
+# Radiator Setpoint Synced
+- name: "HVAC Radiator Setpoint Synced Office"
+  unique_id: hvac_radiator_setpoint_synced_office
+  state: >
+    {{ states('sensor.hvac_radiator_expected_setpoint_office') | float(default='unavailable') == states('sensor.hvac_radiator_observed_setpoint_office') | float(default='unavailable') }}
+  icon: mdi:check
+
+- name: "HVAC Radiator Setpoint Synced Family Room"
+  unique_id: hvac_radiator_setpoint_synced_family_room
+  state: >
+    {{ states('sensor.hvac_radiator_expected_setpoint_family_room') | float(default='unavailable') == states('sensor.hvac_radiator_observed_setpoint_family_room') | float(default='unavailable') }}
+  icon: mdi:check
+
+- name: "HVAC Radiator Setpoint Synced Main Zone"
+  unique_id: hvac_radiator_setpoint_synced_main_zone
+  state: >
+    {{ states('sensor.hvac_radiator_expected_setpoint_main_zone') | float(default='unavailable') == states('sensor.hvac_radiator_observed_setpoint_main_zone') | float(default='unavailable') }}
+  icon: mdi:check
+
+# Mini Split Setpoint Synced
+- name: "HVAC Mini Split Setpoint Synced Office"
+  unique_id: hvac_mini_split_setpoint_synced_office
+  state: >
+    {{ states('sensor.hvac_mini_split_expected_setpoint_office') | float(default='unavailable') == states('sensor.hvac_mini_split_observed_setpoint_office') | float(default='unavailable') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Setpoint Synced Erik Office"
+  unique_id: hvac_mini_split_setpoint_synced_erik_office
+  state: >
+    {{ states('sensor.hvac_mini_split_expected_setpoint_erik_office') | float(default='unavailable') == states('sensor.hvac_mini_split_observed_setpoint_erik_office') | float(default='unavailable') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Setpoint Synced Family Room"
+  unique_id: hvac_mini_split_setpoint_synced_family_room
+  state: >
+    {{ states('sensor.hvac_mini_split_expected_setpoint_family_room') | float(default='unavailable') == states('sensor.hvac_mini_split_observed_setpoint_family_room') | float(default='unavailable') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Setpoint Synced Living Room"
+  unique_id: hvac_mini_split_setpoint_synced_living_room
+  state: >
+    {{ states('sensor.hvac_mini_split_expected_setpoint_living_room') | float(default='unavailable') == states('sensor.hvac_mini_split_observed_setpoint_living_room') | float(default='unavailable') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Setpoint Synced Dining Room"
+  unique_id: hvac_mini_split_setpoint_synced_dining_room
+  state: >
+    {{ states('sensor.hvac_mini_split_expected_setpoint_dining_room') | float(default='unavailable') == states('sensor.hvac_mini_split_observed_setpoint_dining_room') | float(default='unavailable') }}
+  icon: mdi:check
+
+- name: "HVAC Mini Split Setpoint Synced Master Bedroom"
+  unique_id: hvac_mini_split_setpoint_synced_master_bedroom
+  state: >
+    {{ states('sensor.hvac_mini_split_expected_setpoint_master_bedroom') | float(default='unavailable') == states('sensor.hvac_mini_split_observed_setpoint_master_bedroom') | float(default='unavailable') }}
+  icon: mdi:check
+
+# Ducted Setpoint Synced
+- name: "HVAC Ducted Setpoint Synced"
+  unique_id: hvac_ducted_setpoint_synced
+  state: >
+    {{ states('sensor.hvac_ducted_expected_setpoint') | float(default='unavailable') == states('sensor.hvac_ducted_observed_setpoint') | float(default='unavailable') }}
+  icon: mdi:check
