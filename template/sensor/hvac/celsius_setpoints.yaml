@@ -6,7 +6,7 @@
     {% if f in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ ((f | float - 32) / 1.8) | round(0) | round(1) }}
+      {{ ((f | float - 32) / 1.8) | round(0) }}
     {% endif %}
   unit_of_measurement: "°C"
   icon: mdi:thermometer
@@ -19,7 +19,7 @@
     {% if f in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ ((f | float - 32) / 1.8) | round(0) | round(1) }}
+      {{ ((f | float - 32) / 1.8) | round(0) }}
     {% endif %}
   unit_of_measurement: "°C"
   icon: mdi:thermometer
@@ -32,7 +32,7 @@
     {% if f in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ ((f | float - 32) / 1.8) | round(0) | round(1) }}
+      {{ ((f | float - 32) / 1.8) | round(0) }}
     {% endif %}
   unit_of_measurement: "°C"
   icon: mdi:thermometer
@@ -45,7 +45,7 @@
     {% if f in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ ((f | float - 32) / 1.8) | round(0) | round(1) }}
+      {{ ((f | float - 32) / 1.8) | round(0) }}
     {% endif %}
   unit_of_measurement: "°C"
   icon: mdi:thermometer
@@ -58,7 +58,7 @@
     {% if f in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ ((f | float - 32) / 1.8) | round(0) | round(1) }}
+      {{ ((f | float - 32) / 1.8) | round(0) }}
     {% endif %}
   unit_of_measurement: "°C"
   icon: mdi:thermometer
@@ -71,7 +71,7 @@
     {% if f in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ ((f | float - 32) / 1.8) | round(0) | round(1) }}
+      {{ ((f | float - 32) / 1.8) | round(0) }}
     {% endif %}
   unit_of_measurement: "°C"
   icon: mdi:thermometer
@@ -84,7 +84,7 @@
     {% if f in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ ((f | float - 32) / 1.8) | round(0) | round(1) }}
+      {{ ((f | float - 32) / 1.8) | round(0) }}
     {% endif %}
   unit_of_measurement: "°C"
   icon: mdi:thermometer
@@ -97,7 +97,7 @@
     {% if c in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ (c | float * 1.8 + 32) | round(0) | round(1) }}
+      {{ (c | float * 1.8 + 32) | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -110,7 +110,7 @@
     {% if c in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ (c | float * 1.8 + 32) | round(0) | round(1) }}
+      {{ (c | float * 1.8 + 32) | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -123,7 +123,7 @@
     {% if c in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ (c | float * 1.8 + 32) | round(0) | round(1) }}
+      {{ (c | float * 1.8 + 32) | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -136,7 +136,7 @@
     {% if c in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ (c | float * 1.8 + 32) | round(0) | round(1) }}
+      {{ (c | float * 1.8 + 32) | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -149,7 +149,7 @@
     {% if c in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ (c | float * 1.8 + 32) | round(0) | round(1) }}
+      {{ (c | float * 1.8 + 32) | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -162,7 +162,7 @@
     {% if c in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ (c | float * 1.8 + 32) | round(0) | round(1) }}
+      {{ (c | float * 1.8 + 32) | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -175,7 +175,7 @@
     {% if c in ['unavailable', 'unknown', 'Off'] %}
       Off
     {% else %}
-      {{ (c | float * 1.8 + 32) | round(0) | round(1) }}
+      {{ (c | float * 1.8 + 32) | round(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
