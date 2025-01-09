@@ -18,22 +18,22 @@
 - name: "HVAC Mini Split Observed Setpoint Tina Office"
   unique_id: hvac_mini_split_observed_setpoint_tina_office
   state: >
-    {{ state_attr('climate.tinas_office_mini_split_hvac_unit', 'temperature') }}
+    {{ state_attr('climate.office', 'temperature') }}
 
 - name: "HVAC Mini Split Observed Setpoint Erik Office"
   unique_id: hvac_mini_split_observed_setpoint_erik_office
   state: >
-    {{ state_attr('climate.eriks_office_mini_split_hvac_unit', 'temperature') }}
+    {{ state_attr('climate.eriks_office_room', 'temperature') }}
 
 - name: "HVAC Mini Split Observed Setpoint Family Room"
   unique_id: hvac_mini_split_observed_setpoint_family_room
   state: >
-    {{ state_attr('climate.family_room_mini_split_hvac_unit', 'temperature') }}
+    {{ state_attr('climate.family_room_heat_pump', 'temperature') }}
 
 - name: "HVAC Mini Split Observed Setpoint Living Room"
   unique_id: hvac_mini_split_observed_setpoint_living_room
   state: >
-    {{ state_attr('climate.living_room_mini_split_hvac_unit', 'temperature') }}
+    {{ state_attr('climate.living_room_heat_pump', 'temperature') }}
 
 - name: "HVAC Mini Split Observed Setpoint Dining Room"
   unique_id: hvac_mini_split_observed_setpoint_dining_room

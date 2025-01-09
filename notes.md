@@ -9,7 +9,7 @@ Various notes to ease creating configuration/automations.
 climate.tinas_office_heat_pump
 climate.dining_room_heat_pump
 climate.family_room_heat_pump
-climate.family_room_mini_split_hvac_unit
+climate.family_room_heat_pump
 climate.living_room_heat_pump
 climate.master_bedroom_heat_pump
 

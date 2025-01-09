@@ -15,25 +15,25 @@
     {{ 'on' if states('climate.living_room_main_heating') != 'off' else 'off' }}
 
 # Mini Splits
-- name: "HVAC Mini Split Observed Power Status Tina Office"
-  unique_id: hvac_mini_split_observed_power_status_tina_office
+- name: "HVAC Mini Split Observed Power Status Office"
+  unique_id: hvac_mini_split_observed_power_status_office
   state: >
-    {{ 'on' if states('climate.tinas_office_mini_split_hvac_unit') != 'off' else 'off' }}
+    {{ 'on' if states('climate.office') != 'off' else 'off' }}
 
 - name: "HVAC Mini Split Observed Power Status Erik Office"
-  unique_id: hvac_mini_split_observed_power_status_erik_office
+  unique_id: eriks_office_room
   state: >
-    {{ 'on' if states('climate.eriks_office_mini_split_hvac_unit') != 'off' else 'off' }}
+    {{ 'on' if states('climate.eriks_office_room') != 'off' else 'off' }}
 
 - name: "HVAC Mini Split Observed Power Status Family Room"
   unique_id: hvac_mini_split_observed_power_status_family_room
   state: >
-    {{ 'on' if states('climate.family_room_mini_split_hvac_unit') != 'off' else 'off' }}
+    {{ 'on' if states('climate.family_room_heat_pump') != 'off' else 'off' }}
 
 - name: "HVAC Mini Split Observed Power Status Living Room"
   unique_id: hvac_mini_split_observed_power_status_living_room
   state: >
-    {{ 'on' if states('climate.living_room_mini_split_hvac_unit') != 'off' else 'off' }}
+    {{ 'on' if states('climate.living_room_heat_pump') != 'off' else 'off' }}
 
 - name: "HVAC Mini Split Observed Power Status Dining Room"
   unique_id: hvac_mini_split_observed_power_status_dining_room
@@ -52,7 +52,7 @@
     {{ 'on' if states('climate.ducted_heat_pump') != 'off' else 'off' }}
 
 # Space Heater
-- name: "HVAC Space Heater Observed Power Status Tina Office"
-  unique_id: hvac_space_heater_observed_power_status_tina_office
+- name: "HVAC Space Heater Observed Power Status Office"
+  unique_id: hvac_space_heater_observed_power_status_office
   state: >
     {{ 'on' if is_state('switch.tina_office_space_heater', 'on') else 'off' }}

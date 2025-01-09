@@ -18,22 +18,22 @@
 - name: "HVAC Mini Split Observed Mode Office"
   unique_id: hvac_mini_split_observed_mode_office
   state: >
-    {{ states('climate.tinas_office_mini_split_hvac_unit') | capitalize }}
+    {{ states('climate.office') | capitalize }}
 
 - name: "HVAC Mini Split Observed Mode Erik Office"
   unique_id: hvac_mini_split_observed_mode_erik_office
   state: >
-    {{ states('climate.eriks_office_mini_split_hvac_unit') | capitalize }}
+    {{ states('climate.eriks_office_room') | capitalize }}
 
 - name: "HVAC Mini Split Observed Mode Family Room"
   unique_id: hvac_mini_split_observed_mode_family_room
   state: >
-    {{ states('climate.family_room_mini_split_hvac_unit') | capitalize }}
+    {{ states('climate.family_room_heat_pump') | capitalize }}
 
 - name: "HVAC Mini Split Observed Mode Living Room"
   unique_id: hvac_mini_split_observed_mode_living_room
   state: >
-    {{ states('climate.living_room_mini_split_hvac_unit') | capitalize }}
+    {{ states('climate.living_room_heat_pump') | capitalize }}
 
 - name: "HVAC Mini Split Observed Mode Dining Room"
   unique_id: hvac_mini_split_observed_mode_dining_room
