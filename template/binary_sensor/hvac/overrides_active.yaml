@@ -12,4 +12,8 @@
       is_state('input_boolean.hvac_override_status_main_radiator_zone', 'on') 
     }}
   icon: >
-    mdi:alert-circle-outline
+    {% if is_state('sensor.any_hvac_override_active', 'on') %}
+      mdi:alert-circle-outline
+    {% else %}
+      mdi:check-circle-outline
+    {% endif %}
