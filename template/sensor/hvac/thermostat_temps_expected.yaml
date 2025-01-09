@@ -12,9 +12,9 @@
   state: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
 
 # Mini Split
-- name: "HVAC Mini Split Expected Setpoint Tina Office"
-  unique_id: hvac_mini_split_expected_setpoint_tina_office
-  state: "{{ states('sensor.hvac_mini_split_setpoint_tina_office') }}"
+- name: "HVAC Mini Split Expected Setpoint Office"
+  unique_id: hvac_mini_split_expected_setpoint_office
+  state: "{{ states('sensor.hvac_mini_split_setpoint_office') }}"
 
 - name: "HVAC Mini Split Expected Setpoint Erik Office"
   unique_id: hvac_mini_split_expected_setpoint_erik_office

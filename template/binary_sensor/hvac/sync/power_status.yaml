@@ -52,7 +52,7 @@
     {{ is_state('binary_sensor.hvac_ducted_observed_power_status', states('binary_sensor.hvac_ducted_expected_power_status')) }}
 
 # Space Heaters Power Synced
-- name: "HVAC Space Heater Power Synced Tina Office"
-  unique_id: hvac_space_heater_power_synced_tina_office
+- name: "HVAC Space Heater Power Synced Office"
+  unique_id: hvac_space_heater_power_synced_office
   state: >
-    {{ is_state('binary_sensor.hvac_space_heater_observed_power_status_tina_office', states('binary_sensor.hvac_space_heater_expected_power_status_tina_office')) }}
+    {{ is_state('binary_sensor.hvac_space_heater_observed_power_status_office', states('binary_sensor.hvac_space_heater_expected_power_status_office')) }}

@@ -46,7 +46,7 @@
     {{ states('climate.master_bedroom_heat_pump') | capitalize }}
 
 # Space Heater
-- name: "HVAC Space Heater Observed Mode Tina Office"
-  unique_id: hvac_space_heater_observed_mode_tina_office
+- name: "HVAC Space Heater Observed Mode Office"
+  unique_id: hvac_space_heater_observed_mode_office
   state: >
     {{ 'On' if is_state('switch.tina_office_space_heater', 'on') else 'Off' }}
