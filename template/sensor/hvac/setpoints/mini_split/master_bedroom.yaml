@@ -1,0 +1,46 @@
+- name: "HVAC Master Bedroom Mini Split Setpoint"
+  unique_id: hvac_master_bedroom_mini_split_setpoint
+  state: >
+    {% set is_power_off = is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'off') %}
+    {% set is_override = is_state('input_boolean.hvac_override_status_master_bedroom', 'on') %}
+    {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
+    {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_master_bedroom') %}
+    
+    {# If Power is Off, return None #}
+    {% if is_power_off %}
+      None
+    {# If Override is Active, use Override Setpoint #}
+    {% elif is_override %}
+      {{ states('input_number.hvac_mini_split_override_setpoint_master_bedroom') }}
+    {# If Away Mode is Active, use Away Setpoint #}
+    {% elif is_away_mode %}
+      {{ states('input_number.hvac_mini_split_away_setpoint_master_bedroom') }}
+    {# Comfort Mode Based Logic #}
+    {% elif comfort_mode == "Freezing" %}
+      {% if is_state('sensor.hvac_comfort_setting_master_bedroom', 'Day') %}
+        {{ states('input_number.hvac_mini_split_day_freezing_setpoint_master_bedroom') }}
+      {% elif is_state('sensor.hvac_comfort_setting_master_bedroom', 'Night') %}
+        {{ states('input_number.hvac_mini_split_night_freezing_setpoint_master_bedroom') }}
+      {% else %}
+        None
+      {% endif %}
+    {% elif comfort_mode == "Cold" %}
+      {% if is_state('sensor.hvac_comfort_setting_master_bedroom', 'Day') %}
+        {{ states('input_number.hvac_mini_split_day_cold_setpoint_master_bedroom') }}
+      {% elif is_state('sensor.hvac_comfort_setting_master_bedroom', 'Night') %}
+        {{ states('input_number.hvac_mini_split_night_cold_setpoint_master_bedroom') }}
+      {% else %}
+        None
+      {% endif %}
+    {% elif comfort_mode == "Hot" %}
+      {% if is_state('sensor.hvac_comfort_setting_master_bedroom', 'Day') %}
+        {{ states('input_number.hvac_mini_split_day_hot_setpoint_master_bedroom') }}
+      {% elif is_state('sensor.hvac_comfort_setting_master_bedroom', 'Night') %}
+        {{ states('input_number.hvac_mini_split_night_hot_setpoint_master_bedroom') }}
+      {% else %}
+        None
+      {% endif %}
+    {% else %}
+      None
+    {% endif %}
+  icon: mdi:thermometer

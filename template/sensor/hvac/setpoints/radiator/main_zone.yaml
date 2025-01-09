@@ -1,0 +1,26 @@
+- name: "HVAC Main Zone Radiator Setpoint"
+  unique_id: hvac_main_zone_radiator_setpoint
+  state: >
+    {% set is_override = is_state('input_boolean.hvac_override_status_main_zone', 'on') %}
+    {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
+    {% set comfort_setting = states('sensor.hvac_comfort_setting_main_radiator_zone') %}
+    
+    {# Override Logic #}
+    {% if is_override %}
+      {{ states('input_number.hvac_radiator_override_setpoint_main_zone') }}
+    {# Away Mode Logic #}
+    {% elif is_away_mode %}
+      {{ states('input_number.hvac_radiator_away_setpoint_main_zone') }}
+    {# Comfort Setting Based Logic #}
+    {% elif comfort_setting == "Weekday" %}
+      {{ states('input_number.hvac_radiator_weekday_setpoint_main_zone') }}
+    {% elif comfort_setting == "Weekend" %}
+      {{ states('input_number.hvac_radiator_weekend_setpoint_main_zone') }}
+    {% elif comfort_setting == "Bedtime" %}
+      {{ states('input_number.hvac_radiator_bedtime_setpoint_main_zone') }}
+    {% elif comfort_setting == "Sleep" %}
+      {{ states('input_number.hvac_radiator_sleep_setpoint_main_zone') }}
+    {% else %}
+      None
+    {% endif %}
+  icon: mdi:radiator
