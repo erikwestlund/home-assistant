@@ -1,3 +1,8 @@
+hvac_systems_on:
+  name: HVAC Systems On
+  initial: on
+  icon: mdi:power
+
 hvac_radiator_power_on_control_office:
   name: HVAC Office Radiator Power On Control
   initial: on
