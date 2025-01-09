@@ -39,4 +39,4 @@
 # Ducted
 - name: "HVAC Ducted Expected Setpoint"
   unique_id: hvac_ducted_expected_setpoint
-  state: "{{ states('sensor.hvac_target_ducted') }}"
+  state: "{{ states('sensor.hvac_setpoint_ducted') }}"

@@ -1,0 +1,20 @@
+# HVAC Setpoint Ducted
+- name: "HVAC Setpoint Ducted"
+  unique_id: hvac_setpoint_ducted
+  state: >
+    {% if is_state('binary_sensor.hvac_ducted_power_status', 'off') %}
+      Off
+    {% elif is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+      {{ states('input_number.hvac_active_setpoint_ducted') }}
+    {% else %}
+      {{ states('input_number.hvac_off_setpoint_ducted') }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: >
+    {% if is_state('sensor.hvac_setpoint_ducted', 'Off') %}
+      mdi:power
+    {% elif is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+      mdi:fire
+    {% else %}
+      mdi:thermometer
+    {% endif %}
