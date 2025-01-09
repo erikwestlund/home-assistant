@@ -75,8 +75,7 @@
     {% set nighttime_status_off = is_state('binary_sensor.hvac_nighttime_in_window_erik_office', 'off') %}
     
     {{ start_time <= current_time <= end_time and
-       ((is_weekday and erik_home) or (is_weekend and erik_office_occupied)) and
-       nighttime_status_off }}
+       ((is_weekday and erik_home) or (is_weekend and erik_office_occupied)) }}
   icon: >-
     {% if is_state('binary_sensor.hvac_apply_occupied_setpoint_erik_office', 'on') %}
       mdi:clock-check
