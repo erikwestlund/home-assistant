@@ -3,7 +3,7 @@
   unique_id: hvac_setpoint_ducted_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_setpoint_ducted_celsius') %}
-    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else ((c | float * 1.8 + 32) | round(0)) | string }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
@@ -12,7 +12,7 @@
   unique_id: hvac_mini_split_setpoint_dining_room_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_dining_room_celsius') %}
-    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else ((c | float * 1.8 + 32) | round(0)) | string }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
@@ -21,7 +21,7 @@
   unique_id: hvac_mini_split_setpoint_erik_office_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_erik_office_celsius') %}
-    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else ((c | float * 1.8 + 32) | round(0)) | string }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
@@ -30,7 +30,7 @@
   unique_id: hvac_mini_split_setpoint_family_room_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_family_room_celsius') %}
-    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else ((c | float * 1.8 + 32) | round(0)) | string }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
@@ -39,7 +39,7 @@
   unique_id: hvac_mini_split_setpoint_living_room_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_living_room_celsius') %}
-    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else ((c | float * 1.8 + 32) | round(0)) | string }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
@@ -48,7 +48,7 @@
   unique_id: hvac_mini_split_setpoint_master_bedroom_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_master_bedroom_celsius') %}
-    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else ((c | float * 1.8 + 32) | round(0)) | string }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
@@ -57,6 +57,6 @@
   unique_id: hvac_mini_split_setpoint_office_rounded_back_display
   state: >
     {% set c = states('sensor.hvac_mini_split_setpoint_office_celsius') %}
-    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else (c | float * 1.8 + 32) | round(0) }}
+    {{ 'Off' if c in ['None', 'unknown', 'unavailable', 'Off'] else ((c | float * 1.8 + 32) | round(0)) | string }}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
