@@ -87,3 +87,12 @@ hvac_kids_rooms_ducted_override_setpoint:
   step: 1
   unit_of_measurement: "°F"
   initial: 72
+
+# Main Radiator Zone
+hvac_radiator_override_setpoint_main_radiator_zone:
+  name: HVAC Main Radiator Zone Override Setpoint
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72

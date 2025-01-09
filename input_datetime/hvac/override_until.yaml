@@ -46,3 +46,10 @@ hvac_override_until_ducted:
   has_time: true
   has_date: true
   initial: "2025-01-01T00:00:00"
+
+# Main Radiator Zone
+hvac_override_until_main_radiator_zone:
+  name: HVAC Main Radiator Zone Override Until
+  has_time: true
+  has_date: true
+  initial: "2025-01-01T00:00:00"

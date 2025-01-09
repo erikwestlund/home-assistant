@@ -61,3 +61,11 @@ hvac_override_duration_hours_ducted_system:
   step: 0.25
   unit_of_measurement: "hours"
   initial: 1
+
+hvac_override_duration_hours_main_radiator_zone:
+  name: HVAC Main Radiator Zone Override Duration
+  min: 0
+  max: 24
+  step: 0.25
+  unit_of_measurement: "hours"
+  initial: 1

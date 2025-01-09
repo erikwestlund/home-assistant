@@ -63,3 +63,9 @@ hvac_away_system_on_ducted:
   name: HVAC Away Ducted System On
   initial: off
   icon: mdi:radiator
+
+# Main Radiator Zone
+hvac_away_radiator_on_main_radiator_zone:
+  name: HVAC Away Main Radiator Zone On
+  initial: on
+  icon: mdi:radiator

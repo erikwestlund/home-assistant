@@ -37,3 +37,8 @@ hvac_override_status_ducted:
   name: HVAC Ducted Rooms Override
   initial: off
   icon: mdi:cancel
+
+hvac_override_status_main_radiator_zone:
+  name: HVAC Main Radiator Zone Override
+  initial: off
+  icon: mdi:cancel
