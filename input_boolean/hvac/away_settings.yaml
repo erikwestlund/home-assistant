@@ -59,7 +59,7 @@ hvac_away_mini_split_on_master_bedroom:
   icon: mdi:radiator
 
 # Ducted System
-hvac_away_mini_split_on_ducted:
-  name: HVAC Away Ducted Mini Split On
+hvac_away_system_on_ducted:
+  name: HVAC Away Ducted System On
   initial: off
   icon: mdi:radiator
