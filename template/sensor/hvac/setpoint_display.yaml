@@ -4,9 +4,9 @@
   state: >
     {% set value = states('sensor.hvac_setpoint_ducted') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -17,9 +17,9 @@
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_dining_room') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -30,9 +30,9 @@
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_erik_office') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -43,9 +43,9 @@
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_family_room') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -56,9 +56,9 @@
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_living_room') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -69,9 +69,9 @@
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_master_bedroom') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -82,9 +82,9 @@
   state: >
     {% set value = states('sensor.hvac_mini_split_setpoint_office') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -95,9 +95,9 @@
   state: >
     {% set value = states('sensor.hvac_radiator_setpoint_family_room') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -108,9 +108,9 @@
   state: >
     {% set value = states('sensor.hvac_radiator_setpoint_main_zone') %}
     {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
+      "Off"
     {% else %}
-      {{ (value | float | round(0)) | string }}
+      "{{ (value | float | round(0)) }}"
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
@@ -120,10 +120,4 @@
   unique_id: hvac_radiator_setpoint_office_display
   state: >
     {% set value = states('sensor.hvac_radiator_setpoint_office') %}
-    {% if value in ['None', 'unknown', 'unavailable', 'Off', 'off'] %}
-      {{ "Off" }}
-    {% else %}
-      {{ (value | float | round(0)) | string }}
-    {% endif %}
-  unit_of_measurement: "°F"
-  icon: mdi:thermometer
+    {% if value in ['None', '
