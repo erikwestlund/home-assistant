@@ -1,0 +1,31 @@
+hvac_mini_split_night_off_threshold_office:
+  name: HVAC Office Mini Split Night Off Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 30
+
+hvac_mini_split_night_off_threshold_dining_room:
+  name: HVAC Dining Room Mini Split Night Off Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 30
+
+hvac_mini_split_night_off_threshold_erik_office:
+  name: HVAC Erik Office Mini Split Night Off Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 30
+
+hvac_mini_split_daytime_off_threshold_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Daytime Off Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 30
