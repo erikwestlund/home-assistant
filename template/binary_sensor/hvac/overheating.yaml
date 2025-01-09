@@ -1,0 +1,18 @@
+- name: "HVAC Living Room Overheated"
+  unique_id: hvac_living_room_overheated
+  state: >
+    {% set temp = states('sensor.hvac_average_temperature_living_room') | float(0) %}
+    {% set threshold = states('input_number.hvac_mini_split_overheated_threshold_living_room') | float(0) %}
+    {% set offset = states('input_number.hvac_mini_split_overheated_under_threshold_disable_offset_living_room') | float(0) %}
+    
+    {% if is_state('binary_sensor.hvac_living_room_overheated', 'on') %}
+      {{ temp > (threshold - offset) }}
+    {% else %}
+      {{ temp > threshold }}
+    {% endif %}
+  icon: >-
+    {% if is_state('binary_sensor.hvac_living_room_overheated', 'on') %}
+      mdi:thermometer-high
+    {% else %}
+      mdi:thermometer
+    {% endif %}

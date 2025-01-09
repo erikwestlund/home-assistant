@@ -176,6 +176,7 @@
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_living_room', 'on') %}
     {% set current_temp = states('sensor.current_temperature') | float %}
     {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_living_room') | float %}
+    {% set overheated = is_state('binary_sensor.hvac_mini_split_overheated_living_room', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -183,16 +184,19 @@
     {# 2. Power Control Toggle #}
     {% elif not power_control %}
       off
-    {# 3. Override Status #}
+    {# 3. Overheated Check #}
+    {% elif overheated %}
+      off
+    {# 4. Override Status #}
     {% elif override_status %}
       on
-    {# 4. Away Mode #}
+    {# 5. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Outside Temperature Check #}
+    {# 6. Outside Temperature Check #}
     {% elif current_temp < on_threshold %}
       off
-    {# 6. Default On State #}
+    {# 7. Default On State #}
     {% else %}
       on
     {% endif %}

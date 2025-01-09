@@ -5,3 +5,11 @@ hvac_mini_split_overheated_threshold_living_room:
   step: 1
   unit_of_measurement: "°F"
   initial: 73
+
+hvac_mini_split_overheated_under_threshold_disable_offset_living_room:
+  name: HVAC Mini Split Overheated Under Threshold Disable Offset
+  min: 0
+  max: 5
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 2.0
