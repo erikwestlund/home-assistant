@@ -21,7 +21,7 @@
 - name: "HVAC Mini Split Observed Setpoint Office"
   unique_id: hvac_mini_split_observed_setpoint_office
   state: >
-    {% set temp = state_attr('climate.office', 'temperature') %}
+    {% set temp = state_attr('climate.tinas_office_heat_pump', 'temperature') %}
     {{ temp | float(default='unavailable') }}
 
 - name: "HVAC Mini Split Observed Setpoint Erik Office"
