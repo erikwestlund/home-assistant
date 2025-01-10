@@ -66,3 +66,34 @@
     {{ states('sensor.heat_pump_offices_dining_room_energy_this_month') | float | round(0) }}
   unit_of_measurement: "kWh"
   icon: mdi:calendar-month
+
+# Combined
+- name: "Total Minute Average Energy Usage"
+  unique_id: energy_minute_avg_total
+  state: >
+    {% set family_room = states('sensor.heat_pump_family_room_ducted_power_minute_average') | float / 1000 %}
+    {% set offices_dining = states('sensor.heat_pump_offices_dining_room_power_minute_average') | float / 1000 %}
+    {% set living_master = states('sensor.heat_pump_living_room_master_bedroom_power_minute_average') | float / 1000 %}
+    {{ (family_room + offices_dining + living_master) | round(1) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Total Daily Energy Usage"
+  unique_id: energy_today_total
+  state: >
+    {% set family_room = states('sensor.heat_pump_family_room_ducted_energy_today') | float %}
+    {% set offices_dining = states('sensor.heat_pump_offices_dining_room_energy_today') | float %}
+    {% set living_master = states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float %}
+    {{ (family_room + offices_dining + living_master) | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar
+
+- name: "Total Monthly Energy Usage"
+  unique_id: energy_month_total
+  state: >
+    {% set family_room = states('sensor.heat_pump_family_room_ducted_energy_this_month') | float %}
+    {% set offices_dining = states('sensor.heat_pump_offices_dining_room_energy_this_month') | float %}
+    {% set living_master = states('sensor.heat_pump_living_room_master_bedroom_energy_this_month') | float %}
+    {{ (family_room + offices_dining + living_master) | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar-month
