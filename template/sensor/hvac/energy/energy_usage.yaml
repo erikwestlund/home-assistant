@@ -68,8 +68,8 @@
   icon: mdi:calendar-month
 
 # Combined
-- name: "Total Minute Average Energy Usage"
-  unique_id: energy_minute_avg_total
+- name: "Total Heat Pump Minute Average Energy Usage"
+  unique_id: heat_pump_energy_minute_avg_total
   state: >
     {% set family_room = states('sensor.heat_pump_family_room_ducted_power_minute_average') | float / 1000 %}
     {% set offices_dining = states('sensor.heat_pump_offices_dining_room_power_minute_average') | float / 1000 %}
@@ -78,8 +78,8 @@
   unit_of_measurement: "kWh"
   icon: mdi:flash
 
-- name: "Total Daily Energy Usage"
-  unique_id: energy_today_total
+- name: "Total Heat Pump Daily Energy Usage"
+  unique_id: heat_pump_energy_today_total
   state: >
     {% set family_room = states('sensor.heat_pump_family_room_ducted_energy_today') | float %}
     {% set offices_dining = states('sensor.heat_pump_offices_dining_room_energy_today') | float %}
@@ -88,8 +88,8 @@
   unit_of_measurement: "kWh"
   icon: mdi:calendar
 
-- name: "Total Monthly Energy Usage"
-  unique_id: energy_month_total
+- name: "Total Heat Pump Monthly Energy Usage"
+  unique_id: heat_pump_energy_month_total
   state: >
     {% set family_room = states('sensor.heat_pump_family_room_ducted_energy_this_month') | float %}
     {% set offices_dining = states('sensor.heat_pump_offices_dining_room_energy_this_month') | float %}
