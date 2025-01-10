@@ -291,12 +291,15 @@
     {% set override_status = is_state('input_boolean.hvac_override_status_erik_office', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_erik_office', 'on') %}
+    {% set current_temp = states('sensor.current_temperature') | float %}
     {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_erik_office') | float %}
     {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_erik_office') | float %}
     {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_erik_office') | float %}
     {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_erik_office') | float %}
     {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_erik_office') | float %}
+    {% set weekend_off_threshold = states('input_number.hvac_mini_split_weekend_off_threshold_erik_office') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_erik_office', 'on') %}
+    {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -310,16 +313,19 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. General Off Check (using daytime or nighttime average temperature under off threshold) #}
+    {# 5. Weekend Check (turn off if it’s a weekend and temperature is below the weekend threshold) #}
+    {% elif is_weekend and current_temp < weekend_off_threshold %}
+      off
+    {# 6. General Off Check (using daytime or nighttime average temperature under off threshold) #}
     {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
-    {# 6. Daytime Check (using daytime average temperature and daytime threshold) #}
+    {# 7. Daytime Check (using daytime average temperature and daytime threshold) #}
     {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off
-    {# 7. Nighttime Check (using nighttime average temperature and nighttime threshold) #}
+    {# 8. Nighttime Check (using nighttime average temperature and nighttime threshold) #}
     {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
       off
-    {# 8. Default On State #}
+    {# 9. Default On State #}
     {% else %}
       on
     {% endif %}
@@ -378,8 +384,7 @@
       mdi:power-off
     {% endif %}
 
-## Ducted
-# Ducted System
+# Ducted
 - name: "HVAC Ducted Power Status"
   unique_id: hvac_ducted_power_status
   state: >
