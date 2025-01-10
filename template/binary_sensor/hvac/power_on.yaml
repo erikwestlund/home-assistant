@@ -84,7 +84,7 @@
     {% endif %}
 
 ## Mini Splits
-# Office
+# Office: uses current temperature because boiler can heat room very quickly
 - name: "HVAC Mini Split Power Status Office"
   unique_id: hvac_mini_split_power_status_office
   state: >
@@ -134,7 +134,7 @@
       mdi:power-off
     {% endif %}
 
-# Family Room
+# Family Room: uses daily average temperature to determine mode because of slow responsiveness of floor heat
 - name: "HVAC Mini Split Power Status Family Room"
   unique_id: hvac_mini_split_power_status_family_room
   state: >
@@ -172,7 +172,10 @@
       mdi:power-off
     {% endif %}
 
-# Living Room
+# Living Room: day/night strategy:
+# general cutoff, mostly not used: use daily average temperature
+# night: use nighttime average temperature
+# day: use daytime average temperature
 - name: "HVAC Mini Split Power Status Living Room"
   unique_id: hvac_mini_split_power_status_living_room
   state: >
