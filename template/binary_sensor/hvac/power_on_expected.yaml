@@ -55,4 +55,4 @@
 - name: "HVAC Space Heater Expected Power Status Office"
   unique_id: hvac_space_heater_expected_power_status_office
   state: >
-    {{ states('binary_sensor.hvac_space_heater_enabled_office') }}
+    {{ states('binary_sensor.hvac_space_heater_active_office') }}
