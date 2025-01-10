@@ -1,79 +1,129 @@
+# HVAC Ducted Setpoint Display
 - name: "HVAC Ducted Setpoint Display"
   unique_id: hvac_setpoint_ducted_display
   state: >
-    {% set value = states('sensor.hvac_setpoint_ducted') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_ducted_power_status', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_setpoint_ducted') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Mini Split Setpoint Dining Room Display
 - name: "HVAC Mini Split Setpoint Dining Room Display"
   unique_id: hvac_mini_split_setpoint_dining_room_display
   state: >
-    {% set value = states('sensor.hvac_mini_split_setpoint_dining_room') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_mini_split_power_status_dining_room', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_mini_split_setpoint_dining_room') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Mini Split Setpoint Erik Office Display
 - name: "HVAC Mini Split Setpoint Erik Office Display"
   unique_id: hvac_mini_split_setpoint_erik_office_display
   state: >
-    {% set value = states('sensor.hvac_mini_split_setpoint_erik_office') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_mini_split_setpoint_erik_office') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Mini Split Setpoint Family Room Display
 - name: "HVAC Mini Split Setpoint Family Room Display"
   unique_id: hvac_mini_split_setpoint_family_room_display
   state: >
-    {% set value = states('sensor.hvac_mini_split_setpoint_family_room') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_mini_split_power_status_family_room', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_mini_split_setpoint_family_room') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Mini Split Setpoint Living Room Display
 - name: "HVAC Mini Split Setpoint Living Room Display"
   unique_id: hvac_mini_split_setpoint_living_room_display
   state: >
-    {% set value = states('sensor.hvac_mini_split_setpoint_living_room') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_mini_split_power_status_living_room', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_mini_split_setpoint_living_room') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Mini Split Setpoint Master Bedroom Display
 - name: "HVAC Mini Split Setpoint Master Bedroom Display"
   unique_id: hvac_mini_split_setpoint_master_bedroom_display
   state: >
-    {% set value = states('sensor.hvac_mini_split_setpoint_master_bedroom') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_mini_split_setpoint_master_bedroom') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Mini Split Setpoint Office Display
 - name: "HVAC Mini Split Setpoint Office Display"
   unique_id: hvac_mini_split_setpoint_office_display
   state: >
-    {% set value = states('sensor.hvac_mini_split_setpoint_office') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_mini_split_power_status_office', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_mini_split_setpoint_office') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Radiator Setpoint Family Room Display
 - name: "HVAC Radiator Setpoint Family Room Display"
   unique_id: hvac_radiator_setpoint_family_room_display
   state: >
-    {% set value = states('sensor.hvac_radiator_setpoint_family_room') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_radiator_power_status_family_room', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_radiator_setpoint_family_room') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Radiator Setpoint Main Zone Display
 - name: "HVAC Radiator Setpoint Main Zone Display"
   unique_id: hvac_radiator_setpoint_main_zone_display
   state: >
-    {% set value = states('sensor.hvac_radiator_setpoint_main_zone') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_radiator_setpoint_main_zone') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+# HVAC Radiator Setpoint Office Display
 - name: "HVAC Radiator Setpoint Office Display"
   unique_id: hvac_radiator_setpoint_office_display
   state: >
-    {% set value = states('sensor.hvac_radiator_setpoint_office') %}
-    {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% if is_state('binary_sensor.hvac_radiator_power_status_office', 'off') %}
+      None
+    {% else %}
+      {% set value = states('sensor.hvac_radiator_setpoint_office') %}
+      {{ 'Off' if value in ['None', 'unknown', 'unavailable'] else value | float | round }}
+    {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer
