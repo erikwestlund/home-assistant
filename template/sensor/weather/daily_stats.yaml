@@ -1,3 +1,4 @@
+# 🌡️ Current Temperature
 - name: "Current Temperature"
   unique_id: current_temperature
   unit_of_measurement: "°F"
@@ -6,10 +7,26 @@
     {% if pirate_temp and pirate_temp['temperature'] is not none %}
       {{ pirate_temp['temperature'] | round(1) }}
     {% else %}
-      {{ states('weather.kowd') | float | round(1) if states('weather.kowd') not in ['unknown', 'unavailable'] else 'unavailable' }}
+      {{ state_attr('weather.kowd', 'temperature') | float | round(1) if state_attr('weather.kowd', 'temperature') is not none else 'unavailable' }}
     {% endif %}
   icon: mdi:thermometer
 
+# 📊 Daily Average Temperature
+- name: "Daily Average Temperature"
+  unique_id: daily_average_temperature
+  unit_of_measurement: "°F"
+  state: >
+    {% set daily = state_attr('sensor.pirate_weather', 'daily') %}
+    {% if daily and daily['data'] | length > 0 %}
+      {% set high = daily['data'][0]['temperatureHigh'] | float %}
+      {% set low = daily['data'][0]['temperatureLow'] | float %}
+      {{ ((high + low) / 2) | round(1) }}
+    {% else %}
+      {{ state_attr('weather.kowd', 'temperature') | float | round(1) if state_attr('weather.kowd', 'temperature') is not none else 'unavailable' }}
+    {% endif %}
+  icon: mdi:thermometer-lines
+
+# 🔻 Daily Low Temperature
 - name: "Daily Low Temperature"
   unique_id: daily_low_temperature
   unit_of_measurement: "°F"
@@ -18,10 +35,11 @@
     {% if daily and daily['data'] | length > 0 and daily['data'][0]['temperatureLow'] is not none %}
       {{ daily['data'][0]['temperatureLow'] | round(1) }}
     {% else %}
-      {{ state_attr('weather.kowd', 'forecast')[0]['templow'] | float | round(1) if state_attr('weather.kowd', 'forecast') else 'unavailable' }}
+      {{ state_attr('weather.kowd', 'temperature') | float | round(1) if state_attr('weather.kowd', 'temperature') is not none else 'unavailable' }}
     {% endif %}
   icon: mdi:thermometer-chevron-down
 
+# 🔺 Daily High Temperature
 - name: "Daily High Temperature"
   unique_id: daily_high_temperature
   unit_of_measurement: "°F"
@@ -30,6 +48,6 @@
     {% if daily and daily['data'] | length > 0 and daily['data'][0]['temperatureHigh'] is not none %}
       {{ daily['data'][0]['temperatureHigh'] | round(1) }}
     {% else %}
-      {{ state_attr('weather.kowd', 'forecast')[0]['temphigh'] | float | round(1) if state_attr('weather.kowd', 'forecast') else 'unavailable' }}
+      {{ state_attr('weather.kowd', 'temperature') | float | round(1) if state_attr('weather.kowd', 'temperature') is not none else 'unavailable' }}
     {% endif %}
   icon: mdi:thermometer-chevron-up
