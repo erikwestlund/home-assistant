@@ -12,7 +12,7 @@
       minutes: "/5"
   action:
     - choose:
-        # ✅ Correct Power State
+        # ✅ Power, Mode, and Setpoint All at Once if Radiator is Off
         - conditions:
             - condition: state
               entity_id: binary_sensor.hvac_radiator_power_synced_main_zone
@@ -27,18 +27,19 @@
                   {% else %}
                     off
                   {% endif %}
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.living_room_main_heating
+                temperature: >
+                  {{ states('sensor.hvac_radiator_setpoint_main_zone') | float(0) }}
             - service: logbook.log
               data:
                 name: "HVAC Sync Radiator Main Zone"
                 message: >
-                  Power state corrected. HVAC mode set to:
-                  {% if is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'on') %}
-                    heat
-                  {% else %}
-                    off
-                  {% endif %}.
+                  Radiator turned on. Mode set to heat and temperature set to:
+                  {{ states('sensor.hvac_radiator_setpoint_main_zone') }}°F.
 
-        # ✅ Correct Mode
+        # ✅ Correct Mode and Setpoint if Mode is Incorrect
         - conditions:
             - condition: state
               entity_id: binary_sensor.hvac_radiator_mode_synced_main_zone
@@ -48,12 +49,19 @@
               data:
                 entity_id: climate.living_room_main_heating
                 hvac_mode: heat
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.living_room_main_heating
+                temperature: >
+                  {{ states('sensor.hvac_radiator_setpoint_main_zone') | float(0) }}
             - service: logbook.log
               data:
                 name: "HVAC Sync Radiator Main Zone"
-                message: "Mode corrected to heat."
+                message: >
+                  Mode corrected to heat and temperature set to:
+                  {{ states('sensor.hvac_radiator_setpoint_main_zone') }}°F.
 
-        # ✅ Correct Setpoint
+        # ✅ Correct Setpoint if Setpoint is Incorrect
         - conditions:
             - condition: state
               entity_id: binary_sensor.hvac_radiator_setpoint_synced_main_zone

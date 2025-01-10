@@ -42,10 +42,10 @@
                 name: "HVAC Mini Split Sync Family Room"
                 message: >
                   Mini Split turned on. Mode set to:
-                  {{ states('input_select.hvac_mode') }} and temperature set to
+                  {{ states('input_select.hvac_mode') }} and temperature set to:
                   {{ states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') }}°F.
 
-        # ✅ Correct Mode
+        # ✅ Correct Mode and Setpoint if Mode is Incorrect
         - conditions:
             - condition: state
               entity_id: binary_sensor.hvac_mini_split_mode_synced_family_room
@@ -60,12 +60,18 @@
                   {% else %}
                     cool
                   {% endif %}
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.family_room_heat_pump
+                temperature: >
+                  {{ states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') | float(64.4) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Family Room"
                 message: >
                   Mode corrected to:
-                  {{ states('input_select.hvac_mode') }}.
+                  {{ states('input_select.hvac_mode') }} and temperature set to:
+                  {{ states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') }}°F.
 
         # ✅ Correct Temperature
         - conditions:
@@ -83,5 +89,4 @@
                 name: "HVAC Mini Split Sync Family Room"
                 message: >
                   Temperature set to:
-                  {{ states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') }}°F.
-  mode: single
+                  {{ states('sensor.hvac_mini_split_setpoint_family_room_lg

@@ -8,11 +8,12 @@
         - binary_sensor.hvac_radiator_setpoint_synced_family_room
         - input_boolean.hvac_override_status_family_room
         - input_boolean.hvac_away_mode
+      to: "off"
     - platform: time_pattern
       minutes: "/5"
   action:
     - choose:
-        # ✅ Correct Power State
+        # ✅ Power, Mode, and Setpoint All at Once if Radiator is Off
         - conditions:
             - condition: state
               entity_id: binary_sensor.hvac_radiator_power_synced_family_room
@@ -27,18 +28,19 @@
                   {% else %}
                     off
                   {% endif %}
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.family_room_heating
+                temperature: >
+                  {{ states('sensor.hvac_radiator_setpoint_family_room') | float(0) }}
             - service: logbook.log
               data:
                 name: "HVAC Sync Radiator Family Room"
                 message: >
-                  Power state corrected. HVAC mode set to:
-                  {% if is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') %}
-                    heat
-                  {% else %}
-                    off
-                  {% endif %}.
+                  Radiator turned on. Mode set to heat and setpoint set to:
+                  {{ states('sensor.hvac_radiator_setpoint_family_room') }}°F.
 
-        # ✅ Correct Mode
+        # ✅ Correct Mode and Setpoint if Mode is Incorrect
         - conditions:
             - condition: state
               entity_id: binary_sensor.hvac_radiator_mode_synced_family_room
@@ -48,10 +50,17 @@
               data:
                 entity_id: climate.family_room_heating
                 hvac_mode: heat
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.family_room_heating
+                temperature: >
+                  {{ states('sensor.hvac_radiator_setpoint_family_room') | float(0) }}
             - service: logbook.log
               data:
                 name: "HVAC Sync Radiator Family Room"
-                message: "Mode corrected to heat."
+                message: >
+                  Mode corrected to heat and setpoint set to:
+                  {{ states('sensor.hvac_radiator_setpoint_family_room') }}°F.
 
         # ✅ Correct Setpoint
         - conditions:
