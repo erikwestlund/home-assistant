@@ -1,5 +1,6 @@
 # HVAC Average Temperature Daytime Automations
-- alias: "Set HVAC Average Temperature Daytime Office"
+- id: "set_hvac_average_temperature_daytime_office"
+  alias: "Set HVAC Average Temperature Daytime Office"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_office') }}"
@@ -11,7 +12,8 @@
         value: "{{ states('sensor.hvac_average_temperature_daytime_office') | float }}"
   mode: single
 
-- alias: "Set HVAC Average Temperature Daytime Family Room"
+- id: "set_hvac_average_temperature_daytime_family_room"
+  alias: "Set HVAC Average Temperature Daytime Family Room"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_family_room') }}"
@@ -23,7 +25,8 @@
         value: "{{ states('sensor.hvac_average_temperature_daytime_family_room') | float }}"
   mode: single
 
-- alias: "Set HVAC Average Temperature Daytime Living Room"
+- id: "set_hvac_average_temperature_daytime_living_room"
+  alias: "Set HVAC Average Temperature Daytime Living Room"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_living_room') }}"
@@ -35,7 +38,8 @@
         value: "{{ states('sensor.hvac_average_temperature_daytime_living_room') | float }}"
   mode: single
 
-- alias: "Set HVAC Average Temperature Daytime Dining Room"
+- id: "set_hvac_average_temperature_daytime_dining_room"
+  alias: "Set HVAC Average Temperature Daytime Dining Room"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_dining_room') }}"
@@ -47,7 +51,8 @@
         value: "{{ states('sensor.hvac_average_temperature_daytime_dining_room') | float }}"
   mode: single
 
-- alias: "Set HVAC Average Temperature Daytime Master Bedroom"
+- id: "set_hvac_average_temperature_daytime_master_bedroom"
+  alias: "Set HVAC Average Temperature Daytime Master Bedroom"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_master_bedroom') }}"
@@ -59,7 +64,8 @@
         value: "{{ states('sensor.hvac_average_temperature_daytime_master_bedroom') | float }}"
   mode: single
 
-- alias: "Set HVAC Average Temperature Daytime Erik Office"
+- id: "set_hvac_average_temperature_daytime_erik_office"
+  alias: "Set HVAC Average Temperature Daytime Erik Office"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_erik_office') }}"
@@ -71,7 +77,8 @@
         value: "{{ states('sensor.hvac_average_temperature_daytime_erik_office') | float }}"
   mode: single
 
-- alias: "Set HVAC Average Temperature Daytime Ducted"
+- id: "set_hvac_average_temperature_daytime_ducted"
+  alias: "Set HVAC Average Temperature Daytime Ducted"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_ducted') }}"
@@ -81,89 +88,4 @@
         entity_id: input_number.hvac_avg_temp_daytime_ducted
       data:
         value: "{{ states('sensor.hvac_average_temperature_daytime_ducted') | float }}"
-  mode: single
-
-# HVAC Average Temperature Nighttime Automations
-- alias: "Set HVAC Average Temperature Nighttime Office"
-  trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_office') }}"
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_avg_temp_nighttime_office
-      data:
-        value: "{{ states('sensor.hvac_average_temperature_nighttime_office') | float }}"
-  mode: single
-
-- alias: "Set HVAC Average Temperature Nighttime Family Room"
-  trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_family_room') }}"
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_avg_temp_nighttime_family_room
-      data:
-        value: "{{ states('sensor.hvac_average_temperature_nighttime_family_room') | float }}"
-  mode: single
-
-- alias: "Set HVAC Average Temperature Nighttime Living Room"
-  trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_living_room') }}"
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_avg_temp_nighttime_living_room
-      data:
-        value: "{{ states('sensor.hvac_average_temperature_nighttime_living_room') | float }}"
-  mode: single
-
-- alias: "Set HVAC Average Temperature Nighttime Dining Room"
-  trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_dining_room') }}"
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_avg_temp_nighttime_dining_room
-      data:
-        value: "{{ states('sensor.hvac_average_temperature_nighttime_dining_room') | float }}"
-  mode: single
-
-- alias: "Set HVAC Average Temperature Nighttime Master Bedroom"
-  trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_master_bedroom') }}"
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_avg_temp_nighttime_master_bedroom
-      data:
-        value: "{{ states('sensor.hvac_average_temperature_nighttime_master_bedroom') | float }}"
-  mode: single
-
-- alias: "Set HVAC Average Temperature Nighttime Erik Office"
-  trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_erik_office') }}"
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_avg_temp_nighttime_erik_office
-      data:
-        value: "{{ states('sensor.hvac_average_temperature_nighttime_erik_office') | float }}"
-  mode: single
-
-- alias: "Set HVAC Average Temperature Nighttime Ducted"
-  trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_ducted') }}"
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_avg_temp_nighttime_ducted
-      data:
-        value: "{{ states('sensor.hvac_average_temperature_nighttime_ducted') | float }}"
   mode: single
