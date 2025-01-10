@@ -1,6 +1,6 @@
 # HVAC Average Temperature Daytime Automations
 - id: set_hvac_average_temperature_daytime_office
-  ias: "Set HVAC Average Temperature Daytime Office"
+  alias: "Set HVAC Average Temperature Daytime Office"
   trigger:
     - platform: time
       at: "{{ states('input_datetime.hvac_daytime_start_time_office') }}"
