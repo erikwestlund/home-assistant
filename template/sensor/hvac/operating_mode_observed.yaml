@@ -18,7 +18,7 @@
 - name: "HVAC Mini Split Observed Mode Office"
   unique_id: hvac_mini_split_observed_mode_office
   state: >
-    {{ states('climate.office') | capitalize }}
+    {{ states('climate.tinas_office_heat_pump') | capitalize }}
 
 - name: "HVAC Mini Split Observed Mode Erik Office"
   unique_id: hvac_mini_split_observed_mode_erik_office
