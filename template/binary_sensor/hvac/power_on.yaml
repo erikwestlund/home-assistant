@@ -97,6 +97,8 @@
     {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_office') | float %}
     {% set night_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_office') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_office', 'on') %}
+    {% set is_occupied = is_state('binary_sensor.hvac_apply_occupied_setpoints_office', 'on') %}
+    {% set unoccupied_temp_threshold = states('input_number.hvac_mini_split_off_when_unoccupied_temp_under_threshold_office') | float %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -113,10 +115,13 @@
     {# 5. Outside Temperature Check #}
     {% elif current_temp < on_threshold %}
       off
-    {# 6. Nighttime Check #}
+    {# 6. Unoccupied Room and Daytime Average Temperature Check #}
+    {% elif not is_occupied and states('sensor.daytime_average_temperature') | float < unoccupied_temp_threshold %}
+      off
+    {# 7. Nighttime Check #}
     {% elif not daytime_active and current_temp < night_off_threshold %}
       off
-    {# 7. Default On State #}
+    {# 8. Default On State #}
     {% else %}
       on
     {% endif %}
