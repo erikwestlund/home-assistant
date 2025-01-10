@@ -1,0 +1,68 @@
+# Minute average
+- name: "Minute Average Energy Usage Family Room and Ducted"
+  unique_id: energy_minute_avg_family_room_ducted
+  state: >
+    {% set value = states('sensor.heat_pump_family_room_ducted_power_minute_average') | float %}
+    {{ (value / 1000) | round(1) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Minute Average Energy Usage Offices and Dining Room"
+  unique_id: energy_minute_avg_offices_dining_room
+  state: >
+    {% set value = states('sensor.heat_pump_offices_dining_room_power_minute_average') | float %}
+    {{ (value / 1000) | round(1) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Minute Average Energy Usage Living Room and Master Bedroom"
+  unique_id: energy_minute_avg_living_room_master_bedroom
+  state: >
+    {% set value = states('sensor.heat_pump_living_room_master_bedroom_power_minute_average') | float %}
+    {{ (value / 1000) | round(1) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+# Day
+- name: "Daily Energy Usage Family Room and Ducted"
+  unique_id: energy_today_family_room_ducted
+  state: >
+    {{ states('sensor.heat_pump_family_room_ducted_energy_today') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar
+
+- name: "Daily Energy Usage Living Room and Master Bedroom"
+  unique_id: energy_today_living_room_master_bedroom
+  state: >
+    {{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar
+
+- name: "Daily Energy Usage Offices and Dining Room"
+  unique_id: energy_today_offices_dining_room
+  state: >
+    {{ states('sensor.heat_pump_offices_dining_room_energy_today') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar
+
+# Month
+- name: "Monthly Energy Usage Family Room and Ducted"
+  unique_id: energy_month_family_room_ducted
+  state: >
+    {{ states('sensor.heat_pump_family_room_ducted_energy_this_month') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar-month
+
+- name: "Monthly Energy Usage Living Room and Master Bedroom"
+  unique_id: energy_month_living_room_master_bedroom
+  state: >
+    {{ states('sensor.heat_pump_living_room_master_bedroom_energy_this_month') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar-month
+
+- name: "Monthly Energy Usage Offices and Dining Room"
+  unique_id: energy_month_offices_dining_room
+  state: >
+    {{ states('sensor.heat_pump_offices_dining_room_energy_this_month') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar-month
