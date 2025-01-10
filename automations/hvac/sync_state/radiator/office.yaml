@@ -1,0 +1,72 @@
+- id: "hvac_sync_radiator_power_mode_setpoint_office"
+  alias: "HVAC Sync Radiator Power, Mode, and Setpoint Office"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.hvac_radiator_power_synced_office
+        - binary_sensor.hvac_radiator_mode_synced_office
+        - binary_sensor.hvac_radiator_setpoint_synced_office
+        - input_boolean.hvac_override_status_office
+        - input_boolean.hvac_away_mode
+    - platform: time_pattern
+      minutes: "/5"
+  action:
+    - choose:
+        # ✅ Correct Power State
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_synced_office
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.hvac_office_radiator
+                hvac_mode: >
+                  {% if is_state('binary_sensor.hvac_radiator_observed_power_status_office', 'on') %}
+                    heat
+                  {% else %}
+                    off
+                  {% endif %}
+            - service: logbook.log
+              data:
+                name: "HVAC Sync Radiator Office"
+                message: >
+                  Power state corrected. HVAC mode set to:
+                  {% if is_state('binary_sensor.hvac_radiator_observed_power_status_office', 'on') %}
+                    heat
+                  {% else %}
+                    off
+                  {% endif %}.
+
+        # ✅ Correct Mode
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_mode_synced_office
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.hvac_office_radiator
+                hvac_mode: heat
+            - service: logbook.log
+              data:
+                name: "HVAC Sync Radiator Office"
+                message: "Mode corrected to heat."
+
+        # ✅ Correct Setpoint
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_setpoint_synced_office
+              state: "off"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.hvac_office_radiator
+                temperature: >
+                  {{ states('sensor.hvac_radiator_setpoint_office') | float(0) }}
+            - service: logbook.log
+              data:
+                name: "HVAC Sync Radiator Office"
+                message: >
+                  Setpoint corrected to {{ states('sensor.hvac_radiator_setpoint_office') }}°F.
+  mode: single
