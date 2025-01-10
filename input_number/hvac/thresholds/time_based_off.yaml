@@ -101,16 +101,16 @@ hvac_mini_split_night_off_threshold_master_bedroom:
   initial: -10
 
 # Ducted
-hvac_mini_split_daytime_off_threshold_ducted:
-  name: HVAC Ducted Mini Split Day Off Threshold
+hvac_ducted_daytime_off_threshold:
+  name: HVAC Ducted Day Off Threshold
   min: -20
   max: 120
   step: 1
   unit_of_measurement: "°F"
   initial: 55
 
-hvac_mini_split_night_off_threshold_ducted:
-  name: HVAC Ducted Mini Split Night Off Threshold
+hvac_ducted_night_off_threshold:
+  name: HVAC Ducted Night Off Threshold
   min: -20
   max: 120
   step: 1
