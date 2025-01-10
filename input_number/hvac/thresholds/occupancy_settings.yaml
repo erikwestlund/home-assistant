@@ -1,5 +1,5 @@
-hvac_mini_split_on_when_unoccupied_threshold_office:
-  name: HVAC Office Mini Split On When Unoccupied Threshold
+hvac_mini_split_off_when_unoccupied_temp_under_threshold_office:
+  name: HVAC Office Mini Split Off When Unoccupied Temp Under Threshold
   min: -20
   max: 120
   step: 0.5
