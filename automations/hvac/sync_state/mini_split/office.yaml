@@ -1,5 +1,5 @@
-- id: "hvac_mini_split_sync_office"
-  alias: "HVAC Mini Split Sync Office"
+- id: "hvac_sync_mini_split_power_mode_setpoint_office"
+  alias: "HVAC Sync Mini Split Power, Mode, and Setpoint Office"
   trigger:
     - platform: state
       entity_id:
