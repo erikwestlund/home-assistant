@@ -76,7 +76,7 @@
         # ✅ Correct Temperature
         - conditions:
             - condition: state
-              entity_id: binary_sensor.hvac_ducted_temperature_synced
+              entity_id: binary_sensor.hvac_ducted_setpoint_synced
               state: "off"
           sequence:
             - service: climate.set_temperature
