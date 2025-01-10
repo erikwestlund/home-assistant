@@ -1,5 +1,6 @@
 # HVAC Average Temperature Daytime Automations
 - id: "set_hvac_average_temperature_daytime_office"
+  unique_id: set_hvac_average_temperature_daytime_office
   alias: "Set HVAC Average Temperature Daytime Office"
   trigger:
     - platform: time
@@ -13,6 +14,7 @@
   mode: single
 
 - id: "set_hvac_average_temperature_daytime_family_room"
+  unique_id: set_hvac_average_temperature_daytime_family_room
   alias: "Set HVAC Average Temperature Daytime Family Room"
   trigger:
     - platform: time
@@ -26,6 +28,7 @@
   mode: single
 
 - id: "set_hvac_average_temperature_daytime_living_room"
+  unique_id: set_hvac_average_temperature_daytime_living_room
   alias: "Set HVAC Average Temperature Daytime Living Room"
   trigger:
     - platform: time
@@ -39,6 +42,7 @@
   mode: single
 
 - id: "set_hvac_average_temperature_daytime_dining_room"
+  unique_id: set_hvac_average_temperature_daytime_dining_room
   alias: "Set HVAC Average Temperature Daytime Dining Room"
   trigger:
     - platform: time
@@ -52,6 +56,7 @@
   mode: single
 
 - id: "set_hvac_average_temperature_daytime_master_bedroom"
+  unique_id: set_hvac_average_temperature_daytime_master_bedroom
   alias: "Set HVAC Average Temperature Daytime Master Bedroom"
   trigger:
     - platform: time
@@ -65,6 +70,7 @@
   mode: single
 
 - id: "set_hvac_average_temperature_daytime_erik_office"
+  unique_id: set_hvac_average_temperature_daytime_erik_office
   alias: "Set HVAC Average Temperature Daytime Erik Office"
   trigger:
     - platform: time
@@ -78,6 +84,7 @@
   mode: single
 
 - id: "set_hvac_average_temperature_daytime_ducted"
+  unique_id: set_hvac_average_temperature_daytime_ducted
   alias: "Set HVAC Average Temperature Daytime Ducted"
   trigger:
     - platform: time
