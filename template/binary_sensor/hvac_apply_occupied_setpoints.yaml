@@ -9,7 +9,7 @@
 
     {% if is_state('input_boolean.office_early_work_mode', 'on') and early_work_start <= current_time <= early_work_end and is_state('binary_sensor.tina_home', 'on') %}
       true
-    {% elif early_work_start <= current_time <= early_work_end and is_state('binary_sensor.office_motion', 'on') and is_state('binary_sensor.tina_home', 'on') %}
+    {% elif early_work_start <= current_time <= early_work_end and is_state('binary_sensor.tina_desk_motion', 'on') and is_state('binary_sensor.tina_home', 'on') %}
       true
     {% elif is_state('binary_sensor.nighttime_status', 'on') %}
       false
