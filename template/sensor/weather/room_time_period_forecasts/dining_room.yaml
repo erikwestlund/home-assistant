@@ -1,0 +1,37 @@
+# 🌞 HVAC Average Temperature Daytime Dining Room
+- name: "HVAC Average Temperature Daytime Dining Room"
+  unique_id: hvac_avg_temp_daytime_dining_room
+  unit_of_measurement: "°F"
+  state: >
+    {% set pirate_forecast = state_attr('sensor.pirate_weather', 'hourly') %}
+    {% set kowd_temp = state_attr('weather.kowd', 'temperature') | float %}
+    {% set start_time = states('input_datetime.hvac_daytime_start_time_dining_room') %}
+    {% set end_time = states('input_datetime.hvac_nighttime_start_time_dining_room') %}
+    {% if pirate_forecast and pirate_forecast['data'] %}
+      {% set start_timestamp = (now().replace(hour=start_time.split(':')[0] | int, minute=start_time.split(':')[1] | int)).timestamp() %}
+      {% set end_timestamp = (now().replace(hour=end_time.split(':')[0] | int, minute=end_time.split(':')[1] | int)).timestamp() %}
+      {% set future_temps = pirate_forecast['data'] | selectattr('time', '>=', start_timestamp) | selectattr('time', '<=', end_timestamp) | map(attribute='temperature') | list %}
+      {{ (future_temps | sum / future_temps | length) | round(1) if future_temps | length > 0 else kowd_temp }}
+    {% else %}
+      {{ kowd_temp }}
+    {% endif %}
+  icon: mdi:thermometer-lines
+
+# 🌙 HVAC Average Temperature Nighttime Dining Room
+- name: "HVAC Average Temperature Nighttime Dining Room"
+  unique_id: hvac_avg_temp_nighttime_dining_room
+  unit_of_measurement: "°F"
+  state: >
+    {% set pirate_forecast = state_attr('sensor.pirate_weather', 'hourly') %}
+    {% set kowd_temp = state_attr('weather.kowd', 'temperature') | float %}
+    {% set start_time = states('input_datetime.hvac_nighttime_start_time_dining_room') %}
+    {% set end_time = states('input_datetime.hvac_daytime_start_time_dining_room') %}
+    {% if pirate_forecast and pirate_forecast['data'] %}
+      {% set start_timestamp = (now().replace(hour=start_time.split(':')[0] | int, minute=start_time.split(':')[1] | int)).timestamp() %}
+      {% set end_timestamp = (now().replace(hour=end_time.split(':')[0] | int, minute=end_time.split(':')[1] | int) + timedelta(days=1)).timestamp() %}
+      {% set future_temps = pirate_forecast['data'] | selectattr('time', '>=', start_timestamp) | selectattr('time', '<=', end_timestamp) | map(attribute='temperature') | list %}
+      {{ (future_temps | sum / future_temps | length) | round(1) if future_temps | length > 0 else kowd_temp }}
+    {% else %}
+      {{ kowd_temp }}
+    {% endif %}
+  icon: mdi:thermometer-night

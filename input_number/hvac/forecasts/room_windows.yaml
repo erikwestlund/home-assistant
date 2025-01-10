@@ -1,0 +1,119 @@
+# Office
+input_number:
+hvac_daytime_avg_temp_office:
+  name: HVAC Office Daytime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+hvac_nighttime_avg_temp_office:
+  name: HVAC Office Nighttime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+# Family Room
+hvac_daytime_avg_temp_family_room:
+  name: HVAC Family Room Daytime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+hvac_nighttime_avg_temp_family_room:
+  name: HVAC Family Room Nighttime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+# Living Room
+hvac_daytime_avg_temp_living_room:
+  name: HVAC Living Room Daytime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+hvac_nighttime_avg_temp_living_room:
+  name: HVAC Living Room Nighttime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+# Dining Room
+hvac_daytime_avg_temp_dining_room:
+  name: HVAC Dining Room Daytime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+hvac_nighttime_avg_temp_dining_room:
+  name: HVAC Dining Room Nighttime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+# Master Bedroom
+hvac_daytime_avg_temp_master_bedroom:
+  name: HVAC Master Bedroom Daytime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+hvac_nighttime_avg_temp_master_bedroom:
+  name: HVAC Master Bedroom Nighttime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+# Erik Office
+hvac_daytime_avg_temp_erik_office:
+  name: HVAC Erik Office Daytime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+hvac_nighttime_avg_temp_erik_office:
+  name: HVAC Erik Office Nighttime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+# Ducted
+hvac_daytime_avg_temp_ducted:
+  name: HVAC Ducted Daytime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box
+
+hvac_nighttime_avg_temp_ducted:
+  name: HVAC Ducted Nighttime Avg Temp
+  min: -50
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+  mode: box

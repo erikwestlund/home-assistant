@@ -1,0 +1,169 @@
+  # 🌞 HVAC Average Temperature Daytime Automations
+- alias: "Set HVAC Average Temperature Daytime Office"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_daytime_start_time_office') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_office_daytime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_daytime_office') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Daytime Family Room"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_daytime_start_time_family_room') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_family_room_daytime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_daytime_family_room') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Daytime Living Room"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_daytime_start_time_living_room') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_living_room_daytime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_daytime_living_room') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Daytime Dining Room"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_daytime_start_time_dining_room') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_dining_room_daytime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_daytime_dining_room') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Daytime Erik Office"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_daytime_start_time_erik_office') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_office_daytime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_daytime_erik_office') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Daytime Master Bedroom"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_daytime_start_time_master_bedroom') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_master_bedroom_daytime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_daytime_master_bedroom') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Daytime Ducted"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_daytime_start_time_ducted') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_ducted_daytime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_daytime_ducted') | float }}"
+  mode: single
+
+# 🌙 HVAC Average Temperature Nighttime Automations
+- alias: "Set HVAC Average Temperature Nighttime Office"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_nighttime_start_time_office') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_office_nighttime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_nighttime_office') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Nighttime Family Room"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_nighttime_start_time_family_room') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_family_room_nighttime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_nighttime_family_room') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Nighttime Living Room"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_nighttime_start_time_living_room') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_living_room_nighttime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_nighttime_living_room') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Nighttime Dining Room"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_nighttime_start_time_dining_room') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_dining_room_nighttime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_nighttime_dining_room') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Nighttime Erik Office"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_nighttime_start_time_erik_office') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_office_nighttime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_nighttime_erik_office') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Nighttime Master Bedroom"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_nighttime_start_time_master_bedroom') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_master_bedroom_nighttime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_nighttime_master_bedroom') | float }}"
+  mode: single
+
+- alias: "Set HVAC Average Temperature Nighttime Ducted"
+  trigger:
+    - platform: time
+      at: "{{ states('input_datetime.hvac_nighttime_start_time_ducted') }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_ducted_nighttime_avg_temp
+      data:
+        value: "{{ states('sensor.hvac_avg_temp_nighttime_ducted') | float }}"
+  mode: single
