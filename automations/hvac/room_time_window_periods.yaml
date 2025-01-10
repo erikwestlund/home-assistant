@@ -8,7 +8,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_daytime_office
       data:
-        value: "{{ states('sensor.hvac_avg_temp_daytime_office') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_daytime_office') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Daytime Family Room"
@@ -20,7 +20,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_daytime_family_room
       data:
-        value: "{{ states('sensor.hvac_avg_temp_daytime_family_room') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_daytime_family_room') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Daytime Living Room"
@@ -32,7 +32,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_daytime_living_room
       data:
-        value: "{{ states('sensor.hvac_avg_temp_daytime_living_room') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_daytime_living_room') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Daytime Dining Room"
@@ -44,7 +44,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_daytime_dining_room
       data:
-        value: "{{ states('sensor.hvac_avg_temp_daytime_dining_room') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_daytime_dining_room') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Daytime Master Bedroom"
@@ -56,7 +56,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_daytime_master_bedroom
       data:
-        value: "{{ states('sensor.hvac_avg_temp_daytime_master_bedroom') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_daytime_master_bedroom') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Daytime Erik Office"
@@ -68,7 +68,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_daytime_erik_office
       data:
-        value: "{{ states('sensor.hvac_avg_temp_daytime_erik_office') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_daytime_erik_office') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Daytime Ducted"
@@ -80,7 +80,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_daytime_ducted
       data:
-        value: "{{ states('sensor.hvac_avg_temp_daytime_ducted') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_daytime_ducted') | float }}"
   mode: single
 
 # HVAC Average Temperature Nighttime Automations
@@ -93,7 +93,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_nighttime_office
       data:
-        value: "{{ states('sensor.hvac_avg_temp_nighttime_office') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_nighttime_office') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Nighttime Family Room"
@@ -105,7 +105,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_nighttime_family_room
       data:
-        value: "{{ states('sensor.hvac_avg_temp_nighttime_family_room') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_nighttime_family_room') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Nighttime Living Room"
@@ -117,7 +117,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_nighttime_living_room
       data:
-        value: "{{ states('sensor.hvac_avg_temp_nighttime_living_room') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_nighttime_living_room') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Nighttime Dining Room"
@@ -129,7 +129,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_nighttime_dining_room
       data:
-        value: "{{ states('sensor.hvac_avg_temp_nighttime_dining_room') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_nighttime_dining_room') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Nighttime Master Bedroom"
@@ -141,7 +141,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_nighttime_master_bedroom
       data:
-        value: "{{ states('sensor.hvac_avg_temp_nighttime_master_bedroom') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_nighttime_master_bedroom') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Nighttime Erik Office"
@@ -153,7 +153,7 @@
       target:
         entity_id: input_number.hvac_avg_temp_nighttime_erik_office
       data:
-        value: "{{ states('sensor.hvac_avg_temp_nighttime_erik_office') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_nighttime_erik_office') | float }}"
   mode: single
 
 - alias: "Set HVAC Average Temperature Nighttime Ducted"
@@ -165,5 +165,5 @@
       target:
         entity_id: input_number.hvac_avg_temp_nighttime_ducted
       data:
-        value: "{{ states('sensor.hvac_avg_temp_nighttime_ducted') | float }}"
+        value: "{{ states('sensor.hvac_average_temperature_nighttime_ducted') | float }}"
   mode: single
