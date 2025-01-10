@@ -83,6 +83,14 @@ hvac_mini_split_night_off_threshold_erik_office:
   unit_of_measurement: "°F"
   initial: 55
 
+hvac_mini_split_weekend_off_threshold_erik_office:
+  name: HVAC Erik Office Mini Split Weekend Off Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 # Master Bedroom
 hvac_mini_split_daytime_off_threshold_master_bedroom:
   name: HVAC Master Bedroom Mini Split Day Off Threshold
