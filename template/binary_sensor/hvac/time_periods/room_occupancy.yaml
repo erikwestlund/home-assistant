@@ -14,6 +14,8 @@
 - name: "HVAC Apply Occupied Setpoints Office"
   unique_id: hvac_apply_occupied_setpoints_office
   state: >
+    {% set office_occupied = states('binary_sensor.office_occupied') %}
+    {% set tina_home = states('binary_sensor.tina_home') %}
     {% set current_time = now().timestamp() %}
     {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_start_time_office')) %}
     {% set early_work_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_end_time_office')) %}
@@ -27,8 +29,8 @@
     {% elif is_state('binary_sensor.hvac_nighttime_in_window_office', 'on') %}
       false
     {% elif is_state('binary_sensor.is_weekday', 'on') %}
-      {% if apply_start <= current_time <= apply_end %}
-        {{ is_state('binary_sensor.tina_home', 'on') }}
+      {% if tina_home and office_occupied and (apply_start <= current_time <= apply_end) %}
+        true
       {% else %}
         false
       {% endif %}
