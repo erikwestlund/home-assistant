@@ -6,7 +6,7 @@
     {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
     {% set is_bedtime = is_state('binary_sensor.hvac_main_radiator_zone_bedtime_in_window', 'on') %}
     {% set is_sleep = is_state('binary_sensor.hvac_main_radiator_zone_sleep_in_window', 'on') %}
-    {% set is_wakeup = is_state('binary_sensor.hvac_main_radiator_zone_wakeup_in_window', 'on') %}
+    {% set is_wakeup = is_state('binary_sensor.hvac_main_radiator_zone_wake_up_in_window', 'on') %}
 
     {# 1. Override Check #}
     {% if is_override %}

@@ -13,7 +13,7 @@
       minutes: "/5"
   action:
     - choose:
-        # ✅ Correct Power State
+        # ✅ Power, Mode, and Setpoint All at Once if Mini Split is Off
         - conditions:
             - condition: state
               entity_id: binary_sensor.hvac_mini_split_power_synced_office
@@ -32,12 +32,18 @@
                   {% else %}
                     off
                   {% endif %}
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.tinas_office_heat_pump
+                temperature: >
+                  {{ states('sensor.hvac_mini_split_setpoint_office_lg_converted') | float(64.4) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Office"
                 message: >
-                  Power state corrected. HVAC mode set to:
-                  {{ states('input_select.hvac_mode') }}.
+                  Mini Split turned on. Mode set to:
+                  {{ states('input_select.hvac_mode') }} and temperature set to:
+                  {{ states('sensor.hvac_mini_split_setpoint_office_lg_converted') }}°F.
 
         # ✅ Correct Mode
         - conditions:
