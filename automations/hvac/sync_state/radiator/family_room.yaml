@@ -20,9 +20,9 @@
           sequence:
             - service: climate.set_hvac_mode
               data:
-                entity_id: climate.family_room
+                entity_id: climate.family_room_heating
                 hvac_mode: >
-                  {% if is_state('binary_sensor.hvac_radiator_observed_power_status_family_room', 'on') %}
+                  {% if is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') %}
                     heat
                   {% else %}
                     off
@@ -32,7 +32,7 @@
                 name: "HVAC Sync Radiator Family Room"
                 message: >
                   Power state corrected. HVAC mode set to:
-                  {% if is_state('binary_sensor.hvac_radiator_observed_power_status_family_room', 'on') %}
+                  {% if is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') %}
                     heat
                   {% else %}
                     off
@@ -46,7 +46,7 @@
           sequence:
             - service: climate.set_hvac_mode
               data:
-                entity_id: climate.family_room
+                entity_id: climate.family_room_heating
                 hvac_mode: heat
             - service: logbook.log
               data:
@@ -61,7 +61,7 @@
           sequence:
             - service: climate.set_temperature
               data:
-                entity_id: climate.family_room
+                entity_id: climate.family_room_heating
                 temperature: >
                   {{ states('sensor.hvac_radiator_setpoint_family_room') | float(0) }}
             - service: logbook.log

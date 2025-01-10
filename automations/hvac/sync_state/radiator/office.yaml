@@ -22,7 +22,7 @@
               data:
                 entity_id: climate.office
                 hvac_mode: >
-                  {% if is_state('binary_sensor.hvac_radiator_observed_power_status_office', 'on') %}
+                  {% if is_state('binary_sensor.hvac_radiator_power_status_office', 'on') %}
                     heat
                   {% else %}
                     off
@@ -32,7 +32,7 @@
                 name: "HVAC Sync Radiator Office"
                 message: >
                   Power state corrected. HVAC mode set to:
-                  {% if is_state('binary_sensor.hvac_radiator_observed_power_status_office', 'on') %}
+                  {% if is_state('binary_sensor.hvac_radiator_power_status_office', 'on') %}
                     heat
                   {% else %}
                     off
