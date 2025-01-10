@@ -5,7 +5,7 @@
       entity_id:
         - binary_sensor.hvac_ducted_power_synced
         - binary_sensor.hvac_ducted_mode_synced
-        - binary_sensor.hvac_ducted_temperature_synced
+        - binary_sensor.hvac_ducted_setpoint_synced
         - input_boolean.ducted_override_status
         - input_boolean.hvac_away_mode
       to: "off"
