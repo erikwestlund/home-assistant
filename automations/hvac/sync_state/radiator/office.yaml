@@ -20,7 +20,7 @@
           sequence:
             - service: climate.set_hvac_mode
               data:
-                entity_id: climate.hvac_office_radiator
+                entity_id: climate.office
                 hvac_mode: >
                   {% if is_state('binary_sensor.hvac_radiator_observed_power_status_office', 'on') %}
                     heat
@@ -46,7 +46,7 @@
           sequence:
             - service: climate.set_hvac_mode
               data:
-                entity_id: climate.hvac_office_radiator
+                entity_id: climate.office
                 hvac_mode: heat
             - service: logbook.log
               data:
@@ -61,7 +61,7 @@
           sequence:
             - service: climate.set_temperature
               data:
-                entity_id: climate.hvac_office_radiator
+                entity_id: climate.office
                 temperature: >
                   {{ states('sensor.hvac_radiator_setpoint_office') | float(0) }}
             - service: logbook.log
