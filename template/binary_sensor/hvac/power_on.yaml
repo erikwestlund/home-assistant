@@ -84,7 +84,7 @@
     {% endif %}
 
 ## Mini Splits
-# Office: uses current temperature because boiler can heat room very quickly
+# Office: Uses current temperature to decide if off/on (boiler heats room very quickly)
 - name: "HVAC Mini Split Power Status Office"
   unique_id: hvac_mini_split_power_status_office
   state: >
@@ -94,13 +94,13 @@
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_office', 'on') %}
     {% set current_temp = states('sensor.current_temperature') | float %}
-    {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_office') | float %}
-    {% set night_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_office') | float %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_office') | float %}
+    {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_office') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_office') | float %}
     {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_office') | float %}
     {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_office') | float %}
     {% set unoccupied_temp_threshold = states('input_number.hvac_mini_split_off_when_unoccupied_temp_over_threshold_office') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_office', 'on') %}
-    {% set is_occupied = is_state('binary_sensor.hvac_apply_occupied_setpoints_office', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -114,16 +114,19 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Outside Temperature Check (using current temperature) #}
-    {% elif current_temp < on_threshold %}
+    {# 5. Current Temperature Check (always first for Office) #}
+    {% elif current_temp < off_threshold %}
       off
-    {# 6. Unoccupied Room and Daytime Average Temperature Check (only during daytime) #}
-    {% elif daytime_active and not is_occupied and daytime_avg_temp > unoccupied_temp_threshold %}
+    {# 6. Daytime Check (use daytime average temperature and daytime threshold) #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off
-    {# 7. Nighttime Check (using nighttime average temperature) #}
-    {% elif not daytime_active and nighttime_avg_temp < night_off_threshold %}
+    {# 7. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
       off
-    {# 8. Default On State #}
+    {# 8. Unoccupied Room Check (only during daytime) #}
+    {% elif daytime_active and daytime_avg_temp > unoccupied_temp_threshold %}
+      off
+    {# 9. Default On State #}
     {% else %}
       on
     {% endif %}
@@ -143,8 +146,13 @@
     {% set override_status = is_state('input_boolean.hvac_override_status_family_room', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_family_room', 'on') %}
-    {% set daily_average_temp = states('sensor.daily_average_temperature') | float %}
-    {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_family_room') | float %}
+    {% set daily_avg_temp = states('sensor.daily_average_temperature') | float %}
+    {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_family_room') | float %}
+    {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_family_room') | float %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_family_room') | float %}
+    {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_family_room') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_family_room') | float %}
+    {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_family_room', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -158,10 +166,16 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Outside Temperature Check using Daily Average Temperature #}
-    {% elif daily_average_temp < on_threshold %}
+    {# 5. General Off Check using Daily Average Temperature #}
+    {% elif daily_avg_temp < off_threshold %}
       off
-    {# 6. Default On State #}
+    {# 6. Daytime Check (use daytime average temperature and daytime threshold) #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
+      off
+    {# 7. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
+      off
+    {# 8. Default On State #}
     {% else %}
       on
     {% endif %}
@@ -172,10 +186,7 @@
       mdi:power-off
     {% endif %}
 
-# Living Room: day/night strategy:
-# general cutoff, mostly not used: use daily average temperature
-# night: use nighttime average temperature
-# day: use daytime average temperature
+# Living Room
 - name: "HVAC Mini Split Power Status Living Room"
   unique_id: hvac_mini_split_power_status_living_room
   state: >
@@ -184,9 +195,12 @@
     {% set override_status = is_state('input_boolean.hvac_override_status_living_room', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_living_room', 'on') %}
-    {% set current_temp = states('sensor.current_temperature') | float %}
-    {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_living_room') | float %}
-    {% set overheated = is_state('binary_sensor.hvac_mini_split_overheated_living_room', 'on') %}
+    {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_living_room') | float %}
+    {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_living_room') | float %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_living_room') | float %}
+    {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_living_room') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_living_room') | float %}
+    {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_living_room', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -194,19 +208,22 @@
     {# 2. Power Control Toggle #}
     {% elif not power_control %}
       off
-    {# 3. Overheated Check #}
-    {% elif overheated %}
-      off
-    {# 4. Override Status #}
+    {# 3. Override Status #}
     {% elif override_status %}
       on
-    {# 5. Away Mode #}
+    {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 6. Outside Temperature Check #}
-    {% elif current_temp < on_threshold %}
+    {# 5. General Off Check (using daytime or nighttime average temperature under off threshold) #}
+    {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
-    {# 7. Default On State #}
+    {# 6. Daytime Check (use daytime average temperature and daytime threshold) #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
+      off
+    {# 7. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
+      off
+    {# 8. Default On State #}
     {% else %}
       on
     {% endif %}
@@ -226,9 +243,11 @@
     {% set override_status = is_state('input_boolean.hvac_override_status_dining_room', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_dining_room', 'on') %}
-    {% set daily_low_temperature = states('sensor.daily_low_temperature') | float %}
-    {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_dining_room') | float %}
-    {% set night_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_dining_room') | float %}
+    {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_dining_room') | float %}
+    {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_dining_room') | float %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_dining_room') | float %}
+    {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_dining_room') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_dining_room') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_dining_room', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
@@ -243,13 +262,16 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Outside Temperature Check using Nighttime Average Temperature #}
-    {% elif daily_low_temperature < on_threshold %}
+    {# 5. General Off Check (using daytime or nighttime average temperature under off threshold) #}
+    {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
-    {# 6. Nighttime Check #}
-    {% elif not daytime_active and daily_low_temperature < night_off_threshold %}
+    {# 6. Daytime Check (using daytime average temperature and daytime threshold) #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off
-    {# 7. Default On State #}
+    {# 7. Nighttime Check (using nighttime average temperature and nighttime threshold) #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
+      off
+    {# 8. Default On State #}
     {% else %}
       on
     {% endif %}
@@ -269,9 +291,11 @@
     {% set override_status = is_state('input_boolean.hvac_override_status_erik_office', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_erik_office', 'on') %}
-    {% set daily_low_temperature = states('sensor.daily_low_temperature') | float %}
-    {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_erik_office') | float %}
-    {% set night_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_erik_office') | float %}
+    {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_erik_office') | float %}
+    {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_erik_office') | float %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_erik_office') | float %}
+    {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_erik_office') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_erik_office') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_erik_office', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
@@ -286,13 +310,16 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Outside Temperature Check using Nighttime Average Temperature #}
-    {% elif daily_low_temperature < on_threshold %}
+    {# 5. General Off Check (using daytime or nighttime average temperature under off threshold) #}
+    {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
-    {# 6. Nighttime Check #}
-    {% elif not daytime_active and daily_low_temperature < night_off_threshold %}
+    {# 6. Daytime Check (using daytime average temperature and daytime threshold) #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off
-    {# 7. Default On State #}
+    {# 7. Nighttime Check (using nighttime average temperature and nighttime threshold) #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
+      off
+    {# 8. Default On State #}
     {% else %}
       on
     {% endif %}
@@ -312,9 +339,11 @@
     {% set override_status = is_state('input_boolean.hvac_override_status_master_bedroom', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_master_bedroom', 'on') %}
-    {% set daily_average_temp = states('sensor.daily_average_temperature') | float %}
-    {% set on_threshold = states('input_number.hvac_mini_split_on_threshold_master_bedroom') | float %}
+    {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_master_bedroom') | float %}
+    {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_master_bedroom') | float %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_master_bedroom') | float %}
     {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_master_bedroom') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_master_bedroom') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_master_bedroom', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
@@ -329,13 +358,16 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Outside Temperature Check using Daytime Average Temperature #}
-    {% elif daily_average_temp < on_threshold %}
+    {# 5. General Off Check using Daytime/Nighttime Average Temperature and Off Threshold #}
+    {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
-    {# 6. Daytime Check #}
-    {% elif daytime_active and daily_average_temp < daytime_off_threshold %}
+    {# 6. Daytime Check using Daytime Average Temperature and Daytime Off Threshold #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off
-    {# 7. Default On State #}
+    {# 7. Nighttime Check using Nighttime Average Temperature and Nighttime Off Threshold #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
+      off
+    {# 8. Default On State #}
     {% else %}
       on
     {% endif %}
@@ -347,15 +379,21 @@
     {% endif %}
 
 ## Ducted
+# Ducted System
 - name: "HVAC Ducted Power Status"
   unique_id: hvac_ducted_power_status
   state: >
     {% set ducted_enabled = is_state('input_boolean.hvac_ducted_enabled', 'on') %}
     {% set power_control = is_state('input_boolean.hvac_power_on_control_ducted', 'on') %}
+    {% set override_status = is_state('input_boolean.hvac_override_status_ducted', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_system_on = is_state('input_boolean.hvac_away_system_on_ducted', 'on') %}
-    {% set current_temp = states('sensor.current_temperature') | float %}
-    {% set on_threshold = states('input_number.hvac_ducted_on_threshold') | float %}
+    {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_ducted') | float %}
+    {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_ducted') | float %}
+    {% set off_threshold = states('input_number.hvac_ducted_off_threshold') | float %}
+    {% set daytime_off_threshold = states('input_number.hvac_ducted_daytime_off_threshold') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_ducted_night_off_threshold') | float %}
+    {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_ducted', 'on') %}
 
     {# 1. Ducted Enabled Toggle #}
     {% if not ducted_enabled %}
@@ -363,13 +401,22 @@
     {# 2. Power Control Toggle #}
     {% elif not power_control %}
       off
-    {# 3. Away Mode #}
+    {# 3. Override Status #}
+    {% elif override_status %}
+      on
+    {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_system_on else 'off' }}
-    {# 4. Outside Temperature Check #}
-    {% elif current_temp < on_threshold %}
+    {# 5. General Off Check using Daytime/Nighttime Average Temperature and Off Threshold #}
+    {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
-    {# 5. Default On State #}
+    {# 6. Daytime Check using Daytime Average Temperature and Daytime Off Threshold #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
+      off
+    {# 7. Nighttime Check using Nighttime Average Temperature and Nighttime Off Threshold #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
+      off
+    {# 8. Default On State #}
     {% else %}
       on
     {% endif %}
