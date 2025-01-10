@@ -1,0 +1,102 @@
+{% set lg_conversion = {
+  73: 72, 74: 73, 75: 74, 76: 75,
+  78: 79, 79: 80, 80: 81, 81: 82
+} %}
+
+# Office
+- name: "HVAC Mini Split Setpoint Office (LG Converted)"
+  unique_id: hvac_mini_split_setpoint_office_lg_converted
+  state: >
+    {% set actual = states('sensor.hvac_mini_split_setpoint_office') %}
+    {% if actual in ['unavailable', 'unknown', 'Off'] %}
+      Off
+    {% else %}
+      {% set actual = actual | float %}
+      {{ lg_conversion.get(actual | round(0), actual | round(0)) }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Family Room
+- name: "HVAC Mini Split Setpoint Family Room (LG Converted)"
+  unique_id: hvac_mini_split_setpoint_family_room_lg_converted
+  state: >
+    {% set actual = states('sensor.hvac_mini_split_setpoint_family_room') %}
+    {% if actual in ['unavailable', 'unknown', 'Off'] %}
+      Off
+    {% else %}
+      {% set actual = actual | float %}
+      {{ lg_conversion.get(actual | round(0), actual | round(0)) }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Living Room
+- name: "HVAC Mini Split Setpoint Living Room (LG Converted)"
+  unique_id: hvac_mini_split_setpoint_living_room_lg_converted
+  state: >
+    {% set actual = states('sensor.hvac_mini_split_setpoint_living_room') %}
+    {% if actual in ['unavailable', 'unknown', 'Off'] %}
+      Off
+    {% else %}
+      {% set actual = actual | float %}
+      {{ lg_conversion.get(actual | round(0), actual | round(0)) }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Dining Room
+- name: "HVAC Mini Split Setpoint Dining Room (LG Converted)"
+  unique_id: hvac_mini_split_setpoint_dining_room_lg_converted
+  state: >
+    {% set actual = states('sensor.hvac_mini_split_setpoint_dining_room') %}
+    {% if actual in ['unavailable', 'unknown', 'Off'] %}
+      Off
+    {% else %}
+      {% set actual = actual | float %}
+      {{ lg_conversion.get(actual | round(0), actual | round(0)) }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Erik Office
+- name: "HVAC Mini Split Setpoint Erik Office (LG Converted)"
+  unique_id: hvac_mini_split_setpoint_erik_office_lg_converted
+  state: >
+    {% set actual = states('sensor.hvac_mini_split_setpoint_erik_office') %}
+    {% if actual in ['unavailable', 'unknown', 'Off'] %}
+      Off
+    {% else %}
+      {% set actual = actual | float %}
+      {{ lg_conversion.get(actual | round(0), actual | round(0)) }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Master Bedroom
+- name: "HVAC Mini Split Setpoint Master Bedroom (LG Converted)"
+  unique_id: hvac_mini_split_setpoint_master_bedroom_lg_converted
+  state: >
+    {% set actual = states('sensor.hvac_mini_split_setpoint_master_bedroom') %}
+    {% if actual in ['unavailable', 'unknown', 'Off'] %}
+      Off
+    {% else %}
+      {% set actual = actual | float %}
+      {{ lg_conversion.get(actual | round(0), actual | round(0)) }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Ducted System
+- name: "HVAC Setpoint Ducted (LG Converted)"
+  unique_id: hvac_setpoint_ducted_lg_converted
+  state: >
+    {% set actual = states('sensor.hvac_setpoint_ducted') %}
+    {% if actual in ['unavailable', 'unknown', 'Off'] %}
+      Off
+    {% else %}
+      {% set actual = actual | float %}
+      {{ lg_conversion.get(actual | round(0), actual | round(0)) }}
+    {% endif %}
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer

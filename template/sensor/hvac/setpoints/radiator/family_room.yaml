@@ -14,11 +14,11 @@
     {# Comfort Setting Based Logic #}
     {% elif comfort_setting == "Weekday Daytime" %}
       {{ states('input_number.hvac_radiator_weekday_day_setpoint_family_room') }}
-    {% elif comfort_setting == "Weekday Nighttime" %}
+    {% elif comfort_setting == "Weekday Night" %}
       {{ states('input_number.hvac_radiator_weekday_night_setpoint_family_room') }}
     {% elif comfort_setting == "Weekend Daytime" %}
       {{ states('input_number.hvac_radiator_weekend_day_setpoint_family_room') }}
-    {% elif comfort_setting == "Weekend Nighttime" %}
+    {% elif comfort_setting == "Weekend Night" %}
       {{ states('input_number.hvac_radiator_weekend_night_setpoint_family_room') }}
     {% else %}
       None
