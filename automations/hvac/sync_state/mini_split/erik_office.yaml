@@ -1,0 +1,93 @@
+- id: "hvac_sync_mini_split_power_mode_setpoint_eriks_office"
+  alias: "HVAC Sync Mini Split Power, Mode, and Setpoint Erik's Office"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.hvac_mini_split_power_synced_erik_office
+        - binary_sensor.hvac_mini_split_mode_synced_erik_office
+        - binary_sensor.hvac_mini_split_setpoint_synced_erik_office
+        - input_boolean.hvac_override_status_erik_office
+        - input_boolean.hvac_away_mode
+      to: "off"
+    - platform: time_pattern
+      minutes: "/5"
+  action:
+    - choose:
+        # ✅ Power, Mode, and Setpoint All at Once if Mini Split is Off
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_synced_erik_office
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.eriks_office_room
+                hvac_mode: >
+                  {% if is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'on') %}
+                    {% if is_state('input_select.hvac_mode', 'Heat') %}
+                      heat
+                    {% else %}
+                      cool
+                    {% endif %}
+                  {% else %}
+                    off
+                  {% endif %}
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.eriks_office_room
+                temperature: >
+                  {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64.4) }}
+            - service: logbook.log
+              data:
+                name: "HVAC Mini Split Sync Erik's Office"
+                message: >
+                  Mini Split turned on. Mode set to:
+                  {{ states('input_select.hvac_mode') }} and temperature set to:
+                  {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') }}°F.
+
+        # ✅ Correct Mode and Setpoint if Mode is Incorrect
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_mode_synced_erik_office
+              state: "off"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id: climate.eriks_office_room
+                hvac_mode: >
+                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    heat
+                  {% else %}
+                    cool
+                  {% endif %}
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.eriks_office_room
+                temperature: >
+                  {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64.4) }}
+            - service: logbook.log
+              data:
+                name: "HVAC Mini Split Sync Erik's Office"
+                message: >
+                  Mode corrected to:
+                  {{ states('input_select.hvac_mode') }} and temperature set to:
+                  {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') }}°F.
+
+        # ✅ Correct Temperature
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_setpoint_synced_erik_office
+              state: "off"
+          sequence:
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.eriks_office_room
+                temperature: >
+                  {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64.4) }}
+            - service: logbook.log
+              data:
+                name: "HVAC Mini Split Sync Erik's Office"
+                message: >
+                  Temperature set to:
+                  {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') }}°F.
+  mode: single
