@@ -1,0 +1,9 @@
+hvac_working_today_office:
+  name: HVAC Office Working Today
+  initial: off
+  icon: mdi:account-check
+
+hvac_working_today_erik_office:
+  name: HVAC Erik Office Working Today
+  initial: off
+  icon: mdi:account-check

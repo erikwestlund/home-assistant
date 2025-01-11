@@ -1,8 +1,29 @@
-- name: "HVAC Occupancy Monitor End"
-  unique_id: hvac_occupancy_monitor_end
+- name: "HVAC Occupancy Monitor Office End"
+  unique_id: hvac_occupancy_monitor_office_end
   state: >
     {% set start_time = states('input_datetime.hvac_apply_working_start_time_office') %}
     {% set end_time = states('input_datetime.hvac_apply_working_end_time_office') %}
+    
+    {% if start_time != 'unknown' and end_time != 'unknown' %}
+      {% set start_dt = strptime(start_time, '%H:%M:%S') %}
+      {% set end_dt = strptime(end_time, '%H:%M:%S') %}
+
+      {% if end_dt < start_dt %}
+        {% set end_dt = end_dt + timedelta(days=1) %}
+      {% endif %}
+
+      {% set total_seconds = (end_dt - start_dt).total_seconds() %}
+      {% set two_thirds_seconds = total_seconds * (2/3) %}
+      {{ (start_dt + timedelta(seconds=two_thirds_seconds)).strftime('%H:%M:%S') }}
+    {% else %}
+      unknown
+    {% endif %}
+
+- name: "HVAC Occupancy Monitor Erik Office End"
+  unique_id: hvac_occupancy_monitor_erik_office_end
+  state: >
+    {% set start_time = states('input_datetime.hvac_apply_working_start_time_erik_office') %}
+    {% set end_time = states('input_datetime.hvac_apply_working_end_time_erik_office') %}
     
     {% if start_time != 'unknown' and end_time != 'unknown' %}
       {% set start_dt = strptime(start_time, '%H:%M:%S') %}

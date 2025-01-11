@@ -1,4 +1,0 @@
-hvac_working_today_office:
-  name: HVAC Office Working Today
-  initial: off
-  icon: mdi:account-check

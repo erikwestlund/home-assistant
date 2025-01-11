@@ -1,0 +1,119 @@
+# Tina Office
+- id: "hvac_set_working_at_start_time_office"
+  alias: "HVAC Set Working at Start Time Office"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_start_time_office') }}
+  condition:
+    - condition: state
+      entity_id: binary_sensor.is_weekday
+      state: "on"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.tina_home
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.hvac_working_today_office
+  mode: single
+
+- id: "hvac_reset_working_today_office"
+  alias: "HVAC Reset Office Working Today"
+  trigger:
+    - platform: time
+      at: input_datetime.hvac_apply_working_end_time_office
+  condition:
+    - condition: state
+      entity_id: binary_sensor.is_weekday
+      state: "on"
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.hvac_working_today_office
+
+- id: "hvac_set_working_today_before_monitor_end_office"
+  alias: "HVAC Set Working Today Before Monitor End Office"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.tina_home
+      from: "off"
+      to: "on"
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.is_weekday
+          state: "on"
+        - condition: template
+          value_template: >
+            {{ now() < states('sensor.hvac_occupancy_monitor_office_end') }}
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.hvac_working_today_office
+  mode: single
+
+# Set Working at Start Time for Erik Office
+- id: "hvac_set_working_at_start_time_erik_office"
+  alias: "HVAC Set Working at Start Time Erik Office"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_start_time_erik_office') }}
+  condition:
+    - condition: state
+      entity_id: binary_sensor.is_weekday
+      state: "on"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.erik_home
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.hvac_working_today_erik_office
+  mode: single
+
+# Reset Working Today for Erik Office
+- id: "hvac_reset_working_today_erik_office"
+  alias: "HVAC Reset Working Today Erik Office"
+  trigger:
+    - platform: time
+      at: input_datetime.hvac_apply_working_end_time_erik_office
+  condition:
+    - condition: state
+      entity_id: binary_sensor.is_weekday
+      state: "on"
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.hvac_working_today_erik_office
+
+# Set Working Today Before Monitor End for Erik Office
+- id: "hvac_set_working_today_before_monitor_end_erik_office"
+  alias: "HVAC Set Working Today Before Monitor End Erik Office"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.erik_home
+      from: "off"
+      to: "on"
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.is_weekday
+          state: "on"
+        - condition: template
+          value_template: >
+            {{ now().strftime('%H:%M:%S') < states('sensor.hvac_occupancy_monitor_erik_office_end') }}
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.hvac_working_today_erik_office
+  mode: single
