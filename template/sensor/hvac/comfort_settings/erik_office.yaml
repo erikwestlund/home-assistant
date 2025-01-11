@@ -3,10 +3,9 @@
   state: >
     {% set is_override = is_state('input_boolean.hvac_override_status_erik_office', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
-    {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
+    {% set is_occupied = is_state('binary_sensor.hvac_apply_occupied_setpoints_erik_office', 'on') %}
     {% set is_night = is_state('binary_sensor.hvac_nighttime_active_erik_office', 'on') %}
-    {% set is_occupied = is_state('binary_sensor.hvac_apply_occupied_setpoint_erik_office', 'on') %}
-    {% set is_daytime = is_state('binary_sensor.hvac_daytime_active_erik_office', 'on') %}
+    {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
 
     {# 1. Override Check #}
     {% if is_override %}
@@ -14,24 +13,17 @@
     {# 2. Away Mode Check #}
     {% elif is_away_mode %}
       Away
-    {# 3. Weekday Check #}
+    {# 3. Occupied Takes Precedence #}
+    {% elif is_occupied %}
+      Occupied
+    {# 4. Night Check After Occupied #}
+    {% elif is_night %}
+      Night
+    {# 5. Weekday or Weekend Check #}
     {% elif is_weekday %}
-      {% if is_night %}
-        Night
-      {% elif is_occupied %}
-        Weekday Occupied
-      {% elif is_daytime %}
-        Weekday Unoccupied
-      {% else %}
-        Weekday Unoccupied
-      {% endif %}
-    {# 4. Weekend Check #}
+      Weekday
     {% else %}
-      {% if is_night %}
-        Night
-      {% else %}
-        Weekend
-      {% endif %}
+      Weekend
     {% endif %}
   icon: >-
     {% set state = states('sensor.hvac_comfort_setting_erik_office') %}
@@ -39,10 +31,12 @@
       mdi:alert
     {% elif state == "Away" %}
       mdi:airplane
+    {% elif state == "Occupied" %}
+      mdi:chair-rolling
     {% elif state == "Night" %}
       mdi:weather-night
-    {% elif "Occupied" in state %}
-      mdi:chair-rolling
+    {% elif state == "Weekday" %}
+      mdi:calendar
     {% else %}
       mdi:sofa
     {% endif %}

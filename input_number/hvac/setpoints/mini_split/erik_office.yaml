@@ -1,47 +1,47 @@
-# Weekday Occupied Setpoints
-hvac_mini_split_weekday_occupied_freezing_setpoint_erik_office:
-  name: HVAC Erik Office Mini Split Weekday Occupied Setpoint (Freezing)
+# Occupied Setpoints
+hvac_mini_split_occupied_freezing_setpoint_erik_office:
+  name: HVAC Erik Office Mini Split Occupied Setpoint (Freezing)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 74
 
-hvac_mini_split_weekday_occupied_cold_setpoint_erik_office:
-  name: HVAC Erik Office Mini Split Weekday Occupied Setpoint (Cold)
+hvac_mini_split_occupied_cold_setpoint_erik_office:
+  name: HVAC Erik Office Mini Split Occupied Setpoint (Cold)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 70
 
-hvac_mini_split_weekday_occupied_hot_setpoint_erik_office:
-  name: HVAC Erik Office Mini Split Weekday Occupied Setpoint (Hot)
+hvac_mini_split_occupied_hot_setpoint_erik_office:
+  name: HVAC Erik Office Mini Split Occupied Setpoint (Hot)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 70
 
-# Weekday Unoccupied Setpoints
-hvac_mini_split_weekday_unoccupied_freezing_setpoint_erik_office:
-  name: HVAC Erik Office Mini Split Weekday Unoccupied Setpoint (Freezing)
+# Weekday Setpoints
+hvac_mini_split_weekday_freezing_setpoint_erik_office:
+  name: HVAC Erik Office Mini Split Weekday Setpoint (Freezing)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 68
 
-hvac_mini_split_weekday_unoccupied_cold_setpoint_erik_office:
-  name: HVAC Erik Office Mini Split Weekday Unoccupied Setpoint (Cold)
+hvac_mini_split_weekday_cold_setpoint_erik_office:
+  name: HVAC Erik Office Mini Split Weekday Setpoint (Cold)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 64
 
-hvac_mini_split_weekday_unoccupied_hot_setpoint_erik_office:
-  name: HVAC Erik Office Mini Split Weekday Unoccupied Setpoint (Hot)
+hvac_mini_split_weekday_hot_setpoint_erik_office:
+  name: HVAC Erik Office Mini Split Weekday Setpoint (Hot)
   min: 64
   max: 86
   step: 1

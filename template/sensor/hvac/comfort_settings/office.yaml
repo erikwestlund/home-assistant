@@ -15,19 +15,14 @@
       Away
     {# 3. Occupied Status Takes Precedence #}
     {% elif is_occupied %}
-      {% if is_weekday %}
-        Weekday Occupied
-      {% else %}
-        Weekend
-      {% endif %}
-    {# 4. Weekday Unoccupied Check #}
+      Occupied
+    {# 4. Night Check #}
+    {% elif is_night %}
+      Night
+    {# 5. Weekday Check #}
     {% elif is_weekday %}
-      {% if is_night %}
-        Night
-      {% else %}
-        Weekday Unoccupied
-      {% endif %}
-    {# 5. Weekend Default #}
+      Weekday
+    {# 6. Weekend Default #}
     {% else %}
       Weekend
     {% endif %}
@@ -37,10 +32,12 @@
       mdi:alert
     {% elif state == "Away" %}
       mdi:airplane
-    {% elif "Night" in state %}
-      mdi:weather-night
-    {% elif "Occupied" in state %}
+    {% elif state == "Occupied" %}
       mdi:chair-rolling
+    {% elif state == "Night" %}
+      mdi:weather-night
+    {% elif state == "Weekday" %}
+      mdi:calendar
     {% else %}
       mdi:sofa
     {% endif %}

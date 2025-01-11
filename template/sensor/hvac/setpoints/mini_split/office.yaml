@@ -4,56 +4,21 @@
     {% set is_power_off = is_state('binary_sensor.hvac_mini_split_power_status_office', 'off') %}
     {% set is_override = is_state('input_boolean.hvac_override_status_office', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
-    {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_office') %}
-    
-    {# If Power is None, return None #}
+    {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_office')|lower %}
+    {% set comfort_setting = states('sensor.hvac_comfort_setting_office')|lower %}
+
+    {# 1. Power Off Check #}
     {% if is_power_off %}
       None
-    {# If Override is Active, use Override Setpoint #}
+    {# 2. Override Check #}
     {% elif is_override %}
       {{ states('input_number.hvac_mini_split_override_setpoint_office') }}
-    {# If Away Mode is Active, use Away Setpoint #}
+    {# 3. Away Mode Check #}
     {% elif is_away_mode %}
       {{ states('input_number.hvac_mini_split_away_setpoint_office') }}
-    {# Comfort Mode Based Logic #}
-    {% elif comfort_mode == "Freezing" %}
-      {% if is_state('sensor.hvac_comfort_setting_office', 'Weekday Occupied') %}
-        {{ states('input_number.hvac_mini_split_weekday_occupied_freezing_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Weekday Unoccupied') %}
-        {{ states('input_number.hvac_mini_split_weekday_unoccupied_freezing_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Weekend') %}
-        {{ states('input_number.hvac_mini_split_weekend_freezing_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Night') %}
-        {{ states('input_number.hvac_mini_split_night_freezing_setpoint_office') }}
-      {% else %}
-        None
-      {% endif %}
-    {% elif comfort_mode == "Cold" %}
-      {% if is_state('sensor.hvac_comfort_setting_office', 'Weekday Occupied') %}
-        {{ states('input_number.hvac_mini_split_weekday_occupied_cold_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Weekday Unoccupied') %}
-        {{ states('input_number.hvac_mini_split_weekday_unoccupied_cold_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Weekend') %}
-        {{ states('input_number.hvac_mini_split_weekend_cold_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Night') %}
-        {{ states('input_number.hvac_mini_split_night_cold_setpoint_office') }}
-      {% else %}
-        None
-      {% endif %}
-    {% elif comfort_mode == "Hot" %}
-      {% if is_state('sensor.hvac_comfort_setting_office', 'Weekday Occupied') %}
-        {{ states('input_number.hvac_mini_split_weekday_occupied_hot_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Weekday Unoccupied') %}
-        {{ states('input_number.hvac_mini_split_weekday_unoccupied_hot_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Weekend') %}
-        {{ states('input_number.hvac_mini_split_weekend_hot_setpoint_office') }}
-      {% elif is_state('sensor.hvac_comfort_setting_office', 'Night') %}
-        {{ states('input_number.hvac_mini_split_night_hot_setpoint_office') }}
-      {% else %}
-        None
-      {% endif %}
+    {# 4. Comfort Mode and Setting Check #}
     {% else %}
-      None
+      {{ states('input_number.hvac_mini_split_' ~ comfort_setting ~ '_' ~ comfort_mode ~ '_setpoint_office') }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer

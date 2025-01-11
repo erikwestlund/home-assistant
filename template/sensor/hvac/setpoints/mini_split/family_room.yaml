@@ -4,56 +4,21 @@
     {% set is_power_off = is_state('binary_sensor.hvac_mini_split_power_status_family_room', 'off') %}
     {% set is_override = is_state('input_boolean.hvac_override_status_family_room', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
-    {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_family_room') %}
-    
-    {# If Power is unavailable, return unavailable #}
+    {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_family_room') | lower %}
+    {% set comfort_setting = states('sensor.hvac_comfort_setting_family_room') | lower | replace(' ', '_') %}
+
+    {# 1. Power Off Check #}
     {% if is_power_off %}
       None
-    {# If Override is Active, use Override Setpoint #}
+    {# 2. Override Takes Precedence #}
     {% elif is_override %}
       {{ states('input_number.hvac_mini_split_override_setpoint_family_room') }}
-    {# If Away Mode is Active, use Away Setpoint #}
+    {# 3. Away Mode Takes Precedence #}
     {% elif is_away_mode %}
       {{ states('input_number.hvac_mini_split_away_setpoint_family_room') }}
-    {# Comfort Mode Based Logic #}
-    {% elif comfort_mode == "Freezing" %}
-      {% if is_state('sensor.hvac_comfort_setting_family_room', 'Weekday Daytime') %}
-        {{ states('input_number.hvac_mini_split_weekday_day_freezing_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekday Nighttime') %}
-        {{ states('input_number.hvac_mini_split_weekday_night_freezing_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekend Daytime') %}
-        {{ states('input_number.hvac_mini_split_weekend_day_freezing_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekend Nighttime') %}
-        {{ states('input_number.hvac_mini_split_weekend_night_freezing_setpoint_family_room') }}
-      {% else %}
-        None
-      {% endif %}
-    {% elif comfort_mode == "Cold" %}
-      {% if is_state('sensor.hvac_comfort_setting_family_room', 'Weekday Daytime') %}
-        {{ states('input_number.hvac_mini_split_weekday_day_cold_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekday Nighttime') %}
-        {{ states('input_number.hvac_mini_split_weekday_night_cold_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekend Daytime') %}
-        {{ states('input_number.hvac_mini_split_weekend_day_cold_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekend Nighttime') %}
-        {{ states('input_number.hvac_mini_split_weekend_night_cold_setpoint_family_room') }}
-      {% else %}
-        None
-      {% endif %}
-    {% elif comfort_mode == "Hot" %}
-      {% if is_state('sensor.hvac_comfort_setting_family_room', 'Weekday Daytime') %}
-        {{ states('input_number.hvac_mini_split_weekday_day_hot_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekday Nighttime') %}
-        {{ states('input_number.hvac_mini_split_weekday_night_hot_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekend Daytime') %}
-        {{ states('input_number.hvac_mini_split_weekend_day_hot_setpoint_family_room') }}
-      {% elif is_state('sensor.hvac_comfort_setting_family_room', 'Weekend Nighttime') %}
-        {{ states('input_number.hvac_mini_split_weekend_night_hot_setpoint_family_room') }}
-      {% else %}
-        None
-      {% endif %}
+    {# 4. Dynamic Comfort Mode and Setting Check #}
     {% else %}
-      unavailable
+      {{ states('input_number.hvac_mini_split_' ~ comfort_setting ~ '_' ~ comfort_mode ~ '_setpoint_family_room') }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:thermometer

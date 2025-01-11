@@ -4,22 +4,26 @@
     {% set is_override = is_state('input_boolean.hvac_override_status_office', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set comfort_setting = states('sensor.hvac_comfort_setting_office') %}
-    
-    {# Override Logic #}
+
+    {# 1. Override Takes Precedence #}
     {% if is_override %}
       {{ states('input_number.hvac_radiator_override_setpoint_office') }}
-    {# Away Mode Logic #}
+    {# 2. Away Mode Takes Precedence #}
     {% elif is_away_mode %}
       {{ states('input_number.hvac_radiator_away_setpoint_office') }}
-    {# Comfort Setting Based Logic #}
-    {% elif comfort_setting == "Weekday Occupied" %}
-      {{ states('input_number.hvac_radiator_weekday_occupied_setpoint_office') }}
-    {% elif comfort_setting == "Weekday Unoccupied" %}
-      {{ states('input_number.hvac_radiator_weekday_unoccupied_setpoint_office') }}
-    {% elif comfort_setting == "Weekend" %}
-      {{ states('input_number.hvac_radiator_weekend_setpoint_office') }}
+    {# 3. Occupied Takes Precedence #}
+    {% elif comfort_setting == "Occupied" %}
+      {{ states('input_number.hvac_radiator_occupied_setpoint_office') }}
+    {# 4. Night Takes Precedence Over Daytime Settings #}
     {% elif comfort_setting == "Night" %}
       {{ states('input_number.hvac_radiator_night_setpoint_office') }}
+    {# 5. Weekday Setpoint #}
+    {% elif comfort_setting == "Weekday" %}
+      {{ states('input_number.hvac_radiator_weekday_setpoint_office') }}
+    {# 6. Weekend Setpoint #}
+    {% elif comfort_setting == "Weekend" %}
+      {{ states('input_number.hvac_radiator_weekend_setpoint_office') }}
+    {# 7. Default to None if No Condition is Met #}
     {% else %}
       None
     {% endif %}
