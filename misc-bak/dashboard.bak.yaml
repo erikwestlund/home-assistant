@@ -371,15 +371,15 @@ views:
             heading_style: subtitle
           - type: tile
             vertical: false
-            entity: binary_sensor.office_occupied
+            entity: binary_sensor.office_working
             hide_state: false
             grid_options:
               columns: 6
               rows: 1
             name: Occupancy Status
           - type: tile
-            entity: binary_sensor.office_apply_occupied_setpoints
-            name: Apply Occupied Setpoint
+            entity: binary_sensor.office_apply_working_setpoints
+            name: Apply Working Setpoint
           - type: tile
             entity: input_boolean.office_override_status
             grid_options:
@@ -655,7 +655,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Occupied)
+            heading: Daytime (Room Working)
             heading_style: title
             icon: mdi:account
           - type: heading
@@ -666,7 +666,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_heatpump_comfort_weekday_occupied_setpoint
+            entity: input_number.office_heatpump_comfort_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -680,7 +680,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_radiator_weekday_occupied_setpoint
+            entity: input_number.office_radiator_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -700,7 +700,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_heatpump_comfort_weekend_occupied_setpoint
+            entity: input_number.office_heatpump_comfort_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -715,7 +715,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_radiator_weekend_occupied_setpoint
+            entity: input_number.office_radiator_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -731,7 +731,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Unoccupied)
+            heading: Daytime (Room Unworking)
             heading_style: title
             icon: mdi:account-off
           - type: heading
@@ -742,7 +742,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_heatpump_comfort_weekday_unoccupied_setpoint
+            entity: input_number.office_heatpump_comfort_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -755,7 +755,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_radiator_weekday_unoccupied_setpoint
+            entity: input_number.office_radiator_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -775,7 +775,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_heatpump_comfort_weekend_unoccupied_setpoint
+            entity: input_number.office_heatpump_comfort_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -788,7 +788,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.office_radiator_weekend_unoccupied_setpoint
+            entity: input_number.office_radiator_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1028,18 +1028,18 @@ views:
             heading: Occupancy
             heading_style: subtitle
           - type: tile
-            entity: input_datetime.office_apply_occupied_start_time
+            entity: input_datetime.office_apply_working_start_time
             grid_options:
               columns: 6
               rows: 2
-            name: Apply Occupied Start Time
+            name: Apply Working Start Time
             vertical: true
           - type: tile
-            entity: input_datetime.office_apply_occupied_end_time
+            entity: input_datetime.office_apply_working_end_time
             grid_options:
               columns: 6
               rows: 2
-            name: Apply Occupied End Time
+            name: Apply Working End Time
             vertical: true
           - type: tile
             entity: input_datetime.office_early_work_mode_day_start_time
@@ -1109,7 +1109,7 @@ views:
             heading_style: subtitle
           - type: tile
             vertical: false
-            entity: binary_sensor.family_room_occupied
+            entity: binary_sensor.family_room_working
             hide_state: false
             grid_options:
               columns: 6
@@ -1117,8 +1117,8 @@ views:
             name: Occupancy Status
             state_content: state
           - type: tile
-            entity: binary_sensor.family_room_apply_occupied_setpoints
-            name: Apply Occupied Setpoint
+            entity: binary_sensor.family_room_apply_working_setpoints
+            name: Apply Working Setpoint
           - type: tile
             entity: input_boolean.family_room_override_status
             grid_options:
@@ -1335,7 +1335,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Occupied)
+            heading: Daytime (Room Working)
             heading_style: title
             icon: mdi:account
           - type: heading
@@ -1347,7 +1347,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.family_room_heatpump_comfort_weekday_occupied_setpoint
+              input_number.family_room_heatpump_comfort_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1361,7 +1361,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.family_room_radiator_weekday_occupied_setpoint
+            entity: input_number.family_room_radiator_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1382,7 +1382,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.family_room_heatpump_comfort_weekend_occupied_setpoint
+              input_number.family_room_heatpump_comfort_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1397,7 +1397,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.family_room_radiator_weekend_occupied_setpoint
+            entity: input_number.family_room_radiator_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1413,7 +1413,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Unoccupied)
+            heading: Daytime (Room Unworking)
             heading_style: title
             icon: mdi:account-off
           - type: heading
@@ -1425,7 +1425,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.family_room_heatpump_comfort_weekday_unoccupied_setpoint
+              input_number.family_room_heatpump_comfort_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1438,7 +1438,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.family_room_radiator_weekday_unoccupied_setpoint
+            entity: input_number.family_room_radiator_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1459,7 +1459,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.family_room_heatpump_comfort_weekend_unoccupied_setpoint
+              input_number.family_room_heatpump_comfort_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1472,7 +1472,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.family_room_radiator_weekend_unoccupied_setpoint
+            entity: input_number.family_room_radiator_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -1662,18 +1662,18 @@ views:
             heading: Occupancy
             heading_style: subtitle
           - type: tile
-            entity: input_datetime.family_room_apply_occupied_start_time
+            entity: input_datetime.family_room_apply_working_start_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied Start Time
+            name: Apply Working Start Time
             vertical: true
           - type: tile
-            entity: input_datetime.family_room_apply_occupied_end_time
+            entity: input_datetime.family_room_apply_working_end_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied End Time
+            name: Apply Working End Time
             vertical: true
           - type: heading
             icon: mdi:airplane
@@ -1883,13 +1883,13 @@ views:
             heading_style: subtitle
           - type: tile
             vertical: false
-            entity: binary_sensor.living_room_occupied
+            entity: binary_sensor.living_room_working
             hide_state: false
             state_content: state
             name: Occupancy Status
           - type: tile
-            entity: binary_sensor.living_room_apply_occupied_setpoints
-            name: Apply Occupied Setpoint
+            entity: binary_sensor.living_room_apply_working_setpoints
+            name: Apply Working Setpoint
           - type: tile
             entity: input_boolean.living_room_override_status
             grid_options:
@@ -2040,7 +2040,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Occupied)
+            heading: Daytime (Room Working)
             heading_style: title
             icon: mdi:account
           - type: heading
@@ -2052,7 +2052,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.living_room_heatpump_comfort_weekday_occupied_setpoint
+              input_number.living_room_heatpump_comfort_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2066,7 +2066,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.living_room_heatpump_boost_weekday_occupied_setpoint
+            entity: input_number.living_room_heatpump_boost_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2088,7 +2088,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.living_room_heatpump_comfort_weekend_occupied_setpoint
+              input_number.living_room_heatpump_comfort_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2102,7 +2102,7 @@ views:
               - type: numeric-input
                 style: buttons
             type: tile
-            entity: input_number.living_room_heatpump_boost_weekend_occupied_setpoint
+            entity: input_number.living_room_heatpump_boost_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2119,7 +2119,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Unoccupied)
+            heading: Daytime (Room Unworking)
             heading_style: title
             icon: mdi:account-off
           - type: heading
@@ -2131,7 +2131,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.living_room_heatpump_comfort_weekday_unoccupied_setpoint
+              input_number.living_room_heatpump_comfort_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2146,7 +2146,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.living_room_heatpump_boost_weekday_unoccupied_setpoint
+              input_number.living_room_heatpump_boost_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2168,7 +2168,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.living_room_heatpump_comfort_weekend_unoccupied_setpoint
+              input_number.living_room_heatpump_comfort_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2183,7 +2183,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.living_room_heatpump_boost_weekend_unoccupied_setpoint
+              input_number.living_room_heatpump_boost_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2431,18 +2431,18 @@ views:
             heading: Occupancy
             heading_style: subtitle
           - type: tile
-            entity: input_datetime.living_room_apply_occupied_start_time
+            entity: input_datetime.living_room_apply_working_start_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied Start Time
+            name: Apply Working Start Time
             vertical: true
           - type: tile
-            entity: input_datetime.living_room_apply_occupied_end_time
+            entity: input_datetime.living_room_apply_working_end_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied End Time
+            name: Apply Working End Time
             vertical: true
           - type: heading
             icon: mdi:airplane
@@ -2480,13 +2480,13 @@ views:
             heading_style: subtitle
           - type: tile
             vertical: false
-            entity: binary_sensor.dining_room_occupied
+            entity: binary_sensor.dining_room_working
             hide_state: false
             state_content: state
             name: Occupancy Status
           - type: tile
-            entity: binary_sensor.dining_room_apply_occupied_setpoints
-            name: Apply Occupied Setpoint
+            entity: binary_sensor.dining_room_apply_working_setpoints
+            name: Apply Working Setpoint
           - type: tile
             entity: input_boolean.dining_room_override_status
             grid_options:
@@ -2615,7 +2615,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Occupied)
+            heading: Daytime (Room Working)
             heading_style: title
             icon: mdi:account
           - type: heading
@@ -2627,7 +2627,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.dining_room_heatpump_comfort_weekday_occupied_setpoint
+              input_number.dining_room_heatpump_comfort_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2649,7 +2649,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.dining_room_heatpump_comfort_weekend_occupied_setpoint
+              input_number.dining_room_heatpump_comfort_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2666,7 +2666,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Unoccupied)
+            heading: Daytime (Room Unworking)
             heading_style: title
             icon: mdi:account-off
           - type: heading
@@ -2678,7 +2678,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.dining_room_heatpump_comfort_weekday_unoccupied_setpoint
+              input_number.dining_room_heatpump_comfort_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2700,7 +2700,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.dining_room_heatpump_comfort_weekend_unoccupied_setpoint
+              input_number.dining_room_heatpump_comfort_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -2861,18 +2861,18 @@ views:
             heading: Occupancy
             heading_style: subtitle
           - type: tile
-            entity: input_datetime.dining_room_apply_occupied_start_time
+            entity: input_datetime.dining_room_apply_working_start_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied Start Time
+            name: Apply Working Start Time
             vertical: true
           - type: tile
-            entity: input_datetime.dining_room_apply_occupied_end_time
+            entity: input_datetime.dining_room_apply_working_end_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied End Time
+            name: Apply Working End Time
             vertical: true
           - type: heading
             icon: mdi:airplane
@@ -2910,13 +2910,13 @@ views:
             heading_style: subtitle
           - type: tile
             vertical: false
-            entity: binary_sensor.erik_office_occupied
+            entity: binary_sensor.erik_office_working
             hide_state: false
             state_content: state
             name: Occupancy Status
           - type: tile
-            entity: binary_sensor.erik_office_apply_occupied_setpoints
-            name: Apply Occupied Setpoint
+            entity: binary_sensor.erik_office_apply_working_setpoints
+            name: Apply Working Setpoint
           - type: tile
             entity: input_boolean.erik_office_override_status
             grid_options:
@@ -3045,7 +3045,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Occupied)
+            heading: Daytime (Room Working)
             heading_style: title
             icon: mdi:account
           - type: heading
@@ -3057,7 +3057,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.erik_office_heatpump_comfort_weekday_occupied_setpoint
+              input_number.erik_office_heatpump_comfort_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -3079,7 +3079,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.erik_office_heatpump_comfort_weekend_occupied_setpoint
+              input_number.erik_office_heatpump_comfort_weekend_working_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -3096,7 +3096,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Daytime (Room Unoccupied)
+            heading: Daytime (Room Unworking)
             heading_style: title
             icon: mdi:account-off
           - type: heading
@@ -3108,7 +3108,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.erik_office_heatpump_comfort_weekday_unoccupied_setpoint
+              input_number.erik_office_heatpump_comfort_weekday_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -3130,7 +3130,7 @@ views:
                 style: buttons
             type: tile
             entity: >-
-              input_number.erik_office_heatpump_comfort_weekend_unoccupied_setpoint
+              input_number.erik_office_heatpump_comfort_weekend_unworking_setpoint
             grid_options:
               columns: 12
               rows: 2
@@ -3291,18 +3291,18 @@ views:
             heading: Occupancy
             heading_style: subtitle
           - type: tile
-            entity: input_datetime.erik_office_apply_occupied_start_time
+            entity: input_datetime.erik_office_apply_working_start_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied Start Time
+            name: Apply Working Start Time
             vertical: true
           - type: tile
-            entity: input_datetime.erik_office_apply_occupied_end_time
+            entity: input_datetime.erik_office_apply_working_end_time
             grid_options:
               columns: 12
               rows: 2
-            name: Apply Occupied End Time
+            name: Apply Working End Time
             vertical: true
           - type: heading
             icon: mdi:airplane
@@ -3340,7 +3340,7 @@ views:
             heading_style: subtitle
           - type: tile
             vertical: false
-            entity: binary_sensor.master_bedroom_occupied
+            entity: binary_sensor.master_bedroom_working
             hide_state: false
             state_content: state
             name: Occupancy Status
@@ -3759,7 +3759,7 @@ views:
             heading_style: subtitle
           - type: tile
             vertical: false
-            entity: binary_sensor.ducted_rooms_occupied
+            entity: binary_sensor.ducted_rooms_working
             hide_state: false
             state_content: state
             name: Kids Room Occupancy Status

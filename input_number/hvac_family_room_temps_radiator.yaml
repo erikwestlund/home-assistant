@@ -14,32 +14,32 @@ family_room_radiator_weekend_night_setpoint:
   unit_of_measurement: "°F"
   initial: 70
 
-family_room_radiator_weekday_occupied_setpoint:
-  name: Family Room Radiator Temperature (Weekday Occupied)
+family_room_radiator_working_setpoint:
+  name: Family Room Radiator Temperature (Working)
   min: 55
   max: 80
   step: 1
   unit_of_measurement: "°F"
   initial: 67
 
-family_room_radiator_weekday_unoccupied_setpoint:
-  name: Family Room Radiator Temperature (Weekday Unoccupied)
+family_room_radiator_weekday_setpoint:
+  name: Family Room Radiator Temperature (Weekday)
   min: 55
   max: 80
   step: 1
   unit_of_measurement: "°F"
   initial: 67
 
-family_room_radiator_weekend_occupied_setpoint:
-  name: Family Room Radiator Temperature (Weekend Occupied)
+family_room_radiator_weekend_working_setpoint:
+  name: Family Room Radiator Temperature (Weekend Working)
   min: 55
   max: 80
   step: 1
   unit_of_measurement: "°F"
   initial: 71
 
-family_room_radiator_weekend_unoccupied_setpoint:
-  name: Family Room Radiator Temperature (Weekend Unoccupied)
+family_room_radiator_weekend_unworking_setpoint:
+  name: Family Room Radiator Temperature (Weekend Unworking)
   min: 55
   max: 80
   step: 1

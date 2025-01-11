@@ -4,14 +4,14 @@ erik_office_early_work_mode_day_start_time:
   has_date: false
   initial: "03:00:00"
 
-erik_office_apply_occupied_start_time:
-  name: Erik Office Apply Occupied Start Time
+erik_office_apply_working_start_time:
+  name: Erik Office Apply Working Start Time
   has_time: true
   has_date: false
   initial: "09:00:00"
 
-erik_office_apply_occupied_end_time:
-  name: Erik Office Apply Occupied End Time
+erik_office_apply_working_end_time:
+  name: Erik Office Apply Working End Time
   has_time: true
   has_date: false
   initial: "20:59:00"

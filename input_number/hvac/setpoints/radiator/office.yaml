@@ -1,5 +1,5 @@
-hvac_radiator_occupied_setpoint_office:
-  name: HVAC Office Radiator Occupied Setpoint
+hvac_radiator_working_setpoint_office:
+  name: HVAC Office Radiator Working Setpoint
   min: 50
   max: 86
   step: 1

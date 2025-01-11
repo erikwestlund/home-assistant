@@ -11,15 +11,15 @@ hvac_nighttime_start_time_erik_office:
   has_date: false
   initial: "18:00:00"
 
-# Apply Occupied Setpoint Times
-hvac_apply_occupied_start_time_erik_office:
-  name: HVAC Erik Office Apply Occupied Start Time
+# Apply Working Setpoint Times
+hvac_apply_working_start_time_erik_office:
+  name: HVAC Erik Office Apply Working Start Time
   has_time: true
   has_date: false
   initial: "08:00:00"
 
-hvac_apply_occupied_end_time_erik_office:
-  name: HVAC Erik Office Apply Occupied End Time
+hvac_apply_working_end_time_erik_office:
+  name: HVAC Erik Office Apply Working End Time
   has_time: true
   has_date: false
   initial: "17:30:00"

@@ -1,9 +1,9 @@
-- id: "hvac_set_occupied_at_start_time_office"
-  alias: "HVAC Set Occupied at Start Time Office"
+- id: "hvac_set_working_at_start_time_office"
+  alias: "HVAC Set Working at Start Time Office"
   trigger:
     - platform: template
       value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_occupied_start_time_office') }}
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_start_time_office') }}
   condition:
     - condition: state
       entity_id: binary_sensor.is_weekday
@@ -17,14 +17,14 @@
           sequence:
             - service: input_boolean.turn_on
               target:
-                entity_id: input_boolean.hvac_occupied_today_office
+                entity_id: input_boolean.hvac_working_today_office
   mode: single
 
-- id: "hvac_reset_occupied_today_office"
-  alias: "HVAC Reset Office Occupied Today"
+- id: "hvac_reset_working_today_office"
+  alias: "HVAC Reset Office Working Today"
   trigger:
     - platform: time
-      at: input_datetime.hvac_apply_occupied_end_time_office
+      at: input_datetime.hvac_apply_working_end_time_office
   condition:
     - condition: state
       entity_id: binary_sensor.is_weekday
@@ -32,10 +32,10 @@
   action:
     - service: input_boolean.turn_off
       target:
-        entity_id: input_boolean.hvac_occupied_today_office
+        entity_id: input_boolean.hvac_working_today_office
 
-- id: "hvac_set_occupied_today_before_monitor_end_office"
-  alias: "HVAC Set Occupied Today Before Monitor End Office"
+- id: "hvac_set_working_today_before_monitor_end_office"
+  alias: "HVAC Set Working Today Before Monitor End Office"
   trigger:
     - platform: state
       entity_id: binary_sensor.tina_home
@@ -53,5 +53,5 @@
   action:
     - service: input_boolean.turn_on
       target:
-        entity_id: input_boolean.hvac_occupied_today_office
+        entity_id: input_boolean.hvac_working_today_office
   mode: single

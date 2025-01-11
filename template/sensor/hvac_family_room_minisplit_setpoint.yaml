@@ -14,18 +14,18 @@
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
       {% if is_state('binary_sensor.nighttime_status', 'on') %}
         Weekend Night
-      {% elif is_state('binary_sensor.family_room_apply_occupied_setpoints', 'on') %}
-        Weekend Occupied
+      {% elif is_state('binary_sensor.family_room_apply_working_setpoints', 'on') %}
+        Weekend Working
       {% else %}
-        Weekend Unoccupied
+        Weekend Unworking
       {% endif %}
     {% else %}
       {% if is_state('binary_sensor.nighttime_status', 'on') %}
         Weekday Night
-      {% elif is_state('binary_sensor.family_room_apply_occupied_setpoints', 'on') %}
-        Weekday Occupied
+      {% elif is_state('binary_sensor.family_room_apply_working_setpoints', 'on') %}
+        Working
       {% else %}
-        Weekday Unoccupied
+        Weekday
       {% endif %}
     {% endif %}
   icon: >-
@@ -40,7 +40,7 @@
       mdi:fire
     {% elif "Night" in state %}
       mdi:weather-night
-    {% elif "Occupied" in state %}
+    {% elif "Working" in state %}
       mdi:chair-rolling
     {% else %}
       mdi:sofa
@@ -58,14 +58,14 @@
       {{ states('input_number.family_room_heatpump_comfort_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}
       {{ states('input_number.family_room_heatpump_comfort_weekend_night_setpoint') }}
-    {% elif setpoint == "Weekday Occupied" %}
-      {{ states('input_number.family_room_heatpump_comfort_weekday_occupied_setpoint') }}
-    {% elif setpoint == "Weekday Unoccupied" %}
-      {{ states('input_number.family_room_heatpump_comfort_weekday_unoccupied_setpoint') }}
-    {% elif setpoint == "Weekend Occupied" %}
-      {{ states('input_number.family_room_heatpump_comfort_weekend_occupied_setpoint') }}
-    {% elif setpoint == "Weekend Unoccupied" %}
-      {{ states('input_number.family_room_heatpump_comfort_weekend_unoccupied_setpoint') }}
+    {% elif setpoint == "Working" %}
+      {{ states('input_number.family_room_heatpump_comfort_working_setpoint') }}
+    {% elif setpoint == "Weekday" %}
+      {{ states('input_number.family_room_heatpump_comfort_weekday_setpoint') }}
+    {% elif setpoint == "Weekend Working" %}
+      {{ states('input_number.family_room_heatpump_comfort_weekend_working_setpoint') }}
+    {% elif setpoint == "Weekend Unworking" %}
+      {{ states('input_number.family_room_heatpump_comfort_weekend_unworking_setpoint') }}
     {% elif setpoint == "Supplemental Heat" %}
       {{ states('input_number.family_room_heatpump_supplemental_setpoint') }}
     {% elif setpoint == "Overheated" %}

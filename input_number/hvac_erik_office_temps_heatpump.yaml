@@ -30,32 +30,32 @@ erik_office_heatpump_comfort_weekend_night_setpoint:
   unit_of_measurement: "°F"
   initial: 64
 
-erik_office_heatpump_comfort_weekday_occupied_setpoint:
-  name: Erik Office Heat Pump Comfort Temperature (Weekday Occupied)
+erik_office_heatpump_comfort_working_setpoint:
+  name: Erik Office Heat Pump Comfort Temperature (Working)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 72
 
-erik_office_heatpump_comfort_weekday_unoccupied_setpoint:
-  name: Erik Office Heat Pump Comfort Temperature (Weekday Unoccupied)
+erik_office_heatpump_comfort_weekday_setpoint:
+  name: Erik Office Heat Pump Comfort Temperature (Weekday)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 68
 
-erik_office_heatpump_comfort_weekend_occupied_setpoint:
-  name: Erik Office Heat Pump Comfort Temperature (Weekend Occupied)
+erik_office_heatpump_comfort_weekend_working_setpoint:
+  name: Erik Office Heat Pump Comfort Temperature (Weekend Working)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 64
 
-erik_office_heatpump_comfort_weekend_unoccupied_setpoint:
-  name: Erik Office Heat Pump Comfort Temperature (Weekend Unoccupied)
+erik_office_heatpump_comfort_weekend_unworking_setpoint:
+  name: Erik Office Heat Pump Comfort Temperature (Weekend Unworking)
   min: 64
   max: 86
   step: 1

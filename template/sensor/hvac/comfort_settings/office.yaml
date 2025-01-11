@@ -4,7 +4,7 @@
     {% set is_override = is_state('input_boolean.hvac_override_status_office', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
-    {% set is_occupied = is_state('binary_sensor.hvac_apply_occupied_setpoints_office', 'on') %}
+    {% set is_working = is_state('binary_sensor.hvac_apply_working_setpoints_office', 'on') %}
     {% set is_night = is_state('binary_sensor.hvac_nighttime_active_office', 'on') %}
 
     {# 1. Override Check #}
@@ -13,9 +13,9 @@
     {# 2. Away Mode Check #}
     {% elif is_away_mode %}
       Away
-    {# 3. Occupied Status Takes Precedence #}
-    {% elif is_occupied %}
-      Occupied
+    {# 3. Working Status Takes Precedence #}
+    {% elif is_working %}
+      Working
     {# 4. Night Check #}
     {% elif is_night %}
       Night
@@ -32,7 +32,7 @@
       mdi:alert
     {% elif state == "Away" %}
       mdi:airplane
-    {% elif state == "Occupied" %}
+    {% elif state == "Working" %}
       mdi:chair-rolling
     {% elif state == "Night" %}
       mdi:weather-night

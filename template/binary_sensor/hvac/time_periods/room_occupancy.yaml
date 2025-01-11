@@ -1,27 +1,27 @@
 # Tina Office
-- name: "HVAC Office Apply Occupied Time In Window"
-  unique_id: hvac_office_apply_occupied_time_in_window
+- name: "HVAC Office Apply Working Time In Window"
+  unique_id: hvac_office_apply_working_time_in_window
   state: >
     {% set today = now().strftime('%Y-%m-%d') %}
-    {% set start_time = today ~ 'T' ~ states('input_datetime.hvac_apply_occupied_start_time_office') %}
-    {% set end_time = today ~ 'T' ~ states('input_datetime.hvac_apply_occupied_end_time_office') %}
+    {% set start_time = today ~ 'T' ~ states('input_datetime.hvac_apply_working_start_time_office') %}
+    {% set end_time = today ~ 'T' ~ states('input_datetime.hvac_apply_working_end_time_office') %}
     {% set start_time_ts = as_timestamp(strptime(start_time, '%Y-%m-%dT%H:%M:%S')) %}
     {% set end_time_ts = as_timestamp(strptime(end_time, '%Y-%m-%dT%H:%M:%S')) %}
     {% set now_ts = now().timestamp() %}
     
     {{ start_time_ts <= now_ts < end_time_ts }}
 
-- name: "HVAC Apply Occupied Setpoints Office"
-  unique_id: hvac_apply_occupied_setpoints_office
+- name: "HVAC Apply Working Setpoints Office"
+  unique_id: hvac_apply_working_setpoints_office
   state: >
-    {% set office_occupied = is_state('binary_sensor.office_occupied', 'on') %}
+    {% set office_working = is_state('binary_sensor.office_working', 'on') %}
     {% set tina_home = is_state('binary_sensor.tina_home', 'on') %}
     {% set current_time = now().timestamp() %}
     {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_start_time_office')) %}
     {% set early_work_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_end_time_office')) %}
-    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_occupied_start_time_office')) %}
+    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_working_start_time_office')) %}
     {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('sensor.hvac_occupancy_monitor_end')) %}
-    {% set is_occupied_today = is_state('input_boolean.hvac_occupied_today_office', 'on') %}
+    {% set is_working_today = is_state('input_boolean.hvac_working_today_office', 'on') %}
 
     {# 1. Early Work Mode Check #}
     {% if is_state('input_boolean.hvac_early_work_mode_office', 'on') and early_work_start <= current_time <= early_work_end and tina_home %}
@@ -29,50 +29,50 @@
     {# 2. Tina's Desk Motion Check (within early work time range) #}
     {% elif early_work_start <= current_time <= early_work_end and is_state('binary_sensor.tina_desk_motion', 'on') and tina_home %}
       true
-    {# 3. Regular Weekday Check Using hvac_occupied_today_office #}
-    {% elif is_state('binary_sensor.is_weekday', 'on') and is_occupied_today %}
+    {# 3. Regular Weekday Check Using hvac_working_today_office #}
+    {% elif is_state('binary_sensor.is_weekday', 'on') and is_working_today %}
       true
     {# 4. Default Off State #}
     {% else %}
       false
     {% endif %}
   icon: >-
-    {% if is_state('binary_sensor.hvac_apply_occupied_setpoints_office', 'on') %}
+    {% if is_state('binary_sensor.hvac_apply_working_setpoints_office', 'on') %}
       mdi:clock-check
     {% else %}
       mdi:clock
     {% endif %}
 
 # Erik Office
-- name: "HVAC Erik Office Apply Occupied Time In Window"
-  unique_id: hvac_erik_office_apply_occupied_time_in_window
+- name: "HVAC Erik Office Apply Working Time In Window"
+  unique_id: hvac_erik_office_apply_working_time_in_window
   state: >
     {% set today = now().strftime('%Y-%m-%d') %}
-    {% set start_time = today ~ 'T' ~ states('input_datetime.hvac_apply_occupied_start_time_erik_office') %}
-    {% set end_time = today ~ 'T' ~ states('input_datetime.hvac_apply_occupied_end_time_erik_office') %}
+    {% set start_time = today ~ 'T' ~ states('input_datetime.hvac_apply_working_start_time_erik_office') %}
+    {% set end_time = today ~ 'T' ~ states('input_datetime.hvac_apply_working_end_time_erik_office') %}
     {% set start_time_ts = as_timestamp(strptime(start_time, '%Y-%m-%dT%H:%M:%S')) %}
     {% set end_time_ts = as_timestamp(strptime(end_time, '%Y-%m-%dT%H:%M:%S')) %}
     {% set now_ts = now().timestamp() %}
     
     {{ start_time_ts <= now_ts < end_time_ts }}
 
-- name: "HVAC Apply Occupied Setpoint Erik Office"
-  unique_id: hvac_apply_occupied_setpoint_erik_office
+- name: "HVAC Apply Working Setpoint Erik Office"
+  unique_id: hvac_apply_working_setpoint_erik_office
   state: >
-    {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_occupied_start_time_erik_office')) %}
-    {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_occupied_end_time_erik_office')) %}
+    {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_working_start_time_erik_office')) %}
+    {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_working_end_time_erik_office')) %}
     {% set current_time = now().timestamp() %}
     
     {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
     {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
     {% set erik_home = is_state('binary_sensor.erik_home', 'on') %}
-    {% set erik_office_occupied = is_state('binary_sensor.erik_office_occupied', 'on') %}
+    {% set erik_office_working = is_state('binary_sensor.erik_office_working', 'on') %}
     {% set nighttime_status_off = is_state('binary_sensor.hvac_nighttime_in_window_erik_office', 'off') %}
     
     {{ start_time <= current_time <= end_time and
-       ((is_weekday and erik_home) or (is_weekend and erik_office_occupied)) }}
+       ((is_weekday and erik_home) or (is_weekend and erik_office_working)) }}
   icon: >-
-    {% if is_state('binary_sensor.hvac_apply_occupied_setpoint_erik_office', 'on') %}
+    {% if is_state('binary_sensor.hvac_apply_working_setpoint_erik_office', 'on') %}
       mdi:clock-check
     {% else %}
       mdi:clock

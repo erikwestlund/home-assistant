@@ -1,11 +1,11 @@
-living_room_apply_occupied_start_time:
-  name: Living Room Apply Occupied Start Time
+living_room_apply_working_start_time:
+  name: Living Room Apply Working Start Time
   has_time: true
   has_date: false
   initial: "07:00:00"
 
-living_room_apply_occupied_end_time:
-  name: Living Room Apply Occupied End Time
+living_room_apply_working_end_time:
+  name: Living Room Apply Working End Time
   has_time: true
   has_date: false
   initial: "20:59:00"

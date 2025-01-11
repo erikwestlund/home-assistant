@@ -3,8 +3,8 @@
   state: >
     {% set current_time = now().timestamp() %}
     {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_early_work_mode_day_start_time')) %}
-    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_start_time')) %}
-    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_occupied_end_time')) %}
+    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_working_start_time')) %}
+    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.office_apply_working_end_time')) %}
     
     {% if is_state('input_boolean.office_override_status', 'on') %}
       Override
@@ -12,23 +12,23 @@
       Off
     {% elif is_state('input_boolean.hvac_away_mode', 'on') %}
       Away
-    {% elif is_state('input_boolean.office_early_work_mode', 'on') and is_state('binary_sensor.office_apply_occupied_setpoints', 'on') and early_work_start <= current_time <= apply_start %}
-      Weekday Occupied
+    {% elif is_state('input_boolean.office_early_work_mode', 'on') and is_state('binary_sensor.office_apply_working_setpoints', 'on') and early_work_start <= current_time <= apply_start %}
+      Working
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
       {% if is_state('binary_sensor.nighttime_status', 'on') %}
         Weekend Night
-      {% elif is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
-        Weekend Occupied
+      {% elif is_state('binary_sensor.office_apply_working_setpoints', 'on') %}
+        Weekend Working
       {% else %}
-        Weekend Unoccupied
+        Weekend Unworking
       {% endif %}
     {% else %}
       {% if is_state('binary_sensor.nighttime_status', 'on') %}
         Weekday Night
-      {% elif is_state('binary_sensor.office_apply_occupied_setpoints', 'on') %}
-        Weekday Occupied
+      {% elif is_state('binary_sensor.office_apply_working_setpoints', 'on') %}
+        Working
       {% else %}
-        Weekday Unoccupied
+        Weekday
       {% endif %}
     {% endif %}
   icon: >-
@@ -39,7 +39,7 @@
       mdi:power
     {% elif "Night" in state %}
       mdi:weather-night
-    {% elif "Occupied" in state %}
+    {% elif "Working" in state %}
       mdi:chair-rolling
     {% else %}
       mdi:sofa
@@ -50,29 +50,29 @@
   state: >
     {% set setpoint = states('sensor.office_radiator_setpoint') %}
     {% if setpoint == "Off" %}
-      {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
+      {{ states('input_number.office_radiator_working_setpoint') }}
     {% elif setpoint == "Away" %}
       {{ states('input_number.f') }}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.office_radiator_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}
       {{ states('input_number.office_radiator_weekend_night_setpoint') }}
-    {% elif setpoint == "Weekday Occupied" %}
-      {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
-    {% elif setpoint == "Weekday Unoccupied" %}
-      {{ states('input_number.office_radiator_weekday_unoccupied_setpoint') }}
-    {% elif setpoint == "Weekend Occupied" %}
-      {{ states('input_number.office_radiator_weekend_occupied_setpoint') }}
-    {% elif setpoint == "Weekend Unoccupied" %}
-      {{ states('input_number.office_radiator_weekend_unoccupied_setpoint') }}
+    {% elif setpoint == "Working" %}
+      {{ states('input_number.office_radiator_working_setpoint') }}
+    {% elif setpoint == "Weekday" %}
+      {{ states('input_number.office_radiator_weekday_setpoint') }}
+    {% elif setpoint == "Weekend Working" %}
+      {{ states('input_number.office_radiator_weekend_working_setpoint') }}
+    {% elif setpoint == "Weekend Unworking" %}
+      {{ states('input_number.office_radiator_weekend_unworking_setpoint') }}
     {% elif setpoint == "Override" %}
       {{ states('input_number.office_override_setpoint') }}
     {% else %}
-      {{ states('input_number.office_radiator_weekday_occupied_setpoint') }}
+      {{ states('input_number.office_radiator_working_setpoint') }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: >-
-    {% if states('sensor.office_radiator_target_setpoint') | float == states('input_number.office_radiator_weekday_occupied_setpoint') | float %}
+    {% if states('sensor.office_radiator_target_setpoint') | float == states('input_number.office_radiator_working_setpoint') | float %}
       mdi:thermometer
     {% else %}
       mdi:radiator

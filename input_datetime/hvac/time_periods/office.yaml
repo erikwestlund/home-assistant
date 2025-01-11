@@ -11,15 +11,15 @@ hvac_nighttime_start_time_office:
   has_date: false
   initial: "21:00:00"
 
-# Occupied Setpoints Applied
-hvac_apply_occupied_start_time_office:
-  name: HVAC Tina Office Apply Occupied Start Time
+# Working Setpoints Applied
+hvac_apply_working_start_time_office:
+  name: HVAC Tina Office Apply Working Start Time
   has_time: true
   has_date: false
   initial: "08:00:00"
 
-hvac_apply_occupied_end_time_office:
-  name: HVAC Tina Office Apply Occupied End Time
+hvac_apply_working_end_time_office:
+  name: HVAC Tina Office Apply Working End Time
   has_time: true
   has_date: false
   initial: "17:59:00"

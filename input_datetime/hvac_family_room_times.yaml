@@ -1,11 +1,11 @@
-family_room_apply_occupied_start_time:
-  name: Family Room Apply Occupied Start Time
+family_room_apply_working_start_time:
+  name: Family Room Apply Working Start Time
   has_time: true
   has_date: false
   initial: "09:00:00"
 
-family_room_apply_occupied_end_time:
-  name: Family Room Apply Occupied End Time
+family_room_apply_working_end_time:
+  name: Family Room Apply Working End Time
   has_time: true
   has_date: false
   initial: "20:59:00"

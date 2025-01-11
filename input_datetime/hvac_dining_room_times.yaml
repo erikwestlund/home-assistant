@@ -1,11 +1,11 @@
-dining_room_apply_occupied_start_time:
-  name: Dining Room Apply Occupied Start Time
+dining_room_apply_working_start_time:
+  name: Dining Room Apply Working Start Time
   has_time: true
   has_date: false
   initial: "06:00:00"
 
-dining_room_apply_occupied_end_time:
-  name: Dining Room Apply Occupied End Time
+dining_room_apply_working_end_time:
+  name: Dining Room Apply Working End Time
   has_time: true
   has_date: false
   initial: "20:59:00"

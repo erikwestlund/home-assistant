@@ -30,64 +30,64 @@ living_room_heatpump_comfort_weekend_night_setpoint:
   unit_of_measurement: "°F"
   initial: 64
 
-living_room_heatpump_comfort_weekday_occupied_setpoint:
-  name: Living Room Heat Pump Comfort Temperature (Weekday Occupied)
+living_room_heatpump_comfort_working_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Working)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 64
 
-living_room_heatpump_comfort_weekday_unoccupied_setpoint:
-  name: Living Room Heat Pump Comfort Temperature (Weekday Unoccupied)
+living_room_heatpump_comfort_weekday_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Weekday)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 64
 
-living_room_heatpump_comfort_weekend_occupied_setpoint:
-  name: Living Room Heat Pump Comfort Temperature (Weekend Occupied)
+living_room_heatpump_comfort_weekend_working_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Weekend Working)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 64
 
-living_room_heatpump_comfort_weekend_unoccupied_setpoint:
-  name: Living Room Heat Pump Comfort Temperature (Weekend Unoccupied)
+living_room_heatpump_comfort_weekend_unworking_setpoint:
+  name: Living Room Heat Pump Comfort Temperature (Weekend Unworking)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 64
 
-living_room_heatpump_boost_weekday_occupied_setpoint:
-  name: Living Room Heat Pump Boost Temperature (Weekday Occupied)
+living_room_heatpump_boost_working_setpoint:
+  name: Living Room Heat Pump Boost Temperature (Working)
   min: 64
   max: 86
   step: 0.5
   unit_of_measurement: "°F"
   initial: 68
 
-living_room_heatpump_boost_weekend_occupied_setpoint:
-  name: Living Room Heat Pump Boost Temperature (Weekend Occupied)
+living_room_heatpump_boost_weekend_working_setpoint:
+  name: Living Room Heat Pump Boost Temperature (Weekend Working)
   min: 64
   max: 86
   step: 0.5
   unit_of_measurement: "°F"
   initial: 68
 
-living_room_heatpump_boost_weekday_unoccupied_setpoint:
-  name: Living Room Heat Pump Boost Temperature (Weekday Unoccupied)
+living_room_heatpump_boost_weekday_setpoint:
+  name: Living Room Heat Pump Boost Temperature (Weekday)
   min: 64
   max: 86
   step: 0.5
   unit_of_measurement: "°F"
   initial: 68
 
-living_room_heatpump_boost_weekend_unoccupied_setpoint:
-  name: Living Room Heat Pump Boost Temperature (Weekend Unoccupied)
+living_room_heatpump_boost_weekend_unworking_setpoint:
+  name: Living Room Heat Pump Boost Temperature (Weekend Unworking)
   min: 64
   max: 86
   step: 0.5

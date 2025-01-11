@@ -1,21 +1,21 @@
-hvac_mini_split_occupied_freezing_setpoint_office:
-  name: HVAC Office Mini Split Occupied Setpoint (Freezing)
+hvac_mini_split_working_freezing_setpoint_office:
+  name: HVAC Office Mini Split Working Setpoint (Freezing)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 78
 
-hvac_mini_split_occupied_cold_setpoint_office:
-  name: HVAC Office Mini Split Occupied Setpoint (Cold)
+hvac_mini_split_working_cold_setpoint_office:
+  name: HVAC Office Mini Split Working Setpoint (Cold)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 74
 
-hvac_mini_split_occupied_hot_setpoint_office:
-  name: HVAC Office Mini Split Occupied Setpoint (Hot)
+hvac_mini_split_working_hot_setpoint_office:
+  name: HVAC Office Mini Split Working Setpoint (Hot)
   min: 64
   max: 86
   step: 1

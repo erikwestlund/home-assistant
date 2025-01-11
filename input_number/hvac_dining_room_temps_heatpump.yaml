@@ -30,32 +30,32 @@ dining_room_heatpump_comfort_weekend_night_setpoint:
   unit_of_measurement: "°F"
   initial: 68
 
-dining_room_heatpump_comfort_weekday_occupied_setpoint:
-  name: Dining Room Heat Pump Comfort Temperature (Weekday Occupied)
+dining_room_heatpump_comfort_working_setpoint:
+  name: Dining Room Heat Pump Comfort Temperature (Working)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 70
 
-dining_room_heatpump_comfort_weekday_unoccupied_setpoint:
-  name: Dining Room Heat Pump Comfort Temperature (Weekday Unoccupied)
+dining_room_heatpump_comfort_weekday_setpoint:
+  name: Dining Room Heat Pump Comfort Temperature (Weekday)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 70
 
-dining_room_heatpump_comfort_weekend_occupied_setpoint:
-  name: Dining Room Heat Pump Comfort Temperature (Weekend Occupied)
+dining_room_heatpump_comfort_weekend_working_setpoint:
+  name: Dining Room Heat Pump Comfort Temperature (Weekend Working)
   min: 64
   max: 86
   step: 1
   unit_of_measurement: "°F"
   initial: 70
 
-dining_room_heatpump_comfort_weekend_unoccupied_setpoint:
-  name: Dining Room Heat Pump Comfort Temperature (Weekend Unoccupied)
+dining_room_heatpump_comfort_weekend_unworking_setpoint:
+  name: Dining Room Heat Pump Comfort Temperature (Weekend Unworking)
   min: 64
   max: 86
   step: 1

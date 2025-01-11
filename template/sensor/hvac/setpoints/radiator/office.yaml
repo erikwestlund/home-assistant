@@ -11,9 +11,9 @@
     {# 2. Away Mode Takes Precedence #}
     {% elif is_away_mode %}
       {{ states('input_number.hvac_radiator_away_setpoint_office') }}
-    {# 3. Occupied Takes Precedence #}
-    {% elif comfort_setting == "Occupied" %}
-      {{ states('input_number.hvac_radiator_occupied_setpoint_office') }}
+    {# 3. Working Takes Precedence #}
+    {% elif comfort_setting == "Working" %}
+      {{ states('input_number.hvac_radiator_working_setpoint_office') }}
     {# 4. Night Takes Precedence Over Daytime Settings #}
     {% elif comfort_setting == "Night" %}
       {{ states('input_number.hvac_radiator_night_setpoint_office') }}

@@ -99,7 +99,7 @@
     {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_office') | float %}
     {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_office') | float %}
     {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_office') | float %}
-    {% set unoccupied_temp_threshold = states('input_number.hvac_mini_split_off_when_unoccupied_temp_over_threshold_office') | float %}
+    {% set unworking_temp_threshold = states('input_number.hvac_mini_split_off_when_unworking_temp_over_threshold_office') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_office', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
@@ -123,8 +123,8 @@
     {# 7. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
     {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
       off
-    {# 8. Unoccupied Room Check (only during daytime) #}
-    {% elif daytime_active and daytime_avg_temp > unoccupied_temp_threshold %}
+    {# 8. Unworking Room Check (only during daytime) #}
+    {% elif daytime_active and daytime_avg_temp > unworking_temp_threshold %}
       off
     {# 9. Default On State #}
     {% else %}
@@ -439,14 +439,14 @@
   state: >
     {% set override = is_state('input_boolean.hvac_override_status_office_space_heater', 'on') %}
     {% set power_control = is_state('input_boolean.hvac_space_heater_power_on_control_office', 'on') %}
-    {% set apply_occupied = is_state('binary_sensor.hvac_apply_occupied_setpoints_office', 'on') %}
+    {% set apply_working = is_state('binary_sensor.hvac_apply_working_setpoints_office', 'on') %}
     {% set motion = is_state('binary_sensor.tina_desk_motion', 'on') %}
     {% set work_hours = is_state('binary_sensor.hvac_work_hours_in_window', 'on') %}
     {% set home = is_state('binary_sensor.tina_home', 'on') %}
 
     {{ power_control and (
        override or
-       (apply_occupied and motion) or
+       (apply_working and motion) or
        (work_hours and home and motion)
     ) }}
 

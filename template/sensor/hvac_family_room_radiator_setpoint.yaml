@@ -10,18 +10,18 @@
     {% elif is_state('binary_sensor.is_weekend', 'on') %}
       {% if is_state('binary_sensor.nighttime_status', 'on') %}
         Weekend Night
-      {% elif is_state('binary_sensor.family_room_apply_occupied_setpoints', 'on') %}
-        Weekend Occupied
+      {% elif is_state('binary_sensor.family_room_apply_working_setpoints', 'on') %}
+        Weekend Working
       {% else %}
-        Weekend Unoccupied
+        Weekend Unworking
       {% endif %}
     {% else %}
       {% if is_state('binary_sensor.nighttime_status', 'on') %}
         Weekday Night
-      {% elif is_state('binary_sensor.family_room_apply_occupied_setpoints', 'on') %}
-        Weekday Occupied
+      {% elif is_state('binary_sensor.family_room_apply_working_setpoints', 'on') %}
+        Working
       {% else %}
-        Weekday Unoccupied
+        Weekday
       {% endif %}
     {% endif %}
   icon: >-
@@ -32,7 +32,7 @@
       mdi:power
     {% elif "Night" in state %}
       mdi:weather-night
-    {% elif "Occupied" in state %}
+    {% elif "Working" in state %}
       mdi:chair-rolling
     {% else %}
       mdi:sofa
@@ -43,29 +43,29 @@
   state: >
     {% set setpoint = states('sensor.family_room_radiator_setpoint') %}
     {% if setpoint == "Off" %}
-      {{ states('input_number.family_room_radiator_weekday_occupied_setpoint') }}
+      {{ states('input_number.family_room_radiator_working_setpoint') }}
     {% elif setpoint == "Away" %}
       {{ states('input_number.away_family_room_radiator_setpoint') }}
     {% elif setpoint == "Weekday Night" %}
       {{ states('input_number.family_room_radiator_weekday_night_setpoint') }}
     {% elif setpoint == "Weekend Night" %}
       {{ states('input_number.family_room_radiator_weekend_night_setpoint') }}
-    {% elif setpoint == "Weekday Occupied" %}
-      {{ states('input_number.family_room_radiator_weekday_occupied_setpoint') }}
-    {% elif setpoint == "Weekday Unoccupied" %}
-      {{ states('input_number.family_room_radiator_weekday_unoccupied_setpoint') }}
-    {% elif setpoint == "Weekend Occupied" %}
-      {{ states('input_number.family_room_radiator_weekend_occupied_setpoint') }}
-    {% elif setpoint == "Weekend Unoccupied" %}
-      {{ states('input_number.family_room_radiator_weekend_unoccupied_setpoint') }}
+    {% elif setpoint == "Working" %}
+      {{ states('input_number.family_room_radiator_working_setpoint') }}
+    {% elif setpoint == "Weekday" %}
+      {{ states('input_number.family_room_radiator_weekday_setpoint') }}
+    {% elif setpoint == "Weekend Working" %}
+      {{ states('input_number.family_room_radiator_weekend_working_setpoint') }}
+    {% elif setpoint == "Weekend Unworking" %}
+      {{ states('input_number.family_room_radiator_weekend_unworking_setpoint') }}
     {% elif setpoint == "Override" %}
       {{ states('input_number.family_room_override_setpoint') }}
     {% else %}
-      {{ states('input_number.family_room_radiator_weekday_occupied_setpoint') }}
+      {{ states('input_number.family_room_radiator_working_setpoint') }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: >-
-    {% if states('sensor.family_room_radiator_target_setpoint') | float == states('input_number.family_room_radiator_weekday_occupied_setpoint') | float %}
+    {% if states('sensor.family_room_radiator_target_setpoint') | float == states('input_number.family_room_radiator_working_setpoint') | float %}
       mdi:thermometer
     {% else %}
       mdi:radiator

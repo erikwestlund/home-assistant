@@ -1,8 +1,8 @@
 - name: "HVAC Occupancy Monitor End"
   unique_id: hvac_occupancy_monitor_end
   state: >
-    {% set start_time = states('input_datetime.hvac_apply_occupied_start_time_office') %}
-    {% set end_time = states('input_datetime.hvac_apply_occupied_end_time_office') %}
+    {% set start_time = states('input_datetime.hvac_apply_working_start_time_office') %}
+    {% set end_time = states('input_datetime.hvac_apply_working_end_time_office') %}
     
     {% if start_time != 'unknown' and end_time != 'unknown' %}
       {% set start_dt = strptime(start_time, '%H:%M:%S') %}
