@@ -17,10 +17,10 @@
     {# 4. Night Takes Precedence Over Daytime Settings #}
     {% elif comfort_setting == "Night" %}
       {{ states('input_number.hvac_radiator_night_setpoint_office') }}
-    {# 5. Weekday Setpoint #}
+    {# 5. Weekday Setpoint for Regular Days #}
     {% elif comfort_setting == "Weekday" %}
       {{ states('input_number.hvac_radiator_weekday_setpoint_office') }}
-    {# 6. Weekend Setpoint #}
+    {# 6. Weekend Setpoint for Off Days #}
     {% elif comfort_setting == "Weekend" %}
       {{ states('input_number.hvac_radiator_weekend_setpoint_office') }}
     {# 7. Default to None if No Condition is Met #}
