@@ -63,14 +63,9 @@
     {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_working_end_time_erik_office')) %}
     {% set current_time = now().timestamp() %}
     
-    {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
-    {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
-    {% set erik_home = is_state('binary_sensor.erik_home', 'on') %}
-    {% set erik_office_working = is_state('binary_sensor.erik_office_working', 'on') %}
-    {% set nighttime_status_off = is_state('binary_sensor.hvac_nighttime_in_window_erik_office', 'off') %}
+    {% set is_working_today = is_state('input_boolean.hvac_working_today_erik_office', 'on') %}
     
-    {{ start_time <= current_time <= end_time and
-       ((is_weekday and erik_home) or (is_weekend and erik_office_working)) }}
+    {{ is_working_today and start_time <= current_time <= end_time }}
   icon: >-
     {% if is_state('binary_sensor.hvac_apply_working_setpoint_erik_office', 'on') %}
       mdi:clock-check
