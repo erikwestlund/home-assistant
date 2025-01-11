@@ -19,18 +19,18 @@
     {% set current_time = now().timestamp() %}
     {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_start_time_office')) %}
     {% set early_work_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_end_time_office')) %}
-    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_working_start_time_office')) %}
-    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('sensor.hvac_occupancy_monitor_end')) %}
+    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_work_hours_start')) %}
+    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_work_hours_end')) %}
     {% set is_working_today = is_state('input_boolean.hvac_working_today_office', 'on') %}
 
-    {# 1. Early Work Mode Check #}
-    {% if is_state('input_boolean.hvac_early_work_mode_office', 'on') and early_work_start <= current_time <= early_work_end and tina_home %}
+    {# 1. If Is Working Today is On and Within Work Hours, Always True #}
+    {% if is_working_today and apply_start <= current_time < apply_end %}
       true
-    {# 2. Tina's Desk Motion Check (within early work time range) #}
+    {# 2. Early Work Mode Check #}
+    {% elif is_state('input_boolean.hvac_early_work_mode_office', 'on') and early_work_start <= current_time <= early_work_end and tina_home %}
+      true
+    {# 3. Tina's Desk Motion Check (within early work time range) #}
     {% elif early_work_start <= current_time <= early_work_end and is_state('binary_sensor.tina_desk_motion', 'on') and tina_home %}
-      true
-    {# 3. Regular Weekday Check Using hvac_working_today_office #}
-    {% elif is_state('binary_sensor.is_weekday', 'on') and is_working_today %}
       true
     {# 4. Default Off State #}
     {% else %}

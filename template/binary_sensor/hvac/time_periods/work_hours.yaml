@@ -1,7 +1,8 @@
 - name: "HVAC Work Hours In Window"
   state: >
+    {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
     {% set work_start = states('input_datetime.hvac_work_hours_start') %}
     {% set work_end = states('input_datetime.hvac_work_hours_end') %}
     {% set current_time = now().strftime('%H:%M:%S') %}
-    {{ work_start <= current_time < work_end }}
+    {{ is_weekday and work_start <= current_time < work_end }}
   icon: mdi:briefcase-clock

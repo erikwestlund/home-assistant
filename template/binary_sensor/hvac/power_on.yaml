@@ -453,8 +453,6 @@
 - name: "HVAC Space Heater Active Office"
   unique_id: hvac_space_heater_active_office
   state: >
-    
-    
     {% set desk_temp = states('sensor.tina_desk_temperature') | float(0) %}
     {% set target_temp = states('input_number.hvac_space_heater_target_office') | float(0) %}
     {% set under_offset = states('input_number.hvac_under_target_start_threshold_office_space_heater') | float(0) %}
