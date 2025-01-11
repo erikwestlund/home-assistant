@@ -1,0 +1,4 @@
+hvac_occupied_today_office:
+  name: HVAC Office Occupied Today
+  initial: off
+  icon: mdi:account-check

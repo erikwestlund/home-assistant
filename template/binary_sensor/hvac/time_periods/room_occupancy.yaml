@@ -14,32 +14,25 @@
 - name: "HVAC Apply Occupied Setpoints Office"
   unique_id: hvac_apply_occupied_setpoints_office
   state: >
-    {% set office_occupied = states('binary_sensor.office_occupied') %}
-    {% set tina_home = states('binary_sensor.tina_home') %}
+    {% set office_occupied = is_state('binary_sensor.office_occupied', 'on') %}
+    {% set tina_home = is_state('binary_sensor.tina_home', 'on') %}
     {% set current_time = now().timestamp() %}
     {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_start_time_office')) %}
     {% set early_work_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_end_time_office')) %}
     {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_occupied_start_time_office')) %}
-    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_occupied_end_time_office')) %}
+    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('sensor.hvac_occupancy_monitor_end')) %}
+    {% set is_occupied_today = is_state('input_boolean.hvac_occupied_today_office', 'on') %}
 
-    {% if is_state('input_boolean.hvac_early_work_mode_office', 'on') and early_work_start <= current_time <= early_work_end and is_state('binary_sensor.tina_home', 'on') %}
+    {# 1. Early Work Mode Check #}
+    {% if is_state('input_boolean.hvac_early_work_mode_office', 'on') and early_work_start <= current_time <= early_work_end and tina_home %}
       true
-    {% elif early_work_start <= current_time <= apply_end and is_state('binary_sensor.tina_desk_motion', 'on') and is_state('binary_sensor.tina_home', 'on') %}
+    {# 2. Tina's Desk Motion Check (within early work time range) #}
+    {% elif early_work_start <= current_time <= early_work_end and is_state('binary_sensor.tina_desk_motion', 'on') and tina_home %}
       true
-    {% elif is_state('binary_sensor.hvac_nighttime_in_window_office', 'on') %}
-      false
-    {% elif is_state('binary_sensor.is_weekday', 'on') %}
-      {% if tina_home and office_occupied and (apply_start <= current_time <= apply_end) %}
-        true
-      {% else %}
-        false
-      {% endif %}
-    {% elif is_state('binary_sensor.is_weekend', 'on') %}
-      {% if apply_start <= current_time <= apply_end %}
-        {{ is_state('binary_sensor.someone_home', 'on') }}
-      {% else %}
-        false
-      {% endif %}
+    {# 3. Regular Weekday Check Using hvac_occupied_today_office #}
+    {% elif is_state('binary_sensor.is_weekday', 'on') and is_occupied_today %}
+      true
+    {# 4. Default Off State #}
     {% else %}
       false
     {% endif %}
