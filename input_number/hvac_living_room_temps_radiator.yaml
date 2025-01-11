@@ -1,7 +1,0 @@
-living_room_radiator_default_setpoint:
-  name: Living Room Radiator Default Temperature
-  min: 55
-  max: 80
-  step: 1
-  unit_of_measurement: "°F"
-  initial: 68

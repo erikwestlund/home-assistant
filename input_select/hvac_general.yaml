@@ -1,8 +1,0 @@
-hvac_mode:
-  name: HVAC Mode
-  options:
-    - "Heat"
-    - "Cool"
-    - "Off"
-  initial: "Heat"
-  icon: mdi:thermostat

@@ -1,5 +1,0 @@
-office_space_heater_override_until:
-  name: Office Space Heater Override Until
-  has_time: true
-  has_date: true
-  initial: "2021-01-01T00:00:00"
