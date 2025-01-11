@@ -123,7 +123,7 @@
     {# 7. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
     {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
       off
-    {# 8. Unworking Room Check (only during daytime) #}
+    {# 8. Not Working Room Check (only during daytime) #}
     {% elif daytime_active and daytime_avg_temp > not_working_temp_threshold %}
       off
     {# 9. Default On State #}

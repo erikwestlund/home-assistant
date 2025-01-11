@@ -1,5 +1,5 @@
 hvac_mini_split_off_when_not_working_temp_over_threshold_office:
-  name: HVAC Office Mini Split Off When Unworking Temp Over Threshold
+  name: HVAC Office Mini Split Off When Not Working Temp Over Threshold
   min: -20
   max: 120
   step: 1
