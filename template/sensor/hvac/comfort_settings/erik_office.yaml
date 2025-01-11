@@ -3,7 +3,7 @@
   state: >
     {% set is_override = is_state('input_boolean.hvac_override_status_erik_office', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
-    {% set is_working = is_state('binary_sensor.hvac_apply_working_setpoints_erik_office', 'on') %}
+    {% set is_working = is_state('binary_sensor.hvac_apply_working_setpoint_erik_office', 'on') %}
     {% set is_night = is_state('binary_sensor.hvac_nighttime_active_erik_office', 'on') %}
     {% set is_weekday = is_state('binary_sensor.is_weekday', 'on') %}
 

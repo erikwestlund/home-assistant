@@ -439,7 +439,7 @@
   state: >
     {% set override = is_state('input_boolean.hvac_override_status_office_space_heater', 'on') %}
     {% set power_control = is_state('input_boolean.hvac_space_heater_power_on_control_office', 'on') %}
-    {% set apply_working = is_state('binary_sensor.hvac_apply_working_setpoints_office', 'on') %}
+    {% set apply_working = is_state('binary_sensor.hvac_apply_working_setpoint_office', 'on') %}
     {% set motion = is_state('binary_sensor.tina_desk_motion', 'on') %}
     {% set work_hours = is_state('binary_sensor.hvac_work_hours_in_window', 'on') %}
     {% set home = is_state('binary_sensor.tina_home', 'on') %}

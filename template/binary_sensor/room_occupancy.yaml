@@ -8,7 +8,7 @@
       or is_state('binary_sensor.tina_desk_occupancy', 'on') }}
 
 - name: "Office Working"
-  unique_id: office_working
+  unique_id: office_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.office_occupancy_detected', 'on') %}
@@ -24,7 +24,7 @@
       or is_state('binary_sensor.lamp_occupancy', 'on') }}
 
 - name: "Family Room Working"
-  unique_id: family_room_working
+  unique_id: family_room_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.family_room_occupancy_detected', 'on') %}
@@ -40,7 +40,7 @@
       or is_state('binary_sensor.living_room_radiator_occupancy', 'on') }}
 
 - name: "Living Room Working"
-  unique_id: living_room_working
+  unique_id: living_room_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.living_room_occupancy_detected', 'on') %}
@@ -55,7 +55,7 @@
     {{ is_state('binary_sensor.dining_room_occupancy', 'on') }}
 
 - name: "Dining Room Working"
-  unique_id: dining_room_working
+  unique_id: dining_room_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.dining_room_occupancy_detected', 'on') %}
@@ -69,7 +69,7 @@
     {{ is_state('binary_sensor.kitchen_occupancy', 'on') }}
 
 - name: "Kitchen Working"
-  unique_id: kitchen_working
+  unique_id: kitchen_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.kitchen_occupancy_detected', 'on') %}
@@ -83,7 +83,7 @@
     {{ is_state('binary_sensor.stairwell_top_occupancy', 'on') }}
 
 - name: "Stairwell Working"
-  unique_id: stairwell_working
+  unique_id: stairwell_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.stairwell_occupancy_detected', 'on') %}
@@ -100,7 +100,7 @@
           or is_state('binary_sensor.master_bedroom_tina_endtable_occupancy', 'on') }}
 
 - name: "Master Bedroom Working"
-  unique_id: master_bedroom_working
+  unique_id: master_bedroom_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.master_bedroom_occupancy_detected', 'on') %}
@@ -115,7 +115,7 @@
     {{ is_state('binary_sensor.erik_office_occupancy', 'on') }}
 
 - name: "Erik Office Working"
-  unique_id: erik_office_working
+  unique_id: erik_office_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.erik_office_occupancy_detected', 'on') %}
@@ -130,7 +130,7 @@
     {{ is_state('binary_sensor.tillys_room_occupancy', 'on') }}
 
 - name: "Tilly's Room Working"
-  unique_id: tillys_room_working
+  unique_id: tillys_room_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.tilly_s_room_occupancy_detected', 'on') %}
@@ -145,7 +145,7 @@
     {{ is_state('binary_sensor.hanks_room_occupancy', 'on') }}
 
 - name: "Hank's Room Working"
-  unique_id: hanks_room_working
+  unique_id: hanks_room_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.hank_s_room_occupancy_detected', 'on') %}
@@ -159,7 +159,7 @@
     {{ is_state('binary_sensor.basement_playroom_occupancy', 'on') }}
 
 - name: "Basement Working"
-  unique_id: basement_working
+  unique_id: basement_occupied
   device_class: occupancy
   state: >
     {% set recent_occupancy = is_state('binary_sensor.basement_occupancy_detected', 'on') %}

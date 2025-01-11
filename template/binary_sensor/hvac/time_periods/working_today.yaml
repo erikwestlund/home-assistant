@@ -11,8 +11,8 @@
     
     {{ start_time_ts <= now_ts < end_time_ts }}
 
-- name: "HVAC Apply Working Setpoints Office"
-  unique_id: hvac_apply_working_setpoints_office
+- name: "HVAC Apply Working Setpoint Office"
+  unique_id: hvac_apply_working_setpoint_office
   state: >
     {% set office_working = is_state('binary_sensor.office_working', 'on') %}
     {% set tina_home = is_state('binary_sensor.tina_home', 'on') %}
@@ -37,7 +37,7 @@
       false
     {% endif %}
   icon: >-
-    {% if is_state('binary_sensor.hvac_apply_working_setpoints_office', 'on') %}
+    {% if is_state('binary_sensor.hvac_apply_working_setpoint_office', 'on') %}
       mdi:clock-check
     {% else %}
       mdi:clock
