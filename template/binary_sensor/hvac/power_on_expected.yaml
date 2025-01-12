@@ -43,7 +43,7 @@
 - name: "HVAC Mini Split Expected Power Status Master Bedroom"
   unique_id: hvac_mini_split_expected_power_status_master_bedroom
   state: >
-    {{ states('binary_sensor.hvac_mini_split_power_status_master_bedroom') }}
+      {{ states('binary_sensor.hvac_mini_split_power_status_master_bedroom') }}
 
 # Ducted Expected Power Status
 - name: "HVAC Ducted Expected Power Status"
