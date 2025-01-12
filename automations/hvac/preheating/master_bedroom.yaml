@@ -22,6 +22,20 @@
         entity_id: input_boolean.hvac_preheating_stop_override_master_bedroom
   mode: single
 
+# 🔄 Turn Off HVAC Preheating Master Bedroom When Stop Override Activated
+- id: turn_off_hvac_preheating_when_stop_override_master_bedroom
+  alias: "Turn Off HVAC Preheating When Stop Override Master Bedroom"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.hvac_preheating_stop_override_master_bedroom
+      to: "on"
+  condition: []
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.hvac_preheating_on_master_bedroom
+  mode: single
+
 # 🔄 Start Preheating if Required (Master Bedroom)
 - id: start_hvac_preheating_if_required_master_bedroom
   alias: "Start HVAC Preheating if Required Master Bedroom"
