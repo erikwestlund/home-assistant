@@ -100,14 +100,3 @@
     {% set observed_setpoint = states('sensor.hvac_ducted_observed_setpoint') | float(default='unavailable') %}
     {{ (is_unit_off and is_power_synced) or (expected_setpoint == observed_setpoint) }}
   icon: mdi:check
-
-# Space Heater Setpoint Synced
-- name: "HVAC Space Heater Setpoint Synced Office"
-  unique_id: hvac_space_heater_setpoint_synced_office
-  state: >
-    {% set is_unit_off = is_state('binary_sensor.hvac_space_heater_active_office', 'off') %}
-    {% set is_power_synced = is_state('binary_sensor.hvac_space_heater_power_synced_office', 'on') %}
-    {% set expected_setpoint = states('sensor.hvac_space_heater_expected_setpoint_office') | float(default='unavailable') %}
-    {% set observed_setpoint = states('sensor.hvac_space_heater_observed_setpoint_office') | float(default='unavailable') %}
-    {{ (is_unit_off and is_power_synced) or (expected_setpoint == observed_setpoint) }}
-  icon: mdi:check
