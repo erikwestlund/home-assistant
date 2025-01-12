@@ -3,7 +3,7 @@
   unique_id: hvac_current_heat_gain_rate_master_bedroom
   unit_of_measurement: "°F/hour"
   state: >
-    {% set avg_temp = states('sensor.hvac_avg_temp_to_preheat_end_master_bedroom') | float %}
+    {% set avg_temp = states('sensor.hvac_average_temperature_to_preheat_end_window_master_bedroom') | float %}
     {% if avg_temp <= 10 %}
       {{ states('input_number.hvac_heat_gain_under_10f_master_bedroom') | float }}
     {% elif avg_temp <= 15 %}
