@@ -2,8 +2,8 @@
 - id: set_hvac_average_temperature_daytime_office
   alias: "Set HVAC Average Temperature Daytime Office"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_daytime_start_time_office') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -15,8 +15,8 @@
 - id: set_hvac_average_temperature_daytime_family_room
   alias: "Set HVAC Average Temperature Daytime Family Room"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_daytime_start_time_family_room') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -28,8 +28,8 @@
 - id: set_hvac_average_temperature_daytime_living_room
   alias: "Set HVAC Average Temperature Daytime Living Room"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_daytime_start_time_living_room') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -41,8 +41,8 @@
 - id: set_hvac_average_temperature_daytime_dining_room
   alias: "Set HVAC Average Temperature Daytime Dining Room"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_daytime_start_time_dining_room') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -54,8 +54,8 @@
 - id: set_hvac_average_temperature_daytime_master_bedroom
   alias: "Set HVAC Average Temperature Daytime Master Bedroom"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_daytime_start_time_master_bedroom') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -67,8 +67,8 @@
 - id: set_hvac_average_temperature_daytime_erik_office
   alias: "Set HVAC Average Temperature Daytime Erik Office"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_daytime_start_time_erik_office') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -80,8 +80,8 @@
 - id: set_hvac_average_temperature_daytime_ducted
   alias: "Set HVAC Average Temperature Daytime Ducted"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_daytime_start_time_ducted') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -94,8 +94,8 @@
 - id: set_hvac_average_temperature_nighttime_office
   alias: "Set HVAC Average Temperature Nighttime Office"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_office') }}"
+    -  platform: time_pattern
+       minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -107,8 +107,8 @@
 - id: set_hvac_average_temperature_nighttime_family_room
   alias: "Set HVAC Average Temperature Nighttime Family Room"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_family_room') }}"
+    - platform: time_pattern
+      minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -120,8 +120,8 @@
 - id: set_hvac_average_temperature_nighttime_living_room
   alias: "Set HVAC Average Temperature Nighttime Living Room"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_living_room') }}"
+    - platform: time_pattern
+      minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -133,8 +133,8 @@
 - id: set_hvac_average_temperature_nighttime_dining_room
   alias: "Set HVAC Average Temperature Nighttime Dining Room"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_dining_room') }}"
+    - platform: time_pattern
+      minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -146,8 +146,8 @@
 - id: set_hvac_average_temperature_nighttime_master_bedroom
   alias: "Set HVAC Average Temperature Nighttime Master Bedroom"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_master_bedroom') }}"
+    - platform: time_pattern
+      minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -159,8 +159,8 @@
 - id: set_hvac_average_temperature_nighttime_erik_office
   alias: "Set HVAC Average Temperature Nighttime Erik Office"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_erik_office') }}"
+    - platform: time_pattern
+      minutes: "/30"
   action:
     - service: input_number.set_value
       target:
@@ -172,8 +172,8 @@
 - id: set_hvac_average_temperature_nighttime_ducted
   alias: "Set HVAC Average Temperature Nighttime Ducted"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_nighttime_start_time_ducted') }}"
+    - platform: time_pattern
+      minutes: "/30"
   action:
     - service: input_number.set_value
       target:
