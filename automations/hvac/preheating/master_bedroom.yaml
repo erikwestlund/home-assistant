@@ -19,9 +19,12 @@
       from: "false"
       to: "true"
   condition:
-    - condition: time
-      after: "{{ states('input_datetime.hvac_daytime_start_time_master_bedroom') }}"
-      before: "{{ states('input_datetime.hvac_preheat_end_window_master_bedroom') }}"
+    - condition: template
+      value_template: >
+        {% set now_time = now().timestamp() %}
+        {% set daytime_start = as_timestamp(now().replace(hour=states('input_datetime.hvac_daytime_start_time_master_bedroom').split(':')[0] | int, minute=states('input_datetime.hvac_daytime_start_time_master_bedroom').split(':')[1] | int, second=0)) %}
+        {% set preheat_end = as_timestamp(now().replace(hour=states('input_datetime.hvac_preheat_end_window_master_bedroom').split(':')[0] | int, minute=states('input_datetime.hvac_preheat_end_window_master_bedroom').split(':')[1] | int, second=0)) %}
+        {{ now_time >= daytime_start and now_time <= preheat_end }}
     - condition: state
       entity_id: input_boolean.hvac_heat_gain_start_time_set_today_master_bedroom
       state: "off"
