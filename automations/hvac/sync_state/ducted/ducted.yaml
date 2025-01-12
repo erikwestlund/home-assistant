@@ -24,7 +24,7 @@
                 entity_id: climate.ducted_heat_pump
                 hvac_mode: >
                   {% if is_state('binary_sensor.hvac_ducted_power_status', 'on') %}
-                    {% if is_state('input_select.hvac_mode', 'Heat') %}
+                    {% if is_state('binary_sensor.hvac_mode', 'Heat') %}
                       heat
                     {% else %}
                       cool
@@ -42,7 +42,7 @@
                 name: "HVAC Ducted Sync"
                 message: >
                   Ducted system turned on. Mode set to:
-                  {{ states('input_select.hvac_mode') }} and temperature set to:
+                  {{ states('binary_sensor.hvac_mode') }} and temperature set to:
                   {{ states('sensor.hvac_setpoint_ducted') }}°F.
 
         # ✅ Correct Mode and Setpoint if Mode is Incorrect
@@ -55,7 +55,7 @@
               data:
                 entity_id: climate.ducted_heat_pump
                 hvac_mode: >
-                  {% if is_state('input_select.hvac_mode', 'Heat') %}
+                  {% if is_state('binary_sensor.hvac_mode', 'Heat') %}
                     heat
                   {% else %}
                     cool
@@ -70,7 +70,7 @@
                 name: "HVAC Ducted Sync"
                 message: >
                   Mode corrected to:
-                  {{ states('input_select.hvac_mode') }} and temperature set to:
+                  {{ states('binary_sensor.hvac_mode') }} and temperature set to:
                   {{ states('sensor.hvac_setpoint_ducted') }}°F.
 
         # ✅ Correct Temperature
