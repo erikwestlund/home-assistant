@@ -1,0 +1,16 @@
+# 🟢 HVAC Preheat Start Required Master Bedroom
+- name: "HVAC Preheat Start Required Master Bedroom"
+  unique_id: hvac_preheat_start_required_master_bedroom
+  state: >
+    {% set now_time = now().timestamp() %}
+    {% set daytime_start = as_timestamp(now().date() ~ ' ' ~ states('input_datetime.hvac_daytime_start_time_master_bedroom')) %}
+    {% set preheat_end = as_timestamp(now().date() ~ ' ' ~ states('input_datetime.hvac_preheat_end_window_master_bedroom')) %}
+    {% set estimated_target_time = as_timestamp(states('sensor.hvac_estimated_time_when_target_temperature_reached_starting_now_master_bedroom')) %}
+
+    {% if now_time >= daytime_start and now_time <= preheat_end %}
+      {{ estimated_target_time > preheat_end }}
+    {% else %}
+      false
+    {% endif %}
+  device_class: heat
+  icon: mdi:clock-alert
