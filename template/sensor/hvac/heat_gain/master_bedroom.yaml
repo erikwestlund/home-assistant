@@ -24,3 +24,19 @@
       {{ states('input_number.hvac_heat_gain_over_50f_master_bedroom') | float }}
     {% endif %}
   icon: mdi:chart-line
+
+# 🕒 HVAC Hours to Reach Target Temperature (Master Bedroom)
+- name: "HVAC Hours to Reach Target Temperature Master Bedroom"
+  unique_id: hvac_hours_to_reach_target_master_bedroom
+  unit_of_measurement: "hours"
+  state: >
+    {% set current_temp = states('sensor.master_bedroom_average_temperature') | float %}
+    {% set target_temp = states('input_number.hvac_night_target_temp_master_bedroom') | float %}
+    {% set heat_gain_rate = states('sensor.hvac_current_heat_gain_rate_master_bedroom') | float %}
+    
+    {% if heat_gain_rate > 0 %}
+      {{ ((target_temp - current_temp) / heat_gain_rate) | round(2) }}
+    {% else %}
+      0
+    {% endif %}
+  icon: mdi:timer-sand
