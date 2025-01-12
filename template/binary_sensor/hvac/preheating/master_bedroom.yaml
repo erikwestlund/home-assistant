@@ -11,8 +11,8 @@
   icon: mdi:clock-alert
 
 # 🔥 HVAC Preheat Active Master Bedroom
-- name: "HVAC Preheat Active Master Bedroom"
-  unique_id: hvac_preheat_active_master_bedroom
+- name: "HVAC Preheating Active Master Bedroom"
+  unique_id: hvac_preheating_active_master_bedroom
   state: >
     {% set preheating_on = is_state('input_boolean.hvac_preheating_on_master_bedroom', 'on') %}
     {% set stop_override = is_state('input_boolean.hvac_preheating_stop_override_master_bedroom', 'on') %}

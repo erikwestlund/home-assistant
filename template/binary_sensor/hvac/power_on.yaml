@@ -355,6 +355,7 @@
     {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_master_bedroom') | float %}
     {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_master_bedroom') | float %}
     {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_master_bedroom') | float %}
+    {% set preheating_off_threshold = states('input_number.hvac_mini_split_preheating_off_threshold_master_bedroom') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_master_bedroom', 'on') %}
 
     {# 1. Mini Splits Enabled Toggle #}
@@ -370,7 +371,7 @@
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
     {# 5. General Off Check using Daytime/Nighttime Average Temperature and Off Threshold #}
-    {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
+    {% elif (preheating_active and daytime_avg_temp <= preheating_off_threshold) or (not preheating_active and daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
     {# 6. Preheating Active Check #}
     {% elif preheating_active %}
