@@ -37,4 +37,20 @@
     {% endif %}
   icon: mdi:thermometer-night
 
-
+# 🌡️ HVAC Average Temperature to Preheat End Window (Master Bedroom)
+- name: "HVAC Average Temperature to Preheat End Window Master Bedroom"
+  unique_id: hvac_avg_temp_to_preheat_end_master_bedroom
+  unit_of_measurement: "°F"
+  state: >
+    {% set pirate_forecast = state_attr('sensor.pirate_weather', 'hourly') %}
+    {% set fallback_temp = states('input_number.hvac_avg_temp_daytime_master_bedroom') | float %}
+    {% set end_time = states('input_datetime.hvac_preheat_end_window_master_bedroom') %}
+    {% if pirate_forecast and pirate_forecast['data'] %}
+      {% set start_timestamp = now().timestamp() %}
+      {% set end_timestamp = (now().replace(hour=end_time.split(':')[0] | int, minute=end_time.split(':')[1] | int)).timestamp() %}
+      {% set future_temps = pirate_forecast['data'] | selectattr('time', '>=', start_timestamp) | selectattr('time', '<=', end_timestamp) | map(attribute='temperature') | list %}
+      {{ (future_temps | sum / future_temps | length) | round(1) if future_temps | length > 0 else fallback_temp }}
+    {% else %}
+      {{ fallback_temp }}
+    {% endif %}
+  icon: mdi:thermometer
