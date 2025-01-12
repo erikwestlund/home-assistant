@@ -7,7 +7,6 @@
     {% set preheat_end = as_timestamp(now().date() ~ ' ' ~ states('input_datetime.hvac_preheat_end_window_master_bedroom')) %}
     
     {{ preheating_window and estimated_target_time > preheat_end }}
-  device_class: heat
   icon: mdi:clock-alert
 
 # 🔥 HVAC Preheat Active Master Bedroom
@@ -20,5 +19,4 @@
     {% set off_threshold = states('input_number.hvac_mini_split_preheating_off_threshold_master_bedroom') | float %}
 
     {{ preheating_on and not stop_override and daytime_avg_temp > off_threshold }}
-  device_class: heat
   icon: mdi:fire
