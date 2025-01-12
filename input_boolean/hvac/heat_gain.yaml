@@ -1,0 +1,5 @@
+hvac_heat_gain_start_time_set_today_master_bedroom:
+  name: HVAC Master Bedroom Heat Gain Start Time Set Today
+  has_time: true
+  has_date: false
+  initial: "07:30:00"
