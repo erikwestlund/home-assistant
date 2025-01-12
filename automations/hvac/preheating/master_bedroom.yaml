@@ -7,34 +7,39 @@
   action:
     - service: input_boolean.turn_off
       target:
-        entity_id: input_boolean.hvac_heat_gain_start_time_set_today_master_bedroom
+        entity_id: input_boolean.hvac_preheating_on_master_bedroom
   mode: single
 
-# 🟢 Set HVAC Nighttime Start Time for Master Bedroom
-- id: set_hvac_nighttime_start_time_master_bedroom
-  alias: "Set HVAC Nighttime Start Time Master Bedroom"
+# 🔄 Reset HVAC Preheating Stop Override Master Bedroom
+- id: reset_hvac_preheating_stop_override_master_bedroom
+  alias: "Reset HVAC Preheating Stop Override Master Bedroom"
   trigger:
-    - platform: state
-      entity_id: binary_sensor.hvac_preheat_start_required_master_bedroom
-      from: "false"
-      to: "true"
+    - platform: time
+      at: "{{ states('input_datetime.hvac_preheat_end_window_master_bedroom') }}"
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.hvac_preheating_stop_override_master_bedroom
+  mode: single
+
+# 🔄 Start Preheating if Required (Master Bedroom)
+- id: start_hvac_preheating_if_required_master_bedroom
+  alias: "Start HVAC Preheating if Required Master Bedroom"
+  trigger:
+    - platform: time_pattern
+      minutes: "/5"
   condition:
-    - condition: template
-      value_template: >
-        {% set now_time = now().timestamp() %}
-        {% set daytime_start = as_timestamp(now().replace(hour=states('input_datetime.hvac_daytime_start_time_master_bedroom').split(':')[0] | int, minute=states('input_datetime.hvac_daytime_start_time_master_bedroom').split(':')[1] | int, second=0)) %}
-        {% set preheat_end = as_timestamp(now().replace(hour=states('input_datetime.hvac_preheat_end_window_master_bedroom').split(':')[0] | int, minute=states('input_datetime.hvac_preheat_end_window_master_bedroom').split(':')[1] | int, second=0)) %}
-        {{ now_time >= daytime_start and now_time <= preheat_end }}
     - condition: state
-      entity_id: input_boolean.hvac_heat_gain_start_time_set_today_master_bedroom
+      entity_id: binary_sensor.hvac_preheating_window_master_bedroom
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.hvac_preheating_on_master_bedroom
       state: "off"
   action:
-    - service: input_datetime.set_datetime
-      target:
-        entity_id: input_datetime.hvac_nighttime_start_time_master_bedroom
-      data:
-        timestamp: "{{ now().timestamp() }}"
+    - condition: state
+      entity_id: binary_sensor.hvac_preheat_required_master_bedroom
+      state: "on"
     - service: input_boolean.turn_on
       target:
-        entity_id: input_boolean.hvac_heat_gain_start_time_set_today_master_bedroom
+        entity_id: input_boolean.hvac_preheating_on_master_bedroom
   mode: single

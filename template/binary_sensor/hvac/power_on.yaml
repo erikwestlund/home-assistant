@@ -340,6 +340,7 @@
     {% endif %}
 
 # 🌡️ HVAC Mini Split Power Status Master Bedroom
+# 🌡️ HVAC Mini Split Power Status Master Bedroom
 - name: "HVAC Mini Split Power Status Master Bedroom"
   unique_id: hvac_mini_split_power_status_master_bedroom
   state: >
@@ -368,12 +369,12 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Preheating Active #}
-    {% elif preheating_active %}
-      on
-    {# 6. General Off Check using Daytime/Nighttime Average Temperature and Off Threshold #}
+    {# 5. General Off Check using Daytime/Nighttime Average Temperature and Off Threshold #}
     {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
+    {# 6. Preheating Active Check #}
+    {% elif preheating_active %}
+      on
     {# 7. Daytime Check using Daytime Average Temperature and Daytime Off Threshold #}
     {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off

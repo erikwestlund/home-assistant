@@ -1,0 +1,11 @@
+# 🟢 HVAC Preheating Window Master Bedroom
+- name: "HVAC Preheating Window Master Bedroom"
+  unique_id: hvac_preheating_window_master_bedroom
+  state: >
+    {% set today = now().strftime('%Y-%m-%d') %}
+    {% set daytime_start = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_daytime_start_time_master_bedroom')) %}
+    {% set preheat_end = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_preheat_end_window_master_bedroom')) %}
+    {% set current_time = now().timestamp() %}
+    
+    {{ daytime_start <= current_time <= preheat_end }}
+  icon: mdi:clock-outline

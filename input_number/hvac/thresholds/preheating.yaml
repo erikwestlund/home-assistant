@@ -1,0 +1,7 @@
+hvac_mini_split_preheating_off_threshold_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Preheating Off Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55

@@ -1,0 +1,9 @@
+hvac_preheating_on_master_bedroom:
+  name: HVAC Master Bedroom Preheating On
+  initial: on
+  icon: mdi:powern
+
+hvac_preheating_stop_override_master_bedroom:
+  name: HVAC Master Bedroom Preheating Stop Override
+  initial: off
+  icon: mdi:cancel

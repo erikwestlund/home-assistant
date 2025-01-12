@@ -18,3 +18,9 @@ hvac_preheat_end_window_master_bedroom:
   has_time: true
   has_date: false
   initial: "20:00:00"
+
+hvac_preheating_started_master_bedroom:
+  name: HVAC Master Bedroom Preheating Started
+  has_time: true
+  has_date: false
+  initial: "17:30:00"
