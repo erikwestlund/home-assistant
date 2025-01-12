@@ -1,0 +1,6 @@
+# 🕒 HVAC Preheating Started Master Bedroom Display
+- name: "HVAC Preheating Started Master Bedroom Display"
+  unique_id: hvac_preheating_started_master_bedroom_display
+  state: >
+    {{ states('input_datetime.hvac_preheating_started_master_bedroom') }}
+  icon: mdi:clock-start
