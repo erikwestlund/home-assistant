@@ -36,3 +36,5 @@
       {{ fallback_temp }}
     {% endif %}
   icon: mdi:thermometer-night
+
+

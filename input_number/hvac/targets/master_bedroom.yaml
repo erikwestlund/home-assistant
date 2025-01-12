@@ -1,0 +1,7 @@
+hvac_night_target_temp_master_bedroom:
+  name: HVAC Master Bedroom Target Night Temperature
+  min: 62
+  max: 86
+  step: 0.5
+  unit_of_measurement: "°F"
+  initial: 70

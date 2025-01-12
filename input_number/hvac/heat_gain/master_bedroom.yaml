@@ -1,0 +1,109 @@
+# 🌡️ Master Bedroom Heat Gain Input Numbers
+
+# Under 10°F
+hvac_heat_gain_under_10f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain Under 10°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 11-15°F
+hvac_heat_gain_under_11_15f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 11-15°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 16-20°F
+hvac_heat_gain_under_16_20f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 16-20°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 21-25°F
+hvac_heat_gain_under_21_25f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 21-25°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 26-30°F
+hvac_heat_gain_under_26_30f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 26-30°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 31-35°F
+hvac_heat_gain_under_31_35f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 31-35°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 36-40°F
+hvac_heat_gain_under_36_40f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 36-40°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 41-45°F
+hvac_heat_gain_under_41_45f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 41-45°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 46-50°F
+hvac_heat_gain_under_46_50f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 46-50°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 51-55°F
+hvac_heat_gain_under_51_55f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 51-55°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# 56-60°F
+hvac_heat_gain_under_56_60f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain 56-60°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
+
+# Over 60°F
+hvac_heat_gain_over_60f_master_bedroom:
+  name: "HVAC Master Bedroom Heat Gain Over 60°F"
+  min: 0
+  max: 4
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 1.5
