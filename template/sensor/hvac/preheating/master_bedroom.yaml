@@ -2,5 +2,10 @@
 - name: "HVAC Preheating Started Master Bedroom Display"
   unique_id: hvac_preheating_started_master_bedroom_display
   state: >
-    {{ states('input_datetime.hvac_preheating_started_master_bedroom') }}
+    {% set datetime = states('input_datetime.hvac_preheating_started_master_bedroom') %}
+    {% if datetime != 'unknown' %}
+      {{ as_timestamp(datetime) | timestamp_custom('%B %-d, %Y at %-I:%M %p') }}
+    {% else %}
+      "Not Set"
+    {% endif %}
   icon: mdi:clock-start
