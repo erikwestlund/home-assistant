@@ -1,3 +1,59 @@
+# 📈 HVAC Current Heat Gain Rate (Master Bedroom)
+- name: "HVAC Current Heat Gain Rate Master Bedroom"
+  unique_id: hvac_current_heat_gain_rate_master_bedroom
+  unit_of_measurement: "°F/hour"
+  state: >
+    {% set avg_temp = states('sensor.hvac_average_temperature_to_preheat_end_window_master_bedroom') | float %}
+    {% if avg_temp <= 10 %}
+      {{ states('input_number.hvac_heat_gain_under_10f_master_bedroom') | float }}
+    {% elif avg_temp <= 15 %}
+      {{ states('input_number.hvac_heat_gain_under_11_15f_master_bedroom') | float }}
+    {% elif avg_temp <= 20 %}
+      {{ states('input_number.hvac_heat_gain_under_16_20f_master_bedroom') | float }}
+    {% elif avg_temp <= 25 %}
+      {{ states('input_number.hvac_heat_gain_under_21_25f_master_bedroom') | float }}
+    {% elif avg_temp <= 30 %}
+      {{ states('input_number.hvac_heat_gain_under_26_30f_master_bedroom') | float }}
+    {% elif avg_temp <= 35 %}
+      {{ states('input_number.hvac_heat_gain_under_31_35f_master_bedroom') | float }}
+    {% elif avg_temp <= 40 %}
+      {{ states('input_number.hvac_heat_gain_under_36_40f_master_bedroom') | float }}
+    {% elif avg_temp <= 50 %}
+      {{ states('input_number.hvac_heat_gain_under_41_50f_master_bedroom') | float }}
+    {% else %}
+      {{ states('input_number.hvac_heat_gain_over_50f_master_bedroom') | float }}
+    {% endif %}
+  icon: mdi:chart-line
+
+# 🕒 HVAC Hours to Reach Target Temperature (Master Bedroom)
+- name: "HVAC Hours to Reach Target Temperature Master Bedroom"
+  unique_id: hvac_hours_to_reach_target_master_bedroom
+  unit_of_measurement: "hours"
+  state: >
+    {% set current_temp = states('sensor.master_bedroom_average_temperature') | float %}
+    {% set target_temp = states('input_number.hvac_night_target_temp_master_bedroom') | float %}
+    {% set heat_gain_rate = states('sensor.hvac_current_heat_gain_rate_master_bedroom') | float %}
+    
+    {% if heat_gain_rate > 0 %}
+      {{ ((target_temp - current_temp) / heat_gain_rate) | round(2) }}
+    {% else %}
+      0
+    {% endif %}
+  icon: mdi:timer-sand
+
+# 🕒 HVAC Estimated Time to Reach Target Temperature (Master Bedroom)
+- name: "HVAC Estimated Time When Target Temperature Reached Starting Now Master Bedroom"
+  unique_id: hvac_estimated_time_when_target_reached_starting_now_master_bedroom
+  device_class: timestamp
+  state: >
+    {% set hours_to_target = states('sensor.hvac_hours_to_reach_target_temperature_master_bedroom') | float %}
+    {% if hours_to_target > 0 %}
+      {{ (now() + timedelta(hours=hours_to_target)).timestamp() | timestamp_local }}
+    {% else %}
+      {{ now().timestamp() | timestamp_local }}
+    {% endif %}
+  icon: mdi:clock-end
+
 # 🕒 HVAC Preheating Started Master Bedroom Display
 - name: "HVAC Preheating Started Master Bedroom Display"
   unique_id: hvac_preheating_started_master_bedroom_display
@@ -9,3 +65,15 @@
       "Not Set"
     {% endif %}
   icon: mdi:clock-start
+
+# 🕒 HVAC Estimated Time to Reach Target Master Bedroom Display
+- name: "HVAC Estimated Time to Reach Target Master Bedroom Display"
+  unique_id: hvac_estimated_time_to_reach_target_master_bedroom_display
+  state: >
+    {% set datetime = states('sensor.hvac_estimated_time_when_target_temperature_reached_starting_now_master_bedroom') %}
+    {% if datetime != 'unknown' %}
+      {{ as_timestamp(datetime) | timestamp_custom('%-I:%M %p') }}
+    {% else %}
+      "Not Set"
+    {% endif %}
+  icon: mdi:clock-alert
