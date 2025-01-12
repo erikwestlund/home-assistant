@@ -71,7 +71,7 @@
                 message: >
                   Mode corrected to:
                   {{ states('sensor.hvac_mode') }} and temperature set to:
-                  {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') }}°F.
+                    {{ states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') }}°F.
 
         # ✅ Correct Temperature
         - conditions:

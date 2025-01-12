@@ -23,7 +23,7 @@
 - name: "HVAC Mini Split Power Synced Erik Office"
   unique_id: hvac_mini_split_power_synced_erik_office
   state: >
-    {{ is_state('binary_sensor.hvac_mini_split_expected_power_status_erik_office', states('binary_sensor.hvac_mini_split_expected_power_status_erik_office')) }}
+    {{ is_state('binary_sensor.hvac_mini_split_observed_power_status_erik_office', states('binary_sensor.hvac_mini_split_expected_power_status_erik_office')) }}
 
 - name: "HVAC Mini Split Power Synced Family Room"
   unique_id: hvac_mini_split_power_synced_family_room
