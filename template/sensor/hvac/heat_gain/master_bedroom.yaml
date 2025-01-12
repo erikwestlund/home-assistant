@@ -40,3 +40,16 @@
       0
     {% endif %}
   icon: mdi:timer-sand
+
+# 🕒 HVAC Estimated Time to Reach Target Temperature (Master Bedroom)
+- name: "HVAC Estimated Time When Target Temperature Reached Starting Now Master Bedroom"
+  unique_id: hvac_estimated_time_when_target_reached_starting_now_master_bedroom
+  device_class: timestamp
+  state: >
+    {% set hours_to_target = states('sensor.hvac_hours_to_reach_target_temperature_master_bedroom') | float %}
+    {% if hours_to_target > 0 %}
+      {{ (now() + timedelta(hours=hours_to_target)).timestamp() | timestamp_local }}
+    {% else %}
+      {{ now().timestamp() | timestamp_local }}
+    {% endif %}
+  icon: mdi:clock-end
