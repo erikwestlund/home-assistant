@@ -134,7 +134,7 @@
 - name: "Predicted Cost of Energy This Billing Cycle Whole Home"
   unique_id: predicted_cost_billing_cycle_whole_home
   state: >
-    {% set predicted_usage = states('sensor.predicted_energy_billing_cycle_whole_home') | float %}
+    {% set predicted_usage = states('sensor.predicted_energy_usage_this_billing_cycle_whole_home') | float %}
     {% set price_per_kwh = states('input_number.energy_price_kwh') | float %}
     
     {{ (predicted_usage * price_per_kwh) | round(2) }}
