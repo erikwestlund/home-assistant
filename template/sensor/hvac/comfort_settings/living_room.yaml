@@ -16,13 +16,10 @@
     {# 3. Nighttime Check #}
     {% elif is_night %}
       Night
-    {# 4. Daytime Logic #}
-    {% elif is_daytime %}
-      Daytime
-    {# 5. Weekday Logic #}
+    {# 4. Weekday #}
     {% elif is_weekday %}
       Weekday
-    {# 6. Weekend Logic #}
+    {# 6. Weekend #}
     {% else %}
       Weekend
     {% endif %}
