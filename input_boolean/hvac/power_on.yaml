@@ -70,3 +70,9 @@ hvac_space_heater_power_on_control_office:
   name: HVAC Office Space Heater Power On Control
   initial: on
   icon: mdi:power
+
+# Companion settings
+hvac_mini_split_living_room_on_with_master_bedroom:
+  name: HVAC Living Room Heat Pump Always On with Master Bedroom
+  initial: on
+  icon: mdi:power
