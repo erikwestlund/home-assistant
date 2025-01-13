@@ -9,7 +9,7 @@
     {{ preheating_window and estimated_target_time > preheat_end }}
   icon: mdi:clock-alert
 
-# 🔥 HVAC Preheat Active Master Bedroom
+# 🔥 HVAC Preheating Active Master Bedroom
 - name: "HVAC Preheating Active Master Bedroom"
   unique_id: hvac_preheating_active_master_bedroom
   state: >
@@ -17,6 +17,7 @@
     {% set stop_override = is_state('input_boolean.hvac_preheating_stop_override_master_bedroom', 'on') %}
     {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_master_bedroom') | float %}
     {% set off_threshold = states('input_number.hvac_mini_split_preheating_off_threshold_master_bedroom') | float %}
+    {% set in_preheating_window = is_state('binary_sensor.hvac_preheating_window_master_bedroom', 'on') %}
 
-    {{ preheating_on and not stop_override and daytime_avg_temp > off_threshold }}
+    {{ preheating_on and not stop_override and daytime_avg_temp > off_threshold and in_preheating_window }}
   icon: mdi:fire
