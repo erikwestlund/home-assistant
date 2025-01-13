@@ -48,3 +48,64 @@
   unit_of_measurement: "kWh"
   icon: mdi:chart-line
 
+# 🌟 Energy Usage This Billing Cycle Whole Home
+- name: "Energy Usage Billing Cycle Whole Home"
+  unique_id: energy_billing_cycle_whole_home
+  state: >
+    {% set daily_energy = states('sensor.daily_energy_usage_whole_home') | float %}
+    {% set today = now().date() %}
+    {% set start_of_billing = (now().replace(day=4, hour=0, minute=0, second=0, microsecond=0)).date() %}
+    {% set end_of_billing = (now().replace(month=now().month + 1 if now().month < 12 else 1, 
+                                           year=now().year if now().month < 12 else now().year + 1, 
+                                           day=3, hour=23, minute=59, second=59)).date() %}
+    {% if today < start_of_billing %}
+      {% set start_of_billing = (now().replace(month=now().month - 1 if now().month > 1 else 12, 
+                                               year=now().year if now().month > 1 else now().year - 1, 
+                                               day=4)).date() %}
+      {% set end_of_billing = (now().replace(day=3, hour=23, minute=59, second=59)).date() %}
+    {% endif %}
+    {{ (range((start_of_billing - today).days, (end_of_billing - today).days + 1) 
+         | map('float', daily_energy) 
+         | sum) | round(2) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar-check
+
+# 🌟 Cost of Monthly Energy Usage (Whole Home)
+- name: "Cost of Monthly Energy Usage Whole Home"
+  unique_id: cost_of_monthly_energy_usage_whole_home
+  state: >
+    {% set monthly_usage = states('sensor.daily_energy_usage_whole_home') | float %}
+    {% set price_per_kwh = states('input_number.energy_price_kwh') | float %}
+    {{ (monthly_usage * price_per_kwh) | round(2) }}
+  unit_of_measurement: "$"
+  icon: mdi:currency-usd
+
+# 🌟 Predicted Cost of Daily Energy Usage (Whole Home)
+- name: "Predicted Cost of Daily Energy Usage Whole Home"
+  unique_id: predicted_cost_of_daily_energy_usage_whole_home
+  state: >
+    {% set predicted_daily_usage = states('sensor.predicted_daily_energy_usage_whole_home') | float %}
+    {% set price_per_kwh = states('input_number.energy_price_kwh') | float %}
+    {{ (predicted_daily_usage * price_per_kwh) | round(2) }}
+  unit_of_measurement: "$"
+  icon: mdi:chart-line
+
+# 🌟 Predicted Cost of Monthly Energy Usage (Whole Home)
+- name: "Predicted Cost of Monthly Energy Usage Whole Home"
+  unique_id: predicted_cost_of_monthly_energy_usage_whole_home
+  state: >
+    {% set predicted_monthly_usage = states('sensor.predicted_monthly_energy_usage_whole_home') | float %}
+    {% set price_per_kwh = states('input_number.energy_price_kwh') | float %}
+    {{ (predicted_monthly_usage * price_per_kwh) | round(2) }}
+  unit_of_measurement: "$"
+  icon: mdi:chart-line
+
+# 🌟 Cost of Energy Usage This Billing Cycle (Whole Home)
+- name: "Cost of Energy Usage This Billing Cycle Whole Home"
+  unique_id: cost_of_energy_billing_cycle_whole_home
+  state: >
+    {% set billing_cycle_usage = states('sensor.energy_usage_billing_cycle_whole_home') | float %}
+    {% set price_per_kwh = states('input_number.energy_price_kwh') | float %}
+    {{ (billing_cycle_usage * price_per_kwh) | round(2) }}
+  unit_of_measurement: "$"
+  icon: mdi:calendar-check
