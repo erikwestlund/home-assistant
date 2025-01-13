@@ -24,8 +24,9 @@
 - id: "hvac_reset_working_today_office"
   alias: "HVAC Reset Office Working Today"
   trigger:
-    - platform: time
-      at: input_datetime.hvac_apply_working_end_time_office
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_end_time_office') }}
   condition:
     - condition: state
       entity_id: binary_sensor.is_weekday
@@ -84,8 +85,9 @@
 - id: "hvac_reset_working_today_erik_office"
   alias: "HVAC Reset Working Today Erik Office"
   trigger:
-    - platform: time
-      at: input_datetime.hvac_apply_working_end_time_erik_office
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_end_time_erik_office') }}
   condition:
     - condition: state
       entity_id: binary_sensor.is_weekday
