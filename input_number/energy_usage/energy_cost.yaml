@@ -1,0 +1,7 @@
+energy_price_kwh:
+  name: "Energy Price/kWh"
+  min: 0
+  max: 1
+  step: 0.01
+  unit_of_measurement: "$/kWh"
+  mode: box

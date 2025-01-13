@@ -1,0 +1,50 @@
+- name: "Minute Average Energy Usage Whole Home"
+  unique_id: energy_minute_avg_whole_home
+  state: >
+    {% set value = states('sensor.energy_monitor_power_minute_average') | float %}
+    {{ (value / 1000) | round(1) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Daily Energy Usage Whole Home"
+  unique_id: energy_today_whole_home
+  state: >
+    {{ states('sensor.energy_monitor_energy_today') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar
+
+- name: "Month Energy Usage Whole Home"
+  unique_id: energy_month_whole_home
+  state: >
+    {{ states('sensor.energy_monitor_energy_this_month') | float | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar
+
+# 🌟 Predicted Daily Energy Usage (Whole Home)
+- name: "Predicted Daily Energy Usage Whole Home"
+  unique_id: predicted_energy_today_whole_home
+  state: >
+    {% set usage_so_far = states('sensor.energy_monitor_energy_today') | float %}
+    {% set now_time = now() %}
+    {% set start_of_day = now_time.replace(hour=0, minute=0, second=0, microsecond=0) %}
+    {% set elapsed_time = (now_time - start_of_day).total_seconds() %}
+    {% set total_day_seconds = 24 * 60 * 60 %}
+    
+    {{ (usage_so_far / elapsed_time * total_day_seconds) | round(0) if elapsed_time > 0 else 0 }}
+  unit_of_measurement: "kWh"
+  icon: mdi:chart-line
+
+# 🌟 Predicted Monthly Energy Usage (Whole Home)
+- name: "Predicted Monthly Energy Usage Whole Home"
+  unique_id: predicted_energy_this_month_whole_home
+  state: >
+    {% set usage_so_far = states('sensor.energy_monitor_energy_this_month') | float %}
+    {% set now_time = now() %}
+    {% set start_of_month = now_time.replace(day=1, hour=0, minute=0, second=0, microsecond=0) %}
+    {% set elapsed_days = (now_time - start_of_month).days + 1 %}
+    {% set total_days = now_time.replace(day=28).day + (now_time.replace(day=28) + timedelta(days=4)).day - 28 %}
+    
+    {{ (usage_so_far / elapsed_days * total_days) | round(0) if elapsed_days > 0 else 0 }}
+  unit_of_measurement: "kWh"
+  icon: mdi:chart-line
+
