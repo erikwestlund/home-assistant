@@ -3,10 +3,14 @@
   unique_id: hvac_preheat_required_master_bedroom
   state: >
     {% set preheating_window = is_state('binary_sensor.hvac_preheating_window_master_bedroom', 'on') %}
-    {% set estimated_target_time = as_timestamp(states('sensor.hvac_estimated_time_when_target_temperature_reached_starting_now_master_bedroom')) %}
-    {% set preheat_end = as_timestamp(now().date() ~ ' ' ~ states('input_datetime.hvac_preheat_end_window_master_bedroom')) %}
-    
-    {{ preheating_window and estimated_target_time > preheat_end }}
+    {% set estimated_target_time = as_timestamp(states('sensor.hvac_estimated_time_when_target_temperature_reached_starting_now_master_bedroom')) | default(0) %}
+    {% set preheat_end = as_timestamp(now().date() ~ ' ' ~ states('input_datetime.hvac_preheat_end_window_master_bedroom')) | default(0) %}
+
+    {% if preheating_window and estimated_target_time > preheat_end %}
+      true
+    {% else %}
+      false
+    {% endif %}
   icon: mdi:clock-alert
 
 # 🔥 HVAC Preheating Active Master Bedroom (depends on boolean, which is toggled by preheat required status)
