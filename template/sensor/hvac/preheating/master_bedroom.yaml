@@ -1,3 +1,14 @@
+# Master Bedroom Preheating Current Temperature
+- name: "HVAC Current Preheating Temperature Master Bedroom"
+  unique_id: hvac_current_preheating_temperature_master_bedroom
+  unit_of_measurement: "°F"
+  state: >
+    {% set sensors = [
+      states('sensor.master_bedroom_dresser_temperature') | float(0)
+    ] %}
+    {{ (sensors | sum / sensors | length) | round(1) }}
+  icon: mdi:thermometer
+
 # 📈 HVAC Current Heat Gain Rate (Master Bedroom)
 - name: "HVAC Current Heat Gain Rate Master Bedroom"
   unique_id: hvac_current_heat_gain_rate_master_bedroom
