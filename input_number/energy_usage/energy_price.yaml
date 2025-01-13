@@ -5,3 +5,11 @@ energy_price_kwh:
   step: 0.01
   unit_of_measurement: "$/kWh"
   mode: box
+
+day_of_month_billing_cycle_ends:
+  name: "Day of Month Billing Cycle Ends"
+  min: 1
+  max: 31
+  step: 1
+  unit_of_measurement: "day"
+  mode: box

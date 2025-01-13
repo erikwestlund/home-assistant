@@ -54,16 +54,14 @@
   state: >
     {% set daily_energy = states('sensor.daily_energy_usage_whole_home') | float %}
     {% set today = now().date() %}
-    {% set start_of_billing = (now().replace(day=4, hour=0, minute=0, second=0, microsecond=0)).date() %}
-    {% set end_of_billing = (now().replace(month=now().month + 1 if now().month < 12 else 1, 
-                                           year=now().year if now().month < 12 else now().year + 1, 
-                                           day=3, hour=23, minute=59, second=59)).date() %}
-    {% if today < start_of_billing %}
-      {% set start_of_billing = (now().replace(month=now().month - 1 if now().month > 1 else 12, 
-                                               year=now().year if now().month > 1 else now().year - 1, 
-                                               day=4)).date() %}
-      {% set end_of_billing = (now().replace(day=3, hour=23, minute=59, second=59)).date() %}
-    {% endif %}
+    {% set end_day = states('input_number.day_of_month_billing_cycle_ends') | int %}
+    {% set start_of_billing = (now().replace(day=end_day + 1 if today.day > end_day else 1, 
+                                             month=now().month - 1 if today.day <= end_day else now().month, 
+                                             hour=0, minute=0, second=0, microsecond=0)).date() %}
+    {% set end_of_billing = (now().replace(day=end_day, 
+                                           month=now().month if today.day <= end_day else now().month + 1 if now().month < 12 else 1, 
+                                           year=now().year if now().month < 12 or today.day <= end_day else now().year + 1, 
+                                           hour=23, minute=59, second=59)).date() %}
     {{ (range((start_of_billing - today).days, (end_of_billing - today).days + 1) 
          | map('float', daily_energy) 
          | sum) | round(2) }}
@@ -109,3 +107,36 @@
     {{ (billing_cycle_usage * price_per_kwh) | round(2) }}
   unit_of_measurement: "$"
   icon: mdi:calendar-check
+
+# 🌟 Predicted Energy Usage This Billing Cycle Whole Home
+- name: "Predicted Energy Usage This Billing Cycle Whole Home"
+  unique_id: predicted_energy_billing_cycle_whole_home
+  state: >
+    {% set usage_so_far = states('sensor.energy_usage_billing_cycle_whole_home') | float %}
+    {% set today = now().date() %}
+    {% set end_day = states('input_number.day_of_month_billing_cycle_ends') | int %}
+    {% set start_of_billing = (now().replace(day=end_day + 1 if today.day > end_day else 1, 
+                                             month=now().month - 1 if today.day <= end_day else now().month, 
+                                             hour=0, minute=0, second=0, microsecond=0)).date() %}
+    {% set end_of_billing = (now().replace(day=end_day, 
+                                           month=now().month if today.day <= end_day else now().month + 1 if now().month < 12 else 1, 
+                                           year=now().year if now().month < 12 or today.day <= end_day else now().year + 1, 
+                                           hour=23, minute=59, second=59)).date() %}
+    {% set days_elapsed = (today - start_of_billing).days + 1 %}
+    {% set total_days = (end_of_billing - start_of_billing).days + 1 %}
+    {% set daily_average = usage_so_far / days_elapsed if days_elapsed > 0 else 0 %}
+    
+    {{ (daily_average * total_days) | round(0) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:calendar-clock
+
+# 💰 Predicted Cost of Energy This Billing Cycle Whole Home
+- name: "Predicted Cost of Energy This Billing Cycle Whole Home"
+  unique_id: predicted_cost_billing_cycle_whole_home
+  state: >
+    {% set predicted_usage = states('sensor.predicted_energy_billing_cycle_whole_home') | float %}
+    {% set price_per_kwh = states('input_number.energy_price_kwh') | float %}
+    
+    {{ (predicted_usage * price_per_kwh) | round(2) }}
+  unit_of_measurement: "$"
+  icon: mdi:currency-usd
