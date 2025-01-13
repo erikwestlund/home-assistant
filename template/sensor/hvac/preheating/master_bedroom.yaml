@@ -46,7 +46,8 @@
     {% set heat_gain_rate = states('sensor.hvac_current_heat_gain_rate_master_bedroom') | float %}
     
     {% if heat_gain_rate > 0 %}
-      {{ ((target_temp - current_temp) / heat_gain_rate) | round(2) }}
+      {% set hours = ((target_temp - current_temp) / heat_gain_rate) %}
+      {{ [hours, 0] | max | round(2) }}
     {% else %}
       0
     {% endif %}
@@ -57,7 +58,7 @@
   unique_id: hvac_estimated_time_when_target_reached_starting_now_master_bedroom
   device_class: timestamp
   state: >
-    {% set hours_to_target = states('sensor.hvac_hours_to_reach_target_temperature_master_bedroom') | float %}
+    {% set hours_to_target = states('sensor.hvac_hours_to_reach_target_master_bedroom') | float(0) %}
     {% if hours_to_target > 0 %}
       {{ (now() + timedelta(hours=hours_to_target)).timestamp() | timestamp_local }}
     {% else %}
