@@ -13,11 +13,12 @@
 - name: "HVAC Preheating Active Master Bedroom"
   unique_id: hvac_preheating_active_master_bedroom
   state: >
+    {% set preheating_enabled = is_state('input_boolean.hvac_preheating_enabled_master_bedroom', 'on') %}
     {% set preheating_on = is_state('input_boolean.hvac_preheating_on_master_bedroom', 'on') %}
     {% set stop_override = is_state('input_boolean.hvac_preheating_stop_override_master_bedroom', 'on') %}
     {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_master_bedroom') | float %}
     {% set off_threshold = states('input_number.hvac_mini_split_preheating_off_threshold_master_bedroom') | float %}
     {% set in_preheating_window = is_state('binary_sensor.hvac_preheating_window_master_bedroom', 'on') %}
 
-    {{ preheating_on and not stop_override and daytime_avg_temp > off_threshold and in_preheating_window }}
+    {{ preheating_enabled and preheating_on and not stop_override and daytime_avg_temp > off_threshold and in_preheating_window }}
   icon: mdi:fire
