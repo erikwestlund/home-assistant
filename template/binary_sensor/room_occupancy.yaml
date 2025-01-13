@@ -7,7 +7,7 @@
       or is_state('binary_sensor.office_bookshelf_occupancy', 'on')
       or is_state('binary_sensor.tina_desk_occupancy', 'on') }}
 
-- name: "Office Working"
+- name: "Office Occupied"
   unique_id: office_occupied
   device_class: occupancy
   state: >
@@ -23,7 +23,7 @@
     {{ is_state('binary_sensor.bookshelf_occupancy', 'on')
       or is_state('binary_sensor.lamp_occupancy', 'on') }}
 
-- name: "Family Room Working"
+- name: "Family Room Occupied"
   unique_id: family_room_occupied
   device_class: occupancy
   state: >
@@ -39,7 +39,7 @@
     {{ is_state('binary_sensor.living_room_main_heating_occupancy', 'on')
       or is_state('binary_sensor.living_room_radiator_occupancy', 'on') }}
 
-- name: "Living Room Working"
+- name: "Living Room Occupied"
   unique_id: living_room_occupied
   device_class: occupancy
   state: >
@@ -54,7 +54,7 @@
   state: >
     {{ is_state('binary_sensor.dining_room_occupancy', 'on') }}
 
-- name: "Dining Room Working"
+- name: "Dining Room Occupied"
   unique_id: dining_room_occupied
   device_class: occupancy
   state: >
@@ -68,7 +68,7 @@
   state: >
     {{ is_state('binary_sensor.kitchen_occupancy', 'on') }}
 
-- name: "Kitchen Working"
+- name: "Kitchen Occupied"
   unique_id: kitchen_occupied
   device_class: occupancy
   state: >
@@ -82,7 +82,7 @@
   state: >
     {{ is_state('binary_sensor.stairwell_top_occupancy', 'on') }}
 
-- name: "Stairwell Working"
+- name: "Stairwell Occupied"
   unique_id: stairwell_occupied
   device_class: occupancy
   state: >
@@ -99,7 +99,7 @@
           or is_state('binary_sensor.master_bedroom_chair_endtable_occupancy', 'on')
           or is_state('binary_sensor.master_bedroom_tina_endtable_occupancy', 'on') }}
 
-- name: "Master Bedroom Working"
+- name: "Master Bedroom Occupied"
   unique_id: master_bedroom_occupied
   device_class: occupancy
   state: >
@@ -114,7 +114,7 @@
   state: >
     {{ is_state('binary_sensor.erik_office_occupancy', 'on') }}
 
-- name: "Erik Office Working"
+- name: "Erik Office Occupied"
   unique_id: erik_office_occupied
   device_class: occupancy
   state: >
@@ -129,7 +129,7 @@
   state: >
     {{ is_state('binary_sensor.tillys_room_occupancy', 'on') }}
 
-- name: "Tilly's Room Working"
+- name: "Tilly's Room Occupied"
   unique_id: tillys_room_occupied
   device_class: occupancy
   state: >
@@ -144,7 +144,7 @@
   state: >
     {{ is_state('binary_sensor.hanks_room_occupancy', 'on') }}
 
-- name: "Hank's Room Working"
+- name: "Hank's Room Occupied"
   unique_id: hanks_room_occupied
   device_class: occupancy
   state: >
@@ -158,7 +158,7 @@
   state: >
     {{ is_state('binary_sensor.basement_playroom_occupancy', 'on') }}
 
-- name: "Basement Working"
+- name: "Basement Occupied"
   unique_id: basement_occupied
   device_class: occupancy
   state: >
