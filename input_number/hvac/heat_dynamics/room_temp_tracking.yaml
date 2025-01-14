@@ -1,0 +1,197 @@
+# Office
+hvac_office_average_temperature_60m_ago:
+  name: "HVAC Office Average Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_office_average_temperature_15m_ago:
+  name: "HVAC Office Average Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_office_average_temperature_5m_ago:
+  name: "HVAC Office Average Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Family Room
+hvac_family_room_average_temperature_60m_ago:
+  name: "HVAC Family Room Average Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_family_room_average_temperature_15m_ago:
+  name: "HVAC Family Room Average Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_family_room_average_temperature_5m_ago:
+  name: "HVAC Family Room Average Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Living Room
+hvac_living_room_average_temperature_60m_ago:
+  name: "HVAC Living Room Average Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_living_room_average_temperature_15m_ago:
+  name: "HVAC Living Room Average Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_living_room_average_temperature_5m_ago:
+  name: "HVAC Living Room Average Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Dining Room
+hvac_dining_room_temperature_60m_ago:
+  name: "HVAC Dining Room Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_dining_room_temperature_15m_ago:
+  name: "HVAC Dining Room Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_dining_room_temperature_5m_ago:
+  name: "HVAC Dining Room Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Erik Office
+hvac_erik_office_temperature_60m_ago:
+  name: "HVAC Erik Office Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_erik_office_temperature_15m_ago:
+  name: "HVAC Erik Office Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_erik_office_temperature_5m_ago:
+  name: "HVAC Erik Office Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Master Bedroom
+hvac_master_bedroom_average_temperature_60m_ago:
+  name: "HVAC Master Bedroom Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_master_bedroom_average_temperature_15m_ago:
+  name: "HVAC Master Bedroom Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_master_bedroom_average_temperature_5m_ago:
+  name: "HVAC Master Bedroom Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Kids Rooms
+hvac_kids_rooms_average_temperature_60m_ago:
+  name: "HVAC Kids Rooms Average Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_kids_rooms_average_temperature_15m_ago:
+  name: "HVAC Kids Rooms Average Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_kids_rooms_average_temperature_5m_ago:
+  name: "HVAC Kids Rooms Average Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Hank's Room
+hvac_hank_room_temperature_60m_ago:
+  name: "HVAC Hank's Room Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_hank_room_temperature_15m_ago:
+  name: "HVAC Hank's Room Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_hank_room_temperature_5m_ago:
+  name: "HVAC Hank's Room Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Tilly's Room
+hvac_tilly_room_temperature_60m_ago:
+  name: "HVAC Tilly's Room Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_tilly_room_temperature_15m_ago:
+  name: "HVAC Tilly's Room Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_tilly_room_temperature_5m_ago:
+  name: "HVAC Tilly's Room Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
