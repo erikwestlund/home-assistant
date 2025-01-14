@@ -1,4 +1,4 @@
-- id: save_gas_usage_values
+save_gas_usage_values:
   alias: "Save Gas Usage Values"
   sequence:
     - service: input_number.set_value
