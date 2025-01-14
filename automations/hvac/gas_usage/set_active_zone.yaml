@@ -8,24 +8,7 @@
         - binary_sensor.hvac_radiator_calling_for_heat_office
         - binary_sensor.hvac_radiator_calling_for_heat_family_room
         - binary_sensor.hvac_radiator_calling_for_heat_living_room
-  condition:
-    - condition: template
-      value_template: >
-        {% set office = is_state('binary_sensor.hvac_radiator_calling_for_heat_office', 'on') %}
-        {% set family_room = is_state('binary_sensor.hvac_radiator_calling_for_heat_family_room', 'on') %}
-        {% set living_room = is_state('binary_sensor.hvac_radiator_calling_for_heat_living_room', 'on') %}
-        {% set active_zone = states('input_select.hvac_active_boiler_zone') %}
-
-        {% set new_zone = (office and family_room and living_room) and 'All Zones' or
-                          (office and family_room) and 'Office + Family Room' or
-                          (office and living_room) and 'Office + Living Room' or
-                          (family_room and living_room) and 'Family Room + Living Room' or
-                          office and 'Office' or
-                          family_room and 'Family Room' or
-                          living_room and 'Living Room' or
-                          'None' %}
-
-        {{ new_zone != active_zone }}
+  condition: []
   action:
     - service: input_select.select_option
       target:
