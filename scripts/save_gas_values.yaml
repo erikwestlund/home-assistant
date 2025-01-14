@@ -1,0 +1,26 @@
+- id: save_gas_usage_values
+  alias: "Save Gas Usage Values"
+  sequence:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.gas_start_meter_reading_ft3
+      data:
+        value: "{{ states('input_text.gas_start_meter_reading_input') | float }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.gas_end_meter_reading_ft3
+      data:
+        value: "{{ states('input_text.gas_end_meter_reading_input') | float }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.gas_therm_factor
+      data:
+        value: "{{ states('input_text.gas_therm_factor_input') | float }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.gas_price_per_therm
+      data:
+        value: "{{ states('input_text.gas_price_per_therm_input') | float }}"

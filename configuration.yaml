@@ -24,5 +24,6 @@ timer: !include_dir_merge_named timers/
 template:
   - sensor: !include_dir_merge_list template/sensor/
   - binary_sensor: !include_dir_merge_list template/binary_sensor/
+scripts: !include_dir_merge_named scripts/
 
 sensor: !include_dir_merge_list sensors/
