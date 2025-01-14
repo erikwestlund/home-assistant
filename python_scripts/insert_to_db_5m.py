@@ -1,6 +1,3 @@
-from datetime import datetime
-
-# Function to log data to a CSV-like file without using the csv module
 def log_to_csv(data):
     # Path to the CSV file
     csv_file = '/config/www/heat_dynamics_data_log.csv'
