@@ -176,7 +176,7 @@
         hour_temp_change: "{{ (states('sensor.master_bedroom_average_temperature') | float(0)) - (states('input_number.hvac_master_bedroom_average_temperature_60m_ago') | float(0)) }}"
         mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_master_bedroom') | string }}"
         mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0)) != (states('input_number.hvac_mini_split_setpoint_master_bedroom_60m_ago') | float(0)) else 0 }}"
-        door_closed: {{ 1 if (states('binary_sensor.master_bedroom_door_contact') == 'off') else 0 }}
+        door_closed: "{{ 1 if (states('binary_sensor.master_bedroom_door_contact') == 'off') else 0 }}"
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
 
