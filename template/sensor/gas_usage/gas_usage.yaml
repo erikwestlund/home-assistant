@@ -1,23 +1,37 @@
-# 🔥 Gas Therms Used Current Run
-- name: "Gas Therms Used Current Run"
-  unique_id: gas_therms_used_current_run
+# 🔥 HVAC Gas Therms Used Current Run
+- name: "HVAC Gas Therms Used Current Run"
+  unique_id: hvac_gas_therms_used_current_run
   state: >
-    {% set start_ccf = states('input_number.gas_start_meter_reading_ccf') | float %}
-    {% set end_ccf = states('input_number.gas_end_meter_reading_ccf') | float %}
+    {% set start_ft3 = states('input_number.hvac_gas_start_meter_reading_ft3') | float %}
+    {% set end_ft3 = states('input_number.hvac_gas_end_meter_reading_ft3') | float %}
     {% set therm_factor = states('input_number.gas_therm_factor') | float %}
-    {% set ccf_used = end_ccf - start_ccf %}
+    {% set ft3_used = end_ft3 - start_ft3 %}
     
-    {{ (ccf_used * therm_factor) | round(2) if ccf_used > 0 else 0 }}
+    {{ (ft3_used * therm_factor / 100) | round(2) if ft3_used > 0 else 0 }}
   unit_of_measurement: "therms"
   icon: mdi:fire
 
-# 💰 Gas Cost Current Run
-- name: "Gas Cost Current Run"
-  unique_id: gas_cost_current_run
+# 💰 HVAC Gas Cost Current Run
+- name: "HVAC Gas Cost Current Run"
+  unique_id: hvac_gas_cost_current_run
   state: >
-    {% set therms_used = states('sensor.gas_therms_used_current_run') | float %}
+    {% set therms_used = states('sensor.hvac_gas_therms_used_current_run') | float %}
     {% set price_per_therm = states('input_number.gas_price_per_therm') | float %}
     
     {{ (therms_used * price_per_therm) | round(2) }}
   unit_of_measurement: "$"
   icon: mdi:currency-usd
+
+# 🕒 HVAC Boiler Run Duration Current
+- name: "HVAC Boiler Run Duration Current"
+  unique_id: hvac_boiler_run_duration_current
+  state: >
+    {% set start_time = as_timestamp(states('input_datetime.hvac_boiler_start_time')) %}
+    {% set end_time = as_timestamp(states('input_datetime.hvac_boiler_end_time')) %}
+    {% if start_time and end_time and end_time > start_time %}
+      {{ ((end_time - start_time) / 60) | round(1) }}
+    {% else %}
+      0
+    {% endif %}
+  unit_of_measurement: "minutes"
+  icon: mdi:timer
