@@ -4,7 +4,7 @@ from datetime import datetime
 # Function to connect to the SQLite database and insert data
 def insert_to_db(data):
     # Database file
-    db_file = '/config/heat_dynamics.db'
+    db_file = '/root/config/heat_dynamics.db'
 
     # Connect to SQLite database
     conn = sqlite3.connect(db_file)
