@@ -6,7 +6,7 @@
   action:
     service: google_sheets.append_sheet
     data:
-      config_entry: "{{ !secret google_sheets_sheet_id }}"
+      config_entry: !secret google_sheets_id
       worksheet: "Heat Dynamics"
       data:
         timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
