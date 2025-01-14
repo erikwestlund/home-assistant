@@ -35,3 +35,33 @@
         message: >
           {{ now().timestamp() | timestamp_local }}:
           Boiler zone ran for {{ state_attr('timer.hvac_active_boiler_zone_timer', 'duration') }}.
+
+# 🔄 Set Boiler Start Time
+- id: set_hvac_boiler_start_time
+  alias: "Set HVAC Boiler Start Time"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: input_select.hvac_active_boiler_zone
+      from: "Idle"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.hvac_boiler_start_time
+      data:
+        timestamp: "{{ as_timestamp(now()) }}"
+
+# 🔄 Set Boiler End Time
+- id: set_hvac_boiler_end_time
+  alias: "Set HVAC Boiler End Time"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: input_select.hvac_active_boiler_zone
+      to: "Idle"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.hvac_boiler_end_time
+      data:
+        timestamp: "{{ as_timestamp(now()) }}"
