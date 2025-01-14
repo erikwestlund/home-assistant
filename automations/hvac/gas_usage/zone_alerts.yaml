@@ -1,0 +1,77 @@
+# 🔔 Alert: HVAC Radiator Calling For Heat (Office)
+- id: alert_hvac_radiator_calling_for_heat_office
+  alias: "Alert: HVAC Radiator Calling For Heat Office"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
+      from: "off"
+      to: "on"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        message: "🚨 HVAC Alert: The Office radiator zone is now calling for heat."
+
+# 🔔 Alert: HVAC Radiator No Longer Calling For Heat (Office)
+- id: alert_hvac_radiator_no_longer_calling_for_heat_office
+  alias: "Alert: HVAC Radiator No Longer Calling For Heat Office"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
+      from: "on"
+      to: "off"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        message: "ℹ️ HVAC Info: The Office radiator zone has stopped calling for heat."
+
+# 🔔 Alert: HVAC Radiator Calling For Heat (Family Room)
+- id: alert_hvac_radiator_calling_for_heat_family_room
+  alias: "Alert: HVAC Radiator Calling For Heat Family Room"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
+      from: "off"
+      to: "on"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        message: "🚨 HVAC Alert: The Family Room radiator zone is now calling for heat."
+
+# 🔔 Alert: HVAC Radiator No Longer Calling For Heat (Family Room)
+- id: alert_hvac_radiator_no_longer_calling_for_heat_family_room
+  alias: "Alert: HVAC Radiator No Longer Calling For Heat Family Room"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
+      from: "on"
+      to: "off"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        message: "ℹ️ HVAC Info: The Family Room radiator zone has stopped calling for heat."
+
+# 🔔 Alert: HVAC Radiator Calling For Heat (Living Room)
+- id: alert_hvac_radiator_calling_for_heat_living_room
+  alias: "Alert: HVAC Radiator Calling For Heat Living Room"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
+      from: "off"
+      to: "on"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        message: "🚨 HVAC Alert: The Living Room radiator zone is now calling for heat."
+
+# 🔔 Alert: HVAC Radiator No Longer Calling For Heat (Living Room)
+- id: alert_hvac_radiator_no_longer_calling_for_heat_living_room
+  alias: "Alert: HVAC Radiator No Longer Calling For Heat Living Room"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
+      from: "on"
+      to: "off"
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        message: "ℹ️ HVAC Info: The Living Room radiator zone has stopped calling for heat."
