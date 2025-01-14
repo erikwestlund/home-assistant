@@ -1,17 +1,17 @@
 gas_start_meter_reading_ft3:
   name: "Gas Start Meter Reading (ft³)"
-  min: 0
-  max: 10000
-  step: 0.01
+  min: 1275
+  max: 3000
+  step: 0.1
   unit_of_measurement: "ft³"
   initial: 1275
   icon: mdi:counter
 
 gas_end_meter_reading_ft3:
   name: "Gas End Meter Reading (ft³)"
-  min: 0
-  max: 10000
-  step: 0.01
+  min: 1275
+  max: 3000
+  step: 0.1
   unit_of_measurement: "ft³"
   initial: 1350
   icon: mdi:counter
