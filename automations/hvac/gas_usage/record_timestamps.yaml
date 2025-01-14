@@ -4,7 +4,7 @@
   trigger:
     - platform: state
       entity_id: input_select.hvac_active_boiler_zone
-      from: "None"
+      from: "Idle"
   condition:
     - condition: state
       entity_id: timer.hvac_active_boiler_zone_timer
@@ -25,7 +25,7 @@
   trigger:
     - platform: state
       entity_id: input_select.hvac_active_boiler_zone
-      to: "None"
+      to: "Idle"
   action:
     - service: timer.finish
       target:
