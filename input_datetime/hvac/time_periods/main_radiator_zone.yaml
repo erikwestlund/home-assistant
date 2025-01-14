@@ -14,10 +14,10 @@ hvac_bedtime_start_time_main_radiator_zone:
   name: HVAC Main Radiator Zone Bedtime Start Time
   has_time: true
   has_date: false
-  initial: "21:00:00"
+  initial: "19:00:00"
 
 hvac_sleep_start_time_main_radiator_zone:
   name: HVAC Main Radiator Zone Sleep Start Time
   has_time: true
   has_date: false
-  initial: "23:00:00"
+  initial: "22:00:00"

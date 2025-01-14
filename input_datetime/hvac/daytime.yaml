@@ -8,4 +8,4 @@ hvac_night_start_time:
   name: HVAC Night Start Time
   has_time: true
   has_date: false
-  initial: "20:30:00"
+  initial: "21:00:00"

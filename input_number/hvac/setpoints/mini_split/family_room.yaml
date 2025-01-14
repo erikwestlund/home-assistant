@@ -12,7 +12,7 @@ hvac_mini_split_weekday_day_cold_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 74
+  initial: 76
 
 hvac_mini_split_weekday_day_hot_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekday Daytime Setpoint (Hot)
@@ -20,7 +20,7 @@ hvac_mini_split_weekday_day_hot_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  initial: 74
 
 hvac_mini_split_weekday_night_freezing_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekday Nighttime Setpoint (Freezing)
@@ -28,7 +28,7 @@ hvac_mini_split_weekday_night_freezing_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  initial: 78
 
 hvac_mini_split_weekday_night_cold_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekday Nighttime Setpoint (Cold)
@@ -36,7 +36,7 @@ hvac_mini_split_weekday_night_cold_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 68
+  initial: 76
 
 hvac_mini_split_weekday_night_hot_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekday Nighttime Setpoint (Hot)
@@ -44,7 +44,7 @@ hvac_mini_split_weekday_night_hot_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 74
+  initial: 76
 
 hvac_mini_split_weekend_day_freezing_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekend Daytime Setpoint (Freezing)
@@ -60,7 +60,7 @@ hvac_mini_split_weekend_day_cold_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 74
+  initial: 76
 
 hvac_mini_split_weekend_day_hot_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekend Daytime Setpoint (Hot)
@@ -68,7 +68,7 @@ hvac_mini_split_weekend_day_hot_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  initial: 76
 
 hvac_mini_split_weekend_night_freezing_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekend Nighttime Setpoint (Freezing)
@@ -76,7 +76,7 @@ hvac_mini_split_weekend_night_freezing_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 76
+  initial: 78
 
 hvac_mini_split_weekend_night_cold_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekend Nighttime Setpoint (Cold)
@@ -84,7 +84,7 @@ hvac_mini_split_weekend_night_cold_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  initial: 76
 
 hvac_mini_split_weekend_night_hot_setpoint_family_room:
   name: HVAC Family Room Mini Split Weekend Nighttime Setpoint (Hot)
@@ -92,4 +92,4 @@ hvac_mini_split_weekend_night_hot_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 74
+  initial: 76

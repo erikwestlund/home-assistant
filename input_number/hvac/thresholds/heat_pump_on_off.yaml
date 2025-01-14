@@ -1,14 +1,14 @@
 hvac_mini_split_off_threshold_office:
   name: HVAC Office Mini Split Off Threshold
-  min: -20
+  min: -13
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 27
+  initial: -13
 
 hvac_mini_split_off_threshold_family_room:
   name: HVAC Family Room Mini Split Off Threshold
-  min: -20
+  min: -13
   max: 120
   step: 1
   unit_of_measurement: "°F"
@@ -16,23 +16,23 @@ hvac_mini_split_off_threshold_family_room:
 
 hvac_mini_split_off_threshold_living_room:
   name: HVAC Living Room Mini Split Off Threshold
-  min: -20
+  min: -13
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 50
+  initial: -13
 
 hvac_mini_split_off_threshold_dining_room:
   name: HVAC Dining Room Mini Split Off Threshold
-  min: -20
+  min: -13
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 27
+  initial: -13
 
 hvac_mini_split_off_threshold_master_bedroom:
   name: HVAC Master Bedroom Mini Split Off Threshold
-  min: -20
+  min: -13
   max: 120
   step: 1
   unit_of_measurement: "°F"
@@ -40,7 +40,7 @@ hvac_mini_split_off_threshold_master_bedroom:
 
 hvac_mini_split_off_threshold_erik_office:
   name: HVAC Erik Office Mini Split Off Threshold
-  min: -20
+  min: -13
   max: 120
   step: 1
   unit_of_measurement: "°F"
@@ -48,7 +48,7 @@ hvac_mini_split_off_threshold_erik_office:
 
 hvac_ducted_off_threshold:
   name: HVAC Ducted Off Threshold
-  min: -20
+  min: -13
   max: 120
   step: 1
   unit_of_measurement: "°F"

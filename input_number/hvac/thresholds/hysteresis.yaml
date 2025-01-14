@@ -13,7 +13,7 @@ hvac_over_target_stop_threshold_ducted:
   max: 5
   step: 0.5
   unit_of_measurement: "°F"
-  initial: 1
+  initial: 1.5
 
 # Space Heater
 hvac_under_target_start_threshold_office_space_heater:

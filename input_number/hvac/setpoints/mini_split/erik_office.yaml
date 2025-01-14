@@ -13,7 +13,7 @@ hvac_mini_split_working_cold_setpoint_erik_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 74
 
 hvac_mini_split_working_hot_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Working Setpoint (Hot)
@@ -21,7 +21,7 @@ hvac_mini_split_working_hot_setpoint_erik_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 72
 
 # Weekday Setpoints
 hvac_mini_split_weekday_freezing_setpoint_erik_office:
@@ -30,7 +30,7 @@ hvac_mini_split_weekday_freezing_setpoint_erik_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 68
+  initial: 64
 
 hvac_mini_split_weekday_cold_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Weekday Setpoint (Cold)

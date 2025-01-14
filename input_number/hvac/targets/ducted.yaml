@@ -22,7 +22,7 @@ hvac_target_night_heat_ducted:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 69
 
 hvac_target_night_cool_ducted:
   name: HVAC Kids Rooms Night Cool Target
