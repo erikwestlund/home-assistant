@@ -349,3 +349,43 @@
         entity_id: input_number.hvac_tilly_room_temperature_5m_ago
       data:
         value: "{{ states('sensor.tilly_s_room_average_temperature') }}"
+
+# Update Kitchen Temperature 60m Ago (Every Hour)
+- id: update_kitchen_temperature_60m_ago
+  alias: "Update Kitchen Temperature 60m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '7'  # Ducted stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_kitchen_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.kitchen_average_temperature') }}"
+
+# Update Kitchen Temperature 15m Ago (Every 15 Minutes)
+- id: update_kitchen_temperature_15m_ago
+  alias: "Update Kitchen Temperature 15m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/15'  # Trigger every 15 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_kitchen_temperature_15m_ago
+      data:
+        value: "{{ states('sensor.kitchen_average_temperature') }}"
+
+# Update Kitchen Temperature 5m Ago (Every 5 Minutes)
+- id: update_kitchen_temperature_5m_ago
+  alias: "Update Kitchen Temperature 5m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/5'  # Trigger every 5 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_kitchen_temperature_5m_ago
+      data:
+        value: "{{ states('sensor.kitchen_average_temperature') }}"
+

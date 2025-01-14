@@ -195,3 +195,25 @@ hvac_tilly_room_temperature_5m_ago:
   max: 150
   step: 0.1
   unit_of_measurement: "°F"
+
+# Kitchen
+hvac_kitchen_temperature_60m_ago:
+  name: "HVAC Kitchen Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_kitchen_temperature_15m_ago:
+  name: "HVAC Kitchen Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_kitchen_temperature_5m_ago:
+  name: "HVAC Kitchen Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
