@@ -1,9 +1,8 @@
-
-- id: collect_5min_data_office
-  alias: "Collect Hourly Minute Data for Office Heat Dynamics"
+- id: collect_hourly_data_office
+  alias: "Collect Hourly Data for Office Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '0'  # Trigger every hour, on the hour
   action:
     service: google_sheets.append_sheet
     data:
@@ -14,28 +13,28 @@
         outdoor_temp_60m_ago: "{{ states('input_number.outdoor_temperature_60m_ago') | float(0) }}"
         outdoor_temp_current: "{{ states('sensor.current_temperature') | float(0) }}"
         outdoor_temp_60m_change: "{{ (states('sensor.current_temperature') | float(0)) - (states('input_number.outdoor_temperature_60m_ago') | float(0)) }}"
-        main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') }}"
+        main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
         office_temp_temp_now: "{{ states('sensor.tina_office_average_temperature') | float(0) }}"
         office_60m_temp_change: "{{ (states('sensor.tina_office_average_temperature') | float(0)) - (states('input_number.hvac_office_average_temperature_60m_ago') | float(0)) }}"
-        office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') }}"
-        office_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_office') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_office') }}"
+        office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') | string }}"
+        office_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_office') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_office') | string }}"
         office_radiator_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_office') | float(0)) != (states('input_number.hvac_radiator_setpoint_office_60m_ago') | float(0)) else 0 }}"
         office_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) != (states('input_number.hvac_mini_split_setpoint_office_60m_ago') | float(0)) else 0 }}"
         office_space_heater_power_status_change: "{{ 1 if (states('binary_sensor.hvac_space_heater_active_office') != states('input_boolean.space_heater_power_status_office_60m_ago')) else 0 }}"
         family_room_temp_now: "{{ states('sensor.family_room_average_temperature') | float(0) }}"
         family_room_temp_60m_change: "{{ (states('sensor.family_room_average_temperature') | float(0)) - (states('input_number.hvac_family_room_average_temperature_60m_ago') | float(0)) }}"
-        family_room_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_family_room') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_family_room') }}"
-        family_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_family_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_family_room') }}"
+        family_room_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_family_room') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_family_room') | string }}"
+        family_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_family_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_family_room') | string }}"
         family_room_radiator_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_family_room') | float(0)) != (states('input_number.hvac_radiator_setpoint_family_room_60m_ago') | float(0)) else 0 }}"
         family_room_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_family_room') | float(0)) != (states('input_number.hvac_mini_split_setpoint_family_room_60m_ago') | float(0)) else 0 }}"
         living_room_temp_now: "{{ states('sensor.living_room_average_temperature') | float(0) }}"
         living_room_temp_60m_change: "{{ (states('sensor.living_room_average_temperature') | float(0)) - (states('input_number.hvac_living_room_average_temperature_60m_ago') | float(0)) }}"
-        living_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_living_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_living_room') }}"
+        living_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_living_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_living_room') | string }}"
         living_room_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_living_room') | float(0)) != (states('input_number.hvac_mini_split_setpoint_living_room_60m_ago') | float(0)) else 0 }}"
         dining_room_temp_now: "{{ states('sensor.dining_room_average_temperature') | float(0) }}"
         dining_room_temp_60m_change: "{{ (states('sensor.dining_room_average_temperature') | float(0)) - (states('input_number.hvac_dining_room_temperature_60m_ago') | float(0)) }}"
-        dining_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_dining_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_dining_room') }}"
+        dining_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_dining_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_dining_room') | string }}"
         dining_room_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_dining_room') | float(0)) != (states('input_number.hvac_mini_split_setpoint_dining_room_60m_ago') | float(0)) else 0 }}"
         erik_office_temp_now: "{{ states('sensor.erik_office_average_temperature') | float(0) }}"
         erik_office_temp_60m_change: "{{ (states('sensor.erik_office_average_temperature') | float(0)) - (states('input_number.hvac_erik_office_temperature_60m_ago') | float(0)) }}"
@@ -43,7 +42,7 @@
         erik_office_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_erik_office') | float(0)) != (states('input_number.hvac_mini_split_setpoint_erik_office_60m_ago') | float(0)) else 0 }}"
         master_bedroom_temp_now: "{{ states('sensor.master_bedroom_average_temperature') | float(0) }}"
         master_bedroom_temp_60m_change: "{{ (states('sensor.master_bedroom_average_temperature') | float(0)) - (states('input_number.hvac_master_bedroom_average_temperature_60m_ago') | float(0)) }}"
-        master_bedroom_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_master_bedroom') }}"
+        master_bedroom_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_master_bedroom') | string }}"
         master_bedroom_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0)) != (states('input_number.hvac_mini_split_setpoint_master_bedroom_60m_ago') | float(0)) else 0 }}"
         kids_rooms_temp_now: "{{ states('sensor.kids_rooms_average_temperature') | float(0) }}"
         kids_rooms_temp_60m_change: "{{ (states('sensor.kids_rooms_average_temperature') | float(0)) - (states('input_number.hvac_kids_rooms_average_temperature_60m_ago') | float(0)) }}"
@@ -51,6 +50,7 @@
         hank_room_temp_60m_change: "{{ (states('sensor.hank_s_room_average_temperature') | float(0)) - (states('input_number.hvac_hank_room_temperature_60m_ago') | float(0)) }}"
         tilly_room_temp_now: "{{ states('sensor.tilly_s_room_average_temperature') | float(0) }}"
         tilly_room_temp_60m_change: "{{ (states('sensor.tilly_s_room_average_temperature') | float(0)) - (states('input_number.hvac_tilly_room_temperature_60m_ago') | float(0)) }}"
-        ducted_setpoint: "{{ 'off' if (states('sensor.hvac_ducted_setpoint') | float(0)) == 0 else states('sensor.hvac_ducted_setpoint') }}"
+        ducted_setpoint: "{{ 'off' if (states('sensor.hvac_ducted_setpoint') | float(0)) == 0 else states('sensor.hvac_ducted_setpoint') | string }}"
         ducted_setpoint_change: "{{ 1 if (states('sensor.hvac_setpoint_ducted') | float(0)) != (states('input_number.hvac_setpoint_ducted_60m_ago') | float(0)) else 0 }}"
+
 
