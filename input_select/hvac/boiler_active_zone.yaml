@@ -1,14 +1,13 @@
-input_select:
-  hvac_active_boiler_zone:
-    name: HVAC Active Boiler Zone
-    options:
-      - "None"
-      - "Office"
-      - "Family Room"
-      - "Living Room"
-      - "Office + Family Room"
-      - "Office + Living Room"
-      - "Family Room + Living Room"
-      - "All Zones"
-    initial: "None"
-    icon: mdi:radiator
+hvac_active_boiler_zone:
+  name: HVAC Active Boiler Zone
+  options:
+    - "None"
+    - "Office"
+    - "Family Room"
+    - "Living Room"
+    - "Office + Family Room"
+    - "Office + Living Room"
+    - "Family Room + Living Room"
+    - "All Zones"
+  initial: "None"
+  icon: mdi:radiator
