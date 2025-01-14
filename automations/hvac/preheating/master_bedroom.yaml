@@ -2,8 +2,9 @@
 - id: reset_hvac_heat_gain_start_time_set_today_master_bedroom
   alias: "Reset HVAC Heat Gain Start Time Set Today Master Bedroom"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_preheat_end_window_master_bedroom') }}"
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_preheat_end_window_master_bedroom') }}
   action:
     - service: input_boolean.turn_off
       target:
@@ -14,8 +15,9 @@
 - id: reset_hvac_preheating_stop_override_master_bedroom
   alias: "Reset HVAC Preheating Stop Override Master Bedroom"
   trigger:
-    - platform: time
-      at: "{{ states('input_datetime.hvac_preheat_end_window_master_bedroom') }}"
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_preheat_end_window_master_bedroom') }}
   action:
     - service: input_boolean.turn_off
       target:

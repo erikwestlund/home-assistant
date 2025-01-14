@@ -1,0 +1,9 @@
+gas_start_meter_reading_ft3:
+  name: "Gas Start Meter Reading (ft³)"
+  max: 10
+  icon: mdi:counter
+
+gas_end_meter_reading_ft3:
+  name: "Gas End Meter Reading (ft³)"
+  max: 10
+  icon: mdi:counter
