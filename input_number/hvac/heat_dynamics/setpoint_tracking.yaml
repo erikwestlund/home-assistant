@@ -58,7 +58,7 @@ hvac_radiator_setpoint_main_zone_15m_ago:
   step: 1
   unit_of_measurement: "°F"
 
-hvac_radiator_main_zone_setpoint_5m_ago:
+hvac_radiator_setpoint_main_zone_5m_ago:
   name: "HVAC Main Zone Radiator Setpoint 5m Ago"
   min: -100
   max: 150
