@@ -84,5 +84,5 @@
         entity_id: timer.hvac_active_boiler_zone_timer
       data:
         duration: >
-          {% set total_minutes = states('sensor.hvac_total_boiler_run_time') | int %}
-          {{ (total_minutes // 60) | int }}:{{ (total_minutes % 60) | string.zfill(2) }}:00
+          {% set total_minutes = (states('sensor.hvac_total_boiler_run_time') | int(default=0)) %}
+          "{{ '%02d:%02d:00' | format(total_minutes // 60, total_minutes % 60) }}"

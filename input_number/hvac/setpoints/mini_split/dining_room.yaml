@@ -5,7 +5,7 @@ hvac_mini_split_day_freezing_setpoint_dining_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  initial: 74
 
 hvac_mini_split_day_cold_setpoint_dining_room:
   name: HVAC Dining Room Mini Split Day Setpoint (Cold)

@@ -13,5 +13,5 @@ gas_end_meter_reading_ft3:
   max: 3000
   step: 0.1
   unit_of_measurement: "ft³"
-  initial: 1350
+  initial: 1276
   icon: mdi:counter
