@@ -1,60 +1,59 @@
-automation:
-  # Main Zone Radiator Power Status 60m Ago (Every Hour)
-  - id: update_radiator_power_status_main_zone_60m_ago
-    alias: "Update Radiator Power Status Main Zone 60m Ago"
-    trigger:
-      platform: time_pattern
-      minutes: '0'  # Trigger every hour (start of each hour)
-    condition:
-      condition: state
-      entity_id: binary_sensor.hvac_radiator_power_status_main_zone
-      state: 'on'
-    action:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
+# Main Zone Radiator Power Status 60m Ago (Every Hour)
+- id: update_radiator_power_status_main_zone_60m_ago
+  alias: "Update Radiator Power Status Main Zone 60m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '0'  # Trigger every hour (start of each hour)
+  condition:
+    condition: state
+    entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
 
-  # Main Zone Radiator Power Status 15m Ago (Every 15 Minutes)
-  - id: update_radiator_power_status_main_zone_15m_ago
-    alias: "Update Radiator Power Status Main Zone 15m Ago"
-    trigger:
-      platform: time_pattern
-      minutes: '/15'  # Trigger every 15 minutes
-    condition:
-      condition: state
-      entity_id: binary_sensor.hvac_radiator_power_status_main_zone
-      state: 'on'
-    action:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: input_boolean.radiator_power_status_main_zone_15m_ago
+# Main Zone Radiator Power Status 15m Ago (Every 15 Minutes)
+- id: update_radiator_power_status_main_zone_15m_ago
+  alias: "Update Radiator Power Status Main Zone 15m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/15'  # Trigger every 15 minutes
+  condition:
+    condition: state
+    entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.radiator_power_status_main_zone_15m_ago
 
-  # Main Zone Radiator Power Status 5m Ago (Every 5 Minutes)
-  - id: update_radiator_power_status_main_zone_5m_ago
-    alias: "Update Radiator Power Status Main Zone 5m Ago"
-    trigger:
-      platform: time_pattern
-      minutes: '/5'  # Trigger every 5 minutes
-    condition:
-      condition: state
-      entity_id: binary_sensor.hvac_radiator_power_status_main_zone
-      state: 'on'
-    action:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: input_boolean.radiator_power_status_main_zone_5m_ago
+# Main Zone Radiator Power Status 5m Ago (Every 5 Minutes)
+- id: update_radiator_power_status_main_zone_5m_ago
+  alias: "Update Radiator Power Status Main Zone 5m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/5'  # Trigger every 5 minutes
+  condition:
+    condition: state
+    entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.radiator_power_status_main_zone_5m_ago
 
-  # Turn off the input_booleans when the binary sensor is off
-  - id: turn_off_radiator_power_status_main_zone
-    alias: "Turn Off Radiator Power Status Main Zone"
-    trigger:
-      platform: state
-      entity_id: binary_sensor.hvac_radiator_power_status_main_zone
-      to: 'off'
-    action:
-      - service: input_boolean.turn_off
-        target:
-          entity_id:
-            - input_boolean.radiator_power_status_main_zone_60m_ago
-            - input_boolean.radiator_power_status_main_zone_15m_ago
-            - input_boolean.radiator_power_status_main_zone_5m_ago
+# Turn off the input_booleans when the binary sensor is off
+- id: turn_off_radiator_power_status_main_zone
+  alias: "Turn Off Radiator Power Status Main Zone"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+    to: 'off'
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.radiator_power_status_main_zone_60m_ago
+          - input_boolean.radiator_power_status_main_zone_15m_ago
+          - input_boolean.radiator_power_status_main_zone_5m_ago
