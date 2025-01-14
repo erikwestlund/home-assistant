@@ -1,0 +1,116 @@
+# Office Radiator Setpoint 60m Ago (Every Hour)
+- id: update_radiator_setpoint_office_60m_ago
+  alias: "Update Radiator Setpoint Office 60m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '0'  # Trigger every hour (start of each hour)
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_office_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_office') }}"
+
+# Office Radiator Setpoint 15m Ago (Every 15 Minutes)
+- id: update_radiator_setpoint_office_15m_ago
+  alias: "Update Radiator Setpoint Office 15m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/15'  # Trigger every 15 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_office_15m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_office') }}"
+
+# Office Radiator Setpoint 5m Ago (Every 5 Minutes)
+- id: update_radiator_setpoint_office_5m_ago
+  alias: "Update Radiator Setpoint Office 5m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/5'  # Trigger every 5 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_office_5m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_office') }}"
+
+# Family Room Radiator Setpoint 60m Ago (Every Hour)
+- id: update_radiator_setpoint_family_room_60m_ago
+  alias: "Update Radiator Setpoint Family Room 60m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '0'  # Trigger every hour (start of each hour)
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_family_room_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_family_room') }}"
+
+# Family Room Radiator Setpoint 15m Ago (Every 15 Minutes)
+- id: update_radiator_setpoint_family_room_15m_ago
+  alias: "Update Radiator Setpoint Family Room 15m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/15'  # Trigger every 15 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_family_room_15m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_family_room') }}"
+
+# Family Room Radiator Setpoint 5m Ago (Every 5 Minutes)
+- id: update_radiator_setpoint_family_room_5m_ago
+  alias: "Update Radiator Setpoint Family Room 5m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/5'  # Trigger every 5 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_family_room_5m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_family_room') }}"
+
+# Main Zone Radiator Setpoint 60m Ago (Every Hour)
+- id: update_radiator_setpoint_main_zone_60m_ago
+  alias: "Update Radiator Setpoint Main Zone 60m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '0'  # Trigger every hour (start of each hour)
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_main_zone_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
+
+# Main Zone Radiator Setpoint 15m Ago (Every 15 Minutes)
+- id: update_radiator_setpoint_main_zone_15m_ago
+  alias: "Update Radiator Setpoint Main Zone 15m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/15'  # Trigger every 15 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_main_zone_15m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
+
+# Main Zone Radiator Setpoint 5m Ago (Every 5 Minutes)
+- id: update_radiator_setpoint_main_zone_5m_ago
+  alias: "Update Radiator Setpoint Main Zone 5m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/5'  # Trigger every 5 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_main_zone_5m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
