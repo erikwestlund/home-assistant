@@ -1,0 +1,31 @@
+hvac_boiler_office_run_time_daily:
+  source: timer.hvac_boiler_office_run_timer
+  cycle: daily
+
+hvac_boiler_office_run_time_monthly:
+  source: timer.hvac_boiler_office_run_timer
+  cycle: monthly
+
+hvac_boiler_family_room_run_time_daily:
+  source: timer.hvac_boiler_family_room_run_timer
+  cycle: daily
+
+hvac_boiler_family_room_run_time_monthly:
+  source: timer.hvac_boiler_family_room_run_timer
+  cycle: monthly
+
+hvac_boiler_living_room_run_time_daily:
+  source: timer.hvac_boiler_living_room_run_timer
+  cycle: daily
+
+hvac_boiler_living_room_run_time_monthly:
+  source: timer.hvac_boiler_living_room_run_timer
+  cycle: monthly
+
+hvac_boiler_active_boiler_run_time_daily:
+  source: sensor.hvac_boiler_total_boiler_run_time
+  cycle: daily
+
+hvac_boiler_active_boiler_run_time_monthly:
+  source: sensor.hvac_boiler_total_boiler_run_time
+  cycle: monthly

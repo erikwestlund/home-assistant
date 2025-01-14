@@ -1,0 +1,94 @@
+# 🔄 Start Zone Timer When Calling for Heat
+- id: start_zone_timer
+  alias: "Start Zone Timer"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.hvac_radiator_calling_for_heat_office
+        - binary_sensor.hvac_radiator_calling_for_heat_family_room
+        - binary_sensor.hvac_radiator_calling_for_heat_living_room
+      to: "on"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
+              state: "on"
+          sequence:
+            - service: timer.start
+              target:
+                entity_id: timer.hvac_boiler_run_timer_office
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
+              state: "on"
+          sequence:
+            - service: timer.start
+              target:
+                entity_id: timer.hvac_boiler_run_timer_family_room
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
+              state: "on"
+          sequence:
+            - service: timer.start
+              target:
+                entity_id: timer.hvac_boiler_run_timer_living_room
+
+# 🔴 Stop Zone Timer When Stopping Heat Call
+- id: stop_zone_timer
+  alias: "Stop Zone Timer"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.hvac_radiator_calling_for_heat_office
+        - binary_sensor.hvac_radiator_calling_for_heat_family_room
+        - binary_sensor.hvac_radiator_calling_for_heat_living_room
+      to: "off"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
+              state: "off"
+          sequence:
+            - service: timer.pause
+              target:
+                entity_id: timer.hvac_boiler_run_timer_office
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
+              state: "off"
+          sequence:
+            - service: timer.pause
+              target:
+                entity_id: timer.hvac_boiler_run_timer_family_room
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
+              state: "off"
+          sequence:
+            - service: timer.pause
+              target:
+                entity_id: timer.hvac_boiler_run_timer_living_room
+
+# 🔄 Update Active Boiler Zone Timer
+- id: update_hvac_active_boiler_zone_timer
+  alias: "Update HVAC Active Boiler Zone Timer"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - timer.hvac_boiler_run_timer_office
+        - timer.hvac_boiler_run_timer_family_room
+        - timer.hvac_boiler_run_timer_living_room
+  action:
+    - service: timer.start
+      target:
+        entity_id: timer.hvac_active_boiler_zone_timer
+      data:
+        duration: >
+          {% set total_minutes = states('sensor.hvac_total_boiler_run_time') | int %}
+          {{ total_minutes // 60 }}:{{ (total_minutes % 60) | string.zfill(2) }}:00

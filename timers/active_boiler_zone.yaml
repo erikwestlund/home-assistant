@@ -1,3 +1,15 @@
-hvac_active_boiler_zone_timer:
+hvac_boiler_run_timer_active_zone:
   name: "HVAC Active Boiler Zone Timer"
+  duration: "00:00:00"
+
+hvac_boiler_run_timer_office:
+  name: "Office Run Timer"
+  duration: "00:00:00"
+
+hvac_boiler_run_timer_family_room:
+  name: "Family Room Run Timer"
+  duration: "00:00:00"
+
+hvac_boiler_run_timer_living_room:
+  name: "Living Room Run Timer"
   duration: "00:00:00"
