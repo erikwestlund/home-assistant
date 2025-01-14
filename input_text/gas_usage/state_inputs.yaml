@@ -1,9 +1,19 @@
-gas_start_meter_reading_ft3:
+gas_start_meter_reading_ft3_input:
   name: "Gas Start Meter Reading (ft³)"
   max: 10
   icon: mdi:counter
 
-gas_end_meter_reading_ft3:
+gas_end_meter_reading_ft3_input:
   name: "Gas End Meter Reading (ft³)"
   max: 10
   icon: mdi:counter
+
+  gas_therm_factor_input:
+    name: "Gas Therm Factor Input"
+    max: 10
+    icon: mdi:calculator
+
+  gas_price_per_therm_input:
+    name: "Gas Price per Therm Input"
+    max: 10
+    icon: mdi:currency-usd
