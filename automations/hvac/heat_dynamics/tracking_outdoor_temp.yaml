@@ -2,7 +2,7 @@
   alias: "Update Outdoor Temperature 60 Minutes Ago"
   trigger:
     platform: time_pattern
-    minutes: '/60'  # Triggers every 60 minutes
+    minutes: '0'  # This triggers every hour at the start (i.e., 00, 01, 02, ...)
   action:
     - service: input_number.set_value
       target:
