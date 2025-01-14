@@ -4,4 +4,4 @@ hvac_mini_split_preheating_off_threshold_master_bedroom:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  initial: 10
