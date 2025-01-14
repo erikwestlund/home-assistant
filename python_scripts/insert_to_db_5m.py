@@ -1,6 +1,6 @@
 def log_to_csv(data):
     # Path to the CSV file
-    csv_file = '/config/www/heat_dynamics_data_log.csv'
+    csv_file = '/root/config/www/heat_dynamics_data_log.csv'
 
     # Prepare the data in CSV format (comma-separated values)
     data_to_log = f"{data['timestamp']},{data['room']},{data['temp']},{data['temp_change_5m']}," \
