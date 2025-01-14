@@ -5,7 +5,7 @@
     platform: time_pattern
     minutes: '/5'  # Trigger every 5 minutes
   action:
-    - service: python_script.insert_to_db
+    - service: python_script.insert_to_db_5m
       data:
         timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
         room: "office"
