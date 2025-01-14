@@ -34,5 +34,5 @@
           {% elif living_room %}
             Living Room
           {% else %}
-            None
+            Idle
           {% endif %}

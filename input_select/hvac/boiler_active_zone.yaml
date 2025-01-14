@@ -1,7 +1,7 @@
 hvac_active_boiler_zone:
   name: Active Boiler Zone
   options:
-    - None
+    - Idle
     - Office
     - Family Room
     - Living Room
