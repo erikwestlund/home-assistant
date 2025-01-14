@@ -1,0 +1,352 @@
+automation:
+  # Update Tina Office Temperature 60m Ago (Every Hour)
+  - id: update_tina_office_temperature_60m_ago
+    alias: "Update Tina Office Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_office_average_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.tina_office_average_temperature') }}"
+
+  # Update Tina Office Temperature 15m Ago (Every 15 Minutes)
+  - id: update_tina_office_temperature_15m_ago
+    alias: "Update Tina Office Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_office_average_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.tina_office_average_temperature') }}"
+
+  # Update Tina Office Temperature 5m Ago (Every 5 Minutes)
+  - id: update_tina_office_temperature_5m_ago
+    alias: "Update Tina Office Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_office_average_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.tina_office_average_temperature') }}"
+
+  # Update Family Room Temperature 60m Ago (Every Hour)
+  - id: update_family_room_temperature_60m_ago
+    alias: "Update Family Room Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_family_room_average_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.family_room_average_temperature') }}"
+
+  # Update Family Room Temperature 15m Ago (Every 15 Minutes)
+  - id: update_family_room_temperature_15m_ago
+    alias: "Update Family Room Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_family_room_average_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.family_room_average_temperature') }}"
+
+  # Update Family Room Temperature 5m Ago (Every 5 Minutes)
+  - id: update_family_room_temperature_5m_ago
+    alias: "Update Family Room Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_family_room_average_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.family_room_average_temperature') }}"
+
+  # Update Living Room Temperature 60m Ago (Every Hour)
+  - id: update_living_room_temperature_60m_ago
+    alias: "Update Living Room Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_living_room_average_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.living_room_average_temperature') }}"
+
+  # Update Living Room Temperature 15m Ago (Every 15 Minutes)
+  - id: update_living_room_temperature_15m_ago
+    alias: "Update Living Room Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_living_room_average_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.living_room_average_temperature') }}"
+
+  # Update Living Room Temperature 5m Ago (Every 5 Minutes)
+  - id: update_living_room_temperature_5m_ago
+    alias: "Update Living Room Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_living_room_average_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.living_room_average_temperature') }}"
+
+  # Update Dining Room Temperature 60m Ago (Every Hour)
+  - id: update_dining_room_temperature_60m_ago
+    alias: "Update Dining Room Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_dining_room_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.dining_room_average_temperature') }}"
+
+  # Update Dining Room Temperature 15m Ago (Every 15 Minutes)
+  - id: update_dining_room_temperature_15m_ago
+    alias: "Update Dining Room Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_dining_room_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.dining_room_average_temperature') }}"
+
+  # Update Dining Room Temperature 5m Ago (Every 5 Minutes)
+  - id: update_dining_room_temperature_5m_ago
+    alias: "Update Dining Room Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_dining_room_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.dining_room_average_temperature') }}"
+
+automation:
+  # Update Erik Office Temperature 60m Ago (Every Hour)
+  - id: update_erik_office_temperature_60m_ago
+    alias: "Update Erik Office Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_erik_office_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.erik_office_average_temperature') }}"
+
+  # Update Erik Office Temperature 15m Ago (Every 15 Minutes)
+  - id: update_erik_office_temperature_15m_ago
+    alias: "Update Erik Office Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_erik_office_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.erik_office_average_temperature') }}"
+
+  # Update Erik Office Temperature 5m Ago (Every 5 Minutes)
+  - id: update_erik_office_temperature_5m_ago
+    alias: "Update Erik Office Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_erik_office_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.erik_office_average_temperature') }}"
+
+  # Update Master Bedroom Temperature 60m Ago (Every Hour)
+  - id: update_master_bedroom_temperature_60m_ago
+    alias: "Update Master Bedroom Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_master_bedroom_average_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.master_bedroom_average_temperature') }}"
+
+  # Update Master Bedroom Temperature 15m Ago (Every 15 Minutes)
+  - id: update_master_bedroom_temperature_15m_ago
+    alias: "Update Master Bedroom Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_master_bedroom_average_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.master_bedroom_average_temperature') }}"
+
+  # Update Master Bedroom Temperature 5m Ago (Every 5 Minutes)
+  - id: update_master_bedroom_temperature_5m_ago
+    alias: "Update Master Bedroom Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_master_bedroom_average_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.master_bedroom_average_temperature') }}"
+
+  # Update Kids Rooms Temperature 60m Ago (Every Hour)
+  - id: update_kids_rooms_temperature_60m_ago
+    alias: "Update Kids Rooms Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_kids_rooms_average_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.kids_rooms_average_temperature') }}"
+
+  # Update Kids Rooms Temperature 15m Ago (Every 15 Minutes)
+  - id: update_kids_rooms_temperature_15m_ago
+    alias: "Update Kids Rooms Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_kids_rooms_average_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.kids_rooms_average_temperature') }}"
+
+  # Update Kids Rooms Temperature 5m Ago (Every 5 Minutes)
+  - id: update_kids_rooms_temperature_5m_ago
+    alias: "Update Kids Rooms Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_kids_rooms_average_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.kids_rooms_average_temperature') }}"
+
+  # Update Hank's Room Temperature 60m Ago (Every Hour)
+  - id: update_hank_room_temperature_60m_ago
+    alias: "Update Hank's Room Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_hank_room_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.hank_s_room_average_temperature') }}"
+
+  # Update Hank's Room Temperature 15m Ago (Every 15 Minutes)
+  - id: update_hank_room_temperature_15m_ago
+    alias: "Update Hank's Room Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_hank_room_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.hank_s_room_average_temperature') }}"
+
+  # Update Hank's Room Temperature 5m Ago (Every 5 Minutes)
+  - id: update_hank_room_temperature_5m_ago
+    alias: "Update Hank's Room Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_hank_room_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.hank_s_room_average_temperature') }}"
+
+  # Update Tilly's Room Temperature 60m Ago (Every Hour)
+  - id: update_tilly_room_temperature_60m_ago
+    alias: "Update Tilly's Room Temperature 60m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '0'  # Trigger every hour (start of each hour)
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_tilly_room_temperature_60m_ago
+        data:
+          value: "{{ states('sensor.tilly_s_room_average_temperature') }}"
+
+  # Update Tilly's Room Temperature 15m Ago (Every 15 Minutes)
+  - id: update_tilly_room_temperature_15m_ago
+    alias: "Update Tilly's Room Temperature 15m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/15'  # Trigger every 15 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_tilly_room_temperature_15m_ago
+        data:
+          value: "{{ states('sensor.tilly_s_room_average_temperature') }}"
+
+  # Update Tilly's Room Temperature 5m Ago (Every 5 Minutes)
+  - id: update_tilly_room_temperature_5m_ago
+    alias: "Update Tilly's Room Temperature 5m Ago"
+    trigger:
+      platform: time_pattern
+      minutes: '/5'  # Trigger every 5 minutes
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hvac_tilly_room_temperature_5m_ago
+        data:
+          value: "{{ states('sensor.tilly_s_room_average_temperature') }}"
