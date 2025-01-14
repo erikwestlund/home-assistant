@@ -2,7 +2,7 @@
   alias: "Collect Hourly Data for Office Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '1'
+    minutes: '0' # Office heat stores at 1; trigger at 2
   action:
     service: google_sheets.append_sheet
     data:
@@ -29,7 +29,7 @@
   alias: "Collect Hourly Data for Family Room Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '2'
+    minutes: '1'
   action:
     service: google_sheets.append_sheet
     data:
@@ -53,7 +53,7 @@
   alias: "Collect Hourly Data for Living Room Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '3'
+    minutes: '2'
   action:
     service: google_sheets.append_sheet
     data:
@@ -75,7 +75,7 @@
   alias: "Collect Hourly Data for Dining Room Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '4'
+    minutes: '3'
   action:
     service: google_sheets.append_sheet
     data:
@@ -98,7 +98,7 @@
   alias: "Collect Hourly Data for Erik Office Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '5'
+    minutes: '4'
   action:
     service: google_sheets.append_sheet
     data:
@@ -120,7 +120,7 @@
   alias: "Collect Hourly Data for Master Bedroom Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '6'
+    minutes: '5'
   action:
     service: google_sheets.append_sheet
     data:
@@ -142,7 +142,7 @@
   alias: "Collect Hourly Data for Ducted Heat Dynamics"
   trigger:
     platform: time_pattern
-    minutes: '7'
+    minutes: '6'
   action:
     service: google_sheets.append_sheet
     data:
