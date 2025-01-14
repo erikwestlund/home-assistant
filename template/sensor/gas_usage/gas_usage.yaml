@@ -7,7 +7,7 @@
     {% set therm_factor = states('input_number.gas_therm_factor') | float %}
     {% set ft3_used = end_ft3 - start_ft3 %}
     
-    {{ (ft3_used * therm_factor / 100) | round(2) if ft3_used > 0 else 0 }}
+    {{ (ft3_used * therm_factor) | round(2) if ft3_used > 0 else 0 }}
   unit_of_measurement: "therms"
   icon: mdi:fire
 
