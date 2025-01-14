@@ -2,8 +2,8 @@
 - name: "HVAC Gas Therms Used Current Run"
   unique_id: hvac_gas_therms_used_current_run
   state: >
-    {% set start_ft3 = states('input_number.hvac_gas_start_meter_reading_ft3') | float %}
-    {% set end_ft3 = states('input_number.hvac_gas_end_meter_reading_ft3') | float %}
+    {% set start_ft3 = states('input_number.gas_start_meter_reading_ft3') | float %}
+    {% set end_ft3 = states('input_number.gas_end_meter_reading_ft3') | float %}
     {% set therm_factor = states('input_number.gas_therm_factor') | float %}
     {% set ft3_used = end_ft3 - start_ft3 %}
     
