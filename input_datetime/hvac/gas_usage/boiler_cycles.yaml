@@ -1,0 +1,12 @@
+# 🕒 Boiler Zone Start/End Times
+hvac_boiler_start_time:
+  name: "HVAC Boiler Start Time"
+  has_time: true
+  has_date: true
+  icon: mdi:clock-start
+
+hvac_boiler_end_time:
+  name: "HVAC Boiler End Time"
+  has_time: true
+  has_date: true
+  icon: mdi:clock-end

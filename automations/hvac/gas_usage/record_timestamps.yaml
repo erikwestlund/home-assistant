@@ -1,0 +1,37 @@
+# 🔄 Start Boiler Zone Timer
+- id: start_hvac_boiler_zone_timer
+  alias: "Start HVAC Boiler Zone Timer"
+  trigger:
+    - platform: state
+      entity_id: input_select.hvac_active_boiler_zone
+      from: "None"
+  condition:
+    - condition: state
+      entity_id: timer.hvac_active_boiler_zone_timer
+      state: "idle"
+  action:
+    - service: timer.start
+      target:
+        entity_id: timer.hvac_active_boiler_zone_timer
+    - service: notify.file
+      data:
+        message: >
+          {{ now().timestamp() | timestamp_local }}:
+          Boiler zone {{ trigger.to_state.state }} started.
+          
+# 🔄 Stop Boiler Zone Timer
+- id: stop_hvac_boiler_zone_timer
+  alias: "Stop HVAC Boiler Zone Timer"
+  trigger:
+    - platform: state
+      entity_id: input_select.hvac_active_boiler_zone
+      to: "None"
+  action:
+    - service: timer.finish
+      target:
+        entity_id: timer.hvac_active_boiler_zone_timer
+    - service: notify.file
+      data:
+        message: >
+          {{ now().timestamp() | timestamp_local }}:
+          Boiler zone ran for {{ state_attr('timer.hvac_active_boiler_zone_timer', 'duration') }}.

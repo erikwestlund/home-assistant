@@ -1,0 +1,17 @@
+gas_therm_factor:
+  name: "Gas Therm Factor"
+  min: 1.000
+  max: 1.050
+  step: 0.00001
+  unit_of_measurement: ""
+  initial: 1.02956
+  icon: mdi:calculator
+
+gas_price_per_therm:
+  name: "Gas Price per Therm"
+  min: 0
+  max: 10
+  step: 0.01
+  unit_of_measurement: "$/therm"
+  initial: 2.65
+  icon: mdi:currency-usd

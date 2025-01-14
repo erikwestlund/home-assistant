@@ -1,0 +1,23 @@
+# 🟢 HVAC Radiator Calling For Heat Office
+- name: "HVAC Radiator Calling For Heat Office"
+  unique_id: hvac_radiator_calling_for_heat_office
+  state: >
+    {{ state_attr('climate.office', 'hvac_action') == 'heating' }}
+  device_class: heat
+  icon: mdi:radiator
+
+# 🟢 HVAC Radiator Calling For Heat Family Room
+- name: "HVAC Radiator Calling For Heat Family Room"
+  unique_id: hvac_radiator_calling_for_heat_family_room
+  state: >
+    {{ state_attr('climate.family_room_heating', 'hvac_action') == 'heating' }}
+  device_class: heat
+  icon: mdi:radiator
+
+# 🟢 HVAC Radiator Calling For Heat Living Room
+- name: "HVAC Radiator Calling For Heat Living Room"
+  unique_id: hvac_radiator_calling_for_heat_living_room
+  state: >
+    {{ state_attr('climate.living_room_main_heating', 'hvac_action') == 'heating' }}
+  device_class: heat
+  icon: mdi:radiator

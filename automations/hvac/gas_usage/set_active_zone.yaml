@@ -1,0 +1,55 @@
+# 🔄 HVAC Update Active Boiler Zone with Conflict Handling
+- id: update_hvac_active_boiler_zone
+  alias: "HVAC Update Active Boiler Zone"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.hvac_radiator_calling_for_heat_office
+        - binary_sensor.hvac_radiator_calling_for_heat_family_room
+        - binary_sensor.hvac_radiator_calling_for_heat_living_room
+  condition:
+    - condition: template
+      value_template: >
+        {% set office = is_state('binary_sensor.hvac_radiator_calling_for_heat_office', 'on') %}
+        {% set family_room = is_state('binary_sensor.hvac_radiator_calling_for_heat_family_room', 'on') %}
+        {% set living_room = is_state('binary_sensor.hvac_radiator_calling_for_heat_living_room', 'on') %}
+        {% set active_zone = states('input_select.hvac_active_boiler_zone') %}
+
+        {% set new_zone = (office and family_room and living_room) and 'All Zones' or
+                          (office and family_room) and 'Office + Family Room' or
+                          (office and living_room) and 'Office + Living Room' or
+                          (family_room and living_room) and 'Family Room + Living Room' or
+                          office and 'Office' or
+                          family_room and 'Family Room' or
+                          living_room and 'Living Room' or
+                          'None' %}
+
+        {{ new_zone != active_zone }}
+  action:
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.hvac_active_boiler_zone
+      data:
+        option: >
+          {% set office = is_state('binary_sensor.hvac_radiator_calling_for_heat_office', 'on') %}
+          {% set family_room = is_state('binary_sensor.hvac_radiator_calling_for_heat_family_room', 'on') %}
+          {% set living_room = is_state('binary_sensor.hvac_radiator_calling_for_heat_living_room', 'on') %}
+
+          {% if office and family_room and living_room %}
+            All Zones
+          {% elif office and family_room %}
+            Office + Family Room
+          {% elif office and living_room %}
+            Office + Living Room
+          {% elif family_room and living_room %}
+            Family Room + Living Room
+          {% elif office %}
+            Office
+          {% elif family_room %}
+            Family Room
+          {% elif living_room %}
+            Living Room
+          {% else %}
+            None
+          {% endif %}

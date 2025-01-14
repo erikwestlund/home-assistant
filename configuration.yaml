@@ -14,6 +14,7 @@ input_datetime: !include_dir_merge_named input_datetime/
 input_select: !include_dir_merge_named input_select/
 input_number: !include_dir_merge_named input_number/
 rest: !include_dir_merge_named rest/
+timer: !include_dir_merge_named timers/
 template:
   - sensor: !include_dir_merge_list template/sensor/
   - binary_sensor: !include_dir_merge_list template/binary_sensor/

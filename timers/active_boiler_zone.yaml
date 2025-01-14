@@ -1,0 +1,3 @@
+hvac_active_boiler_zone_timer:
+  name: "HVAC Active Boiler Zone Timer"
+  duration: "00:00:00"
