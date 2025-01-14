@@ -8,12 +8,12 @@ gas_end_meter_reading_ft3_input:
   max: 10
   icon: mdi:counter
 
-  gas_therm_factor_input:
-    name: "Gas Therm Factor Input"
-    max: 10
-    icon: mdi:calculator
+gas_therm_factor_input:
+  name: "Gas Therm Factor Input"
+  max: 10
+  icon: mdi:calculator
 
-  gas_price_per_therm_input:
-    name: "Gas Price per Therm Input"
-    max: 10
-    icon: mdi:currency-usd
+gas_price_per_therm_input:
+  name: "Gas Price per Therm Input"
+  max: 10
+  icon: mdi:currency-usd
