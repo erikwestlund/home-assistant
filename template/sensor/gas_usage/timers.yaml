@@ -4,15 +4,26 @@
   state_class: total_increasing
   unit_of_measurement: "minutes"
   state: >
-    {{ state_attr('timer.hvac_boiler_run_timer_office', 'remaining').split(':')[0] | int * 60 + state_attr('timer.hvac_boiler_run_timer_office', 'remaining').split(':')[1] | int }}
-    
+    {% if is_state('timer.hvac_boiler_run_timer_office', 'active') or is_state('timer.hvac_boiler_run_timer_office', 'paused') %}
+    {% set remaining = state_attr('timer.hvac_boiler_run_timer_office', 'remaining').split(':') %}
+    {{ (remaining[0] | int * 60) + (remaining[1] | int) }}
+      {% else %}
+      0
+      {% endif %}    
+
 # 🕒 Family Room Cumulative Run Time
 - name: "HVAC Cumulative Run Time Family Room"
   unique_id: hvac_cumulative_run_time_family_room
   state_class: total_increasing
   unit_of_measurement: "minutes"
   state: >
-    {{ state_attr('timer.hvac_boiler_run_timer_family_room', 'remaining').split(':')[0] | int * 60 + state_attr('timer.hvac_boiler_run_timer_family_room', 'remaining').split(':')[1] | int }}
+    {% set remaining = state_attr('timer.hvac_boiler_run_timer_family_room', 'remaining') %}
+    {% if remaining %}
+      {% set parts = remaining.split(':') %}
+      {{ (parts[0] | int * 60) + (parts[1] | int) }}
+    {% else %}
+      0
+    {% endif %}
     
 # 🕒 Living Room Cumulative Run Time
 - name: "HVAC Cumulative Run Time Living Room"
@@ -20,7 +31,13 @@
   state_class: total_increasing
   unit_of_measurement: "minutes"
   state: >
-    {{ state_attr('timer.hvac_boiler_run_timer_living_room', 'remaining').split(':')[0] | int * 60 + state_attr('timer.hvac_boiler_run_timer_living_room', 'remaining').split(':')[1] | int }}
+    {% set remaining = state_attr('timer.hvac_boiler_run_timer_living_room', 'remaining') %}
+    {% if remaining %}
+      {% set parts = remaining.split(':') %}
+      {{ (parts[0] | int * 60) + (parts[1] | int) }}
+    {% else %}
+      0
+    {% endif %}
 
 # 🧮 Total Boiler Run Time Across All Zones
 - name: "HVAC Run Time Total Boiler"
@@ -30,13 +47,25 @@
     {% set family_room = state_attr('timer.hvac_boiler_run_timer_family_room', 'remaining') %}
     {% set living_room = state_attr('timer.hvac_boiler_run_timer_living_room', 'remaining') %}
 
-    {% if office and family_room and living_room %}
-      {% set office_minutes = (office.split(':')[0] | int) * 60 + (office.split(':')[1] | int) %}
-      {% set family_room_minutes = (family_room.split(':')[0] | int) * 60 + (family_room.split(':')[1] | int) %}
-      {% set living_room_minutes = (living_room.split(':')[0] | int) * 60 + (living_room.split(':')[1] | int) %}
-      {{ office_minutes + family_room_minutes + living_room_minutes }}
-    {% else %}
-      0
+    {% set office_minutes = 0 %}
+    {% set family_room_minutes = 0 %}
+    {% set living_room_minutes = 0 %}
+
+    {% if office %}
+      {% set office_parts = office.split(':') %}
+      {% set office_minutes = (office_parts[0] | int) * 60 + (office_parts[1] | int) %}
     {% endif %}
+
+    {% if family_room %}
+      {% set family_room_parts = family_room.split(':') %}
+      {% set family_room_minutes = (family_room_parts[0] | int) * 60 + (family_room_parts[1] | int) %}
+    {% endif %}
+
+    {% if living_room %}
+      {% set living_room_parts = living_room.split(':') %}
+      {% set living_room_minutes = (living_room_parts[0] | int) * 60 + (living_room_parts[1] | int) %}
+    {% endif %}
+
+    {{ office_minutes + family_room_minutes + living_room_minutes }}
   unit_of_measurement: "minutes"
   icon: mdi:calculator

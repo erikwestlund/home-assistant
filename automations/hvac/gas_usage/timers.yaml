@@ -1,7 +1,7 @@
 # 🔄 Start Zone Timer When Calling for Heat
 - id: start_zone_timer
   alias: "Start Zone Timer"
-  mode: single
+  mode: parallel
   trigger:
     - platform: state
       entity_id:
@@ -12,25 +12,22 @@
   action:
     - choose:
         - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
-              state: "on"
+            - condition: template
+              value_template: "{{ trigger.entity_id == 'binary_sensor.hvac_radiator_calling_for_heat_office' }}"
           sequence:
             - service: timer.start
               target:
                 entity_id: timer.hvac_boiler_run_timer_office
         - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
-              state: "on"
+            - condition: template
+              value_template: "{{ trigger.entity_id == 'binary_sensor.hvac_radiator_calling_for_heat_family_room' }}"
           sequence:
             - service: timer.start
               target:
                 entity_id: timer.hvac_boiler_run_timer_family_room
         - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
-              state: "on"
+            - condition: template
+              value_template: "{{ trigger.entity_id == 'binary_sensor.hvac_radiator_calling_for_heat_living_room' }}"
           sequence:
             - service: timer.start
               target:
@@ -39,7 +36,7 @@
 # 🔴 Stop Zone Timer When Stopping Heat Call
 - id: stop_zone_timer
   alias: "Stop Zone Timer"
-  mode: single
+  mode: parallel
   trigger:
     - platform: state
       entity_id:
@@ -50,25 +47,22 @@
   action:
     - choose:
         - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
-              state: "off"
+            - condition: template
+              value_template: "{{ trigger.entity_id == 'binary_sensor.hvac_radiator_calling_for_heat_office' }}"
           sequence:
             - service: timer.pause
               target:
                 entity_id: timer.hvac_boiler_run_timer_office
         - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
-              state: "off"
+            - condition: template
+              value_template: "{{ trigger.entity_id == 'binary_sensor.hvac_radiator_calling_for_heat_family_room' }}"
           sequence:
             - service: timer.pause
               target:
                 entity_id: timer.hvac_boiler_run_timer_family_room
         - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
-              state: "off"
+            - condition: template
+              value_template: "{{ trigger.entity_id == 'binary_sensor.hvac_radiator_calling_for_heat_living_room' }}"
           sequence:
             - service: timer.pause
               target:
@@ -77,7 +71,7 @@
 # 🔄 Update Active Boiler Zone Timer
 - id: update_hvac_active_boiler_zone_timer
   alias: "Update HVAC Active Boiler Zone Timer"
-  mode: single
+  mode: parallel
   trigger:
     - platform: state
       entity_id:
@@ -91,4 +85,4 @@
       data:
         duration: >
           {% set total_minutes = states('sensor.hvac_total_boiler_run_time') | int %}
-          {{ total_minutes // 60 }}:{{ (total_minutes % 60) | string.zfill(2) }}:00
+          {{ (total_minutes // 60) | int }}:{{ (total_minutes % 60) | string.zfill(2) }}:00
