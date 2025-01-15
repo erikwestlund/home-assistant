@@ -401,7 +401,7 @@
       target:
         entity_id: input_number.hvac_basement_playroom_temperature_60m_ago
       data:
-        value: "{{ states('sensor.basement_playroom_average_temperature') }}"
+        value: "{{ states('sensor.basement_playroom_temperature') }}"
 
 # Update Basement Playroom Temperature 15m Ago (Every 15 Minutes)
 - id: update_basement_playroom_temperature_15m_ago
@@ -414,7 +414,7 @@
       target:
         entity_id: input_number.hvac_basement_playroom_temperature_15m_ago
       data:
-        value: "{{ states('sensor.basement_playroom_average_temperature') }}"
+        value: "{{ states('sensor.basement_playroom_temperature') }}"
 
 # Update Basement Playroom Temperature 5m Ago (Every 5 Minutes)
 - id: update_basement_playroom_temperature_5m_ago
@@ -427,4 +427,4 @@
       target:
         entity_id: input_number.hvac_basement_playroom_temperature_5m_ago
       data:
-        value: "{{ states('sensor.basement_playroom_average_temperature') }}"
+        value: "{{ states('sensor.basement_playroom_temperature') }}"
