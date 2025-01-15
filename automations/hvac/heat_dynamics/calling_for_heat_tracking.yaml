@@ -31,35 +31,44 @@
     target:
       entity_id: input_boolean.radiator_called_for_heat_family_room_previous_hour
 
-- id: reset_radiator_called_for_heat_hourly
-  alias: "Reset Radiator Calling for Heat Hourly"
+- id: reset_radiator_called_for_heat_office_hourly
+  alias: "Reset Radiator Calling for Heat in Office"
   trigger:
     platform: time_pattern
     minutes: '0'  # Trigger every hour at the start of the hour
+  condition:
+    condition: state
+    entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
+    state: 'off'
   action:
-    # Turn off radiator_called_for_heat_office_previous_hour only if not calling for heat
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.radiator_called_for_heat_office_previous_hour
-      condition:
-        condition: state
-        entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
-        state: 'off'
 
-    # Turn off radiator_called_for_heat_living_room_previous_hour only if not calling for heat
+- id: reset_radiator_called_for_heat_living_room_hourly
+  alias: "Reset Radiator Calling for Heat in Living Room"
+  trigger:
+    platform: time_pattern
+    minutes: '0'  # Trigger every hour at the start of the hour
+  condition:
+    condition: state
+    entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
+    state: 'off'
+  action:
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.radiator_called_for_heat_living_room_previous_hour
-      condition:
-        condition: state
-        entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
-        state: 'off'
 
-    # Turn off radiator_called_for_heat_family_room_previous_hour only if not calling for heat
+- id: reset_radiator_called_for_heat_family_room_hourly
+  alias: "Reset Radiator Calling for Heat in Family Room"
+  trigger:
+    platform: time_pattern
+    minutes: '0'  # Trigger every hour at the start of the hour
+  condition:
+    condition: state
+    entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
+    state: 'off'
+  action:
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.radiator_called_for_heat_family_room_previous_hour
-      condition:
-        condition: state
-        entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
-        state: 'off'
