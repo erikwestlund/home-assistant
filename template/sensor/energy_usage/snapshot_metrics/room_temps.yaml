@@ -180,18 +180,18 @@
 
 - name: "Snapshot Basement Playroom Temp Change Hour"
   unique_id: "snapshot_basement_playroom_temp_change_hour"
-  state: "{{ (states('sensor.basement_playroom_average_temperature') | float(0)) - (states('input_number.hvac_basement_playroom_temperature_60m_ago') | float(0)) }}"
+  state: "{{ (states('sensor.basement_playroom_temperature') | float(0)) - (states('input_number.hvac_basement_playroom_temperature_60m_ago') | float(0)) }}"
   unit_of_measurement: "°F"
   icon: mdi:chart-line
 
 - name: "Snapshot Basement Playroom Temp Prev Hour"
   unique_id: "snapshot_basement_playroom_temp_prev_hour"
-  state: "{{ states('input_number.hvac_basement_playroom_average_temperature_60m_ago') | float(0) }}"
+  state: "{{ states('input_number.hvac_basement_playroom_temperature_60m_ago') | float(0) }}"
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
 - name: "Snapshot Basement Playroom Temp Change Hour"
   unique_id: "snapshot_basement_playroom_temp_change_hour"
-  state: "{{ (states('sensor.basement_playroom_average_temperature') | float(0)) - (states('input_number.hvac_basement_playroom_average_temperature_60m_ago') | float(0)) }}"
+  state: "{{ (states('sensor.basement_playroom_temperature') | float(0)) - (states('input_number.hvac_basement_playroom_temperature_60m_ago') | float(0)) }}"
   unit_of_measurement: "°F"
   icon: mdi:chart-line
