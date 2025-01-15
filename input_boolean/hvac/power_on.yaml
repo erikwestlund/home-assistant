@@ -76,3 +76,8 @@ hvac_mini_split_living_room_on_with_master_bedroom:
   name: HVAC Living Room Heat Pump Always On with Master Bedroom
   initial: off
   icon: mdi:power
+
+hvac_mini_split_living_room_on_with_master_bedroom_preheat:
+  name: HVAC Living Room Heat Pump Always On with Master Bedroom Preheat
+  initial: off
+  icon: mdi:power
