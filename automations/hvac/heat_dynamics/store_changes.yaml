@@ -125,6 +125,7 @@
         family_room_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        living_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_living_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_living_room') | string }}"
         office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') | string }}"
         erik_office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') | string }}"
         offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"

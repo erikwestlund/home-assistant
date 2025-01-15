@@ -1,0 +1,31 @@
+#- id: collect_hourly_energy_usage_snapshot_office
+#  alias: "Collect Hourly Energy Usage Snapshot for Office"
+#  trigger:
+#    platform: time_pattern
+#    minutes: '0'  # Trigger at the start of the hour
+#  action:
+#    - service: input_text.set_value
+#      target:
+#        entity_id: input_text.hvac_hourly_snapshot_office
+#      data:
+#        value: >
+#          {{
+#            {
+#              "timestamp": now().strftime('%Y-%m-%d %H:%M:%S'),
+#              "outdoor_temp_hour_ago": states('input_number.outdoor_temperature_60m_ago') | float(0),
+#              "outdoor_temp_current": states('sensor.current_temperature') | float(0),
+#              "outdoor_hour_temp_change": (states('sensor.current_temperature') | float(0)) - (states('input_number.outdoor_temperature_60m_ago') | float(0)),
+#              "temp_now": states('sensor.tina_office_average_temperature') | float(0),
+#              "hour_temp_change": (states('sensor.tina_office_average_temperature') | float(0)) - (states('input_number.hvac_office_average_temperature_60m_ago') | float(0)),
+#              "mini_split_setpoint": 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office'),
+#              "radiator_setpoint": 'off' if (states('sensor.hvac_radiator_setpoint_office') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_office'),
+#              "radiator_setpoint_change": 1 if (states('sensor.hvac_radiator_setpoint_office') | float(0)) != (states('input_number.hvac_radiator_setpoint_office_60m_ago') | float(0)) else 0,
+#              "mini_split_setpoint_change": 1 if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) != (states('input_number.hvac_mini_split_setpoint_office_60m_ago') | float(0)) else 0,
+#              "space_heater_power_status": 'off' if (states('binary_sensor.hvac_space_heater_active_office') == 'off') else 'on',
+#              "space_heater_power_status_change": 1 if (states('binary_sensor.hvac_space_heater_active_office') != states('input_boolean.space_heater_power_status_office_60m_ago')) else 0,
+#              "erik_office_temp_now": states('sensor.erik_office_average_temperature') | float(0),
+#              "erik_office_hour_temp_change": (states('sensor.erik_office_average_temperature') | float(0)) - (states('input_number.hvac_erik_office_temperature_60m_ago') | float(0)),
+#              "office_radiators_calling_for_heat": 1 if (states('binary_sensor.hvac_office_radiators_calling_for_heat') == 'on') else 0,
+#              "office_radiators_calling_for_heat_prev_hour": 1 if (states('input_boolean.radiator_calling_for_heat_office_previous_hour') == 'on') else 0
+#            } | tojson
+#          }}
