@@ -6,6 +6,10 @@ family_room_interior_door_closed_prev_hour:
   name: "Family Room Interior Door Closed Prev Hour"
   initial: off
 
+master_bedroom_door_closed_prev_hour:
+  name: "Master Bedroom Door Closed Prev Hour"
+  initial: off
+
 tilly_door_closed_prev_hour:
   name: "Tilly Door Closed Prev Hour"
   initial: off
@@ -17,3 +21,4 @@ hank_main_door_closed_prev_hour:
 hank_side_door_closed_prev_hour:
   name: "Hank Side Door Closed Prev Hour"
   initial: off
+

@@ -10,6 +10,12 @@
   unit_of_measurement: "closed"
   icon: mdi:door-closed
 
+- name: "Snapshot Master Bedroom Door Closed Prev Hour"
+  unique_id: "snapshot_master_bedroom_interior_door_closed_prev_hour"
+  state: "{{ 1 if is_state('input_boolean.master_bedroom_interior_door_closed_prev_hour', 'on') else 0 }}"
+  unit_of_measurement: "closed"
+  icon: mdi:door-closed
+
 - name: "Snapshot Tilly Door Closed Prev Hour"
   unique_id: "snapshot_tilly_door_closed_prev_hour"
   state: "{{ 1 if is_state('input_boolean.tilly_door_closed_prev_hour', 'on') else 0 }}"

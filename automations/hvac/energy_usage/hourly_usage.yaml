@@ -14,7 +14,7 @@
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_family_room_ducted_energy_hourly
-      data:
+      data: 
         value: "{{ (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) - (states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float(0)) }}"
 
     - service: input_number.set_value
