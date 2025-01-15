@@ -5,7 +5,7 @@
       minutes: 0
   condition: []
   action:
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.office_side_door_contact', 'off') else 'off' }}
+    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.side_door_contact', 'off') else 'off' }}
       data:
         entity_id: input_boolean.office_exterior_door_closed_prev_hour
 
