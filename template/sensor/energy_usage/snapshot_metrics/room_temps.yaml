@@ -70,6 +70,24 @@
   unit_of_measurement: "°F"
   icon: mdi:chart-line
 
+- name: "Snapshot Erik Office Temp Now"
+  unique_id: "snapshot_erik_office_temp_now"
+  state: "{{ states('sensor.erik_office_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Erik Office Temp Prev Hour"
+  unique_id: "snapshot_erik_office_temp_prev_hour"
+  state: "{{ states('input_number.hvac_erik_office_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Erik Office Temp Change Hour"
+  unique_id: "snapshot_erik_office_temp_change_hour"
+  state: "{{ (states('sensor.erik_office_average_temperature') | float(0)) - (states('input_number.hvac_erik_office_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
 - name: "Snapshot Kitchen Temp Now"
   unique_id: "snapshot_kitchen_temp_now"
   state: "{{ states('sensor.kitchen_average_temperature') | float(0) }}"
