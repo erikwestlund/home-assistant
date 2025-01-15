@@ -29,7 +29,9 @@
         kitchen_hour_temp_change: "{{ (states('sensor.kitchen_average_temperature') | float(0)) - (states('input_number.hvac_kitchen_temperature_60m_ago') | float(0)) }}"
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
-
+        office_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_office_radiators_calling_for_heat') == 'on') else 0 }}"
+        office_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_office_previous_hour') == 'on') else 0 }}"
+        offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_family_room
   alias: "Collect Hourly Data for Family Room Heat Dynamics"
@@ -61,6 +63,12 @@
         kitchen_hour_temp_change: "{{ (states('sensor.kitchen_average_temperature') | float(0)) - (states('input_number.hvac_kitchen_temperature_60m_ago') | float(0)) }}"
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
+        family_room_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_family_room') == 'on') else 0 }}"
+        family_room_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        family_room_ducted_kwh_hourly: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') | float(0) }}"
+        living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_living_room
   alias: "Collect Hourly Data for Living Room Heat Dynamics"
@@ -93,6 +101,12 @@
         dining_room_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_dining_room') | float(0)) != (states('input_number.hvac_mini_split_setpoint_dining_room_60m_ago') | float(0)) else 0 }}"
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
+        family_room_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_family_room') == 'on') else 0 }}"
+        family_room_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        family_room_ducted_kwh_hourly: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') | float(0) }}"
+        living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_dining_room
   alias: "Collect Hourly Data for Dining Room Heat Dynamics"
@@ -125,7 +139,15 @@
         family_room_mini_split_setpoint_change: "{{ 1 if (states('sensor.hvac_mini_split_setpoint_family_room') | float(0)) != (states('input_number.hvac_mini_split_setpoint_family_room_60m_ago') | float(0)) else 0 }}"
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
-
+        office_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_office_radiators_calling_for_heat') == 'on') else 0 }}"
+        office_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_office_previous_hour') == 'on') else 0 }}"
+        family_room_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_family_room') == 'on') else 0 }}"
+        family_room_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        family_room_ducted_kwh_hourly: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') | float(0) }}"
+        offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"
+        living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_erik_office
   alias: "Collect Hourly Data for Erik Office Heat Dynamics"
@@ -156,6 +178,12 @@
         office_space_heater_power_status_change: "{{ 1 if (states('binary_sensor.hvac_space_heater_active_office') != states('input_boolean.space_heater_power_status_office_60m_ago')) else 0 }}"
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
+        office_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_office_radiators_calling_for_heat') == 'on') else 0 }}"
+        office_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_office_previous_hour') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"
+        living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_master_bedroom
   alias: "Collect Hourly Data for Master Bedroom Heat Dynamics"
@@ -179,6 +207,9 @@
         door_closed: "{{ 1 if (states('binary_sensor.master_bedroom_door_contact') == 'off') else 0 }}"
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
+        main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
+        main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_ducted
   alias: "Collect Hourly Data for Ducted Heat Dynamics"
@@ -214,8 +245,8 @@
         main_zone_radiator_setpoint: "{{ 'off' if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) == 0 else states('sensor.hvac_radiator_setpoint_main_zone') | string }}"
         main_zone_setpoint_change: "{{ 1 if (states('sensor.hvac_radiator_setpoint_main_zone') | float(0)) != (states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0)) else 0 }}"
         office_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_office_radiators_calling_for_heat') == 'on') else 0 }}"
-        family_room_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_family_room') == 'on') else 0 }}"
+        office_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_office_previous_hour') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
-        family_room_ducted_kwh_hourly: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') | float(0) }}"
+        main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
         offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"
         living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
