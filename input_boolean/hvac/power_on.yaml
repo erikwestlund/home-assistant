@@ -74,5 +74,5 @@ hvac_space_heater_power_on_control_office:
 # Companion settings
 hvac_mini_split_living_room_on_with_master_bedroom:
   name: HVAC Living Room Heat Pump Always On with Master Bedroom
-  initial: on
+  initial: off
   icon: mdi:power

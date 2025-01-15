@@ -3,7 +3,7 @@ hvac_daytime_start_time_office:
   name: HVAC Office Daytime Start Time
   has_time: true
   has_date: false
-  initial: "04:30:00"
+  initial: "04:00:00"
 
 hvac_nighttime_start_time_office:
   name: HVAC Office Nighttime Start Time
@@ -16,7 +16,7 @@ hvac_apply_working_start_time_office:
   name: HVAC Tina Office Apply Working Start Time
   has_time: true
   has_date: false
-  initial: "07:30:00"
+  initial: "07:00:00"
 
 hvac_apply_working_end_time_office:
   name: HVAC Tina Office Apply Working End Time

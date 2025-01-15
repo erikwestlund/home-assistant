@@ -12,7 +12,7 @@ hvac_mini_split_off_threshold_family_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 37
+  initial: 40
 
 hvac_mini_split_off_threshold_living_room:
   name: HVAC Living Room Mini Split Off Threshold
