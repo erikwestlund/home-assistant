@@ -2,11 +2,12 @@
 - name: "HVAC Preheat Required Master Bedroom"
   unique_id: hvac_preheat_required_master_bedroom
   state: >
+    {% set is_heat_mode = is_state('sensor.hvac_mode', 'Heat') %}
     {% set preheating_window = is_state('binary_sensor.hvac_preheating_window_master_bedroom', 'on') %}
     {% set estimated_target_time = as_timestamp(states('sensor.hvac_estimated_time_when_target_temperature_reached_starting_now_master_bedroom')) %}
     {% set preheat_end = as_timestamp(now().date() ~ ' ' ~ states('input_datetime.hvac_preheat_end_window_master_bedroom')) %}
     
-    {{ preheating_window and estimated_target_time > preheat_end }}
+    {{ is_heat_mode and preheating_window and estimated_target_time > preheat_end }}
   icon: mdi:clock-alert
 
 # 🔥 HVAC Preheating Active Master Bedroom (depends on boolean, which is toggled by preheat required status)
@@ -14,6 +15,7 @@
 - name: "HVAC Preheating Active Master Bedroom"
   unique_id: hvac_preheating_active_master_bedroom
   state: >
+    {% set is_heat_mode = is_state('sensor.hvac_mode', 'Heat') %}
     {% set preheating_enabled = is_state('input_boolean.hvac_preheating_enabled_master_bedroom', 'on') %}
     {% set preheating_on = is_state('input_boolean.hvac_preheating_on_master_bedroom', 'on') %}
     {% set stop_override = is_state('input_boolean.hvac_preheating_stop_override_master_bedroom', 'on') %}
@@ -21,7 +23,7 @@
     {% set off_threshold = states('input_number.hvac_mini_split_preheating_off_threshold_master_bedroom') | float %}
     {% set in_preheating_window = is_state('binary_sensor.hvac_preheating_window_master_bedroom', 'on') %}
 
-    {{ preheating_enabled and preheating_on and not stop_override and daytime_avg_temp > off_threshold and in_preheating_window }}
+    {{ is_heat_mode and preheating_enabled and preheating_on and not stop_override and daytime_avg_temp > off_threshold and in_preheating_window }}
   icon: mdi:fire
 
 # Target Temperature >= Current Temperature

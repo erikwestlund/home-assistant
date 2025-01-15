@@ -24,7 +24,7 @@ hvac_mini_split_day_hot_setpoint_master_bedroom:
   initial: 74
 
 # Preheating Setpoints
-hvac_mini_split_preheating_freezing_setpoint_master_bedroom:
+hvac_mini_split_preheat_freezing_setpoint_master_bedroom:
   name: HVAC Master Bedroom Mini Split Preheating Setpoint (Freezing)
   min: 64
   max: 86
@@ -32,7 +32,7 @@ hvac_mini_split_preheating_freezing_setpoint_master_bedroom:
   unit_of_measurement: "°F"
   initial: 82
 
-hvac_mini_split_preheating_cold_setpoint_master_bedroom:
+hvac_mini_split_preheat_cold_setpoint_master_bedroom:
   name: HVAC Master Bedroom Mini Split Preheating Setpoint (Cold)
   min: 64
   max: 86
@@ -40,7 +40,7 @@ hvac_mini_split_preheating_cold_setpoint_master_bedroom:
   unit_of_measurement: "°F"
   initial: 78
 
-hvac_mini_split_preheating_hot_setpoint_master_bedroom:
+hvac_mini_split_preheat_hot_setpoint_master_bedroom:
   name: HVAC Master Bedroom Mini Split Preheating Setpoint (Hot)
   min: 64
   max: 86
