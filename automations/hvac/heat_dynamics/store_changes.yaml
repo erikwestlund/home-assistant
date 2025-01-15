@@ -27,6 +27,8 @@
         kitchen_hour_temp_change: "{{ (states('sensor.kitchen_average_temperature') | float(0)) - (states('input_number.hvac_kitchen_temperature_60m_ago') | float(0)) }}"
         office_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_office_radiators_calling_for_heat') == 'on') else 0 }}"
         office_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_office_previous_hour') == 'on') else 0 }}"
+        erik_office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') | string }}"
+        dining_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_dining_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_dining_room') | string }}"
         offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_family_room
@@ -59,6 +61,7 @@
         family_room_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        ducted_setpoint: "{{ 'off' if (states('sensor.hvac_ducted_setpoint') | float(0)) == 0 else states('sensor.hvac_ducted_setpoint') | string }}"
         family_room_ducted_kwh_hourly: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_living_room
@@ -90,6 +93,7 @@
         family_room_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        master_bedroom_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_master_bedroom') | string }}"
         living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_dining_room
@@ -121,6 +125,8 @@
         family_room_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') | string }}"
+        erik_office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') | string }}"
         offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_erik_office
@@ -149,6 +155,8 @@
         hank_side_door_closed: "{{ 1 if (states('binary_sensor.hank_bedroom_side_door_contact') == 'off') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        office_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_office') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_office') | string }}"
+        dining_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_dining_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_dining_room') | string }}"
         offices_dining_room_kwh_hourly: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_master_bedroom
@@ -173,6 +181,7 @@
         door_closed: "{{ 1 if (states('binary_sensor.master_bedroom_door_contact') == 'off') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        living_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_living_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_living_room') | string }}"
         living_room_master_bedroom_kwh_hourly: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float(0) }}"
 
 - id: collect_hourly_data_ducted
@@ -205,4 +214,5 @@
         hank_side_door_closed: "{{ 1 if (states('binary_sensor.hank_bedroom_side_door_contact') == 'off') else 0 }}"
         main_zone_radiators_calling_for_heat: "{{ 1 if (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') == 'on') else 0 }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ 1 if (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+        family_room_mini_split_setpoint: "{{ 'off' if (states('sensor.hvac_mini_split_setpoint_family_room') | float(0)) == 0 else states('sensor.hvac_mini_split_setpoint_family_room') | string }}"
         family_room_ducted_kwh_hourly: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') | float(0) }}"
