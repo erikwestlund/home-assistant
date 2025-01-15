@@ -10,11 +10,19 @@ script: !include_dir_merge_named scripts/
 scene: !include scenes.yaml
 utility_meter: !include_dir_merge_named utility_meters/
 
+logger:
+  default: warning
+  logs:
+    homeassistant.components.file: debug
+
 notify:
   - name: file
     platform: file
     filename: "/config/notifications.log"
-
+  - name: snapshot_log
+    platform: file
+    filename: /config/snapshots/snapshot_hourly_data.json
+    
 input_boolean: !include_dir_merge_named input_boolean/
 input_datetime: !include_dir_merge_named input_datetime/
 input_select: !include_dir_merge_named input_select/
