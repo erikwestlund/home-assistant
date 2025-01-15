@@ -6,7 +6,7 @@
         "timestamp": states('sensor.snapshot_timestamp'),
         "outdoor_temp_hour_ago": states('sensor.snapshot_outdoor_temp_hour_ago'),
         "outdoor_temp_current": states('sensor.snapshot_outdoor_temp_current'),
-        "outdoor_hour_temp_change": states('sensor.snapshot_outdoor_hour_temp_change'),
+        "outdoor_hour_temp_change": states('sensor.snapshot_outdoor_hour_temp_change')
         
       }  | tojson
     }}
