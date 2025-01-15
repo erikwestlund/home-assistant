@@ -1,0 +1,3 @@
+- name: "Snapshot Timestamp"
+  state: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+  id: snapshot_timestamp

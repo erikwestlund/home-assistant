@@ -1,0 +1,26 @@
+# Space Heater Power Status - Previous Hour
+snapshot_space_heater_power_status_office_prev_hour:
+  value: >
+    {% if is_state('input_boolean.space_heater_power_status_office_60m_ago', 'off') %}
+      off
+    {% else %}
+      {{ states('input_boolean.space_heater_power_status_office_60m_ago') }}
+    {% endif %}
+
+# Space Heater Power Status - Current Hour
+snapshot_space_heater_power_status_office_now:
+  value: >
+    {% if is_state('binary_sensor.hvac_space_heater_active_office', 'off') %}
+      off
+    {% else %}
+      {{ states('binary_sensor.hvac_space_heater_active_office') }}
+    {% endif %}
+
+# Space Heater Power Status - Changed (if it differs from the previous hour)
+snapshot_space_heater_power_status_office_changed:
+  value: >
+    {% if is_state('binary_sensor.hvac_space_heater_active_office', 'off') != is_state('input_boolean.space_heater_power_status_office_60m_ago', 'off') %}
+      1
+    {% else %}
+      0
+    {% endif %}

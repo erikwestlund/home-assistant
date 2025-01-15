@@ -219,3 +219,4 @@ hvac_setpoint_ducted_5m_ago:
   max: 150
   step: 1
   unit_of_measurement: "°F"
+
