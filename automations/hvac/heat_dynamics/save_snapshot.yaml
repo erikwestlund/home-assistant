@@ -6,7 +6,7 @@
   action:
     - service: input_text.set_value
       target:
-        entity_id: input_text.snapshot_hourly_data
+        entity_id: input_text.hvac_hourly_snapshot_all
       data:
         value: >
           {{
