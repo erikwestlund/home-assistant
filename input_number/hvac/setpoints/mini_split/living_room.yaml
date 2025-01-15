@@ -72,3 +72,20 @@ hvac_mini_split_night_hot_setpoint_living_room:
   step: 1
   unit_of_measurement: "°F"
   initial: 74
+
+# Master Bedroom Preheat Setpoints
+hvac_mini_split_master_bedroom_preheat_freezing_setpoint_living_room:
+  name: HVAC Living Room Mini Split Master Bedroom Preheating Setpoint (Freezing)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 78
+
+hvac_mini_split_master_bedroom_preheat_cold_setpoint_living_room:
+  name: HVAC Living Room Mini Split Master Bedroom Preheating Setpoint (Cold)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 76
