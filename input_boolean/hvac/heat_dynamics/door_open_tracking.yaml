@@ -1,0 +1,19 @@
+office_exterior_door_closed_prev_hour:
+  name: "Office Exterior Door Closed Prev Hour"
+  initial: off
+
+family_room_interior_door_closed_prev_hour:
+  name: "Family Room Interior Door Closed Prev Hour"
+  initial: off
+
+tilly_door_closed_prev_hour:
+  name: "Tilly Door Closed Prev Hour"
+  initial: off
+
+hank_main_door_closed_prev_hour:
+  name: "Hank Main Door Closed Prev Hour"
+  initial: off
+
+hank_side_door_closed_prev_hour:
+  name: "Hank Side Door Closed Prev Hour"
+  initial: off

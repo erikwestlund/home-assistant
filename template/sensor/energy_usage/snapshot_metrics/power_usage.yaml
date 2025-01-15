@@ -1,0 +1,14 @@
+- name: "heat_pump_living_room_master_bedroom_energy_hourly"
+  state: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') }}"
+
+- name: "heat_pump_family_room_ducted_energy_hourly"
+  state: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') }}"
+
+- name: "heat_pump_offices_dining_room_energy_hourly"
+  state: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') }}"
+
+- name: "all_heat_pumps_energy_hourly"
+  state: "{{ states('input_number.all_heat_pumps_energy_hourly') }}"
+
+- name: "whole_house_energy_hourly"
+  state: "{{ states('input_number.whole_house_energy_hourly') }}"
