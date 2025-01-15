@@ -1,14 +1,12 @@
 - id: "store_snapshot_hourly_data"
-  alias: "Store Snapshot Hourly Data"
+  alias: "Store Snapshot Hourly Data to File"
   trigger:
     - platform: time_pattern
-      minutes: '0'
+      minutes: "/60"  # Runs every hour
   action:
-    - service: input_text.set_value
-      target:
-        entity_id: input_text.hvac_hourly_snapshot_all
+    - service: notify.snapshot_log
       data:
-        value: >
+        message: >
           {{
               {
                  "timestamp": now().strftime('%Y-%m-%d %H:%M:%S'),
