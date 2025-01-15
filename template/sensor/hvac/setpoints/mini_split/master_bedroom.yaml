@@ -7,7 +7,7 @@
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set is_preheating = is_state('binary_sensor.hvac_preheating_active_master_bedroom', 'on') %}
     {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_master_bedroom') | lower %}
-    {% set comfort_setting = 'night' if is_preheating else states('sensor.hvac_comfort_setting_master_bedroom') | lower | replace(' ', '_') %}
+    {% set comfort_setting = states('sensor.hvac_comfort_setting_master_bedroom') | lower | replace(' ', '_') %}
 
     {# 1. Power Off Check #}
     {% if is_power_off %}
