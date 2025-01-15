@@ -3,7 +3,7 @@
   alias: "Update Tina Office Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '1'  # Office stores hourly changes at 0, so store at 1. At 0 it will compare 59 minutes ago.
+    minutes: '2'  # Office stores hourly changes at 1, so store at 2. At 1 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -43,7 +43,7 @@
   alias: "Update Family Room Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '2'  # Family room stores hourly changes at 1, so store at 2. At 1 it will compare 59 minutes ago.
+    minutes: '3'  # Family room stores hourly changes at 2, so store at 3. At 2 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -82,7 +82,7 @@
   alias: "Update Living Room Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '3'  # Living room stores hourly changes at 2, so store at 3. At 2 it will compare 59 minutes ago.
+    minutes: '4'  # Living room stores hourly changes at 3, so store at 4. At 3 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -121,7 +121,7 @@
   alias: "Update Dining Room Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '4'  # Dining room stores hourly changes at 3, so store at 4. At 3 it will compare 59 minutes ago.
+    minutes: '5'  # Dining room stores hourly changes at 4, so store at 5. At 4 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -160,7 +160,7 @@
   alias: "Update Erik Office Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '5'  # Erik office stores hourly changes at 4, so store at 5. At 4 it will compare 59 minutes ago.
+    minutes: '6'  # Erik office stores hourly changes at 5, so store at 6. At 5 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -199,7 +199,7 @@
   alias: "Update Master Bedroom Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '6'  # Master Bedroom stores hourly changes at 5, so store at 6. At 5 it will compare 59 minutes ago.
+    minutes: '7'  # Master Bedroom stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -238,7 +238,7 @@
   alias: "Update Kids Rooms Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '7'  # Ducted stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+    minutes: '8'  # Ducted stores hourly changes at 7, so store at 8. At 7 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -277,7 +277,7 @@
   alias: "Update Hank's Room Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '7'  # Ducted stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+    minutes: '8'  # Ducted stores hourly changes at 7, so store at 8. At 7 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -316,7 +316,7 @@
   alias: "Update Tilly's Room Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '7'  # Ducted stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+    minutes: '8'  # Ducted stores hourly changes at 7, so store at 8. At 7 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:
@@ -355,7 +355,7 @@
   alias: "Update Kitchen Temperature 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '7'  # Ducted stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+    minutes: '8'  # Ducted stores hourly changes at 7, so store at 8. At 7 it will compare 59 minutes ago.
   action:
     - service: input_number.set_value
       target:

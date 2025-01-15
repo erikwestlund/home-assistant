@@ -2,7 +2,7 @@
   alias: "Track Radiator Calling for Heat Hourly"
   trigger:
     platform: time_pattern
-    minutes: '7'  # Trigger every hour at the 7th minute
+    minutes: '8'  # Trigger every hour at the 7th minute
   action:
     # Office
     - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hvac_radiator_calling_for_heat_office', 'on') else 'off' }}
