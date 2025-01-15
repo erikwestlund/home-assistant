@@ -1,20 +1,45 @@
-- id: track_radiator_calling_for_heat_hourly
-  alias: "Track Radiator Calling for Heat Hourly"
+- id: track_radiator_calling_for_heat_office
+  alias: "Track Radiator Calling for Heat in Office"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
+    to: 'on'
+  action:
+    service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.radiator_called_for_heat_office_previous_hour
+
+- id: track_radiator_calling_for_heat_living_room
+  alias: "Track Radiator Calling for Heat in Living Room"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
+    to: 'on'
+  action:
+    service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.radiator_called_for_heat_living_room_previous_hour
+
+- id: track_radiator_calling_for_heat_family_room
+  alias: "Track Radiator Calling for Heat in Family Room"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
+    to: 'on'
+  action:
+    service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.radiator_called_for_heat_family_room_previous_hour
+
+- id: reset_radiator_called_for_heat_hourly
+  alias: "Reset Radiator Calling for Heat Hourly"
   trigger:
     platform: time_pattern
-    minutes: '8'  # Trigger every hour at the 7th minute
+    minutes: '0'  # Trigger every hour at the start of the hour
   action:
-    # Office
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hvac_radiator_calling_for_heat_office', 'on') else 'off' }}
+    - service: input_boolean.turn_off
       target:
-        entity_id: input_boolean.radiator_calling_for_heat_office_previous_hour
-
-    # Living Room
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hvac_radiator_calling_for_heat_living_room', 'on') else 'off' }}
-      target:
-        entity_id: input_boolean.radiator_calling_for_heat_living_room_previous_hour
-
-    # Family Room
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hvac_radiator_calling_for_heat_family_room', 'on') else 'off' }}
-      target:
-        entity_id: input_boolean.radiator_calling_for_heat_family_room_previous_hour
+        entity_id:
+          - input_boolean.radiator_called_for_heat_office_previous_hour
+          - input_boolean.radiator_called_for_heat_living_room_previous_hour
+          - input_boolean.radiator_called_for_heat_family_room_previous_hour
