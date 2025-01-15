@@ -1,14 +1,29 @@
-#- name: "Office Exterior Door Closed Prev Hour"
-#  state: "{{ 1 if is_state('input_boolean.office_exterior_door_closed_prev_hour', 'on') else 0 }}"
-#
-#- name: "Family Room Interior Door Closed Prev Hour"
-#  state: "{{ 1 if is_state('input_boolean.family_room_interior_door_closed_prev_hour', 'on') else 0 }}"
-#
-#- name: "Tilly Door Closed Prev Hour"
-#  state: "{{ 1 if is_state('input_boolean.tilly_door_closed_prev_hour', 'on') else 0 }}"
-#
-#- name: "Hank Main Door Closed Prev Hour"
-#  state: "{{ 1 if is_state('input_boolean.hank_main_door_closed_prev_hour', 'on') else 0 }}"
-#
-#- name: "Hank Side Door Closed Prev Hour"
-#  state: "{{ 1 if is_state('input_boolean.hank_side_door_closed_prev_hour', 'on') else 0 }}"
+- name: "Snapshot Office Exterior Door Closed Prev Hour"
+  unique_id: "snapshot_office_exterior_door_closed_prev_hour"
+  state: "{{ 1 if is_state('input_boolean.office_exterior_door_closed_prev_hour', 'on') else 0 }}"
+  unit_of_measurement: "closed"
+  icon: mdi:door-closed
+
+- name: "Snapshot Family Room Interior Door Closed Prev Hour"
+  unique_id: "snapshot_family_room_interior_door_closed_prev_hour"
+  state: "{{ 1 if is_state('input_boolean.family_room_interior_door_closed_prev_hour', 'on') else 0 }}"
+  unit_of_measurement: "closed"
+  icon: mdi:door-closed
+
+- name: "Snapshot Tilly Door Closed Prev Hour"
+  unique_id: "snapshot_tilly_door_closed_prev_hour"
+  state: "{{ 1 if is_state('input_boolean.tilly_door_closed_prev_hour', 'on') else 0 }}"
+  unit_of_measurement: "closed"
+  icon: mdi:door-closed
+
+- name: "Snapshot Hank Main Door Closed Prev Hour"
+  unique_id: "snapshot_hank_main_door_closed_prev_hour"
+  state: "{{ 1 if is_state('input_boolean.hank_main_door_closed_prev_hour', 'on') else 0 }}"
+  unit_of_measurement: "closed"
+  icon: mdi:door-closed
+
+- name: "Snapshot Hank Side Door Closed Prev Hour"
+  unique_id: "snapshot_hank_side_door_closed_prev_hour"
+  state: "{{ 1 if is_state('input_boolean.hank_side_door_closed_prev_hour', 'on') else 0 }}"
+  unit_of_measurement: "closed"
+  icon: mdi:door-closed

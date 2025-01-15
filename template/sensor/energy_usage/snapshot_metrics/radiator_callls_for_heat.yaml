@@ -1,50 +1,68 @@
-## Office Radiators Calling for Heat - Previous Hour
-#snapshot_office_radiators_calling_for_heat_prev_hour:
-#  value: "{{ 1 if (states('input_boolean.radiator_called_for_heat_office_previous_hour') == 'on') else 0 }}"
-#
-## Office Radiators Calling for Heat - Now
-#snapshot_office_radiators_calling_for_heat_now:
-#  value: "{{ 1 if (state_attr('climate.office', 'hvac_action') == 'heating') else 0 }}"
-#
-## Office Radiators Calling for Heat - Changed
-#snapshot_office_radiators_calling_for_heat_changed:
-#  value: >
-#    {% if (state_attr('climate.office', 'hvac_action') == 'heating') != (states('input_boolean.radiator_called_for_heat_office_previous_hour') == 'on') %}
-#      1
-#    {% else %}
-#      0
-#    {% endif %}
-#
-## Family Room Radiators Calling for Heat - Previous Hour
-#snapshot_family_room_radiators_calling_for_heat_prev_hour:
-#  value: "{{ 1 if (states('input_boolean.radiator_called_for_heat_family_room_previous_hour') == 'on') else 0 }}"
-#
-## Family Room Radiators Calling for Heat - Now
-#snapshot_family_room_radiators_calling_for_heat_now:
-#  value: "{{ 1 if (state_attr('climate.family_room_heating', 'hvac_action') == 'heating') else 0 }}"
-#
-## Family Room Radiators Calling for Heat - Changed
-#snapshot_family_room_radiators_calling_for_heat_changed:
-#  value: >
-#    {% if (state_attr('climate.family_room_heating', 'hvac_action') == 'heating') != (states('input_boolean.radiator_called_for_heat_family_room_previous_hour') == 'on') %}
-#      1
-#    {% else %}
-#      0
-#    {% endif %}
-#
-## Living Room Radiators Calling for Heat - Previous Hour
-#snapshot_living_room_radiators_calling_for_heat_prev_hour:
-#  value: "{{ 1 if (states('input_boolean.radiator_called_for_heat_living_room_previous_hour') == 'on') else 0 }}"
-#
-## Living Room Radiators Calling for Heat - Now
-#snapshot_living_room_radiators_calling_for_heat_now:
-#  value: "{{ 1 if (state_attr('climate.living_room_main_heating', 'hvac_action') == 'heating') else 0 }}"
-#
-## Living Room Radiators Calling for Heat - Changed
-#snapshot_living_room_radiators_calling_for_heat_changed:
-#  value: >
-#    {% if (state_attr('climate.living_room_main_heating', 'hvac_action') == 'heating') != (states('input_boolean.radiator_called_for_heat_living_room_previous_hour') == 'on') %}
-#      1
-#    {% else %}
-#      0
-#    {% endif %}
+- name: "Snapshot Office Radiators Calling for Heat Prev Hour"
+  unique_id: "snapshot_office_radiators_calling_for_heat_prev_hour"
+  state: "{{ 1 if (states('input_boolean.radiator_called_for_heat_office_previous_hour') == 'on') else 0 }}"
+  unit_of_measurement: ""
+  icon: mdi:radiator
+
+- name: "Snapshot Office Radiators Calling for Heat Now"
+  unique_id: "snapshot_office_radiators_calling_for_heat_now"
+  state: "{{ 1 if (state_attr('climate.office', 'hvac_action') == 'heating') else 0 }}"
+  unit_of_measurement: ""
+  icon: mdi:radiator
+
+- name: "Snapshot Office Radiators Calling for Heat Changed"
+  unique_id: "snapshot_office_radiators_calling_for_heat_changed"
+  state: >
+    {% if (state_attr('climate.office', 'hvac_action') == 'heating') != (states('input_boolean.radiator_called_for_heat_office_previous_hour') == 'on') %}
+      1
+    {% else %}
+      0
+    {% endif %}
+  unit_of_measurement: ""
+  icon: mdi:radiator-off
+
+- name: "Snapshot Family Room Radiators Calling for Heat Prev Hour"
+  unique_id: "snapshot_family_room_radiators_calling_for_heat_prev_hour"
+  state: "{{ 1 if (states('input_boolean.radiator_called_for_heat_family_room_previous_hour') == 'on') else 0 }}"
+  unit_of_measurement: ""
+  icon: mdi:radiator
+
+- name: "Snapshot Family Room Radiators Calling for Heat Now"
+  unique_id: "snapshot_family_room_radiators_calling_for_heat_now"
+  state: "{{ 1 if (state_attr('climate.family_room_heating', 'hvac_action') == 'heating') else 0 }}"
+  unit_of_measurement: ""
+  icon: mdi:radiator
+
+- name: "Snapshot Family Room Radiators Calling for Heat Changed"
+  unique_id: "snapshot_family_room_radiators_calling_for_heat_changed"
+  state: >
+    {% if (state_attr('climate.family_room_heating', 'hvac_action') == 'heating') != (states('input_boolean.radiator_called_for_heat_family_room_previous_hour') == 'on') %}
+      1
+    {% else %}
+      0
+    {% endif %}
+  unit_of_measurement: ""
+  icon: mdi:radiator-off
+
+- name: "Snapshot Living Room Radiators Calling for Heat Prev Hour"
+  unique_id: "snapshot_living_room_radiators_calling_for_heat_prev_hour"
+  state: "{{ 1 if (states('input_boolean.radiator_called_for_heat_living_room_previous_hour') == 'on') else 0 }}"
+  unit_of_measurement: ""
+  icon: mdi:radiator
+
+- name: "Snapshot Living Room Radiators Calling for Heat Now"
+  unique_id: "snapshot_living_room_radiators_calling_for_heat_now"
+  state: "{{ 1 if (state_attr('climate.living_room_main_heating', 'hvac_action') == 'heating') else 0 }}"
+  unit_of_measurement: ""
+  icon: mdi:radiator
+
+- name: "Snapshot Living Room Radiators Calling for Heat Changed"
+  unique_id: "snapshot_living_room_radiators_calling_for_heat_changed"
+  state: >
+    {% if (state_attr('climate.living_room_main_heating', 'hvac_action') == 'heating') != (states('input_boolean.radiator_called_for_heat_living_room_previous_hour') == 'on') %}
+      1
+    {% else %}
+      0
+    {% endif %}
+  unit_of_measurement: ""
+  icon: mdi:radiator-off

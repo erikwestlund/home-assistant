@@ -1,80 +1,161 @@
-#snapshot_office_temp_now:
-#  value: "{{ states('sensor.tina_office_average_temperature') | float(0) }}"
-#
-#snapshot_office_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_office_average_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_office_temp_change_hour:
-#  value: "{{ (states('sensor.tina_office_average_temperature') | float(0)) - (states('input_number.hvac_office_average_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_family_room_temp_now:
-#  value: "{{ states('sensor.family_room_average_temperature') | float(0) }}"
-#
-#snapshot_family_room_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_family_room_average_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_family_room_temp_change_hour:
-#  value: "{{ (states('sensor.family_room_average_temperature') | float(0)) - (states('input_number.hvac_family_room_average_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_living_room_temp_now:
-#  value: "{{ states('sensor.living_room_average_temperature') | float(0) }}"
-#
-#snapshot_living_room_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_living_room_average_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_living_room_temp_change_hour:
-#  value: "{{ (states('sensor.living_room_average_temperature') | float(0)) - (states('input_number.hvac_living_room_average_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_dining_room_temp_now:
-#  value: "{{ states('sensor.dining_room_average_temperature') | float(0) }}"
-#
-#snapshot_dining_room_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_dining_room_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_dining_room_temp_change_hour:
-#  value: "{{ (states('sensor.dining_room_average_temperature') | float(0)) - (states('input_number.hvac_dining_room_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_kitchen_temp_now:
-#  value: "{{ states('sensor.kitchen_average_temperature') | float(0) }}"
-#
-#snapshot_kitchen_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_kitchen_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_kitchen_temp_change_hour:
-#  value: "{{ (states('sensor.kitchen_average_temperature') | float(0)) - (states('input_number.hvac_kitchen_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_kids_rooms_temp_now:
-#  value: "{{ states('sensor.kids_rooms_average_temperature') | float(0) }}"
-#
-#snapshot_kids_rooms_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_kids_rooms_average_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_kids_rooms_temp_change_hour:
-#  value: "{{ (states('sensor.kids_rooms_average_temperature') | float(0)) - (states('input_number.hvac_kids_rooms_average_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_hanks_room_temp_now:
-#  value: "{{ states('sensor.hank_s_room_average_temperature') | float(0) }}"
-#
-#snapshot_hanks_room_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_hank_room_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_hanks_room_temp_change_hour:
-#  value: "{{ (states('sensor.hank_s_room_average_temperature') | float(0)) - (states('input_number.hvac_hank_room_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_tillys_room_temp_now:
-#  value: "{{ states('sensor.tilly_s_room_average_temperature') | float(0) }}"
-#
-#snapshot_tillys_room_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_tilly_room_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_tillys_room_temp_change_hour:
-#  value: "{{ (states('sensor.tilly_s_room_average_temperature') | float(0)) - (states('input_number.hvac_tilly_room_temperature_60m_ago') | float(0)) }}"
-#
-#snapshot_master_bedroom_temp_now:
-#  value: "{{ states('sensor.master_bedroom_average_temperature') | float(0) }}"
-#
-#snapshot_master_bedroom_temp_prev_hour:
-#  value: "{{ states('input_number.hvac_master_bedroom_average_temperature_60m_ago') | float(0) }}"
-#
-#snapshot_master_bedroom_temp_change_hour:
-#  value: "{{ (states('sensor.master_bedroom_average_temperature') | float(0)) - (states('input_number.hvac_master_bedroom_average_temperature_60m_ago') | float(0)) }}"
+- name: "Snapshot Office Temp Now"
+  unique_id: "snapshot_office_temp_now"
+  state: "{{ states('sensor.tina_office_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Office Temp Prev Hour"
+  unique_id: "snapshot_office_temp_prev_hour"
+  state: "{{ states('input_number.hvac_office_average_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Office Temp Change Hour"
+  unique_id: "snapshot_office_temp_change_hour"
+  state: "{{ (states('sensor.tina_office_average_temperature') | float(0)) - (states('input_number.hvac_office_average_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Family Room Temp Now"
+  unique_id: "snapshot_family_room_temp_now"
+  state: "{{ states('sensor.family_room_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Family Room Temp Prev Hour"
+  unique_id: "snapshot_family_room_temp_prev_hour"
+  state: "{{ states('input_number.hvac_family_room_average_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Family Room Temp Change Hour"
+  unique_id: "snapshot_family_room_temp_change_hour"
+  state: "{{ (states('sensor.family_room_average_temperature') | float(0)) - (states('input_number.hvac_family_room_average_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Living Room Temp Now"
+  unique_id: "snapshot_living_room_temp_now"
+  state: "{{ states('sensor.living_room_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Living Room Temp Prev Hour"
+  unique_id: "snapshot_living_room_temp_prev_hour"
+  state: "{{ states('input_number.hvac_living_room_average_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Living Room Temp Change Hour"
+  unique_id: "snapshot_living_room_temp_change_hour"
+  state: "{{ (states('sensor.living_room_average_temperature') | float(0)) - (states('input_number.hvac_living_room_average_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Dining Room Temp Now"
+  unique_id: "snapshot_dining_room_temp_now"
+  state: "{{ states('sensor.dining_room_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Dining Room Temp Prev Hour"
+  unique_id: "snapshot_dining_room_temp_prev_hour"
+  state: "{{ states('input_number.hvac_dining_room_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Dining Room Temp Change Hour"
+  unique_id: "snapshot_dining_room_temp_change_hour"
+  state: "{{ (states('sensor.dining_room_average_temperature') | float(0)) - (states('input_number.hvac_dining_room_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Kitchen Temp Now"
+  unique_id: "snapshot_kitchen_temp_now"
+  state: "{{ states('sensor.kitchen_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Kitchen Temp Prev Hour"
+  unique_id: "snapshot_kitchen_temp_prev_hour"
+  state: "{{ states('input_number.hvac_kitchen_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Kitchen Temp Change Hour"
+  unique_id: "snapshot_kitchen_temp_change_hour"
+  state: "{{ (states('sensor.kitchen_average_temperature') | float(0)) - (states('input_number.hvac_kitchen_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Kids' Rooms Temp Now"
+  unique_id: "snapshot_kids_rooms_temp_now"
+  state: "{{ states('sensor.kids_rooms_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Kids' Rooms Temp Prev Hour"
+  unique_id: "snapshot_kids_rooms_temp_prev_hour"
+  state: "{{ states('input_number.hvac_kids_rooms_average_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Kids' Rooms Temp Change Hour"
+  unique_id: "snapshot_kids_rooms_temp_change_hour"
+  state: "{{ (states('sensor.kids_rooms_average_temperature') | float(0)) - (states('input_number.hvac_kids_rooms_average_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Hank's Room Temp Now"
+  unique_id: "snapshot_hanks_room_temp_now"
+  state: "{{ states('sensor.hank_s_room_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Hank's Room Temp Prev Hour"
+  unique_id: "snapshot_hanks_room_temp_prev_hour"
+  state: "{{ states('input_number.hvac_hank_room_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Hank's Room Temp Change Hour"
+  unique_id: "snapshot_hanks_room_temp_change_hour"
+  state: "{{ (states('sensor.hank_s_room_average_temperature') | float(0)) - (states('input_number.hvac_hank_room_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Tilly's Room Temp Now"
+  unique_id: "snapshot_tillys_room_temp_now"
+  state: "{{ states('sensor.tilly_s_room_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Tilly's Room Temp Prev Hour"
+  unique_id: "snapshot_tillys_room_temp_prev_hour"
+  state: "{{ states('input_number.hvac_tilly_room_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Tilly's Room Temp Change Hour"
+  unique_id: "snapshot_tillys_room_temp_change_hour"
+  state: "{{ (states('sensor.tilly_s_room_average_temperature') | float(0)) - (states('input_number.hvac_tilly_room_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line
+
+- name: "Snapshot Master Bedroom Temp Now"
+  unique_id: "snapshot_master_bedroom_temp_now"
+  state: "{{ states('sensor.master_bedroom_average_temperature') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Master Bedroom Temp Prev Hour"
+  unique_id: "snapshot_master_bedroom_temp_prev_hour"
+  state: "{{ states('input_number.hvac_master_bedroom_average_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Master Bedroom Temp Change Hour"
+  unique_id: "snapshot_master_bedroom_temp_change_hour"
+  state: "{{ (states('sensor.master_bedroom_average_temperature') | float(0)) - (states('input_number.hvac_master_bedroom_average_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line

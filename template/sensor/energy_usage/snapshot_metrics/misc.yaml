@@ -1,3 +1,5 @@
-#- name: "Snapshot Timestamp"
-#  state: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
-#  id: snapshot_timestamp
+- name: "Snapshot Timestamp"
+  unique_id: "snapshot_timestamp"
+  state: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+  unit_of_measurement: ""
+  icon: mdi:calendar-clock
