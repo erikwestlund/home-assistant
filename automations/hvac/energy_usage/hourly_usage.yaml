@@ -1,43 +1,49 @@
-
-- id: track_heat_pump_energy_hourly
-  alias: "Track Heat Pump Energy Usage Hourly"
+- id: track_heat_pump_energy_usage_calculate
+  alias: "Track Heat Pump Energy Usage Calculate Hourly Usage"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '59'  # Trigger at the 59th minute of every hour
   action:
+    # Calculate energy usage for the current hour (difference between today and the previous hour)
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_living_room_master_bedroom_energy_hourly
       data:
-        value: "{{ (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float) - (states('input_number.heat_pump_living_room_master_bedroom_energy_previous_hour') | float) }}"
+        value: "{{ (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) - (states('input_number.heat_pump_living_room_master_bedroom_energy_previous_hour') | float(0)) }}"
 
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_family_room_ducted_energy_hourly
       data:
-        value: "{{ (states('sensor.heat_pump_family_room_ducted_energy_today') | float) - (states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float) }}"
+        value: "{{ (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) - (states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float(0)) }}"
 
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_offices_dining_room_energy_hourly
       data:
-        value: "{{ (states('sensor.heat_pump_offices_dining_room_energy_today') | float) - (states('input_number.heat_pump_offices_dining_room_energy_previous_hour') | float) }}"
+        value: "{{ (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) - (states('input_number.heat_pump_offices_dining_room_energy_previous_hour') | float(0)) }}"
 
+- id: track_heat_pump_energy_usage_update_previous_hour
+  alias: "Track Heat Pump Energy Usage Update Previous Hour"
+  trigger:
+    platform: time_pattern
+    minutes: '0'  # Trigger at the start of every hour
+  action:
+    # Store the current total energy as the previous hour's energy for next cycle
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_living_room_master_bedroom_energy_previous_hour
       data:
-        value: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float }}"
+        value: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) }}"
 
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_family_room_ducted_energy_previous_hour
       data:
-        value: "{{ states('sensor.heat_pump_family_room_ducted_energy_today') | float }}"
+        value: "{{ states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) }}"
 
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_offices_dining_room_energy_previous_hour
       data:
-        value: "{{ states('sensor.heat_pump_offices_dining_room_energy_today') | float }}"
-
+        value: "{{ states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
