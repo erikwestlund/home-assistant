@@ -1,6 +1,24 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+
+
+name: Home
+latitude: 42.24953
+longitude: -71.06616
+elevation: 20
+radius: 100
+unit_system: imperial
+currency: USD
+country: US
+time_zone: "America/New_York"
+
+allowlist_external_dirs:
+  - "/config/"
+  - "/config/snapshots/"
+  - "/config/www/"
+
+
 # Load frontend themes from the themes folder
 frontend:
   themes: !include_dir_merge_named themes
@@ -22,6 +40,7 @@ notify:
   - name: snapshot_log
     platform: file
     filename: "/config/snapshots/snapshot_hourly_data.json"
+
 
 input_boolean: !include_dir_merge_named input_boolean/
 input_datetime: !include_dir_merge_named input_datetime/
