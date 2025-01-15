@@ -2,7 +2,7 @@
   alias: "Store Snapshot Hourly Data to File"
   trigger:
     - platform: time_pattern
-      minutes: '0''
+      minutes: '0'
   action:
     - service: notify.snapshot_log
       data:
