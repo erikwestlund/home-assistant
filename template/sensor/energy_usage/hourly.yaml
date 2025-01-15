@@ -1,0 +1,14 @@
+heat_pump_living_room_master_bedroom_energy_hourly_sensor:
+  friendly_name: "Heat Pump Living Room Master Bedroom Energy Hourly"
+  unit_of_measurement: "kWh"
+  value_template: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_hourly') | float }}"
+
+heat_pump_family_room_ducted_energy_hourly_sensor:
+  friendly_name: "Heat Pump Family Room Ducted Energy Hourly"
+  unit_of_measurement: "kWh"
+  value_template: "{{ states('input_number.heat_pump_family_room_ducted_energy_hourly') | float }}"
+
+heat_pump_offices_dining_room_energy_hourly_sensor:
+  friendly_name: "Heat Pump Offices Dining Room Energy Hourly"
+  unit_of_measurement: "kWh"
+  value_template: "{{ states('input_number.heat_pump_offices_dining_room_energy_hourly') | float }}"
