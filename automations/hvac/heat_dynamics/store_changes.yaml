@@ -86,6 +86,7 @@
         radiator_changed: "{{ 1 if is_state('sensor.snapshot_main_zone_radiator_changed', 'unavailable') or is_state('sensor.snapshot_main_zone_radiator_changed', '0') else  0 }}"
         dining_room_temp_prev_hour: "{{ states('sensor.snapshot_dining_room_temp_prev_hour') }}"
         family_room_temp_prev_hour: "{{ states('sensor.snapshot_family_room_temp_prev_hour') }}"
+        master_bedroom_temp_prev_hour: "{{ states('sensor.snapshot_master_bedroom_temp_prev_hour') }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
         main_zone_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_living_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
         master_bedroom_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_master_bedroom_mini_split_prev_hour', 'unavailable') else states('sensor.snapshot_master_bedroom_mini_split_prev_hour') }}"
@@ -114,6 +115,8 @@
         living_room_temp_prev_hour: "{{ states('sensor.snapshot_living_room_temp_prev_hour') }}"
         basement_playroom_temp_prev_hour: "{{ states('sensor.snapshot_basement_playroom_temp_prev_hour') }}"
         family_room_temp_prev_hour: "{{ states('sensor.snapshot_family_room_temp_prev_hour') }}"
+        hanks_room_temp_prev_hour: "{{ states('sensor.snapshot_hank_s_room_temp_prev_hour') }}"
+        tillys_room_temp_prev_hour: "{{ states('sensor.snapshot_tilly_s_room_temp_prev_hour') }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
         main_zone_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_living_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
         office_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_mini_split_prev_hour', 'unavailable') else states('sensor.snapshot_office_mini_split_prev_hour') }}"
@@ -169,6 +172,7 @@
         mini_split_changed: "{{ 1 if is_state('sensor.snapshot_master_bedroom_mini_split_changed', 'unknown') or is_state('sensor.snapshot_master_bedroom_mini_split_changed', '0') else  0 }}"
         radiator_prev_hour: "{{ 'off' if is_state('sensor.snapshot_main_zone_radiator_prev_hour', 'unavailable') else states('sensor.snapshot_main_zone_radiator_prev_hour') }}"
         radiator_changed: "{{ 1 if is_state('sensor.snapshot_main_zone_radiator_changed', 'unavailable') or is_state('sensor.snapshot_main_zone_radiator_changed', '0') else  0 }}"
+        living_room_temp_prev_hour: "{{ states('sensor.snapshot_living_room_temp_prev_hour') }}"
         door_closed_prev_hour: "{{ states('sensor.snapshot_master_bedroom_door_closed_prev_hour', 'on') }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
         main_zone_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_living_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
@@ -198,6 +202,9 @@
         tillys_room_temp_change_hour: "{{ states('sensor.snapshot_tilly_s_room_temp_change_hour') }}"
         ducted_prev_hour: "{{ 'off' if is_state('sensor.snapshot_ducted_prev_hour', 'unavailable') else states('sensor.snapshot_ducted_prev_hour') }}"
         ducted_changed: "{{ 1 if is_state('sensor.snapshot_ducted_changed', 'unknown') or is_state('sensor.snapshot_ducted_changed', '0') else  0 }}"
+        living_room_temp_prev_hour: "{{ states('sensor.snapshot_living_room_temp_prev_hour') }}"
+        kitchen_temp_prev_hour: "{{ states('sensor.snapshot_kitchen_temp_prev_hour') }}"
+        dining_room_temp_prev_hour: "{{ states('sensor.snapshot_dining_room_temp_prev_hour') }}"
         tilly_door_closed_prev_hour: "{{ states('sensor.snapshot_tilly_door_closed_prev_hour', 'on') }}"
         hank_main_door_closed_prev_hour: "{{ states('sensor.snapshot_hank_main_door_closed_prev_hour', 'on') }}"
         hank_side_door_closed_prev_hour: "{{ states('sensor.snapshot_hank_side_door_closed_prev_hour', 'on') }}"
@@ -206,8 +213,8 @@
         family_room_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_family_room_mini_split_prev_hour', 'unavailable') else states('sensor.snapshot_family_room_mini_split_prev_hour') }}"
         heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
 
-- id: collect_hourly_data_ducted
-  alias: "Collect Hourly Data for Ducted Heat Dynamics"
+- id: collect_hourly_data_energy
+  alias: "Collect Hourly Data for Energy Usage"
   trigger:
     platform: time_pattern
     minutes: '8'

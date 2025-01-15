@@ -22,7 +22,7 @@
   unit_of_measurement: "kWh"
   icon: mdi:flash
 
-- name: "Snapshot Space Heater Hourly"
+- name: "Snapshot Space Heater Energy Hourly"
   unique_id: "snapshot_space_heater_energy_hourly"
   state: "{{ states('input_number.space_heater_energy_hourly') | float(0) }}"
   unit_of_measurement: "kWh"
