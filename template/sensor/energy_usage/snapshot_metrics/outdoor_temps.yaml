@@ -1,19 +1,19 @@
-- name: "Snapshot Outdoor Temp Hour Ago"
-  state: "{{ states('input_number.outdoor_temperature_60m_ago') | float(0) }}"
-  id: snapshot_outdoor_temp_hour_ago
-
-- name: "Snapshot Outdoor Temp Current"
-  state: "{{ states('sensor.current_temperature') | float(0) }}"
-  id: snapshot_outdoor_temp_current
-
-- name: "Snapshot Outdoor Hour Temp Change"
-  state: "{{ (states('sensor.current_temperature') | float(0)) - (states('input_number.outdoor_temperature_60m_ago') | float(0)) }}"
-  id: snapshot_outdoor_hour_temp_change
-
-- name: "Snapshot Temp Now"
-  state: "{{ states('sensor.tina_office_average_temperature') | float(0) }}"
-  id: snapshot_temp_now
-
-- name: "Snapshot Hour Temp Change"
-  state: "{{ (states('sensor.tina_office_average_temperature') | float(0)) - (states('input_number.hvac_office_average_temperature_60m_ago') | float(0)) }}"
-  id: snapshot_hour_temp_change
+#- name: "Snapshot Outdoor Temp Hour Ago"
+#  state: "{{ states('input_number.outdoor_temperature_60m_ago') | float(0) }}"
+#  id: snapshot_outdoor_temp_hour_ago
+#
+#- name: "Snapshot Outdoor Temp Current"
+#  state: "{{ states('sensor.current_temperature') | float(0) }}"
+#  id: snapshot_outdoor_temp_current
+#
+#- name: "Snapshot Outdoor Hour Temp Change"
+#  state: "{{ (states('sensor.current_temperature') | float(0)) - (states('input_number.outdoor_temperature_60m_ago') | float(0)) }}"
+#  id: snapshot_outdoor_hour_temp_change
+#
+#- name: "Snapshot Temp Now"
+#  state: "{{ states('sensor.tina_office_average_temperature') | float(0) }}"
+#  id: snapshot_temp_now
+#
+#- name: "Snapshot Hour Temp Change"
+#  state: "{{ (states('sensor.tina_office_average_temperature') | float(0)) - (states('input_number.hvac_office_average_temperature_60m_ago') | float(0)) }}"
+#  id: snapshot_hour_temp_change
