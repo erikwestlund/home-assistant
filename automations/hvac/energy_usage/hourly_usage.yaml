@@ -2,9 +2,8 @@
 - id: track_heat_pump_energy_hourly
   alias: "Track Heat Pump Energy Usage Hourly"
   trigger:
-    platform: time
-    minutes: 0  # Trigger every hour at the top of the hour
-    seconds: 0
+    platform: time_pattern
+    minutes: '0'
   action:
     - service: input_number.set_value
       target:
