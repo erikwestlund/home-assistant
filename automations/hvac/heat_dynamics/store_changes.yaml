@@ -28,6 +28,7 @@
         office_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_office_radiators_calling_for_heat_changed', 'on') else 0 }}"
         erik_office_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_erik_office_mini_split_prev_hour', 'unavailable') else states('sensor.snapshot_erik_office_mini_split_prev_hour') }}"
         dining_room_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_dining_room_mini_split_prev_hour', 'unavailable') else states('sensor.snapshot_dining_room_mini_split_prev_hour') }}"
+        space_heater_energy_hourly: "{{ states('sensor.snapshot_space_heater_energy_hourly') }}"
         heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
 
 - id: collect_hourly_data_family_room
@@ -204,3 +205,25 @@
         main_zone_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_living_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
         family_room_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_family_room_mini_split_prev_hour', 'unavailable') else states('sensor.snapshot_family_room_mini_split_prev_hour') }}"
         heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
+
+- id: collect_hourly_data_ducted
+  alias: "Collect Hourly Data for Ducted Heat Dynamics"
+  trigger:
+    platform: time_pattern
+    minutes: '8'
+  action:
+    service: google_sheets.append_sheet
+    data:
+      config_entry: !secret google_sheets_sheet_id
+      worksheet: "Energy Usage"
+      data:
+        timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+        outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
+        outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
+        outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change') }}"
+        space_heater_energy_hourly: "{{ states('sensor.snapshot_space_heater_energy_hourly') }}"
+        heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
+        heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
+        heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
+        heat_pump_all_energy_hourly: "{{ states('sensor.snapshot_all_heat_pumps_energy_hourly') }}"
+        whole_home_energy_hourly: "{{ states('sensor.snapshot_whole_house_energy_hourly') }}"

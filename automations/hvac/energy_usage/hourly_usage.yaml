@@ -14,7 +14,7 @@
     - service: input_number.set_value
       target:
         entity_id: input_number.heat_pump_family_room_ducted_energy_hourly
-      data: 
+      data:
         value: "{{ (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) - (states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float(0)) }}"
 
     - service: input_number.set_value
@@ -28,6 +28,12 @@
         entity_id: input_number.all_heat_pumps_energy_hourly
       data:
         value: "{{ (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) + (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) + (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) - (states('input_number.all_heat_pumps_energy_previous_hour') | float(0)) }}"
+
+    - service: input_number.set_value
+      target:
+          entity_id: input_number.space_heater_energy_hourly
+      data:
+          value: "{{ states('sensor.tina_office_space_heater_today_s_consumption') | float(0) - states('input_number.space_heater_energy_previous_hour') | float(0) }}"
 
     - service: input_number.set_value
       target:
@@ -65,6 +71,12 @@
           entity_id: input_number.all_heat_pumps_energy_previous_hour
       data:
           value: "{{ states('input_number.heat_pump_offices_dining_room_energy_previous_hour') | float(0) + states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float(0) + states('input_number.heat_pump_living_room_master_bedroom_energy_previous_hour') | float(0) }}"
+
+    - service: input_number.set_value
+      target:
+          entity_id: input_number.space_heater_energy_previous_hour
+      data:
+          value: "{{ states('sensor.tina_office_space_heater_today_s_consumption') | float(0) }}"
 
     - service: input_number.set_value
       target:

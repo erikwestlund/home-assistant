@@ -62,6 +62,22 @@ heat_pump_offices_dining_room_energy_hourly:
   step: 0.1
   unit_of_measurement: "kWh"
 
+space_heater_energy_previous_hour:
+  name: "Space Heater Energy Previous Hour"
+  initial: 0
+  min: 0
+  max: 10000
+  step: 0.1
+  unit_of_measurement: "kWh"
+
+space_heater_energy_hourly:
+  name: "Space Heater Energy Hourly"
+  initial: 0
+  min: 0
+  max: 1000
+  step: 0.1
+  unit_of_measurement: "kWh"
+
 all_heat_pumps_energy_hourly:
   name: "All Heat Pumps Energy Hourly"
   initial: 0
@@ -77,3 +93,4 @@ whole_house_energy_hourly:
   max: 1000
   step: 0.1
   unit_of_measurement: "kWh"
+
