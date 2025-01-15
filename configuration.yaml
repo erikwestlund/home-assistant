@@ -21,8 +21,8 @@ notify:
     filename: "/config/notifications.log"
   - name: snapshot_log
     platform: file
-    filename: /config/snapshots/snapshot_hourly_data.json
-    
+    filename: "/config/snapshots/snapshot_hourly_data.json"
+
 input_boolean: !include_dir_merge_named input_boolean/
 input_datetime: !include_dir_merge_named input_datetime/
 input_select: !include_dir_merge_named input_select/
