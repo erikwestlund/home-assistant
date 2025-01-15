@@ -2,7 +2,7 @@ radiator_calling_for_heat_office_previous_hour:
   name: Radiator Calling for Heat Office Previous Hour
   initial: off
   icon: mdi:radiator
-  
+
 radiator_calling_for_heat_living_room_previous_hour:
   name: Radiator Calling for Heat Living Room Previous Hour
   initial: off

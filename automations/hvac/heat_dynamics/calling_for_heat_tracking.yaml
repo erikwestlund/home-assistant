@@ -2,40 +2,19 @@
   alias: "Track Radiator Calling for Heat Hourly"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '7'  # Trigger every hour at the 7th minute
   action:
-    - service: input_boolean.turn_on
+    # Office
+    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hvac_radiator_calling_for_heat_office', 'on') else 'off' }}
       target:
         entity_id: input_boolean.radiator_calling_for_heat_office_previous_hour
-      data:
-        value: "{{ states('binary_sensor.hvac_radiator_calling_for_heat_office') }}"
 
-    - service: input_boolean.turn_on
+    # Living Room
+    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hvac_radiator_calling_for_heat_living_room', 'on') else 'off' }}
       target:
         entity_id: input_boolean.radiator_calling_for_heat_living_room_previous_hour
-      data:
-        value: "{{ states('binary_sensor.hvac_radiator_calling_for_heat_living_room') }}"
 
-    - service: input_boolean.turn_on
+    # Family Room
+    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hvac_radiator_calling_for_heat_family_room', 'on') else 'off' }}
       target:
         entity_id: input_boolean.radiator_calling_for_heat_family_room_previous_hour
-      data:
-        value: "{{ states('binary_sensor.hvac_radiator_calling_for_heat_family_room') }}"
-
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.radiator_calling_for_heat_office_hourly
-      data:
-        value: "{{ (states('binary_sensor.hvac_radiator_calling_for_heat_office') | int) - (states('input_boolean.radiator_calling_for_heat_office_previous_hour') | int) }}"
-
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.radiator_calling_for_heat_living_room_hourly
-      data:
-        value: "{{ (states('binary_sensor.hvac_radiator_calling_for_heat_living_room') | int) - (states('input_boolean.radiator_calling_for_heat_living_room_previous_hour') | int) }}"
-
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.radiator_calling_for_heat_family_room_hourly
-      data:
-        value: "{{ (states('binary_sensor.hvac_radiator_calling_for_heat_family_room') | int) - (states('input_boolean.radiator_calling_for_heat_family_room_previous_hour') | int) }}"
