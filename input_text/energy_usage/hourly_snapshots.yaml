@@ -1,3 +1,7 @@
+hvac_hourly_snapshot_all:
+  name: "Snapshot Hourly Data"
+  initial: '{}'
+
 hvac_hourly_snapshot_office:
   name: "HVAC Office Hourly Snapshot"
   initial: '{}'
