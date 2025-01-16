@@ -36,7 +36,7 @@
               data:
                 entity_id: climate.family_room_heat_pump
                 temperature: >
-                  {{ states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') | float(64.4) }}
+                  {{ max([states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Family Room"
@@ -64,7 +64,7 @@
               data:
                 entity_id: climate.family_room_heat_pump
                 temperature: >
-                  {{ states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') | float(64.4) }}
+                  {{ max([states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Family Room"
@@ -83,7 +83,7 @@
               data:
                 entity_id: climate.family_room_heat_pump
                 temperature: >
-                  {{ states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') | float(64.4) }}
+                  {{ max([states('sensor.hvac_mini_split_setpoint_family_room_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Family Room"
