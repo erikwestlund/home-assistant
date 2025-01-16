@@ -1,4 +1,4 @@
-- id: Store_daily_gas_usage
+- id: store_daily_gas_usage
   alias: "Store Daily Gas Usage"
   trigger:
     - platform: template

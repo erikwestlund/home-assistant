@@ -11,3 +11,19 @@ hvac_active_boiler_zone:
     - "All Zones"
   initial: "Idle"
   icon: mdi:radiator
+
+hvac_last_active_boiler_zone:
+  name: HVAC Last Active Boiler Zone
+  options:
+    - "Idle"
+    - "Office"
+    - "Family Room"
+    - "Living Room"
+    - "Office + Family Room"
+    - "Office + Living Room"
+    - "Family Room + Living Room"
+    - "All Zones"
+  initial: "Idle"
+  icon: mdi:radiator
+  restore: true
+  hidden: true

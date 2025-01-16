@@ -1,4 +1,3 @@
-# 🔄 Start Zone Timer When Calling for Heat
 - id: start_zone_timer
   alias: "Start Zone Timer"
   mode: parallel
@@ -9,6 +8,7 @@
         - binary_sensor.hvac_radiator_calling_for_heat_family_room
         - binary_sensor.hvac_radiator_calling_for_heat_living_room
       to: "on"
+      for: "00:00:05"  # Ensure it's "on" for at least 5 seconds
   action:
     - choose:
         - conditions:
@@ -33,7 +33,6 @@
               target:
                 entity_id: timer.hvac_boiler_run_timer_living_room
 
-# 🔴 Stop Zone Timer When Stopping Heat Call
 - id: stop_zone_timer
   alias: "Stop Zone Timer"
   mode: parallel
@@ -44,6 +43,7 @@
         - binary_sensor.hvac_radiator_calling_for_heat_family_room
         - binary_sensor.hvac_radiator_calling_for_heat_living_room
       to: "off"
+      for: "00:00:05"  # Ensure it's "off" for at least 5 seconds
   action:
     - choose:
         - conditions:

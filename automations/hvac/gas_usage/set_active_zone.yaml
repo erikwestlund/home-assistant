@@ -12,6 +12,11 @@
   action:
     - service: input_select.select_option
       target:
+        entity_id: input_select.hvac_last_active_boiler_zone
+      data:
+        option: "{{ states('input_select.hvac_active_boiler_zone') }}"
+    - service: input_select.select_option
+      target:
         entity_id: input_select.hvac_active_boiler_zone
       data:
         option: >
