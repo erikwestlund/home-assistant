@@ -22,6 +22,17 @@
   unit_of_measurement: "$"
   icon: mdi:currency-usd
 
+# kWh Equivalent of Gas Used
+- name: "HVAC Gas kWh Equivalent Used Current Run"
+  unique_id: hvac_gas_kwh_equivalent_used_current_run
+  state: >
+    {% set therms_used = states('sensor.hvac_gas_therms_used_current_run') | float %}
+    {% set therm_kwh_equivalent = states('input_number.gas_price_per_therm') | float  / states('input_number.energy_price_kwh') | float %}
+    
+    {{ (therms_used * therm_kwh_equivalent) | round(2) }}
+  unit_of_measurement: "kWh"
+  icon: mdi:fire
+
 # 🕒 HVAC Boiler Run Duration Current
 - name: "HVAC Boiler Run Duration Current"
   unique_id: hvac_boiler_run_duration_current
