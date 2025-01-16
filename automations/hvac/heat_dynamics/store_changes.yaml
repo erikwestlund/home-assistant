@@ -89,6 +89,8 @@
         master_bedroom_temp_prev_hour: "{{ states('sensor.snapshot_master_bedroom_temp_prev_hour') }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
         main_zone_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_living_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
+        family_room_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_family_room_radiators_calling_for_heat_prev_hour') }}"
+        family_room_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_family_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
         master_bedroom_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_master_bedroom_mini_split_prev_hour', 'off') else states('sensor.snapshot_master_bedroom_mini_split_prev_hour') }}"
         heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
 
@@ -119,6 +121,8 @@
         tillys_room_temp_prev_hour: "{{ states('sensor.snapshot_tilly_s_room_temp_prev_hour') }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
         main_zone_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_living_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
+        family_room_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_family_room_radiators_calling_for_heat_prev_hour') }}"
+        family_room_radiators_calling_for_heat_changed: "{{ 1 if is_state('sensor.snapshot_family_room_radiators_calling_for_heat_changed', 'on') else 0 }}"
         office_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_mini_split_prev_hour', 'off') else states('sensor.snapshot_office_mini_split_prev_hour') }}"
         erik_office_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_erik_office_mini_split_prev_hour', 'off') else states('sensor.snapshot_erik_office_mini_split_prev_hour') }}"
         heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
