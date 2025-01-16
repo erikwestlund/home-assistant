@@ -7,5 +7,5 @@
     {% set preheat_end = as_timestamp(today ~ 'T' ~ states('input_datetime.hvac_preheat_end_window_master_bedroom')) %}
     {% set current_time = now().timestamp() %}
     
-    {{ daytime_start <= current_time <= preheat_end }}
+    {{ daytime_start < current_time < preheat_end }}
   icon: mdi:clock-outline

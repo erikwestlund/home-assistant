@@ -1,6 +1,6 @@
-# 🔄 Reset HVAC Heat Gain Start Time Set Today (Master Bedroom)
-- id: reset_hvac_heat_gain_start_time_set_today_master_bedroom
-  alias: "Reset HVAC Heat Gain Start Time Set Today Master Bedroom"
+# 🔄 Reset HVAC Heat Preheating Active Today (Master Bedroom)
+- id: hvac_reset_hvac_preheating_active_today_master_bedroom
+  alias: "HVAC Reset Preheating Active Today Master Bedroom"
   trigger:
     - platform: template
       value_template: >
@@ -12,8 +12,8 @@
   mode: single
 
 # 🔄 Reset HVAC Preheating Stop Override Master Bedroom
-- id: reset_hvac_preheating_stop_override_master_bedroom
-  alias: "Reset HVAC Preheating Stop Override Master Bedroom"
+- id: hvac_reset_hvac_preheating_stop_override_master_bedroom
+  alias: "HVAC Reset Preheating Stop Override Master Bedroom"
   trigger:
     - platform: template
       value_template: >
@@ -25,8 +25,8 @@
   mode: single
 
 # 🔄 Turn Off HVAC Preheating Master Bedroom When Stop Override Activated
-- id: turn_off_hvac_preheating_when_stop_override_master_bedroom
-  alias: "Turn Off HVAC Preheating When Stop Override Master Bedroom"
+- id: hvac_turn_off_hvac_preheating_when_stop_override_master_bedroom
+  alias: "HVAC Turn Off Preheating When Stop Override Master Bedroom"
   trigger:
     - platform: state
       entity_id: input_boolean.hvac_preheating_stop_override_master_bedroom
@@ -39,7 +39,7 @@
   mode: single
 
 # 🔄 Start Preheating if Required (Master Bedroom)
-- id: start_hvac_preheating_if_required_master_bedroom
+- id: hvac_start_hvac_preheating_if_required_master_bedroom
   alias: "Start HVAC Preheating if Required Master Bedroom"
   trigger:
     - platform: time_pattern

@@ -1,0 +1,13 @@
+- id: collect_daily_gas_usage
+  alias: "Collect Daily Gas Usage"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_preheat_end_window_master_bedroom') }}
+  action:
+    service: google_sheets.append_sheet
+    data:
+      config_entry: !secret google_sheets_sheet_id
+      worksheet: "Office"
+      data:
+        timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
