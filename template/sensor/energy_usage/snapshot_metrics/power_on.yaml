@@ -9,14 +9,3 @@
   state: "{{ 0 if is_state('binary_sensor.hvac_space_heater_active_office', 'off') else 1 }}"
   unit_of_measurement: ""
   icon: mdi:power
-
-- name: "Snapshot Space Heater Power Status Office Changed"
-  unique_id: "snapshot_space_heater_power_status_office_changed"
-  state: >
-    {% if is_state('binary_sensor.hvac_space_heater_active_office', 'off') != is_state('input_boolean.space_heater_power_status_office_60m_ago', 'off') %}
-      1
-    {% else %}
-      0
-    {% endif %}
-  unit_of_measurement: ""
-  icon: mdi:swap-horizontal-bold

@@ -2,7 +2,7 @@
   alias: "Update Door Closed Prev Hour States"
   trigger:
     - platform: time_pattern
-      minutes: 0
+      minutes: '10'
   condition: []
   action:
     - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.side_door_contact', 'off') else 'off' }}

@@ -3,7 +3,7 @@
   alias: "Update Radiator Setpoint Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '2'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -42,7 +42,7 @@
   alias: "Update Radiator Setpoint Family Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '3'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -81,7 +81,7 @@
   alias: "Update Radiator Setpoint Main Zone 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '10'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -120,7 +120,7 @@
   alias: "Update Mini Split Setpoint Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '2'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -159,7 +159,7 @@
   alias: "Update Mini Split Setpoint Family Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '3'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -198,7 +198,7 @@
   alias: "Update Mini Split Setpoint Living Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '4'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -237,7 +237,7 @@
   alias: "Update Mini Split Setpoint Dining Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '5'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -276,7 +276,7 @@
   alias: "Update Mini Split Setpoint Erik Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '6'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -315,7 +315,7 @@
   alias: "Update Mini Split Setpoint Master Bedroom 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '7'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:
@@ -354,7 +354,7 @@
   alias: "Update Ducted Setpoint 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '8'  # Trigger every hour (start of each hour)
   action:
     - service: input_number.set_value
       target:

@@ -4,7 +4,7 @@
   alias: "Update Radiator Power Status Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '2'
   action:
     - choose:
         - conditions:
@@ -79,7 +79,7 @@
   alias: "Update Radiator Power Status Family Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '3'
   action:
     - choose:
         - conditions:
@@ -154,7 +154,7 @@
   alias: "Update Radiator Power Status Main Zone 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '10'
   action:
     - choose:
         - conditions:
@@ -231,7 +231,7 @@
   alias: "Update Mini Split Power Status Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '2'
   action:
     - choose:
         - conditions:
@@ -306,7 +306,7 @@
   alias: "Update Mini Split Power Status Family Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '3'
   action:
     - choose:
         - conditions:
@@ -382,7 +382,7 @@
   alias: "Update Mini Split Power Status Living Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '4'
   action:
     - choose:
         - conditions:
@@ -457,7 +457,7 @@
   alias: "Update Mini Split Power Status Dining Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '5'
   action:
     - choose:
         - conditions:
@@ -532,7 +532,7 @@
   alias: "Update Mini Split Power Status Erik Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '6'
   action:
     - choose:
         - conditions:
@@ -607,7 +607,7 @@
   alias: "Update Mini Split Power Status Master Bedroom 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '7'
   action:
     - choose:
         - conditions:
@@ -683,7 +683,7 @@
   alias: "Update Ducted Power Status 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '8'
   action:
     - choose:
         - conditions:
@@ -759,7 +759,7 @@
   alias: "Update Space Heater Power Status Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'
+    minutes: '2'
   action:
     - choose:
         - conditions:

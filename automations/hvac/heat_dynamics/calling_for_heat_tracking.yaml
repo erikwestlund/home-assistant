@@ -35,7 +35,7 @@
   alias: "Reset Radiator Calling for Heat in Office"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour at the start of the hour
+    minutes: '2'  # Trigger every hour at the start of the hour
   condition:
     condition: state
     entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
@@ -49,7 +49,7 @@
   alias: "Reset Radiator Calling for Heat in Living Room"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour at the start of the hour
+    minutes: '4'  # Trigger every hour at the start of the hour
   condition:
     condition: state
     entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
@@ -63,7 +63,7 @@
   alias: "Reset Radiator Calling for Heat in Family Room"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour at the start of the hour
+    minutes: '3'  # Trigger every hour at the start of the hour
   condition:
     condition: state
     entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
