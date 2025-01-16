@@ -25,5 +25,6 @@ hvac_last_active_boiler_zone:
     - "All Zones"
   initial: "Idle"
   icon: mdi:radiator
+  restore: true
 
 
