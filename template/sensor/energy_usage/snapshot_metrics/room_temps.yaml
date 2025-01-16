@@ -195,3 +195,21 @@
   state: "{{ (states('sensor.basement_playroom_temperature') | float(0)) - (states('input_number.hvac_basement_playroom_temperature_60m_ago') | float(0)) }}"
   unit_of_measurement: "°F"
   icon: mdi:chart-line
+
+- name: "Snapshot Master Bedroom Preheating Average Temp Now"
+  unique_id: "snapshot_master_bedroom_preheating_average_temp_now"
+  state: "{{ states('sensor.hvac_current_preheating_temperature_master_bedroom') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Master Bedroom Preheating Average Temp Prev Hour"
+  unique_id: "snapshot_master_bedroom_preheating_average_temp_prev_hour"
+  state: "{{ states('input_number.hvac_master_bedroom_preheating_average_temperature_60m_ago') | float(0) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+- name: "Snapshot Master Bedroom Preheating Average Temp Change Hour"
+  unique_id: "snapshot_master_bedroom_preheating_average_temp_change_hour"
+  state: "{{ (states('sensor.hvac_current_preheating_temperature_master_bedroom') | float(0)) - (states('input_number.hvac_master_bedroom_preheating_average_temperature_60m_ago') | float(0)) }}"
+  unit_of_measurement: "°F"
+  icon: mdi:chart-line

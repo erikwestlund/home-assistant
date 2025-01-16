@@ -172,6 +172,7 @@
         mini_split_changed: "{{ 1 if is_state('sensor.snapshot_master_bedroom_mini_split_changed', 'unknown') or is_state('sensor.snapshot_master_bedroom_mini_split_changed', '0') else  0 }}"
         radiator_prev_hour: "{{ 'off' if is_state('sensor.snapshot_main_zone_radiator_prev_hour', 'unavailable') else states('sensor.snapshot_main_zone_radiator_prev_hour') }}"
         radiator_changed: "{{ 1 if is_state('sensor.snapshot_main_zone_radiator_changed', 'unavailable') or is_state('sensor.snapshot_main_zone_radiator_changed', '0') else  0 }}"
+        master_bedroom_preheating_average_temp_prev_hour: "{{ states('sensor.snapshot_master_bedroom_preheating_average_temp_prev_hour') }}"
         living_room_temp_prev_hour: "{{ states('sensor.snapshot_living_room_temp_prev_hour') }}"
         door_closed_prev_hour: "{{ states('sensor.snapshot_master_bedroom_door_closed_prev_hour', 'on') }}"
         main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"

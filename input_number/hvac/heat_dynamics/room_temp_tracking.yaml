@@ -130,6 +130,27 @@ hvac_master_bedroom_average_temperature_5m_ago:
   step: 0.1
   unit_of_measurement: "°F"
 
+hvac_master_bedroom_preheating_average_temperature_60m_ago:
+  name: "HVAC Master Bedroom Preheating Average Temperature 60m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_master_bedroom_preheating_average_temperature_15m_ago:
+  name: "HVAC Master Bedroom Preheating Average Temperature 15m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_master_bedroom_preheating_average_temperature_5m_ago:
+  name: "HVAC Master Bedroom Preheating Average Temperature 5m Ago"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
 # Kids Rooms
 hvac_kids_rooms_average_temperature_60m_ago:
   name: "HVAC Kids Rooms Average Temperature 60m Ago"

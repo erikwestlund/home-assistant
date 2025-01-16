@@ -64,3 +64,4 @@ hvac_mini_split_night_hot_setpoint_master_bedroom:
   step: 1
   unit_of_measurement: "°F"
   initial: 70
+

@@ -233,6 +233,45 @@
       data:
         value: "{{ states('sensor.master_bedroom_average_temperature') }}"
 
+# Update Master Bedroom Preheating Average Temperature 60m Ago (Every Hour)
+- id: update_master_bedroom_preheating_average_temperature_60m_ago
+  alias: "Update Master Bedroom Preheating Average Temperature 60m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '7'  # Master Bedroom stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_master_bedroom_preheating_average_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.master_bedroom_preheating_average_temperature') }}"
+
+# Update Master Bedroom Preheating Average Temperature 15m Ago (Every 15 Minutes)
+- id: update_master_bedroom_preheating_average_temperature_15m_ago
+  alias: "Update Master Bedroom Preheating Average Temperature 15m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/15'  # Trigger every 15 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_master_bedroom_preheating_average_temperature_15m_ago
+      data:
+        value: "{{ states('sensor.master_bedroom_preheating_average_temperature') }}"
+
+# Update Master Bedroom Preheating Average Temperature 5m Ago (Every 5 Minutes)
+- id: update_master_bedroom_preheating_average_temperature_5m_ago
+  alias: "Update Master Bedroom Preheating Average Temperature 5m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/5'  # Trigger every 5 minutes
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_master_bedroom_preheating_average_temperature_5m_ago
+      data:
+        value: "{{ states('sensor.master_bedroom_preheating_average_temperature') }}"
+
 # Update Kids Rooms Temperature 60m Ago (Every Hour)
 - id: update_kids_rooms_temperature_60m_ago
   alias: "Update Kids Rooms Temperature 60m Ago"
