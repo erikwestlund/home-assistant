@@ -204,7 +204,9 @@
     {% set on_with_master_bedroom = is_state('input_boolean.hvac_mini_split_living_room_on_with_master_bedroom', 'on') %}
     {% set on_with_master_bedroom_preheat = is_state('input_boolean.hvac_mini_split_living_room_on_with_master_bedroom_preheat', 'on') %}
     {% set master_bedroom_power_status = is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'on') %}
-
+    {% set master_bedroom_preheating_active = is_state('binary_sensor.hvac_preheating_active_master_bedroom', 'on') %}
+    
+    
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
       off
@@ -221,7 +223,7 @@
     {% elif on_with_master_bedroom %}
       {{ 'on' if master_bedroom_power_status else 'off' }}
     {% elif on_with_master_bedroom_preheat %}
-      {{ 'on' if master_bedroom_power_status else 'off' }}
+      {{ 'on' if master_bedroom_preheating_active else 'off' }}
     {# 6. General Off Check (using daytime or nighttime average temperature under off threshold) #}
     {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
