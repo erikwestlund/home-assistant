@@ -1,17 +1,44 @@
 - id: store_boiler_runs
   alias: "Store Boiler Runs"
   trigger:
-    - platform: template
+    - platform: state
+      entity_id: input_number.gas_end_meter_reading_ft3
+  condition:
+    - condition: template
       value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_store_gas_usage_time') }}
+        {{ states('input_number.gas_end_meter_reading_ft3') | float > states('input_number.gas_start_meter_reading_ft3') | float }}
   action:
-    service: google_sheets.append_sheet
-    data:
-      config_entry: !secret google_sheets_sheet_id
-      worksheet: "Boiler Runs"
+    - service: google_sheets.append_sheet
       data:
-        timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
-        hvac_last_active_boiler_zone: "{{ states('input_select.hvac_last_active_boiler_zone') }}"
-        meter_start_reading: "{{ states('input_number.gas_start_meter_reading_ft3') }}"
-        meter_end_reading: "{{ states('input_number.gas_end_meter_reading_ft3') }}"
-        outdoor_temp: "{{ states('sensor.current_temperature') }}"
+        config_entry: !secret google_sheets_sheet_id
+        worksheet: "Boiler Runs"
+        data:
+          timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          hvac_last_active_boiler_zone: "{{ states('input_select.hvac_last_active_boiler_zone') }}"
+          hvac_boiler_start_time: "{{ states('input_datetime.hvac_boiler_start_time') }}"
+          hvac_boiler_end_time: "{{ states('input_datetime.hvac_boiler_end_time') }}"
+          duration_minutes: >
+            {{ ((as_timestamp(states('input_datetime.hvac_boiler_end_time')) | float) - 
+                 (as_timestamp(states('input_datetime.hvac_boiler_start_time')) | float)) / 60 | round(2) }}
+          meter_start_reading: "{{ states('input_number.gas_start_meter_reading_ft3') }}"
+          meter_end_reading: "{{ states('input_number.gas_end_meter_reading_ft3') }}"
+          therms_used: >
+            {{ (states('input_number.gas_end_meter_reading_ft3') | float - 
+                states('input_number.gas_start_meter_reading_ft3') | float) | round(4) }}
+          billing_therms: >
+            {{ ((states('input_number.gas_end_meter_reading_ft3') | float - 
+                 states('input_number.gas_start_meter_reading_ft3') | float)) * 
+                 (states('input_number.gas_therm_factor') | float) | round(4) }}
+          cost: >
+            {{ (((states('input_number.gas_end_meter_reading_ft3') | float - 
+                  states('input_number.gas_start_meter_reading_ft3') | float)) * 
+                  (states('input_number.gas_therm_factor') | float)) * 
+                  (states('input_number.gas_price_per_therm') | float) | round(2) }}
+          kwh_equivalent: >
+            {{     (((states('input_number.gas_end_meter_reading_ft3') | float - 
+                   states('input_number.gas_start_meter_reading_ft3') | float)) * 
+                   (states('input_number.gas_therm_factor') | float)) * 
+                   (states('input_number.gas_price_per_therm') | float) | round(2) /
+                   states('input_number.energy_price_kwh') | float
+            }}
+          outdoor_temp: "{{ states('sensor.current_temperature') }}"

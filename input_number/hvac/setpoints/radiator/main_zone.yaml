@@ -4,7 +4,7 @@ hvac_radiator_wakeup_setpoint_main_zone:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  # initial: 69
+  # initial: 66
 
 hvac_radiator_weekday_setpoint_main_zone:
   name: HVAC Main Zone Radiator Weekday Setpoint
@@ -20,7 +20,7 @@ hvac_radiator_weekend_setpoint_main_zone:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  # initial: 69
+  # initial: 66
 
 hvac_radiator_bedtime_setpoint_main_zone:
   name: HVAC Main Zone Radiator Bedtime Setpoint
@@ -28,7 +28,7 @@ hvac_radiator_bedtime_setpoint_main_zone:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  # initial: 69
+  # initial: 66
 
 hvac_radiator_sleep_setpoint_main_zone:
   name: HVAC Main Zone Radiator Sleep Setpoint
