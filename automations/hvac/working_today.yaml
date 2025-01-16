@@ -51,7 +51,7 @@
           state: "on"
         - condition: template
           value_template: >
-            {{ now() < states('sensor.hvac_occupancy_monitor_office_end') }}
+            {{ now().strftime('%H:%M:%S') < states('sensor.hvac_occupancy_monitor_office_end') }}
   action:
     - service: input_boolean.turn_on
       target:
