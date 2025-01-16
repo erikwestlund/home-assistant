@@ -4,218 +4,453 @@
   alias: "Update Radiator Power Status Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Every hour
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_office_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_office_60m_ago
 
 # Office Radiator Power Status 15m Ago (Every 15 Minutes)
 - id: update_radiator_power_status_office_15m_ago
   alias: "Update Radiator Power Status Office 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_office_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_office_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_office_15m_ago
 
 # Office Radiator Power Status 5m Ago (Every 5 Minutes)
 - id: update_radiator_power_status_office_5m_ago
   alias: "Update Radiator Power Status Office 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_office_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_office_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_office_5m_ago
 
 # Family Room Radiator Power Status 60m Ago (Every Hour)
 - id: update_radiator_power_status_family_room_60m_ago
   alias: "Update Radiator Power Status Family Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Every hour
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_family_room_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_60m_ago
 
 # Family Room Radiator Power Status 15m Ago (Every 15 Minutes)
 - id: update_radiator_power_status_family_room_15m_ago
   alias: "Update Radiator Power Status Family Room 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_family_room_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_15m_ago
 
 # Family Room Radiator Power Status 5m Ago (Every 5 Minutes)
 - id: update_radiator_power_status_family_room_5m_ago
   alias: "Update Radiator Power Status Family Room 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_family_room_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_5m_ago
 
 # Main Zone Radiator Power Status 60m Ago (Every Hour)
 - id: update_radiator_power_status_main_zone_60m_ago
   alias: "Update Radiator Power Status Main Zone 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Every hour
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
 
 # Main Zone Radiator Power Status 15m Ago (Every 15 Minutes)
 - id: update_radiator_power_status_main_zone_15m_ago
   alias: "Update Radiator Power Status Main Zone 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_main_zone_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_15m_ago
 
 # Main Zone Radiator Power Status 5m Ago (Every 5 Minutes)
 - id: update_radiator_power_status_main_zone_5m_ago
   alias: "Update Radiator Power Status Main Zone 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.radiator_power_status_main_zone_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'on') }}"
-
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_5m_ago
 
 ## Mini Spilts
+## Mini Splits
 # Office Mini Split Power Status 60m Ago (Every Hour)
 - id: update_mini_split_power_status_office_60m_ago
   alias: "Update Mini Split Power Status Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_office_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_60m_ago
 
 # Office Mini Split Power Status 15m Ago (Every 15 Minutes)
 - id: update_mini_split_power_status_office_15m_ago
   alias: "Update Mini Split Power Status Office 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Trigger every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_office_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_15m_ago
 
 # Office Mini Split Power Status 5m Ago (Every 5 Minutes)
 - id: update_mini_split_power_status_office_5m_ago
   alias: "Update Mini Split Power Status Office 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Trigger every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_office_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_5m_ago
 
 # Family Room Mini Split Power Status 60m Ago (Every Hour)
 - id: update_mini_split_power_status_family_room_60m_ago
   alias: "Update Mini Split Power Status Family Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_family_room_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_family_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_60m_ago
 
 # Family Room Mini Split Power Status 15m Ago (Every 15 Minutes)
 - id: update_mini_split_power_status_family_room_15m_ago
   alias: "Update Mini Split Power Status Family Room 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Trigger every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_family_room_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_family_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_15m_ago
 
 # Family Room Mini Split Power Status 5m Ago (Every 5 Minutes)
 - id: update_mini_split_power_status_family_room_5m_ago
   alias: "Update Mini Split Power Status Family Room 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Trigger every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_family_room_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_family_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_5m_ago
+
 
 # Living Room Mini Split Power Status 60m Ago (Every Hour)
 - id: update_mini_split_power_status_living_room_60m_ago
   alias: "Update Mini Split Power Status Living Room 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_living_room_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_living_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_60m_ago
 
 # Living Room Mini Split Power Status 15m Ago (Every 15 Minutes)
 - id: update_mini_split_power_status_living_room_15m_ago
   alias: "Update Mini Split Power Status Living Room 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Trigger every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_living_room_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_living_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_15m_ago
 
 # Living Room Mini Split Power Status 5m Ago (Every 5 Minutes)
 - id: update_mini_split_power_status_living_room_5m_ago
   alias: "Update Mini Split Power Status Living Room 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Trigger every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_living_room_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_living_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_5m_ago
 
 # Dining Room Mini Split Power Status 60m Ago (Every Hour)
 - id: update_mini_split_power_status_dining_room_60m_ago
@@ -224,10 +459,23 @@
     platform: time_pattern
     minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_dining_room_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_dining_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_60m_ago
 
 # Dining Room Mini Split Power Status 15m Ago (Every 15 Minutes)
 - id: update_mini_split_power_status_dining_room_15m_ago
@@ -236,10 +484,23 @@
     platform: time_pattern
     minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_dining_room_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_dining_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_15m_ago
 
 # Dining Room Mini Split Power Status 5m Ago (Every 5 Minutes)
 - id: update_mini_split_power_status_dining_room_5m_ago
@@ -248,10 +509,23 @@
     platform: time_pattern
     minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_dining_room_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_dining_room', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_5m_ago
 
 # Erik Office Mini Split Power Status 60m Ago (Every Hour)
 - id: update_mini_split_power_status_erik_office_60m_ago
@@ -260,10 +534,23 @@
     platform: time_pattern
     minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_erik_office_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_erik_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_erik_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_erik_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_erik_office_60m_ago
 
 # Erik Office Mini Split Power Status 15m Ago (Every 15 Minutes)
 - id: update_mini_split_power_status_erik_office_15m_ago
@@ -272,10 +559,23 @@
     platform: time_pattern
     minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_erik_office_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_erik_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_erik_office_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_erik_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_erik_office_15m_ago
 
 # Erik Office Mini Split Power Status 5m Ago (Every 5 Minutes)
 - id: update_mini_split_power_status_erik_office_5m_ago
@@ -284,10 +584,23 @@
     platform: time_pattern
     minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_erik_office_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_erik_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_erik_office_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_erik_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_erik_office_5m_ago
 
 # Master Bedroom Mini Split Power Status 60m Ago (Every Hour)
 - id: update_mini_split_power_status_master_bedroom_60m_ago
@@ -296,108 +609,257 @@
     platform: time_pattern
     minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_master_bedroom_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_master_bedroom_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_master_bedroom_60m_ago
 
 # Master Bedroom Mini Split Power Status 15m Ago (Every 15 Minutes)
 - id: update_mini_split_power_status_master_bedroom_15m_ago
   alias: "Update Mini Split Power Status Master Bedroom 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Trigger every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_master_bedroom_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_master_bedroom_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_master_bedroom_15m_ago
 
 # Master Bedroom Mini Split Power Status 5m Ago (Every 5 Minutes)
 - id: update_mini_split_power_status_master_bedroom_5m_ago
   alias: "Update Mini Split Power Status Master Bedroom 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Trigger every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.mini_split_power_status_master_bedroom_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'on') }}"
-
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_master_bedroom_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_master_bedroom_5m_ago
 
 ## Ducted
-# Ducted Power Status 60m Ago (Every Hour)
 # Ducted Power Status 60m Ago (Every Hour)
 - id: update_ducted_power_status_60m_ago
   alias: "Update Ducted Power Status 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.ducted_power_status_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_ducted_power_status', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_ducted_power_status
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.ducted_power_status_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_ducted_power_status
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.ducted_power_status_60m_ago
 
-# Ducted Mini Split Power Status 15m Ago (Every 15 Minutes)
+# Ducted Power Status 15m Ago (Every 15 Minutes)
 - id: update_ducted_power_status_15m_ago
   alias: "Update Ducted Power Status 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Trigger every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.ducted_power_status_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_ducted_power_status', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_ducted_power_status
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.ducted_power_status_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_ducted_power_status
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.ducted_power_status_15m_ago
 
-# Ducted Mini Split Power Status 5m Ago (Every 5 Minutes)
+# Ducted Power Status 5m Ago (Every 5 Minutes)
 - id: update_ducted_power_status_5m_ago
   alias: "Update Ducted Power Status 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Trigger every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.ducted_power_status_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_ducted_power_status', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_ducted_power_status
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.ducted_power_status_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_ducted_power_status
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.ducted_power_status_5m_ago
 
 ## Space Heaters
-# Office Space Heater Power Status 60m Ago (Every Hour)
 # Office Space Heater Power Status 60m Ago (Every Hour)
 - id: update_space_heater_power_status_office_60m_ago
   alias: "Update Space Heater Power Status Office 60m Ago"
   trigger:
     platform: time_pattern
-    minutes: '0'  # Trigger every hour (start of each hour)
+    minutes: '0'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.space_heater_power_status_office_60m_ago
-        value: "{{ is_state('binary_sensor.hvac_space_heater_active_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_60m_ago
 
 # Office Space Heater Power Status 15m Ago (Every 15 Minutes)
 - id: update_space_heater_power_status_office_15m_ago
   alias: "Update Space Heater Power Status Office 15m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/15'  # Trigger every 15 minutes
+    minutes: '/15'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.space_heater_power_status_office_15m_ago
-        value: "{{ is_state('binary_sensor.hvac_space_heater_active_office', 'on') }}"
+    - choose:
+        - conditions:
+## Space Heaters
+# Office Space Heater Power Status 60m Ago (Every Hour)
+- id: update_space_heater_power_status_office_60m_ago
+  alias: "Update Space Heater Power Status Office 60m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '0'
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_60m_ago
+
+# Office Space Heater Power Status 15m Ago (Every 15 Minutes)
+- id: update_space_heater_power_status_office_15m_ago
+  alias: "Update Space Heater Power Status Office 15m Ago"
+  trigger:
+    platform: time_pattern
+    minutes: '/15'
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_15m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_15m_ago
 
 # Office Space Heater Power Status 5m Ago (Every 5 Minutes)
 - id: update_space_heater_power_status_office_5m_ago
   alias: "Update Space Heater Power Status Office 5m Ago"
   trigger:
     platform: time_pattern
-    minutes: '/5'  # Trigger every 5 minutes
+    minutes: '/5'
   action:
-    - service: input_boolean.set_value
-      data:
-        entity_id: input_boolean.space_heater_power_status_office_5m_ago
-        value: "{{ is_state('binary_sensor.hvac_space_heater_active_office', 'on') }}"
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_5m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_5m_ago
