@@ -2,10 +2,10 @@ hvac_work_hours_start:
   name: HVAC Work Hours Start
   has_time: true
   has_date: false
-  initial: "07:30:00"
+  # initial: "07:30:00"
 
 hvac_work_hours_end:
   name: HVAC Work Hours End
   has_time: true
   has_date: false
-  initial: "18:00:00"
+  # initial: "18:00:00"

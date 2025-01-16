@@ -4,7 +4,7 @@ hvac_override_duration_hours_office:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_office_space_heater:
   name: HVAC Office Space Heater Override Duration
@@ -12,7 +12,7 @@ hvac_override_duration_hours_office_space_heater:
   max: 6
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_family_room:
   name: HVAC Family Room Override Duration
@@ -20,7 +20,7 @@ hvac_override_duration_hours_family_room:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_living_room:
   name: HVAC Living Room Override Duration
@@ -28,7 +28,7 @@ hvac_override_duration_hours_living_room:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_dining_room:
   name: HVAC Dining Room Override Duration
@@ -36,7 +36,7 @@ hvac_override_duration_hours_dining_room:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_erik_office:
   name: HVAC Erik Office Override Duration
@@ -44,7 +44,7 @@ hvac_override_duration_hours_erik_office:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_master_bedroom:
   name: HVAC Master Bedroom Override Duration
@@ -52,7 +52,7 @@ hvac_override_duration_hours_master_bedroom:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_ducted_system:
   name: HVAC Ducted System Override Duration
@@ -60,7 +60,7 @@ hvac_override_duration_hours_ducted_system:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1
 
 hvac_override_duration_hours_main_radiator_zone:
   name: HVAC Main Radiator Zone Override Duration
@@ -68,4 +68,4 @@ hvac_override_duration_hours_main_radiator_zone:
   max: 24
   step: 0.25
   unit_of_measurement: "hours"
-  initial: 1
+  # initial: 1

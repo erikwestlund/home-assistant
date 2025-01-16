@@ -7,7 +7,7 @@ hvac_heat_gain_under_10f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 0.8
+  # initial: 0.8
 
 # 11-15°F
 hvac_heat_gain_under_11_15f_master_bedroom:
@@ -16,7 +16,7 @@ hvac_heat_gain_under_11_15f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 0.9
+  # initial: 0.9
 
 # 16-20°F
 hvac_heat_gain_under_16_20f_master_bedroom:
@@ -25,7 +25,7 @@ hvac_heat_gain_under_16_20f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.0
+  # initial: 1.0
 
 # 21-25°F
 hvac_heat_gain_under_21_25f_master_bedroom:
@@ -34,7 +34,7 @@ hvac_heat_gain_under_21_25f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.1
+  # initial: 1.1
 
 # 26-30°F
 hvac_heat_gain_under_26_30f_master_bedroom:
@@ -43,7 +43,7 @@ hvac_heat_gain_under_26_30f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.2
+  # initial: 1.2
 
 # 31-35°F
 hvac_heat_gain_under_31_35f_master_bedroom:
@@ -52,7 +52,7 @@ hvac_heat_gain_under_31_35f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.3
+  # initial: 1.3
 
 # 36-40°F
 hvac_heat_gain_under_36_40f_master_bedroom:
@@ -61,7 +61,7 @@ hvac_heat_gain_under_36_40f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.4
+  # initial: 1.4
 
 # 41-45°F
 hvac_heat_gain_under_41_45f_master_bedroom:
@@ -70,7 +70,7 @@ hvac_heat_gain_under_41_45f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.5
+  # initial: 1.5
 
 # 46-50°F
 hvac_heat_gain_under_46_50f_master_bedroom:
@@ -79,7 +79,7 @@ hvac_heat_gain_under_46_50f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.6
+  # initial: 1.6
 
 # 51-55°F
 hvac_heat_gain_under_51_55f_master_bedroom:
@@ -88,7 +88,7 @@ hvac_heat_gain_under_51_55f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.7
+  # initial: 1.7
 
 # 56-60°F
 hvac_heat_gain_under_56_60f_master_bedroom:
@@ -97,7 +97,7 @@ hvac_heat_gain_under_56_60f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.8
+  # initial: 1.8
 
 # Over 60°F
 hvac_heat_gain_over_60f_master_bedroom:
@@ -106,4 +106,4 @@ hvac_heat_gain_over_60f_master_bedroom:
   max: 4
   step: 0.05
   unit_of_measurement: "°F"
-  initial: 1.9
+  # initial: 1.9

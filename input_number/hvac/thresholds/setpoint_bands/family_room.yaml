@@ -4,7 +4,7 @@ hvac_mini_split_freezing_to_cold_threshold_family_room:
   max: 50
   step: 1
   unit_of_measurement: "°F"
-  initial: 37
+  # initial: 37
 
 hvac_mini_split_cold_to_hot_threshold_family_room:
   name: HVAC Mini Split Cold to Hot Threshold Family Room
@@ -12,4 +12,4 @@ hvac_mini_split_cold_to_hot_threshold_family_room:
   max: 90
   step: 1
   unit_of_measurement: "°F"
-  initial: 60
+  # initial: 60

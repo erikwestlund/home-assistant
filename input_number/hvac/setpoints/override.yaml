@@ -5,7 +5,7 @@ hvac_mini_split_override_setpoint_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Office (Radiator)
 hvac_radiator_override_setpoint_office:
@@ -14,7 +14,7 @@ hvac_radiator_override_setpoint_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Family Room (Mini Split)
 hvac_mini_split_override_setpoint_family_room:
@@ -23,7 +23,7 @@ hvac_mini_split_override_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Family Room (Radiator)
 hvac_radiator_override_setpoint_family_room:
@@ -32,7 +32,7 @@ hvac_radiator_override_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Living Room (Mini Split)
 hvac_mini_split_override_setpoint_living_room:
@@ -41,7 +41,7 @@ hvac_mini_split_override_setpoint_living_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Main Zone (Radiator)
 hvac_radiator_override_setpoint_main_zone:
@@ -50,7 +50,7 @@ hvac_radiator_override_setpoint_main_zone:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Dining Room (Mini Split)
 hvac_mini_split_override_setpoint_dining_room:
@@ -59,7 +59,7 @@ hvac_mini_split_override_setpoint_dining_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Erik Office (Mini Split)
 hvac_mini_split_override_setpoint_erik_office:
@@ -68,7 +68,7 @@ hvac_mini_split_override_setpoint_erik_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Master Bedroom (Mini Split)
 hvac_mini_split_override_setpoint_master_bedroom:
@@ -77,7 +77,7 @@ hvac_mini_split_override_setpoint_master_bedroom:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Kids Rooms (Ducted)
 hvac_kids_rooms_ducted_override_setpoint:
@@ -86,7 +86,7 @@ hvac_kids_rooms_ducted_override_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72
 
 # Main Radiator Zone
 hvac_radiator_override_setpoint_main_radiator_zone:
@@ -95,4 +95,4 @@ hvac_radiator_override_setpoint_main_radiator_zone:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 72
+  # initial: 72

@@ -2,5 +2,5 @@ current_time_debug:
   name: Current Time Debug
   has_time: true
   has_date: true
-  initial: "2024-01-01T00:00:00"
+  # initial: "2024-01-01T00:00:00"
   icon: mdi:clock

@@ -5,7 +5,7 @@ hvac_mini_split_daytime_off_threshold_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -10
+  # initial: -10
 
 hvac_mini_split_night_off_threshold_office:
   name: HVAC Office Mini Split Night Off Threshold
@@ -13,7 +13,7 @@ hvac_mini_split_night_off_threshold_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 # Family Room
 hvac_mini_split_daytime_off_threshold_family_room:
@@ -22,7 +22,7 @@ hvac_mini_split_daytime_off_threshold_family_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 22
+  # initial: 22
 
 hvac_mini_split_night_off_threshold_family_room:
   name: HVAC Family Room Mini Split Night Off Threshold
@@ -30,7 +30,7 @@ hvac_mini_split_night_off_threshold_family_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 22
+  # initial: 22
 
 # Living Room
 hvac_mini_split_daytime_off_threshold_living_room:
@@ -39,7 +39,7 @@ hvac_mini_split_daytime_off_threshold_living_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 hvac_mini_split_night_off_threshold_living_room:
   name: HVAC Living Room Mini Split Night Off Threshold
@@ -47,7 +47,7 @@ hvac_mini_split_night_off_threshold_living_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -13
+  # initial: -13
 
 # Dining Room
 hvac_mini_split_daytime_off_threshold_dining_room:
@@ -56,7 +56,7 @@ hvac_mini_split_daytime_off_threshold_dining_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -13
+  # initial: -13
 
 hvac_mini_split_night_off_threshold_dining_room:
   name: HVAC Dining Room Mini Split Night Off Threshold
@@ -64,7 +64,7 @@ hvac_mini_split_night_off_threshold_dining_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 # Erik Office
 hvac_mini_split_daytime_off_threshold_erik_office:
@@ -73,7 +73,7 @@ hvac_mini_split_daytime_off_threshold_erik_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -13
+  # initial: -13
 
 hvac_mini_split_night_off_threshold_erik_office:
   name: HVAC Erik Office Mini Split Night Off Threshold
@@ -81,7 +81,7 @@ hvac_mini_split_night_off_threshold_erik_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 hvac_mini_split_weekend_off_threshold_erik_office:
   name: HVAC Erik Office Mini Split Weekend Off Threshold
@@ -89,7 +89,7 @@ hvac_mini_split_weekend_off_threshold_erik_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -13
+  # initial: -13
 
 # Master Bedroom
 hvac_mini_split_daytime_off_threshold_master_bedroom:
@@ -98,7 +98,7 @@ hvac_mini_split_daytime_off_threshold_master_bedroom:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -13
+  # initial: -13
 
 hvac_mini_split_night_off_threshold_master_bedroom:
   name: HVAC Master Bedroom Mini Split Night Off Threshold
@@ -106,7 +106,7 @@ hvac_mini_split_night_off_threshold_master_bedroom:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -13
+  # initial: -13
 
 # Ducted
 hvac_ducted_daytime_off_threshold:
@@ -115,7 +115,7 @@ hvac_ducted_daytime_off_threshold:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 hvac_ducted_night_off_threshold:
   name: HVAC Ducted Night Off Threshold
@@ -123,4 +123,4 @@ hvac_ducted_night_off_threshold:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: -13
+  # initial: -13

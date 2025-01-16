@@ -4,7 +4,7 @@ hvac_mini_split_away_setpoint_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  # initial: 64
 
 hvac_radiator_away_setpoint_office:
   name: HVAC Office Radiator Away Setpoint
@@ -12,7 +12,7 @@ hvac_radiator_away_setpoint_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 hvac_mini_split_away_setpoint_family_room:
   name: HVAC Family Room Mini Split Away Setpoint
@@ -20,7 +20,7 @@ hvac_mini_split_away_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  # initial: 64
 
 hvac_radiator_away_setpoint_family_room:
   name: HVAC Family Room Radiator Away Setpoint
@@ -28,7 +28,7 @@ hvac_radiator_away_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 hvac_mini_split_away_setpoint_living_room:
   name: HVAC Living Room Mini Split Away Setpoint
@@ -36,7 +36,7 @@ hvac_mini_split_away_setpoint_living_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  # initial: 64
 
 hvac_radiator_away_setpoint_main_zone:
   name: HVAC Main Zone Radiator Away Setpoint
@@ -44,7 +44,7 @@ hvac_radiator_away_setpoint_main_zone:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 55
+  # initial: 55
 
 hvac_mini_split_away_setpoint_dining_room:
   name: HVAC Dining Room Mini Split Away Setpoint
@@ -52,7 +52,7 @@ hvac_mini_split_away_setpoint_dining_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  # initial: 64
 
 hvac_mini_split_away_setpoint_erik_office:
   name: HVAC Erik Office Mini Split Away Setpoint
@@ -60,7 +60,7 @@ hvac_mini_split_away_setpoint_erik_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  # initial: 64
 
 hvac_mini_split_away_setpoint_master_bedroom:
   name: HVAC Master Bedroom Mini Split Away Setpoint
@@ -68,7 +68,7 @@ hvac_mini_split_away_setpoint_master_bedroom:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 64
+  # initial: 64
 
 hvac_kids_rooms_ducted_away_setpoint:
   name: HVAC Kids Rooms Ducted Away Setpoint
@@ -76,4 +76,4 @@ hvac_kids_rooms_ducted_away_setpoint:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 62
+  # initial: 62

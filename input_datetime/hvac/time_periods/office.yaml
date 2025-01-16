@@ -3,36 +3,36 @@ hvac_daytime_start_time_office:
   name: HVAC Office Daytime Start Time
   has_time: true
   has_date: false
-  initial: "04:00:00"
+  # initial: "04:00:00"
 
 hvac_nighttime_start_time_office:
   name: HVAC Office Nighttime Start Time
   has_time: true
   has_date: false
-  initial: "21:00:00"
+  # initial: "21:00:00"
 
 # Working Setpoints Applied
 hvac_apply_working_start_time_office:
   name: HVAC Tina Office Apply Working Start Time
   has_time: true
   has_date: false
-  initial: "07:00:00"
+  # initial: "07:00:00"
 
 hvac_apply_working_end_time_office:
   name: HVAC Tina Office Apply Working End Time
   has_time: true
   has_date: false
-  initial: "18:00:00"
+  # initial: "18:00:00"
 
 # Early Work Mode
 hvac_early_work_mode_start_time_office:
   name: HVAC Tina Office Early Work Mode Start Time
   has_time: true
   has_date: false
-  initial: "03:30:00"
+  # initial: "03:30:00"
 
 hvac_early_work_mode_end_time_office:
   name: HVAC Tina Office Early Work Mode End Time
   has_time: true
   has_date: false
-  initial: "06:30:00"
+  # initial: "06:30:00"

@@ -4,4 +4,4 @@ hvac_away_duration_days:
   max: 30
   step: 0.5
   unit_of_measurement: "days"
-  initial: 3
+  # initial: 3

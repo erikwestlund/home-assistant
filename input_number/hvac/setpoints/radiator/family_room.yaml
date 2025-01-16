@@ -4,7 +4,7 @@ hvac_radiator_weekday_day_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 69
+  # initial: 69
 
 hvac_radiator_weekday_night_setpoint_family_room:
   name: HVAC Family Room Radiator Weekday Nighttime Setpoint
@@ -12,7 +12,7 @@ hvac_radiator_weekday_night_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 68
+  # initial: 68
 
 hvac_radiator_weekend_day_setpoint_family_room:
   name: HVAC Family Room Radiator Weekend Daytime Setpoint
@@ -20,7 +20,7 @@ hvac_radiator_weekend_day_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 71
+  # initial: 71
 
 
 hvac_radiator_weekend_night_setpoint_family_room:
@@ -29,4 +29,4 @@ hvac_radiator_weekend_night_setpoint_family_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  # initial: 70

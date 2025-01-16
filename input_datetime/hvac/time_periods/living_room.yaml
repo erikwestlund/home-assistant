@@ -2,10 +2,10 @@ hvac_daytime_start_time_living_room:
   name: HVAC Living Room Daytime Start Time
   has_time: true
   has_date: false
-  initial: "07:00:00"
+  # initial: "07:00:00"
 
 hvac_nighttime_start_time_living_room:
   name: HVAC Living Room Nighttime Start Time
   has_time: true
   has_date: false
-  initial: "21:00:00"
+  # initial: "21:00:00"

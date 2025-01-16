@@ -2,10 +2,10 @@ hvac_daytime_start_time_ducted:
   name: HVAC Ducted Daytime Start Time
   has_time: true
   has_date: false
-  initial: "06:30:00"
+  # initial: "06:30:00"
 
 hvac_nighttime_start_time_ducted:
   name: HVAC Ducted Nighttime Start Time
   has_time: true
   has_date: false
-  initial: "19:30:00"
+  # initial: "19:30:00"

@@ -4,4 +4,4 @@ hvac_night_target_temp_master_bedroom:
   max: 86
   step: 0.5
   unit_of_measurement: "°F"
-  initial: 70
+  # initial: 70

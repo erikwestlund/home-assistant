@@ -4,7 +4,7 @@ gas_therm_factor:
   max: 1.050
   step: 0.00001
   unit_of_measurement: ""
-  initial: 1.02956
+  # initial: 1.02956
   icon: mdi:calculator
 
 gas_price_per_therm:
@@ -13,5 +13,5 @@ gas_price_per_therm:
   max: 10
   step: 0.01
   unit_of_measurement: "$/therm"
-  initial: 2.65
+  # initial: 2.65
   icon: mdi:currency-usd

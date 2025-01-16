@@ -3,24 +3,24 @@ hvac_daytime_start_time_master_bedroom:
   name: HVAC Master Bedroom Daytime Start Time
   has_time: true
   has_date: false
-  initial: "07:00:00"
+  # initial: "07:00:00"
 
 # This will be dynamically set
 hvac_nighttime_start_time_master_bedroom:
   name: HVAC Master Bedroom Nighttime Start Time
   has_time: true
   has_date: false
-  initial: "07:00:00"
+  # initial: "07:00:00"
 
 # Start window to average temperatures for caclulating when to turn on at night
 hvac_preheat_end_window_master_bedroom:
   name: HVAC Master Bedroom Night Preheat End Window
   has_time: true
   has_date: false
-  initial: "20:00:00"
+  # initial: "20:00:00"
 
 hvac_preheating_started_master_bedroom:
   name: HVAC Master Bedroom Preheating Started
   has_time: true
   has_date: true
-  initial: "2025-01-01T17:30:00"
+  # initial: "2025-01-01T17:30:00"
