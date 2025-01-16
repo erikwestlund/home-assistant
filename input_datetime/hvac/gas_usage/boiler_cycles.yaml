@@ -16,4 +16,4 @@ hvac_store_gas_usage_time:
   has_time: true
   has_date: false
   icon: mdi:clock
-  initial: "00:08:00"
+  initial: "08:00:00"

@@ -1,13 +1,15 @@
-- id: collect_daily_gas_usage
-  alias: "Collect Daily Gas Usage"
+- id: Store_daily_gas_usage
+  alias: "Store Daily Gas Usage"
   trigger:
     - platform: template
       value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_preheat_end_window_master_bedroom') }}
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_store_gas_usage_time') }}
   action:
     service: google_sheets.append_sheet
     data:
       config_entry: !secret google_sheets_sheet_id
-      worksheet: "Office"
+      worksheet: "Gas Usage"
       data:
         timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+        meter_reading: "{{ states('input_number.gas_start_meter_reading_ft3') }}"
+        outdoor_temp_avg_prev_day: "{{ states('input_number.daily_average_temperature_previous_day') }}"

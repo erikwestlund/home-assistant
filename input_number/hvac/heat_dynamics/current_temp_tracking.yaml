@@ -18,3 +18,10 @@ outdoor_temperature_5m_ago:
   max: 150
   step: 0.1
   unit_of_measurement: "°F"
+
+daily_average_temperature_previous_day:
+  name: "Daily Average Temperature Previous Day"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"

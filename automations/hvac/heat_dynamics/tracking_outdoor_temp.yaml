@@ -33,3 +33,15 @@
         entity_id: input_number.outdoor_temperature_5m_ago
       data:
         value: "{{ states('sensor.current_temperature') }}"
+
+- id: update_daily_average_temperature_previous_day
+  alias: "Update Daily Average Temperature Previous Day"
+  trigger:
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '23:55:00' }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.daily_average_temperature_previous_day
+      data:
+        value: "{{ states('sensor.daily_average_temperature') | float(0) }}"
