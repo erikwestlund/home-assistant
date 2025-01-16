@@ -9,7 +9,7 @@ hvac_nighttime_start_time_erik_office:
   name: HVAC Erik Office Nighttime Start Time
   has_time: true
   has_date: false
-  initial: "17:30:00"
+  initial: "21:00:00"
 
 # Apply Working Setpoint Times
 hvac_apply_working_start_time_erik_office:
