@@ -244,7 +244,7 @@
       target:
         entity_id: input_number.hvac_master_bedroom_preheating_average_temperature_60m_ago
       data:
-        value: "{{ states('sensor.master_bedroom_preheating_average_temperature') }}"
+        value: "{{ states('sensor.hvac_current_preheating_temperature_master_bedroom') }}"
 
 # Update Master Bedroom Preheating Average Temperature 15m Ago (Every 15 Minutes)
 - id: update_master_bedroom_preheating_average_temperature_15m_ago
@@ -257,7 +257,7 @@
       target:
         entity_id: input_number.hvac_master_bedroom_preheating_average_temperature_15m_ago
       data:
-        value: "{{ states('sensor.master_bedroom_preheating_average_temperature') }}"
+        value: "{{ states('sensor.hvac_current_preheating_temperature_master_bedroom') }}"
 
 # Update Master Bedroom Preheating Average Temperature 5m Ago (Every 5 Minutes)
 - id: update_master_bedroom_preheating_average_temperature_5m_ago
@@ -270,7 +270,7 @@
       target:
         entity_id: input_number.hvac_master_bedroom_preheating_average_temperature_5m_ago
       data:
-        value: "{{ states('sensor.master_bedroom_preheating_average_temperature') }}"
+        value: "{{ states('sensor.hvac_current_preheating_temperature_master_bedroom') }}"
 
 # Update Kids Rooms Temperature 60m Ago (Every Hour)
 - id: update_kids_rooms_temperature_60m_ago
