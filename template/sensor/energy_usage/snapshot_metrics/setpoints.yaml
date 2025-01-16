@@ -3,9 +3,9 @@
   unique_id: "snapshot_office_mini_split_prev_hour"
   state: >
     {% if is_state('input_boolean.mini_split_power_status_office_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_mini_split_setpoint_office_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_mini_split_setpoint_office_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -14,9 +14,9 @@
   unique_id: "snapshot_family_room_mini_split_prev_hour"
   state: >
     {% if is_state('input_boolean.mini_split_power_status_family_room_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_mini_split_setpoint_family_room_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_mini_split_setpoint_family_room_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -25,9 +25,9 @@
   unique_id: "snapshot_living_room_mini_split_prev_hour"
   state: >
     {% if is_state('input_boolean.mini_split_power_status_living_room_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_mini_split_setpoint_living_room_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_mini_split_setpoint_living_room_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -36,9 +36,9 @@
   unique_id: "snapshot_dining_room_mini_split_prev_hour"
   state: >
     {% if is_state('input_boolean.mini_split_power_status_dining_room_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_mini_split_setpoint_dining_room_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_mini_split_setpoint_dining_room_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -47,9 +47,9 @@
   unique_id: "snapshot_erik_office_mini_split_prev_hour"
   state: >
     {% if is_state('input_boolean.mini_split_power_status_erik_office_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_mini_split_setpoint_erik_office_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_mini_split_setpoint_erik_office_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -58,9 +58,9 @@
   unique_id: "snapshot_master_bedroom_mini_split_prev_hour"
   state: >
     {% if is_state('input_boolean.mini_split_power_status_master_bedroom_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_mini_split_setpoint_master_bedroom_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_mini_split_setpoint_master_bedroom_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -69,9 +69,9 @@
   unique_id: "snapshot_ducted_prev_hour"
   state: >
     {% if is_state('input_boolean.ducted_power_status_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_setpoint_ducted_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_setpoint_ducted_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -81,9 +81,9 @@
   unique_id: "snapshot_office_radiator_prev_hour"
   state: >
     {% if is_state('input_boolean.radiator_power_status_office_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_radiator_setpoint_office_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_radiator_setpoint_office_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:radiator
@@ -92,9 +92,9 @@
   unique_id: "snapshot_family_room_radiator_prev_hour"
   state: >
     {% if is_state('input_boolean.radiator_power_status_family_room_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_radiator_setpoint_family_room_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_radiator_setpoint_family_room_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:radiator
@@ -103,9 +103,9 @@
   unique_id: "snapshot_main_zone_radiator_prev_hour"
   state: >
     {% if is_state('input_boolean.radiator_power_status_main_zone_60m_ago', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0) | string }}
+      {{ states('input_number.hvac_radiator_setpoint_main_zone_60m_ago') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:radiator
@@ -115,9 +115,9 @@
   unique_id: "snapshot_office_mini_split_now"
   state: >
     {% if is_state('binary_sensor.hvac_mini_split_power_status_office', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_office') | float(0) | string }}
+      {{ states('sensor.hvac_mini_split_setpoint_office') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -126,9 +126,9 @@
   unique_id: "snapshot_family_room_mini_split_now"
   state: >
     {% if is_state('binary_sensor.hvac_mini_split_power_status_family_room', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_family_room') | float(0) | string }}
+      {{ states('sensor.hvac_mini_split_setpoint_family_room') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -137,9 +137,9 @@
   unique_id: "snapshot_living_room_mini_split_now"
   state: >
     {% if is_state('binary_sensor.hvac_mini_split_power_status_living_room', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_living_room') | float(0) | string }}
+      {{ states('sensor.hvac_mini_split_setpoint_living_room') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -148,9 +148,9 @@
   unique_id: "snapshot_dining_room_mini_split_now"
   state: >
     {% if is_state('binary_sensor.hvac_mini_split_power_status_dining_room', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_dining_room') | float(0) | string }}
+      {{ states('sensor.hvac_mini_split_setpoint_dining_room') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -159,9 +159,9 @@
   unique_id: "snapshot_erik_office_mini_split_now"
   state: >
     {% if is_state('binary_sensor.hvac_mini_split_power_status_erik_office', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_erik_office') | float(0) | string }}
+      {{ states('sensor.hvac_mini_split_setpoint_erik_office') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -170,9 +170,9 @@
   unique_id: "snapshot_master_bedroom_mini_split_now"
   state: >
     {% if is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0) | string }}
+      {{ states('sensor.hvac_mini_split_setpoint_master_bedroom') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -181,9 +181,9 @@
   unique_id: "snapshot_ducted_now"
   state: >
     {% if is_state('binary_sensor.hvac_ducted_power_status', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_setpoint_ducted') | float(0) | string }}
+      {{ states('sensor.hvac_setpoint_ducted') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:air-conditioner
@@ -192,9 +192,9 @@
   unique_id: "snapshot_office_radiator_now"
   state: >
     {% if is_state('binary_sensor.hvac_radiator_power_status_office', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_radiator_setpoint_office') | float(0) | string }}
+      {{ states('sensor.hvac_radiator_setpoint_office') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:radiator
@@ -203,9 +203,9 @@
   unique_id: "snapshot_family_room_radiator_now"
   state: >
     {% if is_state('binary_sensor.hvac_radiator_power_status_family_room', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_radiator_setpoint_family_room') | float(0) | string }}
+      {{ states('sensor.hvac_radiator_setpoint_family_room') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:radiator
@@ -214,9 +214,9 @@
   unique_id: "snapshot_main_zone_radiator_now"
   state: >
     {% if is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'off') %}
-      off
+      -999
     {% else %}
-      {{ states('sensor.hvac_radiator_setpoint_main_zone') | float(0) | string }}
+      {{ states('sensor.hvac_radiator_setpoint_main_zone') | float(0) }}
     {% endif %}
   unit_of_measurement: "°F"
   icon: mdi:radiator
