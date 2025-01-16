@@ -9,7 +9,7 @@ hvac_active_boiler_zone:
     - "Office + Living Room"
     - "Family Room + Living Room"
     - "All Zones"
-  initial: "Idle"
+  # initial: "Idle"
   icon: mdi:radiator
 
 hvac_last_active_boiler_zone:
@@ -23,7 +23,7 @@ hvac_last_active_boiler_zone:
     - "Office + Living Room"
     - "Family Room + Living Room"
     - "All Zones"
-  initial: "Idle"
+  # initial: "Idle"
   icon: mdi:radiator
 
 
