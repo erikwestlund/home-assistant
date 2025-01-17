@@ -62,7 +62,7 @@ store_minute_energy_usage:
   initial: 9
   unit_of_measurement: "minutes"
 
-store_minute_boiler_Runs:
+store_minute_boiler_runs:
   name: "Store Minute (Boiler Runs)"
   min: 0
   max: 59
