@@ -12,11 +12,11 @@
     {% elif is_away_mode %}
       {{ states('input_number.hvac_radiator_away_setpoint_family_room') }}
     {# Comfort Setting Based Logic #}
-    {% elif comfort_setting == "Weekday Daytime" %}
+    {% elif comfort_setting == "Weekday Day" %}
       {{ states('input_number.hvac_radiator_weekday_day_setpoint_family_room') }}
     {% elif comfort_setting == "Weekday Night" %}
       {{ states('input_number.hvac_radiator_weekday_night_setpoint_family_room') }}
-    {% elif comfort_setting == "Weekend Daytime" %}
+    {% elif comfort_setting == "Weekend Day" %}
       {{ states('input_number.hvac_radiator_weekend_day_setpoint_family_room') }}
     {% elif comfort_setting == "Weekend Night" %}
       {{ states('input_number.hvac_radiator_weekend_night_setpoint_family_room') }}
