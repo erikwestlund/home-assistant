@@ -13,20 +13,6 @@
 
 
 
-# Store Outdoor Temperature for Living Room
-- id: update_outdoor_temperature_living_room_60m_ago
-  alias: "Update Outdoor Temperature for Living Room 60 Minutes Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_living_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_living_room
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
-
 # Store Outdoor Temperature for Dining Room
 - id: update_outdoor_temperature_dining_room_60m_ago
   alias: "Update Outdoor Temperature for Dining Room 60 Minutes Ago"

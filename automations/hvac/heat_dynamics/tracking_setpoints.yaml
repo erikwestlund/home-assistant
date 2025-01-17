@@ -1,32 +1,4 @@
-# Office Radiator Setpoint 60m Ago (Every Hour)
 
-# Main Zone Radiator Setpoint 60m Ago (Every Hour)
-- id: update_radiator_setpoint_main_zone_60m_ago
-  alias: "Update Radiator Setpoint Main Zone 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_main_zone') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_radiator_setpoint_main_zone_60m_ago
-      data:
-        value: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
-
-# Living Room Mini Split Setpoint 60m Ago (Every Hour)
-- id: update_mini_split_setpoint_living_room_60m_ago
-  alias: "Update Mini Split Setpoint Living Room 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_living_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_mini_split_setpoint_living_room_60m_ago
-      data:
-        value: "{{ states('sensor.hvac_mini_split_setpoint_living_room') }}"
 
 # Dining Room Mini Split Setpoint 60m Ago (Every Hour)
 - id: update_mini_split_setpoint_dining_room_60m_ago

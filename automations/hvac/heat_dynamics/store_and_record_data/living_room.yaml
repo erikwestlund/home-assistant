@@ -27,8 +27,19 @@
           heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
 
     # Store outdoor temperature
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_living_room
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
     # Store room temperatures
-    # Store door status
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_living_room_average_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.living_room_average_temperature') }}"
+
     # Reset calling for heat
     - choose:
         - conditions:
@@ -41,4 +52,49 @@
                 entity_id: input_boolean.radiator_called_for_heat_living_room_previous_hour
 
     # Store power status (radiator, mini split, space heater)
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_main_zone
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_living_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_living_room_60m_ago
+
     # Store setpoints (radiator, mini split)
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_main_zone_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_mini_split_setpoint_living_room_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_mini_split_setpoint_living_room') }}"
