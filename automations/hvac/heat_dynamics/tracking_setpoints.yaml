@@ -1,30 +1,4 @@
 # Office Radiator Setpoint 60m Ago (Every Hour)
-- id: update_radiator_setpoint_office_60m_ago
-  alias: "Update Radiator Setpoint Office 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_office') | int }}
-  action:
-#    - service: input_number.set_value
-#      target:
-#        entity_id: input_number.hvac_radiator_setpoint_office_60m_ago
-#      data:
-#        value: "{{ states('sensor.hvac_radiator_setpoint_office') }}"
-
-# Family Room Radiator Setpoint 60m Ago (Every Hour)
-- id: update_radiator_setpoint_family_room_60m_ago
-  alias: "Update Radiator Setpoint Family Room 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_family_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_radiator_setpoint_family_room_60m_ago
-      data:
-        value: "{{ states('sensor.hvac_radiator_setpoint_family_room') }}"
 
 # Main Zone Radiator Setpoint 60m Ago (Every Hour)
 - id: update_radiator_setpoint_main_zone_60m_ago
@@ -39,34 +13,6 @@
         entity_id: input_number.hvac_radiator_setpoint_main_zone_60m_ago
       data:
         value: "{{ states('sensor.hvac_radiator_setpoint_main_zone') }}"
-
-# Office Mini Split Setpoint 60m Ago (Every Hour)
-- id: update_mini_split_setpoint_office_60m_ago
-  alias: "Update Mini Split Setpoint Office 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_office') | int }}
-  action:
-#    - service: input_number.set_value
-#      target:
-#        entity_id: input_number.hvac_mini_split_setpoint_office_60m_ago
-#      data:
-#        value: "{{ states('sensor.hvac_mini_split_setpoint_office') }}"
-
-# Family Room Mini Split Setpoint 60m Ago (Every Hour)
-- id: update_mini_split_setpoint_family_room_60m_ago
-  alias: "Update Mini Split Setpoint Family Room 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_family_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_mini_split_setpoint_family_room_60m_ago
-      data:
-        value: "{{ states('sensor.hvac_mini_split_setpoint_family_room') }}"
 
 # Living Room Mini Split Setpoint 60m Ago (Every Hour)
 - id: update_mini_split_setpoint_living_room_60m_ago

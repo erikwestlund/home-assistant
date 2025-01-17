@@ -58,6 +58,49 @@
                 entity_id: input_boolean.radiator_called_for_heat_family_room_previous_hour
 
     # Store power status (radiator, mini split, space heater)
-
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_family_room_60m_ago
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_family_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_family_room_60m_ago
 
     # Store setpoints (radiator, mini split)
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_family_room_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_family_room') }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_mini_split_setpoint_family_room_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_mini_split_setpoint_family_room') }}"
