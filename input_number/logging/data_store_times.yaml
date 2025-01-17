@@ -53,3 +53,19 @@ store_minute_ducted:
   step: 1
   initial: 8
   unit_of_measurement: "minutes"
+
+store_minute_energy_usage:
+  name: "Store Minute (Energy)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 9
+  unit_of_measurement: "minutes"
+
+store_minute_boiler_Runs:
+  name: "Store Minute (Boiler Runs)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 10
+  unit_of_measurement: "minutes"

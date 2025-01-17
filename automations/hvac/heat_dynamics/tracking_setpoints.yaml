@@ -2,8 +2,9 @@
 - id: update_radiator_setpoint_office_60m_ago
   alias: "Update Radiator Setpoint Office 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '2'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -41,8 +42,9 @@
 - id: update_mini_split_setpoint_office_60m_ago
   alias: "Update Mini Split Setpoint Office 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '2'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
   action:
     - service: input_number.set_value
       target:

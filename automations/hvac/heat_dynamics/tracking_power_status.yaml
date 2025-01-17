@@ -3,8 +3,9 @@
 - id: update_radiator_power_status_office_60m_ago
   alias: "Update Radiator Power Status Office 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '2'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
   action:
     - choose:
         - conditions:
@@ -80,8 +81,9 @@
 - id: update_mini_split_power_status_office_60m_ago
   alias: "Update Mini Split Power Status Office 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '2'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
   action:
     - choose:
         - conditions:
@@ -258,8 +260,9 @@
 - id: update_space_heater_power_status_office_60m_ago
   alias: "Update Space Heater Power Status Office 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '2'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
   action:
     - choose:
         - conditions:

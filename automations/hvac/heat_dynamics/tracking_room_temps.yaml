@@ -2,8 +2,9 @@
 - id: update_tina_office_temperature_60m_ago
   alias: "Update Tina Office Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '2'  # Office stores hourly changes at 1, so store at 2. At 1 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
   action:
     - service: input_number.set_value
       target:
