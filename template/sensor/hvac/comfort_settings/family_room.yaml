@@ -23,9 +23,9 @@
     {# 4. Daytime Check #}
     {% elif is_daytime %}
       {% if is_weekend %}
-        Weekend Daytime
+        Weekend Day
       {% else %}
-        Weekday Daytime
+        Weekday Day
       {% endif %}
     {% else %}
       {# If it's neither night nor daytime, assume weekday daytime #}
