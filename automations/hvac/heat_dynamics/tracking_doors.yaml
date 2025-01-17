@@ -6,13 +6,8 @@
         {{ now().minute == states('input_number.store_minute_doors') | int }}
   condition: []
   action:
-#    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.side_door_contact', 'off') else 'off' }}
-#      data:
-#        entity_id: input_boolean.office_exterior_door_closed_prev_hour
+#
 
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.family_room_interior_door_contact', 'off') else 'off' }}
-      data:
-        entity_id: input_boolean.family_room_interior_door_closed_prev_hour
 
     - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.tilly_bedroom_door_contact', 'off') else 'off' }}
       data:

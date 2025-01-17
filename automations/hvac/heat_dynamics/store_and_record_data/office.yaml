@@ -48,9 +48,15 @@
         entity_id: input_boolean.office_exterior_door_closed_prev_hour
 
     # Reset calling for heat
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.radiator_called_for_heat_office_previous_hour
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_called_for_heat_office_previous_hour
         
     # Store power status (radiator, mini split, space heater)
     - choose:

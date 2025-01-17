@@ -1,18 +1,4 @@
 
-# Update Family Room Temperature 60m Ago (Every Hour)
-- id: update_family_room_temperature_60m_ago
-  alias: "Update Family Room Temperature 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_family_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_family_room_average_temperature_60m_ago
-      data:
-        value: "{{ states('sensor.family_room_average_temperature') }}"
-
 # Update Living Room Temperature 60m Ago (Every Hour)
 - id: update_living_room_temperature_60m_ago
   alias: "Update Living Room Temperature 60m Ago"

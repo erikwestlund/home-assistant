@@ -25,9 +25,20 @@
           family_room_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_family_room_radiators_calling_for_heat_prev_hour') }}"
           master_bedroom_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_master_bedroom_mini_split_prev_hour', '-999') else states('sensor.snapshot_master_bedroom_mini_split_prev_hour') }}"
           heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
+
     # Store outdoor temperature
     # Store room temperatures
     # Store door status
     # Reset calling for heat
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_living_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_called_for_heat_living_room_previous_hour
+
     # Store power status (radiator, mini split, space heater)
     # Store setpoints (radiator, mini split)

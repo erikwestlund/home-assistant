@@ -28,16 +28,34 @@
           heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
 
     # Store outdoor temperature
-
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_family_room
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
 
     # Store room temperatures
-
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_family_room_average_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.family_room_average_temperature') }}"
 
     # Store door status
-
+    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.family_room_interior_door_contact', 'off') else 'off' }}
+      data:
+        entity_id: input_boolean.family_room_interior_door_closed_prev_hour
 
     # Reset calling for heat
-
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_calling_for_heat_family_room
+              state: 'off'
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_called_for_heat_family_room_previous_hour
 
     # Store power status (radiator, mini split, space heater)
 

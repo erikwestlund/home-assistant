@@ -11,33 +11,7 @@
       data:
         value: "{{ states('sensor.daily_average_temperature') | float(0) }}"
 
-# Store Outdoor Temperature for Office
-- id: update_outdoor_temperature_office_60m_ago
-  alias: "Update Outdoor Temperature for Office 60 Minutes Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_office') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_office
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
 
-# Store Outdoor Temperature for Family Room
-- id: update_outdoor_temperature_family_room_60m_ago
-  alias: "Update Outdoor Temperature for Family Room 60 Minutes Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_family_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_family_room
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
 
 # Store Outdoor Temperature for Living Room
 - id: update_outdoor_temperature_living_room_60m_ago
