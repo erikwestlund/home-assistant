@@ -1,0 +1,39 @@
+- id: collect_hourly_data_ducted
+  alias: "Store and Record Hourly Data for Ducted Heat Dynamics"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_ducted') | int }}
+  action:
+    - service: google_sheets.append_sheet
+      data:
+        config_entry: !secret google_sheets_sheet_id
+        worksheet: "Ducted"
+        data:
+          timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
+          outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
+          outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change_ducted') }}"
+          temp_now: "{{ states('sensor.snapshot_kids_rooms_temp_now') }}"
+          temp_change_hour: "{{ states('sensor.snapshot_kids_rooms_temp_change_hour') }}"
+          hanks_room_temp_prev_hour: "{{ states('sensor.snapshot_hank_s_room_temp_prev_hour') }}"
+          hanks_room_temp_change_hour: "{{ states('sensor.snapshot_hank_s_room_temp_change_hour') }}"
+          tillys_room_temp_prev_hour: "{{ states('sensor.snapshot_tilly_s_room_temp_prev_hour') }}"
+          tillys_room_temp_change_hour: "{{ states('sensor.snapshot_tilly_s_room_temp_change_hour') }}"
+          ducted_prev_hour: "{{ 'off' if is_state('sensor.snapshot_ducted_prev_hour', '-999') else states('sensor.snapshot_ducted_prev_hour') }}"
+          living_room_temp_prev_hour: "{{ states('sensor.snapshot_living_room_temp_prev_hour') }}"
+          kitchen_temp_prev_hour: "{{ states('sensor.snapshot_kitchen_temp_prev_hour') }}"
+          dining_room_temp_prev_hour: "{{ states('sensor.snapshot_dining_room_temp_prev_hour') }}"
+          tilly_door_closed_prev_hour: "{{ states('sensor.snapshot_tilly_door_closed_prev_hour', 'on') }}"
+          hank_main_door_closed_prev_hour: "{{ states('sensor.snapshot_hank_main_door_closed_prev_hour', 'on') }}"
+          hank_side_door_closed_prev_hour: "{{ states('sensor.snapshot_hank_side_door_closed_prev_hour', 'on') }}"
+          main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
+          family_room_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_family_room_mini_split_prev_hour', '-999') else states('sensor.snapshot_family_room_mini_split_prev_hour') }}"
+          heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
+
+    # Store outdoor temperature
+    # Store room temperatures
+    # Store door status
+    # Reset calling for heat
+    # Store power status (radiator, mini split, space heater)
+    # Store setpoints (radiator, mini split)

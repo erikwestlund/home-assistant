@@ -1,0 +1,118 @@
+- id: collect_hourly_data_office
+  alias: "Store and Record Hourly Data for Office Heat Dynamics"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
+  action:
+    - service: google_sheets.append_sheet
+      data:
+        config_entry: !secret google_sheets_sheet_id
+        worksheet: "Office"
+        data:
+          timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
+          outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
+          outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change_office') }}"
+          temp_now: "{{ states('sensor.snapshot_office_temp_now') }}"
+          temp_change_hour: "{{ states('sensor.snapshot_office_temp_change_hour') }}"
+          mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_mini_split_prev_hour', '-999') else states('sensor.snapshot_office_mini_split_prev_hour') }}"
+          radiator_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_radiator_prev_hour', '-999') else states('sensor.snapshot_office_radiator_prev_hour') }}"
+          space_heater_power_status_office_prev_hour: "{{ states('sensor.snapshot_space_heater_power_status_office_prev_hour') }}"
+          exterior_door_closed_prev_hour: "{{ states('sensor.snapshot_office_exterior_door_closed_prev_hour', 'on') }}"
+          erik_office_temp_prev_hour: "{{ states('sensor.snapshot_erik_office_temp_prev_hour') }}"
+          kitchen_temp_prev_hour: "{{ states('sensor.snapshot_kitchen_temp_prev_hour') }}"
+          office_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_office_radiators_calling_for_heat_prev_hour') }}"
+          erik_office_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_erik_office_mini_split_prev_hour', '-999') else states('sensor.snapshot_erik_office_mini_split_prev_hour') }}"
+          dining_room_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_dining_room_mini_split_prev_hour', '-999') else states('sensor.snapshot_dining_room_mini_split_prev_hour') }}"
+          space_heater_energy_hourly: "{{ states('sensor.snapshot_space_heater_energy_hourly') }}"
+          heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
+
+    # Store outdoor temperature
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
+    # Store room temperatures
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_office_average_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.tina_office_average_temperature') }}"
+
+    # Store door status
+    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.side_door_contact', 'off') else 'off' }}
+      data:
+        entity_id: input_boolean.office_exterior_door_closed_prev_hour
+
+    # Reset calling for heat
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.radiator_called_for_heat_office_previous_hour
+        
+    # Store power status (radiator, mini split, space heater)
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.radiator_power_status_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_radiator_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.radiator_power_status_office_60m_ago
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_office_60m_ago
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_space_heater_active_office
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.space_heater_power_status_office_60m_ago
+
+    # Store setpoints (radiator, mini split)
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_radiator_setpoint_office_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_radiator_setpoint_office') }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_mini_split_setpoint_office_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_mini_split_setpoint_office') }}"

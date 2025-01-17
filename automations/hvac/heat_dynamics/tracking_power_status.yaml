@@ -1,29 +1,5 @@
 ## Radiators
-# Office Radiator Power Status 60m Ago (Every Hour)
-- id: update_radiator_power_status_office_60m_ago
-  alias: "Update Radiator Power Status Office 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_office') | int }}
-  action:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_power_status_office
-              state: "on"
-          sequence:
-            - service: input_boolean.turn_on
-              target:
-                entity_id: input_boolean.radiator_power_status_office_60m_ago
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_radiator_power_status_office
-              state: "off"
-          sequence:
-            - service: input_boolean.turn_off
-              target:
-                entity_id: input_boolean.radiator_power_status_office_60m_ago
+
 
 # Family Room Radiator Power Status 60m Ago (Every Hour)
 - id: update_radiator_power_status_family_room_60m_ago
@@ -78,32 +54,7 @@
                 entity_id: input_boolean.radiator_power_status_main_zone_60m_ago
 
 ## Mini Spilts
-## Mini Splits
-# Office Mini Split Power Status 60m Ago (Every Hour)
-- id: update_mini_split_power_status_office_60m_ago
-  alias: "Update Mini Split Power Status Office 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_office') | int }}
-  action:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_mini_split_power_status_office
-              state: "on"
-          sequence:
-            - service: input_boolean.turn_on
-              target:
-                entity_id: input_boolean.mini_split_power_status_office_60m_ago
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_mini_split_power_status_office
-              state: "off"
-          sequence:
-            - service: input_boolean.turn_off
-              target:
-                entity_id: input_boolean.mini_split_power_status_office_60m_ago
+
 
 # Family Room Mini Split Power Status 60m Ago (Every Hour)
 - id: update_mini_split_power_status_family_room_60m_ago
@@ -263,29 +214,3 @@
               target:
                 entity_id: input_boolean.ducted_power_status_60m_ago
 
-## Space Heaters
-# Office Space Heater Power Status 60m Ago (Every Hour)
-- id: update_space_heater_power_status_office_60m_ago
-  alias: "Update Space Heater Power Status Office 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_office') | int }}
-  action:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_space_heater_active_office
-              state: "on"
-          sequence:
-            - service: input_boolean.turn_on
-              target:
-                entity_id: input_boolean.space_heater_power_status_office_60m_ago
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_space_heater_active_office
-              state: "off"
-          sequence:
-            - service: input_boolean.turn_off
-              target:
-                entity_id: input_boolean.space_heater_power_status_office_60m_ago

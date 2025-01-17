@@ -1,0 +1,37 @@
+- id: collect_hourly_data_dining_room
+  alias: "Store and Record Hourly Data for Dining Room Heat Dynamics"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
+  action:
+    - service: google_sheets.append_sheet
+      data:
+        config_entry: !secret google_sheets_sheet_id
+        worksheet: "Dining Room"
+        data:
+          timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
+          outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
+          outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change_dining_room') }}"
+          temp_now: "{{ states('sensor.snapshot_dining_room_temp_now') }}"
+          temp_change_hour: "{{ states('sensor.snapshot_dining_room_temp_change_hour') }}"
+          mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_dining_room_mini_split_prev_hour', '-999') else states('sensor.snapshot_dining_room_mini_split_prev_hour') }}"
+          kitchen_temp_prev_hour: "{{ states('sensor.snapshot_kitchen_temp_prev_hour') }}"
+          living_room_temp_prev_hour: "{{ states('sensor.snapshot_living_room_temp_prev_hour') }}"
+          basement_playroom_temp_prev_hour: "{{ states('sensor.snapshot_basement_playroom_temp_prev_hour') }}"
+          family_room_temp_prev_hour: "{{ states('sensor.snapshot_family_room_temp_prev_hour') }}"
+          hanks_room_temp_prev_hour: "{{ states('sensor.snapshot_hank_s_room_temp_prev_hour') }}"
+          tillys_room_temp_prev_hour: "{{ states('sensor.snapshot_tilly_s_room_temp_prev_hour') }}"
+          main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
+          family_room_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_family_room_radiators_calling_for_heat_prev_hour') }}"
+          office_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_mini_split_prev_hour', '-999') else states('sensor.snapshot_office_mini_split_prev_hour') }}"
+          erik_office_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_erik_office_mini_split_prev_hour', '-999') else states('sensor.snapshot_erik_office_mini_split_prev_hour') }}"
+          heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
+
+    # Store outdoor temperature
+    # Store room temperatures
+    # Store door status
+    # Reset calling for heat
+    # Store power status (radiator, mini split, space heater)
+    # Store setpoints (radiator, mini split)

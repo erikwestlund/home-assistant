@@ -1,15 +1,3 @@
-- id: update_outdoor_temperature_60m_ago
-  alias: "Update Outdoor Temperature 60 Minutes Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_outdoor_temps_general') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_60m_ago
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
 
 - id: update_daily_average_temperature_previous_day
   alias: "Update Daily Average Temperature Previous Day"

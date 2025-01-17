@@ -1,0 +1,29 @@
+- id: collect_hourly_data_energy
+  alias: "Store and Record Hourly Data for Energy Usage"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_energy_usage') | int }}
+  action:
+    - service: google_sheets.append_sheet
+      data:
+        config_entry: !secret google_sheets_sheet_id
+        worksheet: "Energy Usage"
+        data:
+          timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
+          outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
+          outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change_ducted') }}" # Use ducted as its closest.
+          space_heater_energy_hourly: "{{ states('sensor.snapshot_space_heater_energy_hourly') }}"
+          heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
+          heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
+          heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
+          heat_pump_all_energy_hourly: "{{ states('sensor.snapshot_all_heat_pumps_energy_hourly') }}"
+          whole_home_energy_hourly: "{{ states('sensor.snapshot_whole_house_energy_hourly') }}"
+
+    # Store outdoor temperature
+    # Store room temperatures
+    # Store door status
+    # Reset calling for heat
+    # Store power status (radiator, mini split, space heater)
+    # Store setpoints (radiator, mini split)

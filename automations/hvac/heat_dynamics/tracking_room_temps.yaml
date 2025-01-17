@@ -1,17 +1,3 @@
-# Update Tina Office Temperature 60m Ago (Every Hour)
-- id: update_tina_office_temperature_60m_ago
-  alias: "Update Tina Office Temperature 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_office') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_office_average_temperature_60m_ago
-      data:
-        value: "{{ states('sensor.tina_office_average_temperature') }}"
-
 
 # Update Family Room Temperature 60m Ago (Every Hour)
 - id: update_family_room_temperature_60m_ago

@@ -1,0 +1,32 @@
+- id: collect_hourly_data_master_bedroom
+  alias: "Store and Record Hourly Data for Master Bedroom Heat Dynamics"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
+  action:
+    - service: google_sheets.append_sheet
+      data:
+        config_entry: !secret google_sheets_sheet_id
+        worksheet: "Master Bedroom"
+        data:
+          timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
+          outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
+          outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change_master_bedroom') }}"
+          temp_now: "{{ states('sensor.snapshot_master_bedroom_temp_now') }}"
+          temp_change_hour: "{{ states('sensor.snapshot_master_bedroom_temp_change_hour') }}"
+          mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_master_bedroom_mini_split_prev_hour', '-999') else states('sensor.snapshot_master_bedroom_mini_split_prev_hour') }}"
+          radiator_prev_hour: "{{ 'off' if is_state('sensor.snapshot_main_zone_radiator_prev_hour', '-999') else states('sensor.snapshot_main_zone_radiator_prev_hour') }}"
+          master_bedroom_preheating_average_temp_prev_hour: "{{ states('sensor.snapshot_master_bedroom_preheating_average_temp_prev_hour') }}"
+          living_room_temp_prev_hour: "{{ states('sensor.snapshot_living_room_temp_prev_hour') }}"
+          door_closed_prev_hour: "{{ states('sensor.snapshot_master_bedroom_door_closed_prev_hour', 'on') }}"
+          main_zone_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_living_room_radiators_calling_for_heat_prev_hour') }}"
+          living_room_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_living_room_mini_split_prev_hour', '-999') else states('sensor.snapshot_living_room_mini_split_prev_hour') }}"
+          heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
+    # Store outdoor temperature
+    # Store room temperatures
+    # Store door status
+    # Reset calling for heat
+    # Store power status (radiator, mini split, space heater)
+    # Store setpoints (radiator, mini split)
