@@ -1,0 +1,55 @@
+store_minute_office:
+  name: "Store Minute (Office)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 2
+  unit_of_measurement: "minutes"
+
+store_minute_family_room:
+  name: "Store Minute (Family Room)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 3
+  unit_of_measurement: "minutes"
+
+store_minute_living_room:
+  name: "Store Minute (Living Room)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 4
+  unit_of_measurement: "minutes"
+
+store_minute_dining_room:
+  name: "Store Minute (Dining Room)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 5
+  unit_of_measurement: "minutes"
+
+store_minute_erik_office:
+  name: "Store Minute (Erik Office)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 6
+  unit_of_measurement: "minutes"
+
+store_minute_master_bedroom:
+  name: "Store Minute (Master Bedroom)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 7
+  unit_of_measurement: "minutes"
+
+store_minute_ducted:
+  name: "Store Minute (Ducted)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 8
+  unit_of_measurement: "minutes"

@@ -11,3 +11,53 @@ daily_average_temperature_previous_day:
   max: 150
   step: 0.1
   unit_of_measurement: "°F"
+
+# For storing time
+outdoor_temperature_60m_ago_data_storage_office:
+  name: "Current Temperature 60 Minutes Ago (Office Data Storage Reload Time)"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+outdoor_temperature_60m_ago_data_storage_family_room:
+  name: "Current Temperature 60 Minutes Ago (Family Room Data Storage Reload Time)"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+outdoor_temperature_60m_ago_data_storage_living_room:
+  name: "Current Temperature 60 Minutes Ago (Living Room Data Storage Reload Time)"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+outdoor_temperature_60m_ago_data_storage_dining_room:
+  name: "Current Temperature 60 Minutes Ago (Dining Room Data Storage Reload Time)"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+outdoor_temperature_60m_ago_data_storage_erik_office:
+  name: "Current Temperature 60 Minutes Ago (Erik Office Data Storage Reload Time)"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+outdoor_temperature_60m_ago_data_storage_master_bedroom:
+  name: "Current Temperature 60 Minutes Ago (Master Bedroom Data Storage Reload Time)"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+outdoor_temperature_60m_ago_data_storage_ducted:
+  name: "Current Temperature 60 Minutes Ago (Ducted Data Storage Reload Time)"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
