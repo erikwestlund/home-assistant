@@ -31,7 +31,7 @@
     # Store outdoor temperature
     - service: input_number.set_value
       target:
-        entity_id: input_number.outdoor_temperature_60m_ago
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_office
       data:
         value: "{{ states('sensor.current_temperature') }}"
 
