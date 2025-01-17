@@ -10,30 +10,6 @@
       data:
         value: "{{ states('sensor.current_temperature') }}"
 
-- id: update_outdoor_temperature_15m_ago
-  alias: "Update Outdoor Temperature 15 Minutes Ago"
-  trigger:
-    platform: time_pattern
-    minutes: '/15'  # Triggers every 15 minutes
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_15m_ago
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
-
-- id: update_outdoor_temperature_5m_ago
-  alias: "Update Outdoor Temperature 5 Minutes Ago"
-  trigger:
-    platform: time_pattern
-    minutes: '/5'  # Triggers every 5 minutes
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_5m_ago
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
-
 - id: update_daily_average_temperature_previous_day
   alias: "Update Daily Average Temperature Previous Day"
   trigger:

@@ -3,25 +3,9 @@ radiator_power_status_office_60m_ago:
   name: "Radiator Power Status Office 60m Ago"
   initial: off
 
-radiator_power_status_office_15m_ago:
-  name: "Radiator Power Status Office 15m Ago"
-  initial: off
-
-radiator_power_status_office_5m_ago:
-  name: "Radiator Power Status Office 5m Ago"
-  initial: off
-
 # Family Room Radiator Power Status
 radiator_power_status_family_room_60m_ago:
   name: "Radiator Power Status Family Room 60m Ago"
-  initial: off
-
-radiator_power_status_family_room_15m_ago:
-  name: "Radiator Power Status Family Room 15m Ago"
-  initial: off
-
-radiator_power_status_family_room_5m_ago:
-  name: "Radiator Power Status Family Room 5m Ago"
   initial: off
 
 # Main Zone Radiator Power Status
@@ -29,25 +13,9 @@ radiator_power_status_main_zone_60m_ago:
   name: "Radiator Power Status Main Zone 60m Ago"
   initial: off
 
-radiator_power_status_main_zone_15m_ago:
-  name: "Radiator Power Status Main Zone 15m Ago"
-  initial: off
-
-radiator_power_status_main_zone_5m_ago:
-  name: "Radiator Power Status Main Zone 5m Ago"
-  initial: off
-
 # Office Mini Split Power Status
 mini_split_power_status_office_60m_ago:
   name: "Mini Split Power Status Office 60m Ago"
-  initial: off
-
-mini_split_power_status_office_15m_ago:
-  name: "Mini Split Power Status Office 15m Ago"
-  initial: off
-
-mini_split_power_status_office_5m_ago:
-  name: "Mini Split Power Status Office 5m Ago"
   initial: off
 
 # Family Room Mini Split Power Status
@@ -55,25 +23,9 @@ mini_split_power_status_family_room_60m_ago:
   name: "Mini Split Power Status Family Room 60m Ago"
   initial: off
 
-mini_split_power_status_family_room_15m_ago:
-  name: "Mini Split Power Status Family Room 15m Ago"
-  initial: off
-
-mini_split_power_status_family_room_5m_ago:
-  name: "Mini Split Power Status Family Room 5m Ago"
-  initial: off
-
 # Living Room Mini Split Power Status
 mini_split_power_status_living_room_60m_ago:
   name: "Mini Split Power Status Living Room 60m Ago"
-  initial: off
-
-mini_split_power_status_living_room_15m_ago:
-  name: "Mini Split Power Status Living Room 15m Ago"
-  initial: off
-
-mini_split_power_status_living_room_5m_ago:
-  name: "Mini Split Power Status Living Room 5m Ago"
   initial: off
 
 # Dining Room Mini Split Power Status
@@ -81,25 +33,9 @@ mini_split_power_status_dining_room_60m_ago:
   name: "Mini Split Power Status Dining Room 60m Ago"
   initial: off
 
-mini_split_power_status_dining_room_15m_ago:
-  name: "Mini Split Power Status Dining Room 15m Ago"
-  initial: off
-
-mini_split_power_status_dining_room_5m_ago:
-  name: "Mini Split Power Status Dining Room 5m Ago"
-  initial: off
-
 # Erik Office Mini Split Power Status
 mini_split_power_status_erik_office_60m_ago:
   name: "Mini Split Power Status Erik Office 60m Ago"
-  initial: off
-
-mini_split_power_status_erik_office_15m_ago:
-  name: "Mini Split Power Status Erik Office 15m Ago"
-  initial: off
-
-mini_split_power_status_erik_office_5m_ago:
-  name: "Mini Split Power Status Erik Office 5m Ago"
   initial: off
 
 # Master Bedroom Mini Split Power Status
@@ -107,25 +43,9 @@ mini_split_power_status_master_bedroom_60m_ago:
   name: "Mini Split Power Status Master Bedroom 60m Ago"
   initial: off
 
-mini_split_power_status_master_bedroom_15m_ago:
-  name: "Mini Split Power Status Master Bedroom 15m Ago"
-  initial: off
-
-mini_split_power_status_master_bedroom_5m_ago:
-  name: "Mini Split Power Status Master Bedroom 5m Ago"
-  initial: off
-
 # Ducted Mini Split Power Status
 ducted_power_status_60m_ago:
   name: "Ducted Power Status 60m Ago"
-  initial: off
-
-ducted_power_status_15m_ago:
-  name: "Ducted Power Status 15m Ago"
-  initial: off
-
-ducted_power_status_5m_ago:
-  name: "Ducted Power Status 5m Ago"
   initial: off
 
 # Office Space Heater Power Status
@@ -133,10 +53,3 @@ space_heater_power_status_office_60m_ago:
   name: "Space Heater Power Status Office 60m Ago"
   initial: off
 
-space_heater_power_status_office_15m_ago:
-  name: "Space Heater Power Status Office 15m Ago"
-  initial: off
-
-space_heater_power_status_office_5m_ago:
-  name: "Space Heater Power Status Office 5m Ago"
-  initial: off

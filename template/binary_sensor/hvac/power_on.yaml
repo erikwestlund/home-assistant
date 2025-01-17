@@ -206,6 +206,14 @@
     {% set master_bedroom_power_status = is_state('binary_sensor.hvac_mini_split_power_status_master_bedroom', 'on') %}
     {% set master_bedroom_preheating_active = is_state('binary_sensor.hvac_preheating_active_master_bedroom', 'on') %}
     
+    {# Use this within off checks #}
+    {% if on_with_master_bedroom %}
+      {% set on_from_master_bedroom_or_preheat = 'on' if master_bedroom_power_status else 'off' %}
+    {% elif on_with_master_bedroom_preheat %}
+      {% set on_from_master_bedroom_or_preheat = 'on' if master_bedroom_preheating_active else 'off' %}
+    {% else %}
+      {% set on_from_master_bedroom_or_preheat = off %}
+    {% endif %}
     
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -219,20 +227,15 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. When configured, always on when Master Bedroom is on #}
-    {% elif on_with_master_bedroom %}
-      {{ 'on' if master_bedroom_power_status else 'off' }}
-    {% elif on_with_master_bedroom_preheat %}
-      {{ 'on' if master_bedroom_preheating_active else 'off' }}
     {# 6. General Off Check (using daytime or nighttime average temperature under off threshold) #}
     {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
-      off
+      {{ 'on' if on_from_master_bedroom_or_preheat == 'on' else 'off' }}
     {# 7. Daytime Check (use daytime average temperature and daytime threshold) #}
     {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
-      off
+      {{ 'on' if on_from_master_bedroom_or_preheat == 'on' else 'off' }}
     {# 8. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
     {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
-      off
+      {{ 'on' if on_from_master_bedroom_or_preheat == 'on' else 'off' }}
     {# 9. Default On State #}
     {% else %}
       on

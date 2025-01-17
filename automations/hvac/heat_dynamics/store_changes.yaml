@@ -15,7 +15,7 @@
         outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change') }}"
         temp_now: "{{ states('sensor.snapshot_office_temp_now') }}"
         temp_change_hour: "{{ states('sensor.snapshot_office_temp_change_hour') }}"
-        mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_mini_split_prev_hour', 'on') else states('sensor.snapshot_office_mini_split_prev_hour') }}"
+        mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_mini_split_prev_hour', '-999') else states('sensor.snapshot_office_mini_split_prev_hour') }}"
         radiator_prev_hour: "{{ 'off' if is_state('sensor.snapshot_office_radiator_prev_hour', '-999') else states('sensor.snapshot_office_radiator_prev_hour') }}"
         space_heater_power_status_office_prev_hour: "{{ states('sensor.snapshot_space_heater_power_status_office_prev_hour') }}"
         exterior_door_closed_prev_hour: "{{ states('sensor.snapshot_office_exterior_door_closed_prev_hour', 'on') }}"

@@ -7,20 +7,6 @@ hvac_radiator_setpoint_office_60m_ago:
   step: 1
   unit_of_measurement: "°F"
 
-hvac_radiator_setpoint_office_15m_ago:
-  name: "HVAC Office Radiator Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_radiator_setpoint_office_5m_ago:
-  name: "HVAC Office Radiator Setpoint 5m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
 # Family Room
 hvac_radiator_setpoint_family_room_60m_ago:
   name: "HVAC Family Room Radiator Setpoint 60m Ago"
@@ -29,37 +15,9 @@ hvac_radiator_setpoint_family_room_60m_ago:
   step: 1
   unit_of_measurement: "°F"
 
-hvac_radiator_setpoint_family_room_15m_ago:
-  name: "HVAC Family Room Radiator Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_radiator_setpoint_family_room_5m_ago:
-  name: "HVAC Family Room Radiator Setpoint 5m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
 # Main Zone
 hvac_radiator_setpoint_main_zone_60m_ago:
   name: "HVAC Main Zone Radiator Setpoint 60m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_radiator_setpoint_main_zone_15m_ago:
-  name: "HVAC Main Zone Radiator Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_radiator_setpoint_main_zone_5m_ago:
-  name: "HVAC Main Zone Radiator Setpoint 5m Ago"
   min: -100
   max: 150
   step: 1
@@ -74,37 +32,9 @@ hvac_mini_split_setpoint_office_60m_ago:
   step: 1
   unit_of_measurement: "°F"
 
-hvac_mini_split_setpoint_office_15m_ago:
-  name: "HVAC Office Mini Split Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_office_5m_ago:
-  name: "HVAC Office Mini Split Setpoint 5m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
 # Family Room
 hvac_mini_split_setpoint_family_room_60m_ago:
   name: "HVAC Family Room Mini Split Setpoint 60m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_family_room_15m_ago:
-  name: "HVAC Family Room Mini Split Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_family_room_5m_ago:
-  name: "HVAC Family Room Mini Split Setpoint 5m Ago"
   min: -100
   max: 150
   step: 1
@@ -118,37 +48,9 @@ hvac_mini_split_setpoint_living_room_60m_ago:
   step: 1
   unit_of_measurement: "°F"
 
-hvac_mini_split_setpoint_living_room_15m_ago:
-  name: "HVAC Living Room Mini Split Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_living_room_5m_ago:
-  name: "HVAC Living Room Mini Split Setpoint 5m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
 # Dining Room
 hvac_mini_split_setpoint_dining_room_60m_ago:
   name: "HVAC Dining Room Mini Split Setpoint 60m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_dining_room_15m_ago:
-  name: "HVAC Dining Room Mini Split Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_dining_room_5m_ago:
-  name: "HVAC Dining Room Mini Split Setpoint 5m Ago"
   min: -100
   max: 150
   step: 1
@@ -162,20 +64,6 @@ hvac_mini_split_setpoint_erik_office_60m_ago:
   step: 1
   unit_of_measurement: "°F"
 
-hvac_mini_split_setpoint_erik_office_15m_ago:
-  name: "HVAC Erik Office Mini Split Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_erik_office_5m_ago:
-  name: "HVAC Erik Office Mini Split Setpoint 5m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
 # Master Bedroom
 hvac_mini_split_setpoint_master_bedroom_60m_ago:
   name: "HVAC Master Bedroom Mini Split Setpoint 60m Ago"
@@ -184,37 +72,9 @@ hvac_mini_split_setpoint_master_bedroom_60m_ago:
   step: 1
   unit_of_measurement: "°F"
 
-hvac_mini_split_setpoint_master_bedroom_15m_ago:
-  name: "HVAC Master Bedroom Mini Split Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_mini_split_setpoint_master_bedroom_5m_ago:
-  name: "HVAC Master Bedroom Mini Split Setpoint 5m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
 # Ducted
 hvac_setpoint_ducted_60m_ago:
   name: "HVAC Ducted Setpoint 60m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_setpoint_ducted_15m_ago:
-  name: "HVAC Ducted Setpoint 15m Ago"
-  min: -100
-  max: 150
-  step: 1
-  unit_of_measurement: "°F"
-
-hvac_setpoint_ducted_5m_ago:
-  name: "HVAC Ducted Setpoint 5m Ago"
   min: -100
   max: 150
   step: 1
