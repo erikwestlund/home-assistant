@@ -1,19 +1,5 @@
 
 
-# Dining Room Mini Split Setpoint 60m Ago (Every Hour)
-- id: update_mini_split_setpoint_dining_room_60m_ago
-  alias: "Update Mini Split Setpoint Dining Room 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_mini_split_setpoint_dining_room_60m_ago
-      data:
-        value: "{{ states('sensor.hvac_mini_split_setpoint_dining_room') }}"
-
 # Erik Office Mini Split Setpoint 60m Ago (Every Hour)
 - id: update_mini_split_setpoint_erik_office_60m_ago
   alias: "Update Mini Split Setpoint Erik Office 60m Ago"

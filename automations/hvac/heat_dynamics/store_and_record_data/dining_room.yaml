@@ -30,8 +30,41 @@
           heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
 
     # Store outdoor temperature
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_dining_room
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
     # Store room temperatures
-    # Store door status
-    # Reset calling for heat
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_dining_room_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.dining_room_average_temperature') }}"
+
     # Store power status (radiator, mini split, space heater)
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_60m_ago
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.hvac_mini_split_power_status_dining_room
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.mini_split_power_status_dining_room_60m_ago
+
     # Store setpoints (radiator, mini split)
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_mini_split_setpoint_dining_room_60m_ago
+      data:
+        value: "{{ states('sensor.hvac_mini_split_setpoint_dining_room') }}"
