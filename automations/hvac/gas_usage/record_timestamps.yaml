@@ -5,7 +5,11 @@
   trigger:
     - platform: state
       entity_id: input_select.hvac_active_boiler_zone
-      from: "Idle"
+      from: "Idle"  # Trigger when transitioning from "Idle"
+  condition:
+    - condition: template
+      value_template: >
+        {{ trigger.to_state is not none and trigger.to_state.state != "Idle" }}
   action:
     - service: input_datetime.set_datetime
       target:
@@ -20,7 +24,11 @@
   trigger:
     - platform: state
       entity_id: input_select.hvac_active_boiler_zone
-      to: "Idle"
+      to: "Idle"  # Trigger when the state changes to "Idle"
+  condition:
+    - condition: template
+      value_template: >
+        {{ trigger.from_state is not none and trigger.from_state.state != "Idle" }}
   action:
     - service: input_datetime.set_datetime
       target:
