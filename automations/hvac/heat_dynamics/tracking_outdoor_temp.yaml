@@ -22,3 +22,101 @@
         entity_id: input_number.daily_average_temperature_previous_day
       data:
         value: "{{ states('sensor.daily_average_temperature') | float(0) }}"
+
+# Store Outdoor Temperature for Office
+- id: update_outdoor_temperature_office_60m_ago
+  alias: "Update Outdoor Temperature for Office 60 Minutes Ago"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_office') | int }}
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_office
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
+# Store Outdoor Temperature for Family Room
+- id: update_outdoor_temperature_family_room_60m_ago
+  alias: "Update Outdoor Temperature for Family Room 60 Minutes Ago"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_family_room') | int }}
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_family_room
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
+# Store Outdoor Temperature for Living Room
+- id: update_outdoor_temperature_living_room_60m_ago
+  alias: "Update Outdoor Temperature for Living Room 60 Minutes Ago"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_living_room') | int }}
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_living_room
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
+# Store Outdoor Temperature for Dining Room
+- id: update_outdoor_temperature_dining_room_60m_ago
+  alias: "Update Outdoor Temperature for Dining Room 60 Minutes Ago"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_dining_room
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
+# Store Outdoor Temperature for Erik Office
+- id: update_outdoor_temperature_erik_office_60m_ago
+  alias: "Update Outdoor Temperature for Erik Office 60 Minutes Ago"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_erik_office') | int }}
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_erik_office
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
+# Store Outdoor Temperature for Master Bedroom
+- id: update_outdoor_temperature_master_bedroom_60m_ago
+  alias: "Update Outdoor Temperature for Master Bedroom 60 Minutes Ago"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_master_bedroom
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
+
+# Store Outdoor Temperature for Ducted
+- id: update_outdoor_temperature_ducted_60m_ago
+  alias: "Update Outdoor Temperature for Ducted 60 Minutes Ago"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_ducted') | int }}
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_ducted
+      data:
+        value: "{{ states('sensor.current_temperature') }}"

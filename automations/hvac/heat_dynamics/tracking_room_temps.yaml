@@ -17,8 +17,9 @@
 - id: update_family_room_temperature_60m_ago
   alias: "Update Family Room Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '3'  # Family room stores hourly changes at 2, so store at 3. At 2 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_family_room') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -30,8 +31,9 @@
 - id: update_living_room_temperature_60m_ago
   alias: "Update Living Room Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '4'  # Living room stores hourly changes at 3, so store at 4. At 3 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_living_room') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -43,8 +45,9 @@
 - id: update_dining_room_temperature_60m_ago
   alias: "Update Dining Room Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '5'  # Dining room stores hourly changes at 4, so store at 5. At 4 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -56,8 +59,9 @@
 - id: update_erik_office_temperature_60m_ago
   alias: "Update Erik Office Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '6'  # Erik office stores hourly changes at 5, so store at 6. At 5 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_erik_office') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -69,8 +73,9 @@
 - id: update_master_bedroom_temperature_60m_ago
   alias: "Update Master Bedroom Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '7'  # Master Bedroom stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -82,8 +87,9 @@
 - id: update_master_bedroom_preheating_average_temperature_60m_ago
   alias: "Update Master Bedroom Preheating Average Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '7'  # Master Bedroom stores hourly changes at 6, so store at 7. At 6 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -95,8 +101,9 @@
 - id: update_kids_rooms_temperature_60m_ago
   alias: "Update Kids Rooms Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '8'  # Ducted stores hourly changes at 7, so store at 8. At 7 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_ducted') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -108,8 +115,9 @@
 - id: update_hank_room_temperature_60m_ago
   alias: "Update Hank's Room Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '8'  # Ducted stores hourly changes at 7, so store at 8. At 7 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_ducted') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -121,8 +129,9 @@
 - id: update_tilly_room_temperature_60m_ago
   alias: "Update Tilly's Room Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '8'  # Ducted stores hourly changes at 7, so store at 8. At 7 it will compare 59 minutes ago.
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_ducted') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -134,8 +143,9 @@
 - id: update_kitchen_temperature_60m_ago
   alias: "Update Kitchen Temperature 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '5'  # Coincide with dining room
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
   action:
     - service: input_number.set_value
       target:

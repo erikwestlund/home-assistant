@@ -16,8 +16,9 @@
 - id: update_radiator_setpoint_family_room_60m_ago
   alias: "Update Radiator Setpoint Family Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '3'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_family_room') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -29,8 +30,9 @@
 - id: update_radiator_setpoint_main_zone_60m_ago
   alias: "Update Radiator Setpoint Main Zone 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '10'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_main_zone') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -56,8 +58,9 @@
 - id: update_mini_split_setpoint_family_room_60m_ago
   alias: "Update Mini Split Setpoint Family Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '3'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_family_room') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -69,8 +72,9 @@
 - id: update_mini_split_setpoint_living_room_60m_ago
   alias: "Update Mini Split Setpoint Living Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '4'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_living_room') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -82,8 +86,9 @@
 - id: update_mini_split_setpoint_dining_room_60m_ago
   alias: "Update Mini Split Setpoint Dining Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '5'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -95,8 +100,9 @@
 - id: update_mini_split_setpoint_erik_office_60m_ago
   alias: "Update Mini Split Setpoint Erik Office 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '6'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_erik_office') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -108,8 +114,9 @@
 - id: update_mini_split_setpoint_master_bedroom_60m_ago
   alias: "Update Mini Split Setpoint Master Bedroom 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '7'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
   action:
     - service: input_number.set_value
       target:
@@ -121,8 +128,9 @@
 - id: update_setpoint_ducted_60m_ago
   alias: "Update Ducted Setpoint 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '8'  # Trigger every hour (start of each hour)
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_ducted') | int }}
   action:
     - service: input_number.set_value
       target:
