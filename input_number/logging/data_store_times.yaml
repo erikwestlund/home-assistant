@@ -54,6 +54,14 @@ store_minute_ducted:
   initial: 8
   unit_of_measurement: "minutes"
 
+store_minute_main_zone:
+  name: "Store Minute (Main Zone)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 9
+  unit_of_measurement: "minutes"
+
 store_minute_energy_usage:
   name: "Store Minute (Energy)"
   min: 0
@@ -68,4 +76,20 @@ store_minute_boiler_runs:
   max: 59
   step: 1
   initial: 10
+  unit_of_measurement: "minutes"
+
+store_minute_doors:
+  name: "Store Minute (Doors)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 9
+  unit_of_measurement: "minutes"
+
+store_minute_outdoor_temps_general:
+  name: "Store Minute (Outdoor Temps General)"
+  min: 0
+  max: 59
+  step: 1
+  initial: 9
   unit_of_measurement: "minutes"

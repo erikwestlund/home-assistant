@@ -29,8 +29,9 @@
 - id: update_radiator_power_status_family_room_60m_ago
   alias: "Update Radiator Power Status Family Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '3'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_family_room') | int }}
   action:
     - choose:
         - conditions:
@@ -54,8 +55,9 @@
 - id: update_radiator_power_status_main_zone_60m_ago
   alias: "Update Radiator Power Status Main Zone 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '10'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_main_zone') | int }}
   action:
     - choose:
         - conditions:
@@ -107,8 +109,9 @@
 - id: update_mini_split_power_status_family_room_60m_ago
   alias: "Update Mini Split Power Status Family Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '3'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_family_room') | int }}
   action:
     - choose:
         - conditions:
@@ -133,8 +136,9 @@
 - id: update_mini_split_power_status_living_room_60m_ago
   alias: "Update Mini Split Power Status Living Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '4'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_living_room') | int }}
   action:
     - choose:
         - conditions:
@@ -158,8 +162,9 @@
 - id: update_mini_split_power_status_dining_room_60m_ago
   alias: "Update Mini Split Power Status Dining Room 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '5'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
   action:
     - choose:
         - conditions:
@@ -183,8 +188,9 @@
 - id: update_mini_split_power_status_erik_office_60m_ago
   alias: "Update Mini Split Power Status Erik Office 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '6'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_erik_office') | int }}
   action:
     - choose:
         - conditions:
@@ -208,8 +214,9 @@
 - id: update_mini_split_power_status_master_bedroom_60m_ago
   alias: "Update Mini Split Power Status Master Bedroom 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '7'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
   action:
     - choose:
         - conditions:
@@ -234,8 +241,9 @@
 - id: update_ducted_power_status_60m_ago
   alias: "Update Ducted Power Status 60m Ago"
   trigger:
-    platform: time_pattern
-    minutes: '8'
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_ducted') | int }}
   action:
     - choose:
         - conditions:

@@ -1,8 +1,9 @@
 - id: update_outdoor_temperature_60m_ago
   alias: "Update Outdoor Temperature 60 Minutes Ago"
   trigger:
-    platform: time_pattern
-    minutes: '10'  # Do 10 because data gets stored at 0-8
+    - platform: template
+      value_template: >
+        {{ now().minute == states('input_number.store_minute_outdoor_temps_general') | int }}
   action:
     - service: input_number.set_value
       target:
