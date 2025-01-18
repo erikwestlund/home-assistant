@@ -26,6 +26,7 @@
           family_room_radiators_calling_for_heat_prev_hour: "{{ states('sensor.snapshot_family_room_radiators_calling_for_heat_prev_hour') }}"
           ducted_prev_hour: "{{ 'off' if is_state('sensor.snapshot_ducted_prev_hour', '-999') else states('sensor.snapshot_ducted_prev_hour') }}"
           heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
+          heat_pump_family_room_ducted_energy_today: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_today') }}"
 
     # Store outdoor temperature
     - service: input_number.set_value

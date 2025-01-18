@@ -1,85 +1,97 @@
-- id: track_heat_pump_energy_usage_calculate
-  alias: "Track Heat Pump Energy Usage Calculate Hourly Usage"
+- id: track_heat_pump_energy_usage_hourly
+  alias: "Track Heat Pump Energy Usage Hourly"
   trigger:
     platform: time_pattern
-    minutes: '59'  # Trigger at the 59th minute of every hour
+    minutes: '1'  # Trigger at the 1st minute of every hour
   action:
-    # Calculate energy usage for the current hour (difference between today and the previous hour)
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.heat_pump_living_room_master_bedroom_energy_hourly
-      data:
-        value: "{{ (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) - (states('input_number.heat_pump_living_room_master_bedroom_energy_previous_hour') | float(0)) }}"
+    sequence:
+      # Calculate and update hourly energy usage
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.heat_pump_living_room_master_bedroom_energy_hourly
+        data:
+          value: >
+            {{ [0, (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) - 
+                  (states('input_number.heat_pump_living_room_master_bedroom_energy_previous_hour') | float(0))] | max }}
 
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.heat_pump_family_room_ducted_energy_hourly
-      data:
-        value: "{{ (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) - (states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float(0)) }}"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.heat_pump_family_room_ducted_energy_hourly
+        data:
+          value: >
+            {{ [0, (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) - 
+                  (states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float(0))] | max }}
 
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.heat_pump_offices_dining_room_energy_hourly
-      data:
-        value: "{{ (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) - (states('input_number.heat_pump_offices_dining_room_energy_previous_hour') | float(0)) }}"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.heat_pump_offices_dining_room_energy_hourly
+        data:
+          value: >
+            {{ [0, (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) - 
+                  (states('input_number.heat_pump_offices_dining_room_energy_previous_hour') | float(0))] | max }}
 
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.all_heat_pumps_energy_hourly
-      data:
-        value: "{{ (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) + (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) + (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) - (states('input_number.all_heat_pumps_energy_previous_hour') | float(0)) }}"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.all_heat_pumps_energy_hourly
+        data:
+          value: >
+            {{ [0, (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) + 
+                  (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) + 
+                  (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) - 
+                  (states('input_number.all_heat_pumps_energy_previous_hour') | float(0))] | max }}
 
-    - service: input_number.set_value
-      target:
+      - service: input_number.set_value
+        target:
           entity_id: input_number.space_heater_energy_hourly
-      data:
-          value: "{{ states('sensor.tina_office_space_heater_today_s_consumption') | float(0) - states('input_number.space_heater_energy_previous_hour') | float(0) }}"
+        data:
+          value: >
+            {{ [0, (states('sensor.tina_office_space_heater_today_s_consumption') | float(0)) - 
+                  (states('input_number.space_heater_energy_previous_hour') | float(0))] | max }}
 
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.whole_house_energy_hourly
-      data:
-        value: "{{ states('sensor.energy_monitor_energy_today') | float(0) - states('input_number.whole_house_energy_previous_hour') | float(0) }}"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.whole_house_energy_hourly
+        data:
+          value: >
+            {{ [0, (states('sensor.energy_monitor_energy_today') | float(0)) - 
+                  (states('input_number.whole_house_energy_previous_hour') | float(0))] | max }}
 
-- id: track_heat_pump_energy_usage_update_previous_hour
-  alias: "Track Heat Pump Energy Usage Update Previous Hour"
-  trigger:
-    platform: time_pattern
-    minutes: '0'  # Trigger at the start of every hour
-  action:
-    # Store the current total energy as the previous hour's energy for next cycle
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.heat_pump_living_room_master_bedroom_energy_previous_hour
-      data:
-        value: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) }}"
+      # Immediately update previous_hour values to current readings
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.heat_pump_living_room_master_bedroom_energy_previous_hour
+        data:
+          value: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) }}"
 
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.heat_pump_family_room_ducted_energy_previous_hour
-      data:
-        value: "{{ states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) }}"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.heat_pump_family_room_ducted_energy_previous_hour
+        data:
+          value: "{{ states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) }}"
 
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.heat_pump_offices_dining_room_energy_previous_hour
-      data:
-        value: "{{ states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.heat_pump_offices_dining_room_energy_previous_hour
+        data:
+          value: "{{ states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
 
-    - service: input_number.set_value
-      target:
+      - service: input_number.set_value
+        target:
           entity_id: input_number.all_heat_pumps_energy_previous_hour
-      data:
-          value: "{{ states('input_number.heat_pump_offices_dining_room_energy_previous_hour') | float(0) + states('input_number.heat_pump_family_room_ducted_energy_previous_hour') | float(0) + states('input_number.heat_pump_living_room_master_bedroom_energy_previous_hour') | float(0) }}"
+        data:
+          value: >
+            {{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) + 
+               states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) + 
+               states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}
 
-    - service: input_number.set_value
-      target:
+      - service: input_number.set_value
+        target:
           entity_id: input_number.space_heater_energy_previous_hour
-      data:
+        data:
           value: "{{ states('sensor.tina_office_space_heater_today_s_consumption') | float(0) }}"
 
-    - service: input_number.set_value
-      target:
+      - service: input_number.set_value
+        target:
           entity_id: input_number.whole_house_energy_previous_hour
-      data:
+        data:
           value: "{{ states('sensor.energy_monitor_energy_today') | float(0) }}"

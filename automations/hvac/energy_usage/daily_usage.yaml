@@ -1,0 +1,39 @@
+- id: update_energy_previous_day
+  alias: "Update Energy Usage Previous Day"
+  trigger:
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '23:59:59' }}"
+  action:
+    # Update energy usage for the previous day
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.heat_pump_living_room_master_bedroom_energy_previous_day
+      data:
+        value: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.heat_pump_family_room_ducted_energy_previous_day
+      data:
+        value: "{{ states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.heat_pump_offices_dining_room_energy_previous_day
+      data:
+        value: "{{ states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.all_heat_pumps_energy_previous_day
+      data:
+        value: >
+          {{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) +
+             states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) +
+             states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.whole_house_energy_previous_day
+      data:
+        value: "{{ states('sensor.energy_monitor_energy_today') | float(0) }}"

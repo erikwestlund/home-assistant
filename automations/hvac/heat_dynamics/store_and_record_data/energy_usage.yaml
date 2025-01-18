@@ -8,7 +8,7 @@
     - service: google_sheets.append_sheet
       data:
         config_entry: !secret google_sheets_sheet_id
-        worksheet: "Energy Usage"
+        worksheet: "Daily Energy Usage"
         data:
           timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
           outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
@@ -21,3 +21,29 @@
           heat_pump_all_energy_hourly: "{{ states('sensor.snapshot_all_heat_pumps_energy_hourly') }}"
           non_heat_pump_energy_hourly: "{{ states('sensor.snapshot_non_heat_pump_energy_hourly') }}"
           whole_home_energy_hourly: "{{ states('sensor.snapshot_whole_house_energy_hourly') }}"
+          space_heater_energy_today: "{{ states('sensor.snapshot_space_heater_energy_today') }}"
+          heat_pump_offices_dining_room_energy_today: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_today') }}"
+          heat_pump_living_room_master_bedroom_energy_today: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_today') }}"
+          heat_pump_family_room_ducted_energy_today: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_today') }}"
+          heat_pump_all_energy_today: "{{ states('sensor.snapshot_all_heat_pumps_energy_today') }}"
+          non_heat_pump_energy_today: "{{ states('sensor.snapshot_non_heat_pump_energy_today') }}"
+          whole_home_energy_today: "{{ states('sensor.snapshot_whole_house_energy_today') }}"
+
+- id: collect_daily_data_energy
+  alias: "Store and Record Daily Data for Energy Usage"
+  trigger:
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '00:00:01' }}"
+  action:
+    - service: google_sheets.append_sheet
+      data:
+        config_entry: !secret google_sheets_sheet_id
+        worksheet: "Daily Energy Usage"
+        data:
+          timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          space_heater_energy_previous_day: "{{ states('input_number.space_heater_energy_previous_day') }}"
+          heat_pump_offices_dining_room_energy_previous_day: "{{ states('input_number.heat_pump_offices_dining_room_energy_previous_day') }}"
+          heat_pump_living_room_master_bedroom_energy_previous_day: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_previous_day') }}"
+          heat_pump_family_room_ducted_energy_previous_day: "{{ states('input_number.heat_pump_family_room_ducted_energy_previous_day') }}"
+          heat_pump_all_energy_previous_day: "{{ states('input_number.all_heat_pumps_energy_previous_day') }}"
+          whole_home_energy_previous_day: "{{ states('input_number.whole_house_energy_previous_day') }}"

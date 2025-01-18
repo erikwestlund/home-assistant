@@ -44,3 +44,45 @@
   state: "{{ states('input_number.whole_house_energy_hourly') | float(0) - states('input_number.all_heat_pumps_energy_hourly') | float(0) }}"
   unit_of_measurement: "kWh"
   icon: mdi:flash
+
+- name: "Snapshot Total Energy Today"
+  unique_id: "snapshot_total_energy_today"
+  state: "{{ states('sensor.energy_monitor_energy_today') | float(0) }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Snapshot Heat Pump Living Room Master Bedroom Energy Today"
+  unique_id: "snapshot_heat_pump_living_room_master_bedroom_energy_today"
+  state: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Snapshot Heat Pump Family Room Ducted Energy Today"
+  unique_id: "snapshot_heat_pump_family_room_ducted_energy_today"
+  state: "{{ states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Snapshot Heat Pump Offices Dining Room Energy Today"
+  unique_id: "snapshot_heat_pump_offices_dining_room_energy_today"
+  state: "{{ states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Snapshot All Heat Pumps Energy Today"
+  unique_id: "snapshot_all_heat_pumps_energy_today"
+  state: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) + states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) + states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+- name: "Snapshot Space Heater Energy Today"
+  unique_id: "snapshot_space_heater_energy_today"
+  state: "{{ states('sensor.tina_office_space_heater_today_s_consumption') | float(0) }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:fire
+
+- name: "Snapshot Non Heat Pump Energy Today"
+  unique_id: "snapshot_non_heat_pump_energy_today"
+  state: "{{ states('sensor.energy_monitor_energy_today') | float(0) - states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) - states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) - states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash

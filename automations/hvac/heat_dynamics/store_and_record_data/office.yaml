@@ -27,6 +27,8 @@
           dining_room_mini_split_prev_hour: "{{ 'off' if is_state('sensor.snapshot_dining_room_mini_split_prev_hour', '-999') else states('sensor.snapshot_dining_room_mini_split_prev_hour') }}"
           space_heater_energy_hourly: "{{ states('sensor.snapshot_space_heater_energy_hourly') }}"
           heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
+          space_heater_energy_today: "{{ states('sensor.snapshot_space_heater_energy_today') }}"
+          heat_pump_offices_dining_room_energy_today: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_today') }}"
 
     # Store outdoor temperature
     - service: input_number.set_value

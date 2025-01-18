@@ -1,0 +1,39 @@
+heat_pump_living_room_master_bedroom_energy_previous_day:
+  name: "Heat Pump Living Room Master Bedroom Energy Previous Day"
+  # initial: 0
+  min: 0
+  max: 10000
+  step: 0.1
+  unit_of_measurement: "kWh"
+
+heat_pump_family_room_ducted_energy_previous_day:
+  name: "Heat Pump Family Room Ducted Energy Previous Day"
+  # initial: 0
+  min: 0
+  max: 10000
+  step: 0.1
+  unit_of_measurement: "kWh"
+
+heat_pump_offices_dining_room_energy_previous_day:
+  name: "Heat Pump Offices Dining Room Energy Previous Day"
+  # initial: 0
+  min: 0
+  max: 10000
+  step: 0.1
+  unit_of_measurement: "kWh"
+
+all_heat_pumps_energy_previous_day:
+  name: "All Heat Pumps Energy Previous Day"
+  # initial: 0
+  min: 0
+  max: 10000
+  step: 0.1
+  unit_of_measurement: "kWh"
+
+whole_house_energy_previous_day:
+  name: "Whole House Energy Previous Day"
+  # initial: 0
+  min: 0
+  max: 10000
+  step: 0.1
+  unit_of_measurement: "kWh"
