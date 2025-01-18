@@ -9,15 +9,3 @@
 #
 
 
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.tilly_bedroom_door_contact', 'off') else 'off' }}
-      data:
-        entity_id: input_boolean.tilly_door_closed_prev_hour
-
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hank_bedroom_main_door_contact', 'off') else 'off' }}
-      data:
-        entity_id: input_boolean.hank_main_door_closed_prev_hour
-
-    - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.hank_bedroom_side_door_contact', 'off') else 'off' }}
-      data:
-        entity_id: input_boolean.hank_side_door_closed_prev_hour
-
