@@ -21,11 +21,7 @@
       value_template: >
         {{ now().minute == states('input_number.store_minute_erik_office') | int }}
   action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_erik_office
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
+
 
 # Store Outdoor Temperature for Master Bedroom
 - id: update_outdoor_temperature_master_bedroom_60m_ago
