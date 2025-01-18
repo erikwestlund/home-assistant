@@ -1,9 +1,11 @@
-# Radiator
 - name: "HVAC Radiator Expected Setpoint Office"
   unique_id: hvac_radiator_expected_setpoint_office
   state: >
     {% if is_state('binary_sensor.hvac_radiator_power_status_office', 'on') %}
-      {{ states('sensor.hvac_radiator_setpoint_office') | float(default='unavailable') | round(1) }}
+      {% set f_value = states('sensor.hvac_radiator_setpoint_office') | float(default='unavailable') %}
+      {% set celsius = ((f_value - 32) * 5 / 9) | round(1) %}
+      {% set fahrenheit = ((celsius * 9 / 5) + 32) | round(0) %}
+      {{ fahrenheit }}
     {% else %}
       None
     {% endif %}
@@ -12,7 +14,10 @@
   unique_id: hvac_radiator_expected_setpoint_family_room
   state: >
     {% if is_state('binary_sensor.hvac_radiator_power_status_family_room', 'on') %}
-      {{ states('sensor.hvac_radiator_setpoint_family_room') | float(default='unavailable') }}
+      {% set f_value = states('sensor.hvac_radiator_setpoint_family_room') | float(default='unavailable') %}
+      {% set celsius = ((f_value - 32) * 5 / 9) | round(1) %}
+      {% set fahrenheit = ((celsius * 9 / 5) + 32) | round(0) %}
+      {{ fahrenheit }}
     {% else %}
       None
     {% endif %}
@@ -21,11 +26,13 @@
   unique_id: hvac_radiator_expected_setpoint_main_zone
   state: >
     {% if is_state('binary_sensor.hvac_radiator_power_status_main_zone', 'on') %}
-      {{ states('sensor.hvac_radiator_setpoint_main_zone') | float(default='unavailable') }}
+      {% set f_value = states('sensor.hvac_radiator_setpoint_main_zone') | float(default='unavailable') %}
+      {% set celsius = ((f_value - 32) * 5 / 9) | round(1) %}
+      {% set fahrenheit = ((celsius * 9 / 5) + 32) | round(0) %}
+      {{ fahrenheit }}
     {% else %}
       None
     {% endif %}
-
 # Mini Split
 - name: "HVAC Mini Split Expected Setpoint Office"
   unique_id: hvac_mini_split_expected_setpoint_office
