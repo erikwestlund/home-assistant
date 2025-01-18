@@ -1,4 +1,38 @@
 # Tina Office
+# Early work mode
+- id: "hvac_start_early_work_mode_office"
+  alias: "HVAC Start Early Work Mode Office"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_early_work_mode_start_time_office') }}
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_early_work_mode_office
+      state: "on"
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.hvac_working_today_office
+  mode: single
+
+- id: "hvac_end_early_work_mode_office"
+  alias: "HVAC End Early Work Mode Office"
+  trigger:
+    - platform: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_early_work_mode_end_time_office') }}
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_early_work_mode_office
+      state: "on"
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.hvac_working_today_office
+  mode: single
+
+# Regular day
 - id: "hvac_set_working_at_start_time_office"
   alias: "HVAC Set Working at Start Time Office"
   trigger:
