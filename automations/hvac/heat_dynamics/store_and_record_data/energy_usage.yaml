@@ -27,6 +27,7 @@
           heat_pump_family_room_ducted_energy_today: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_today') }}"
           heat_pump_all_energy_today: "{{ states('sensor.snapshot_all_heat_pumps_energy_today') }}"
           non_heat_pump_energy_today: "{{ states('sensor.snapshot_non_heat_pump_energy_today') }}"
+          non_hvac_energy_today: "{{ states('sensor.snapshot_non_hvac_energy_today') }}"
           total_energy_today: "{{ states('sensor.snapshot_total_energy_today') }}"
 
 - id: store_and_record_daily_data_energy
@@ -46,5 +47,5 @@
           heat_pump_living_room_master_bedroom_energy_previous_day: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_total_energy_previous_day') }}"
           heat_pump_family_room_ducted_energy_previous_day: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_total_energy_previous_day') }}"
           heat_pump_all_energy_previous_day: "{{ states('sensor.snapshot_heat_pump_all_total_energy_previous_day') }}"
-          non_heat_pump_energy_previous_day: "{{ states('sensor.snapshot_non_heat_pump_total_energy_previous_day') }}"
+          non_hvac_total_energy_previous_day: "{{ states('sensor.snapshot_non_hvac_total_energy_previous_day') }}"
           whole_home_energy_previous_day: "{{ states('sensor.snapshot_whole_home_total_energy_previous_day') }}"
