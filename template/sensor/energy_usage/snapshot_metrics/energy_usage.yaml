@@ -87,7 +87,7 @@
   unit_of_measurement: "kWh"
   icon: mdi:flash
 
-- name: "Snapshot All HVAC Energy Today"
+- name: "Snapshot Total HVAC Energy Today"
   unique_id: "snapshot_total_hvac_energy_today"
   state: >
     {{
