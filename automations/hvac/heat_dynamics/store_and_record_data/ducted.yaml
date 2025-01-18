@@ -11,7 +11,7 @@
         worksheet: "Ducted"
         data:
           timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
-          outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
+          outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temperature_hour_ago_ducted') }}"
           outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
           outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change_ducted') }}"
           temp_now: "{{ states('sensor.snapshot_kids_rooms_temp_now') }}"

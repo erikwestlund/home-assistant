@@ -16,6 +16,56 @@
   unit_of_measurement: "°F"
   icon: mdi:chart-line
 
+# Hour ago
+# Snapshot Outdoor Temperature Hour Ago (Office)
+- name: "Snapshot Outdoor Temperature Hour Ago Office"
+  unique_id: "snapshot_outdoor_temperature_hour_ago_office"
+  state: "{{ states('input_number.outdoor_temperature_60m_ago_data_storage_office') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Snapshot Outdoor Temperature Hour Ago (Family Room)
+- name: "Snapshot Outdoor Temperature Hour Ago Family Room"
+  unique_id: "snapshot_outdoor_temperature_hour_ago_family_room"
+  state: "{{ states('input_number.outdoor_temperature_60m_ago_data_storage_family_room') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Snapshot Outdoor Temperature Hour Ago (Living Room)
+- name: "Snapshot Outdoor Temperature Hour Ago Living Room"
+  unique_id: "snapshot_outdoor_temperature_hour_ago_living_room"
+  state: "{{ states('input_number.outdoor_temperature_60m_ago_data_storage_living_room') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Snapshot Outdoor Temperature Hour Ago (Dining Room)
+- name: "Snapshot Outdoor Temperature Hour Ago Dining Room"
+  unique_id: "snapshot_outdoor_temperature_hour_ago_dining_room"
+  state: "{{ states('input_number.outdoor_temperature_60m_ago_data_storage_dining_room') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Snapshot Outdoor Temperature Hour Ago (Erik Office)
+- name: "Snapshot Outdoor Temperature Hour Ago Erik Office"
+  unique_id: "snapshot_outdoor_temperature_hour_ago_erik_office"
+  state: "{{ states('input_number.outdoor_temperature_60m_ago_data_storage_erik_office') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Snapshot Outdoor Temperature Hour Ago (Master Bedroom)
+- name: "Snapshot Outdoor Temperature Hour Ago Master Bedroom"
+  unique_id: "snapshot_outdoor_temperature_hour_ago_master_bedroom"
+  state: "{{ states('input_number.outdoor_temperature_60m_ago_data_storage_master_bedroom') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
+# Snapshot Outdoor Temperature Hour Ago (Ducted)
+- name: "Snapshot Outdoor Temperature Hour Ago Ducted"
+  unique_id: "snapshot_outdoor_temperature_hour_ago_ducted"
+  state: "{{ states('input_number.outdoor_temperature_60m_ago_data_storage_ducted') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
 # Snapshot Outdoor Hour Temp Change (Office)
 - name: "Snapshot Outdoor Hour Temp Change Office"
   unique_id: "snapshot_outdoor_hour_temp_change_office"
