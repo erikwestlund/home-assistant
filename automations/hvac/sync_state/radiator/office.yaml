@@ -1,3 +1,20 @@
+- id: "hvac_radiator_changed_setpoint_office"
+  alias: "HVAC Radiator Changed Setpoint Office"
+  trigger:
+    - platform: state
+      entity_id: sensor.hvac_radiator_setpoint_office
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.office
+        temperature: "{{ states('sensor.hvac_radiator_setpoint_office') | float(0) }}"
+    - service: logbook.log
+      data:
+        name: "HVAC Radiator Setpoint Changed Office"
+        message: >
+          New setpoint applied: {{ states('sensor.hvac_radiator_setpoint_office') }}°F.
+  mode: single
+
 - id: "hvac_sync_radiator_power_mode_setpoint_office"
   alias: "HVAC Sync Radiator Power, Mode, and Setpoint Office"
   trigger:

@@ -1,3 +1,20 @@
+- id: "hvac_radiator_changed_setpoint_family_room"
+  alias: "HVAC Radiator Changed Setpoint Family Room"
+  trigger:
+    - platform: state
+      entity_id: sensor.hvac_radiator_setpoint_family_room
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.family_room_heating
+        temperature: "{{ states('sensor.hvac_radiator_setpoint_family_room') | float(0) }}"
+    - service: logbook.log
+      data:
+        name: "HVAC Radiator Setpoint Changed Family Room"
+        message: >
+          New setpoint applied: {{ states('sensor.hvac_radiator_setpoint_family_room') }}°F.
+  mode: single
+
 - id: "hvac_sync_radiator_power_mode_setpoint_family_room"
   alias: "HVAC Sync Radiator Power, Mode, and Setpoint Family Room"
   trigger:

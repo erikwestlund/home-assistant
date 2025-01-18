@@ -1,3 +1,20 @@
+- id: "hvac_radiator_changed_setpoint_main_zone"
+  alias: "HVAC Radiator Changed Setpoint Main Zone"
+  trigger:
+    - platform: state
+      entity_id: sensor.hvac_radiator_setpoint_main_zone
+  action:
+    - service: climate.living_room_main_heating
+      data:
+        entity_id: climate.living_room_main_heating
+        temperature: "{{ states('sensor.hvac_radiator_setpoint_main_zone') | float(0) }}"
+    - service: logbook.log
+      data:
+        name: "HVAC Radiator Setpoint Changed Main Zone"
+        message: >
+          New setpoint applied: {{ states('sensor.hvac_radiator_setpoint_main_zone') }}°F.
+  mode: single
+
 - id: "hvac_sync_radiator_power_mode_setpoint_main_zone"
   alias: "HVAC Sync Radiator Power, Mode, and Setpoint Main Zone"
   trigger:
