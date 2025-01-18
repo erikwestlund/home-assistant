@@ -26,7 +26,7 @@
           heat_pump_living_room_master_bedroom_energy_today: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_today') }}"
           heat_pump_family_room_ducted_energy_today: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_today') }}"
           heat_pump_all_energy_today: "{{ states('sensor.snapshot_all_heat_pumps_energy_today') }}"
-          hvac_total_energy_today: "{{ states('sensor.snapshot_total_hvac_energy_today') }}"
+          total_hvac_energy_today: "{{ states('sensor.snapshot_total_hvac_energy_today') }}"
           non_heat_pump_energy_today: "{{ states('sensor.snapshot_non_heat_pump_energy_today') }}"
           non_hvac_energy_today: "{{ states('sensor.snapshot_non_hvac_energy_today') }}"
           total_energy_today: "{{ states('sensor.snapshot_total_energy_today') }}"
