@@ -151,17 +151,24 @@
   unit_of_measurement: "kWh"
   icon: mdi:flash
 
+- name: "Snapshot All HVAC Total Energy Previous Day"
+  unique_id: "snapshot_all_hvac_total_energy_previous_day"
+  state: >
+    {{
+      (states('sensor.snapshot_heat_pump_offices_dining_room_total_energy_previous_day') | float(0)) +
+      (states('sensor.snapshot_heat_pump_living_room_master_bedroom_total_energy_previous_day') | float(0)) +
+      (states('sensor.snapshot_heat_pump_family_room_ducted_total_energy_previous_day') | float(0)) +
+      (states('sensor.snapshot_space_heater_total_energy_previous_day') | float(0))
+    }}
+  unit_of_measurement: "kWh"
+  icon: mdi:home-lightning-bolt
+
 - name: "Snapshot Non HVAC Total Energy Previous Day"
   unique_id: "snapshot_non_hvac_total_energy_previous_day"
   state: >
     {{
       (states('sensor.snapshot_whole_home_total_energy_previous_day') | float(0)) -
-      (
-        (states('sensor.snapshot_heat_pump_offices_dining_room_total_energy_previous_day') | float(0)) +
-        (states('sensor.snapshot_heat_pump_living_room_master_bedroom_total_energy_previous_day') | float(0)) +
-        (states('sensor.snapshot_heat_pump_family_room_ducted_total_energy_previous_day') | float(0)) +
-        (states('sensor.snapshot_space_heater_total_energy_previous_day') | float(0))
-      )
+      (states('sensor.snapshot_all_heat_pump_space_heater_total_energy_previous_day') | float(0))
     }}
   unit_of_measurement: "kWh"
   icon: mdi:chart-bar
