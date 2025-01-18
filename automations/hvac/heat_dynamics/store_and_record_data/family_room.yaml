@@ -40,6 +40,12 @@
         entity_id: input_number.hvac_family_room_average_temperature_60m_ago
       data:
         value: "{{ states('sensor.family_room_average_temperature') }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_basement_playroom_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.basement_playroom_temperature') }}"
+
 
     # Store door status
     - service: input_boolean.turn_{{ 'on' if is_state('binary_sensor.family_room_interior_door_contact', 'off') else 'off' }}

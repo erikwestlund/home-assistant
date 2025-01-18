@@ -1,29 +1,4 @@
 
-# Master Bedroom Mini Split Power Status 60m Ago (Every Hour)
-- id: update_mini_split_power_status_master_bedroom_60m_ago
-  alias: "Update Mini Split Power Status Master Bedroom 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
-  action:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
-              state: "on"
-          sequence:
-            - service: input_boolean.turn_on
-              target:
-                entity_id: input_boolean.mini_split_power_status_master_bedroom_60m_ago
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.hvac_mini_split_power_status_master_bedroom
-              state: "off"
-          sequence:
-            - service: input_boolean.turn_off
-              target:
-                entity_id: input_boolean.mini_split_power_status_master_bedroom_60m_ago
 
 ## Ducted
 # Ducted Power Status 60m Ago (Every Hour)

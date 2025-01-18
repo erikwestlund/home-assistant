@@ -8,11 +8,7 @@
       value_template: >
         {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
   action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_mini_split_setpoint_master_bedroom_60m_ago
-      data:
-        value: "{{ states('sensor.hvac_mini_split_setpoint_master_bedroom') }}"
+
 
 # Ducted Setpoint 60m Ago (Every Hour)
 - id: update_setpoint_ducted_60m_ago

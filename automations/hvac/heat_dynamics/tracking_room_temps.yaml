@@ -1,30 +1,4 @@
-# Update Master Bedroom Temperature 60m Ago (Every Hour)
-- id: update_master_bedroom_temperature_60m_ago
-  alias: "Update Master Bedroom Temperature 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_master_bedroom_average_temperature_60m_ago
-      data:
-        value: "{{ states('sensor.master_bedroom_average_temperature') }}"
 
-# Update Master Bedroom Preheating Average Temperature 60m Ago (Every Hour)
-- id: update_master_bedroom_preheating_average_temperature_60m_ago
-  alias: "Update Master Bedroom Preheating Average Temperature 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_master_bedroom_preheating_average_temperature_60m_ago
-      data:
-        value: "{{ states('sensor.hvac_current_preheating_temperature_master_bedroom') }}"
 
 # Update Kids Rooms Temperature 60m Ago (Every Hour)
 - id: update_kids_rooms_temperature_60m_ago
@@ -67,32 +41,4 @@
         entity_id: input_number.hvac_tilly_room_temperature_60m_ago
       data:
         value: "{{ states('sensor.tilly_s_room_average_temperature') }}"
-
-# Update Kitchen Temperature 60m Ago (Every Hour)
-- id: update_kitchen_temperature_60m_ago
-  alias: "Update Kitchen Temperature 60m Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_dining_room') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_kitchen_temperature_60m_ago
-      data:
-        value: "{{ states('sensor.kitchen_average_temperature') }}"
-
-
-# Update Basement Playroom Temperature 60m Ago (Every Hour)
-- id: update_basement_playroom_temperature_60m_ago
-  alias: "Update Basement Playroom Temperature 60m Ago"
-  trigger:
-    platform: time_pattern
-    minutes: '3'  # Coincide with family room
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.hvac_basement_playroom_temperature_60m_ago
-      data:
-        value: "{{ states('sensor.basement_playroom_temperature') }}"
 

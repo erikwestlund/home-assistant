@@ -13,30 +13,6 @@
 
 
 
-# Store Outdoor Temperature for Erik Office
-- id: update_outdoor_temperature_erik_office_60m_ago
-  alias: "Update Outdoor Temperature for Erik Office 60 Minutes Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_erik_office') | int }}
-  action:
-
-
-# Store Outdoor Temperature for Master Bedroom
-- id: update_outdoor_temperature_master_bedroom_60m_ago
-  alias: "Update Outdoor Temperature for Master Bedroom 60 Minutes Ago"
-  trigger:
-    - platform: template
-      value_template: >
-        {{ now().minute == states('input_number.store_minute_master_bedroom') | int }}
-  action:
-    - service: input_number.set_value
-      target:
-        entity_id: input_number.outdoor_temperature_60m_ago_data_storage_master_bedroom
-      data:
-        value: "{{ states('sensor.current_temperature') }}"
-
 # Store Outdoor Temperature for Ducted
 - id: update_outdoor_temperature_ducted_60m_ago
   alias: "Update Outdoor Temperature for Ducted 60 Minutes Ago"

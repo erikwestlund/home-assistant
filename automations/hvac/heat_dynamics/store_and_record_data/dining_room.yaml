@@ -42,6 +42,11 @@
         entity_id: input_number.hvac_dining_room_temperature_60m_ago
       data:
         value: "{{ states('sensor.dining_room_average_temperature') }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.hvac_kitchen_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.kitchen_average_temperature') }}"
 
     # Store power status (radiator, mini split, space heater)
     - choose:
