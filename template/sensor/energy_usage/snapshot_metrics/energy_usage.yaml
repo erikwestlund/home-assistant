@@ -87,17 +87,24 @@
   unit_of_measurement: "kWh"
   icon: mdi:flash
 
+- name: "Snapshot All HVAC Energy Today"
+  unique_id: "snapshot_all_hvac_energy_today"
+  state: >
+    {{
+      (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) +
+      (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) +
+      (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) +
+      (states('sensor.snapshot_space_heater_energy_today') | float(0))
+    }}
+  unit_of_measurement: "kWh"
+  icon: mdi:home-lightning-bolt
+
 - name: "Snapshot Non HVAC Energy Today"
   unique_id: "snapshot_non_hvac_energy_today"
   state: >
     {{
       (states('sensor.energy_monitor_energy_today') | float(0)) -
-      (
-        (states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0)) +
-        (states('sensor.heat_pump_family_room_ducted_energy_today') | float(0)) +
-        (states('sensor.heat_pump_offices_dining_room_energy_today') | float(0)) +
-        (states('sensor.snapshot_space_heater_energy_today') | float(0))
-      )
+      (states('sensor.snapshot_all_hvac_energy_today') | float(0))
     }}
   unit_of_measurement: "kWh"
   icon: mdi:flash
