@@ -19,4 +19,5 @@
           heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
           heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
           heat_pump_all_energy_hourly: "{{ states('sensor.snapshot_all_heat_pumps_energy_hourly') }}"
+          non_heat_pump_energy_hourly: "{{ states('sensor.snapshot_non_heat_pump_energy_hourly') }}"
           whole_home_energy_hourly: "{{ states('sensor.snapshot_whole_house_energy_hourly') }}"
