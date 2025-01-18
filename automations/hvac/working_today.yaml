@@ -27,10 +27,6 @@
     - platform: template
       value_template: >
         {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_end_time_office') }}
-  condition:
-    - condition: state
-      entity_id: binary_sensor.is_weekday
-      state: "on"
   action:
     - service: input_boolean.turn_off
       target:
@@ -88,10 +84,6 @@
     - platform: template
       value_template: >
         {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_end_time_erik_office') }}
-  condition:
-    - condition: state
-      entity_id: binary_sensor.is_weekday
-      state: "on"
   action:
     - service: input_boolean.turn_off
       target:

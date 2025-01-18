@@ -23,8 +23,8 @@
     {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_work_hours_end')) %}
     {% set is_working_today = is_state('input_boolean.hvac_working_today_office', 'on') %}
 
-    {# 1. If Is Working Today is On and Within Work Hours, Always True #}
-    {% if is_working_today and apply_start <= current_time < apply_end %}
+    {# 1. If Is Working Today, Always True #}
+    {% if is_working_today %}
       true
     {# 2. Early Work Mode Check #}
     {% elif is_state('input_boolean.hvac_early_work_mode_office', 'on') and early_work_start <= current_time <= early_work_end and tina_home %}
@@ -59,13 +59,8 @@
 - name: "HVAC Apply Working Setpoint Erik Office"
   unique_id: hvac_apply_working_setpoint_erik_office
   state: >
-    {% set start_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_working_start_time_erik_office')) %}
-    {% set end_time = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_apply_working_end_time_erik_office')) %}
-    {% set current_time = now().timestamp() %}
-    
     {% set is_working_today = is_state('input_boolean.hvac_working_today_erik_office', 'on') %}
-    
-    {{ is_working_today and start_time <= current_time <= end_time }}
+    {{ is_working_today }}
   icon: >-
     {% if is_state('binary_sensor.hvac_apply_working_setpoint_erik_office', 'on') %}
       mdi:clock-check

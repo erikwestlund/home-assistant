@@ -6,3 +6,19 @@
     {% set current_time = now().strftime('%H:%M:%S') %}
     {{ is_weekday and work_start <= current_time < work_end }}
   icon: mdi:briefcase-clock
+
+- name: "HVAC Work Hours In Window Office"
+  state: >
+      {% set work_start = states('input_datetime.hvac_apply_working_start_time_office') %}
+      {% set work_end = states('input_datetime.hvac_apply_working_end_time_office') %}
+      {% set current_time = now().strftime('%H:%M:%S') %}
+      {{ work_start <= current_time < work_end }}
+  icon: mdi:briefcase-clock
+
+- name: "HVAC Work Hours In Window Erik Office"
+  state: >
+    {% set work_start = states('input_datetime.hvac_apply_working_start_time_erik_office') %}
+    {% set work_end = states('input_datetime.hvac_apply_working_end_time_erik_office') %}
+    {% set current_time = now().strftime('%H:%M:%S') %}
+    {{ work_start <= current_time < work_end }}
+  icon: mdi:briefcase-clock
