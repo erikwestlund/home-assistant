@@ -1,0 +1,10 @@
+- name: "Snapshot Daily Gas Meter Reading"
+  unique_id: "snapshot_daily_gas_meter_reading"
+  state: "{{ max([states('input_number.gas_start_meter_reading_ft3') | float, states('input_number.gas_start_meter_reading_ft3') | float ]) | float(0) }}"
+  unit_of_measurement: "ft³"
+  icon: mdi:flash
+
+- name: "Snapshot Last Gas Meter Reading Update Timestamp"
+  unique_id: "snapshot_last_gas_meter_reading_update_timestamp"
+  state: "{{ states('input_datetime.hvac_gas_meter_reading_last_saved') | float(0) }}"
+  icon: mdi:calendar-clock

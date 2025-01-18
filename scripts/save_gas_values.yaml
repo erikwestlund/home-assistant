@@ -24,3 +24,9 @@ save_gas_usage_values:
         entity_id: input_number.gas_price_per_therm
       data:
         value: "{{ states('input_text.gas_price_per_therm_input') | float }}"
+
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.hvac_gas_meter_reading_last_saved
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"

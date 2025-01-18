@@ -16,6 +16,12 @@
   unit_of_measurement: "°F"
   icon: mdi:chart-line
 
+- name: "Snapshot Outdoor Temp Daily Average Previous Day"
+  unique_id: "snapshot_outdoor_temp_daily_average_previous_day"
+  state: "{{ states('input_number.daily_average_temperature_previous_day') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer
+
 # Hour ago
 # Snapshot Outdoor Temperature Hour Ago (Office)
 - name: "Snapshot Outdoor Temperature Hour Ago Office"
