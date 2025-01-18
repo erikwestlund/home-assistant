@@ -1,3 +1,11 @@
+space_heater_energy_previous_day:
+  name: "Space Heater Energy Previous Day"
+  # initial: 0
+  min: 0
+  max: 10000
+  step: 0.1
+  unit_of_measurement: "kWh"
+
 heat_pump_living_room_master_bedroom_energy_previous_day:
   name: "Heat Pump Living Room Master Bedroom Energy Previous Day"
   # initial: 0

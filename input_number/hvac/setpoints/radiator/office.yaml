@@ -2,7 +2,7 @@ hvac_radiator_working_setpoint_office:
   name: HVAC Office Radiator Working Setpoint
   min: 50
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 69
 
@@ -10,7 +10,7 @@ hvac_radiator_weekday_setpoint_office:
   name: HVAC Office Radiator Weekday Setpoint
   min: 50
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 65
 
@@ -18,7 +18,7 @@ hvac_radiator_weekend_setpoint_office:
   name: HVAC Office Radiator Weekend Setpoint
   min: 50
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 69
 
@@ -26,6 +26,6 @@ hvac_radiator_night_setpoint_office:
   name: HVAC Office Radiator Night Setpoint
   min: 50
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 55

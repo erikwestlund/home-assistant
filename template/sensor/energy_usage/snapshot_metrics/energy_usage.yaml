@@ -86,3 +86,52 @@
   state: "{{ states('sensor.energy_monitor_energy_today') | float(0) - states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) - states('sensor.heat_pump_family_room_ducted_energy_today') | float(0) - states('sensor.heat_pump_offices_dining_room_energy_today') | float(0) }}"
   unit_of_measurement: "kWh"
   icon: mdi:flash
+
+# Snapshot Space Heater Total Energy Previous Day
+- name: "Snapshot Space Heater Total Energy Previous Day"
+  unique_id: "snapshot_space_heater_total_energy_previous_day"
+  state: "{{ states('input_number.space_heater_energy_previous_day') }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+# Snapshot Heat Pump Offices Dining Room Total Energy Previous Day
+- name: "Snapshot Heat Pump Offices Dining Room Total Energy Previous Day"
+  unique_id: "snapshot_heat_pump_offices_dining_room_total_energy_previous_day"
+  state: "{{ states('input_number.heat_pump_offices_dining_room_energy_previous_day') }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+# Snapshot Heat Pump Living Room Master Bedroom Total Energy Previous Day
+- name: "Snapshot Heat Pump Living Room Master Bedroom Total Energy Previous Day"
+  unique_id: "snapshot_heat_pump_living_room_master_bedroom_total_energy_previous_day"
+  state: "{{ states('input_number.heat_pump_living_room_master_bedroom_energy_previous_day') }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+# Snapshot Heat Pump Family Room Ducted Total Energy Previous Day
+- name: "Snapshot Heat Pump Family Room Ducted Total Energy Previous Day"
+  unique_id: "snapshot_heat_pump_family_room_ducted_total_energy_previous_day"
+  state: "{{ states('input_number.heat_pump_family_room_ducted_energy_previous_day') }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+# Snapshot Heat Pump All Total Energy Previous Day
+- name: "Snapshot Heat Pump All Total Energy Previous Day"
+  unique_id: "snapshot_heat_pump_all_total_energy_previous_day"
+  state: "{{ states('input_number.all_heat_pumps_energy_previous_day') }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+# Snapshot Non Heat Pump Total Energy Previous Day
+- name: "Snapshot Non Heat Pump Total Energy Previous Day"
+  unique_id: "snapshot_non_heat_pump_total_energy_previous_day"
+  state: "{{ states('input_number.all_heat_pumps_energy_previous_day') }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash
+
+# Snapshot Whole Home Total Energy Previous Day
+- name: "Snapshot Whole Home Total Energy Previous Day"
+  unique_id: "snapshot_whole_home_total_energy_previous_day"
+  state: "{{ states('input_number.whole_house_energy_previous_day') }}"
+  unit_of_measurement: "kWh"
+  icon: mdi:flash

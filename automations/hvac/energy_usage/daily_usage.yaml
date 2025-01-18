@@ -7,6 +7,12 @@
     # Update energy usage for the previous day
     - service: input_number.set_value
       target:
+        entity_id: input_number.space_heater_energy_previous_day
+      data:
+        value: "{{ states('sensor.tina_office_space_heater_today_s_consumption') | float(0) }}"
+
+    - service: input_number.set_value
+      target:
         entity_id: input_number.heat_pump_living_room_master_bedroom_energy_previous_day
       data:
         value: "{{ states('sensor.heat_pump_living_room_master_bedroom_energy_today') | float(0) }}"
