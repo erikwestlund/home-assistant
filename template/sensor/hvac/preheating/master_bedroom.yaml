@@ -29,10 +29,16 @@
       {{ states('input_number.hvac_heat_gain_under_31_35f_master_bedroom') | float }}
     {% elif avg_temp <= 40 %}
       {{ states('input_number.hvac_heat_gain_under_36_40f_master_bedroom') | float }}
+    {% elif avg_temp <= 45 %}
+      {{ states('input_number.hvac_heat_gain_under_41_45f_master_bedroom') | float }}
     {% elif avg_temp <= 50 %}
-      {{ states('input_number.hvac_heat_gain_under_41_50f_master_bedroom') | float }}
+      {{ states('input_number.hvac_heat_gain_under_46_50f_master_bedroom') | float }}
+    {% elif avg_temp <= 55 %}
+      {{ states('input_number.hvac_heat_gain_under_51_55f_master_bedroom') | float }}
+    {% elif avg_temp <= 60 %}
+      {{ states('input_number.hvac_heat_gain_under_56_60f_master_bedroom') | float }}
     {% else %}
-      {{ states('input_number.hvac_heat_gain_over_50f_master_bedroom') | float }}
+      {{ states('input_number.hvac_heat_gain_over_60f_master_bedroom') | float }}
     {% endif %}
   icon: mdi:chart-line
 
