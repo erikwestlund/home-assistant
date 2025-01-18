@@ -1,5 +1,5 @@
-- id: update_day_setting_previous_day
-  alias: "Update Day Setting Previous Day"
+- id: update_weekend_status_previous_day
+  alias: "Update Weekend Status Previous Day"
   trigger:
     - platform: template
       value_template: "{{ now().strftime('%H:%M:%S') == '23:55:00' }}"

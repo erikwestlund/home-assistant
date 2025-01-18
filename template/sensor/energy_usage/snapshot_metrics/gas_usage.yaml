@@ -6,5 +6,5 @@
 
 - name: "Snapshot Last Gas Meter Reading Update Timestamp"
   unique_id: "snapshot_last_gas_meter_reading_update_timestamp"
-  state: "{{ states('input_datetime.hvac_gas_meter_reading_last_saved') | float(0) }}"
+  state: "{{ states('input_datetime.hvac_gas_meter_reading_last_saved') }}"
   icon: mdi:calendar-clock

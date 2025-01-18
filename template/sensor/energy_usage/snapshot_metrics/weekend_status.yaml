@@ -1,0 +1,4 @@
+- name: "Snapshot Weekend Status Previous Day"
+  unique_id: "snapshot_weekend_status_previous_day"
+  state: "{{ states('input_boolean.weekend_status_previous_day') }}"
+  icon: mdi:calendar
