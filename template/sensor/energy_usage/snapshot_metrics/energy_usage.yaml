@@ -175,7 +175,7 @@
   state: >
     {{
       (states('sensor.snapshot_whole_home_total_energy_previous_day') | float(0)) -
-      (states('sensor.snapshot_all_heat_pump_space_heater_total_energy_previous_day') | float(0))
+      (states('sensor.snapshot_all_hvac_total_energy_previous_day') | float(0))
     }}
   unit_of_measurement: "kWh"
   icon: mdi:chart-bar
