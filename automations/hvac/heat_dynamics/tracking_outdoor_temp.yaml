@@ -1,3 +1,5 @@
+# Note, hour ago is stored after the hourly energy usage automation
+
 - id: update_daily_average_temperature_previous_day
   alias: "Update Daily Average Temperature Previous Day"
   trigger:
@@ -9,3 +11,4 @@
         entity_id: input_number.daily_average_temperature_previous_day
       data:
         value: "{{ states('sensor.daily_average_temperature') | float(0) }}"
+

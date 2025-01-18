@@ -30,6 +30,11 @@
           non_heat_pump_energy_today: "{{ states('sensor.snapshot_non_heat_pump_energy_today') }}"
           non_hvac_energy_today: "{{ states('sensor.snapshot_non_hvac_energy_today') }}"
           total_energy_today: "{{ states('sensor.snapshot_total_energy_today') }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.outdoor_temperature_60m_ago
+      data:
+        value: "{{ states('sensor.current_temperature') }}"
 
 - id: store_and_record_daily_data_energy
   alias: "Store and Record Daily Data for Energy Usage"
