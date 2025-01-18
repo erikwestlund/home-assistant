@@ -1,0 +1,4 @@
+weekend_status_previous_day:
+  name: Weekend Status Previous Day
+  initial: off
+  icon: mdi:radiator

@@ -1,0 +1,23 @@
+- id: update_day_setting_previous_day
+  alias: "Update Day Setting Previous Day"
+  trigger:
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '23:55:00' }}"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.is_weekend
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.weekend_status_previous_day
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.is_weekend
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.weekend_status_previous_day

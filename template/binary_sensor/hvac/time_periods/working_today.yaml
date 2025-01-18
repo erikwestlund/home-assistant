@@ -19,8 +19,6 @@
     {% set current_time = now().timestamp() %}
     {% set early_work_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_start_time_office')) %}
     {% set early_work_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_early_work_mode_end_time_office')) %}
-    {% set apply_start = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_work_hours_start')) %}
-    {% set apply_end = as_timestamp(now().strftime('%Y-%m-%d') ~ 'T' ~ states('input_datetime.hvac_work_hours_end')) %}
     {% set is_working_today = is_state('input_boolean.hvac_working_today_office', 'on') %}
 
     {# 1. If Is Working Today, Always True #}
