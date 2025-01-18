@@ -20,10 +20,3 @@
           heat_pump_family_room_ducted_energy_hourly: "{{ states('sensor.snapshot_heat_pump_family_room_ducted_energy_hourly') }}"
           heat_pump_all_energy_hourly: "{{ states('sensor.snapshot_all_heat_pumps_energy_hourly') }}"
           whole_home_energy_hourly: "{{ states('sensor.snapshot_whole_house_energy_hourly') }}"
-
-    # Store outdoor temperature
-    # Store room temperatures
-    # Store door status
-    # Reset calling for heat
-    # Store power status (radiator, mini split, space heater)
-    # Store setpoints (radiator, mini split)
