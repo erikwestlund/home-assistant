@@ -51,6 +51,7 @@
           daily_avg_outdoor_temp: "{{ states('sensor.snapshot_outdoor_temp_daily_average_previous_day') }}"
           daily_low_outdoor_temp: "{{ states('sensor.snapshot_outdoor_temp_daily_low_previous_day') }}"
           daily_high_outdoor_temp: "{{ states('sensor.snapshot_outdoor_temp_daily_high_previous_day') }}"
+          weekend_status_prev_day: "{{ 1 if states('sensor.snapshot_weekend_status_previous_day') == 'on' else 0 }}"
           space_heater_energy: "{{ states('sensor.snapshot_space_heater_total_energy_previous_day') }}"
           heat_pump_offices_dining_room_energy: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_total_energy_previous_day') }}"
           heat_pump_living_room_master_bedroom_energy: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_total_energy_previous_day') }}"

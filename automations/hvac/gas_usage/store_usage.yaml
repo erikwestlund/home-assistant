@@ -15,5 +15,5 @@
         daily_avg_outdoor_temp_prev_day: "{{ states('sensor.snapshot_outdoor_temp_daily_average_previous_day') }}"
         daily_low_outdoor_temp_prev_day: "{{ states('sensor.snapshot_outdoor_temp_daily_low_previous_day') }}"
         daily_high_outdoor_temp_prev_day: "{{ states('sensor.snapshot_outdoor_temp_daily_high_previous_day') }}"
-        weekend_status_prev_day: "{{ states('sensor.snapshot_weekend_status_previous_day') }}"
+        weekend_status_prev_day: "{{ 1 if states('sensor.snapshot_weekend_status_previous_day') == 'on' else 0 }}"
         last_meter_reading_update_timestamp: "{{ states('sensor.snapshot_last_gas_meter_reading_update_timestamp') }}"
