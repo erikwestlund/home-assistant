@@ -258,29 +258,10 @@
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_dining_room', 'on') %}
     {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_dining_room') | float %}
     {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_dining_room') | float %}
-    {% set general_off_threshold = states('input_number.hvac_mini_split_off_threshold_dining_room') | float %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_dining_room') | float %}
+    {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_dining_room') | float %}
+    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_dining_room') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_dining_room', 'on') %}
-
-    {# Comfort mode thresholds #}
-    {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_dining_room') | lower %}
-    {% set daytime_off_freezing_threshold = states('input_number.hvac_mini_split_daytime_off_freezing_threshold_dining_room') | float %}
-    {% set nighttime_off_freezing_threshold = states('input_number.hvac_mini_split_night_off_freezing_threshold_dining_room') | float %}
-    {% set daytime_off_cold_threshold = states('input_number.hvac_mini_split_daytime_off_cold_threshold_dining_room') | float %}
-    {% set nighttime_off_cold_threshold = states('input_number.hvac_mini_split_night_off_cold_threshold_dining_room') | float %}
-    {% set daytime_off_hot_threshold = states('input_number.hvac_mini_split_daytime_off_hot_threshold_dining_room') | float %}
-    {% set nighttime_off_hot_threshold = states('input_number.hvac_mini_split_night_off_hot_threshold_dining_room') | float %}
-
-    {# Dynamic threshold selection based on comfort mode #}
-    {% set daytime_off_threshold = 
-      daytime_off_freezing_threshold if comfort_mode == 'freezing' else
-      daytime_off_cold_threshold if comfort_mode == 'cold' else
-      daytime_off_hot_threshold if comfort_mode == 'hot' else
-      -13 %}
-    {% set nighttime_off_threshold = 
-      nighttime_off_freezing_threshold if comfort_mode == 'freezing' else
-      nighttime_off_cold_threshold if comfort_mode == 'cold' else
-      nighttime_off_hot_threshold if comfort_mode == 'hot' else
-      -13 %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -294,10 +275,8 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. General Off Check (using general_off_threshold) #}
-    {% elif (daytime_active and daytime_avg_temp < general_off_threshold) %}
-      off
-    {% elif (not daytime_active and nighttime_avg_temp < off_threshold) %}
+    {# 5. General Off Check (using daytime or nighttime average temperature under off threshold) #}
+    {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
       off
     {# 6. Daytime Check (using daytime average temperature and daytime threshold) #}
     {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
