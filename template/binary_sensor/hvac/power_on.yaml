@@ -282,7 +282,6 @@
       nighttime_off_hot_threshold if comfort_mode == 'hot' else
       states('input_number.hvac_mini_split_night_off_' ~ comfort_mode ~ '_threshold_dining_room') | float %}
 
-#    {% set daytime_off_threshold = daytime_off_cold_threshold %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
