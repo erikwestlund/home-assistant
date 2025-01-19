@@ -271,18 +271,18 @@
     {% set nighttime_off_hot_threshold = states('input_number.hvac_mini_split_night_off_hot_threshold_dining_room') | float %}
 
     {# Dynamic threshold selection based on comfort mode #}
-    {% set daytime_off_threshold = 
+    {% set daytime_off_threshold =
       daytime_off_freezing_threshold if comfort_mode == 'freezing' else
       daytime_off_cold_threshold if comfort_mode == 'cold' else
       daytime_off_hot_threshold if comfort_mode == 'hot' else
-      -13 %}
-    {% set nighttime_off_threshold = 
+      states('input_number.hvac_mini_split_daytime_off_' ~ comfort_mode ~ '_threshold_dining_room') | float %}
+    {% set nighttime_off_threshold =
       nighttime_off_freezing_threshold if comfort_mode == 'freezing' else
       nighttime_off_cold_threshold if comfort_mode == 'cold' else
       nighttime_off_hot_threshold if comfort_mode == 'hot' else
-      -13 %}
+      states('input_number.hvac_mini_split_night_off_' ~ comfort_mode ~ '_threshold_dining_room') | float %}
 
-    {% set daytime_off_threshold = daytime_off_cold_threshold %}
+#    {% set daytime_off_threshold = daytime_off_cold_threshold %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
