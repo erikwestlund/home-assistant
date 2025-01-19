@@ -275,7 +275,34 @@
        'on' if (on_with_master_bedroom_preheat and master_bedroom_preheating_active) or
        (on_with_master_bedroom and master_bedroom_power_status) else 'off' %}
     
-    off
+    {# 1. Mini Splits Enabled Toggle #}
+    {% if not mini_splits_enabled %}
+      off
+    {# 2. Power Control Toggle #}
+    {% elif not power_control %}
+      off
+    {# 3. Override Status #}
+    {% elif override_status %}
+      on
+    {# 4. Away Mode #}
+    {% elif away_mode %}
+      {{ 'on' if away_mini_split_on else 'off' }}
+    {# 5. Preheat Override Check #}
+
+    {# 6. General Off Check (using average temperature and general thresholds) #}
+    {% elif (daytime_active and daytime_avg_temp < general_off_threshold) or 
+            (not daytime_active and nighttime_avg_temp < general_off_threshold) %}
+      off
+    {# 7. Daytime Check (using average temperature and daytime threshold) #}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
+      off
+    {# 8. Nighttime Check (using average temperature and nighttime threshold) #}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
+      off
+    {# 9. Default On State #}
+    {% else %}
+      on
+    {% endif %}
   icon: >
     {% if is_state('sensor.hvac_mini_split_power_status_living_room', 'on') %}
       mdi:power
