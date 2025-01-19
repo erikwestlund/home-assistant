@@ -1,3 +1,8 @@
+gas_daily_meter_reading_input:
+  name: "Gas Daily Meter Reading (ft³)"
+  max: 10
+  icon: mdi:counter
+
 gas_start_meter_reading_input:
   name: "Gas Start Meter Reading (ft³)"
   max: 10
