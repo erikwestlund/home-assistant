@@ -5,6 +5,34 @@ outdoor_temperature_60m_ago:
   step: 0.1
   unit_of_measurement: "°F"
 
+low_temperature_today:
+  name: "Low Temperature Today"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+low_temperature_previous_day:
+  name: "Low Temperature Previous Day"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+high_temperature_today:
+  name: "High Temperature Today"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
+high_temperature_previous_day:
+  name: "High Temperature Previous Day"
+  min: -100
+  max: 150
+  step: 0.1
+  unit_of_measurement: "°F"
+
 daily_average_temperature_previous_day:
   name: "Daily Average Temperature Previous Day"
   min: -100

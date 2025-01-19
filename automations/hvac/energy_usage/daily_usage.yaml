@@ -2,7 +2,7 @@
   alias: "Update Energy Usage Previous Day"
   trigger:
     - platform: template
-      value_template: "{{ now().strftime('%H:%M:%S') == '23:59:59' }}"
+      value_template: "{{ now().strftime('%H:%M:%S') == '23:59:00' }}"
   action:
     # Update energy usage for the previous day
     - service: input_number.set_value

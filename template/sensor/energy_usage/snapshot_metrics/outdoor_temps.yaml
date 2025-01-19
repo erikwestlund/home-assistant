@@ -22,6 +22,18 @@
   unit_of_measurement: "°F"
   icon: mdi:thermometer
 
+- name: "Snapshot Outdoor Temp Daily Low Previous Day"
+  unique_id: "snapshot_outdoor_temp_daily_low_previous_day"
+  state: "{{ states('input_number.low_temperature_previous_day') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer-low
+
+- name: "Snapshot Outdoor Temp Daily High Previous Day"
+  unique_id: "snapshot_outdoor_temp_daily_high_previous_day"
+  state: "{{ states('input_number.high_temperature_previous_day') }}"
+  unit_of_measurement: "°F"
+  icon: mdi:thermometer-high
+
 # Hour ago
 # Snapshot Outdoor Temperature Hour Ago (Office)
 - name: "Snapshot Outdoor Temperature Hour Ago Office"

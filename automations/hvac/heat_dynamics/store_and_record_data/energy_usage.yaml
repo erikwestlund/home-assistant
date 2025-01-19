@@ -40,7 +40,7 @@
   alias: "Store and Record Daily Data for Energy Usage"
   trigger:
     - platform: template
-      value_template: "{{ now().strftime('%H:%M:%S') == '00:00:01' }}"
+      value_template: "{{ now().strftime('%H:%M:%S') == '00:00:00' }}"
   action:
     - service: google_sheets.append_sheet
       data:
@@ -48,6 +48,9 @@
         worksheet: "Daily Energy Usage"
         data:
           day: "{{ (now() - timedelta(days=1)).strftime('%Y-%m-%d') }}"
+          daily_avg_outdoor_temp: "{{ states('sensor.snapshot_outdoor_temp_daily_average_previous_day') }}"
+          daily_low_outdoor_temp: "{{ states('sensor.snapshot_outdoor_temp_daily_low_previous_day') }}"
+          daily_high_outdoor_temp: "{{ states('sensor.snapshot_outdoor_temp_daily_high_previous_day') }}"
           space_heater_energy: "{{ states('sensor.snapshot_space_heater_total_energy_previous_day') }}"
           heat_pump_offices_dining_room_energy: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_total_energy_previous_day') }}"
           heat_pump_living_room_master_bedroom_energy: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_total_energy_previous_day') }}"

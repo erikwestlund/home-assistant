@@ -12,3 +12,78 @@
       data:
         value: "{{ states('sensor.daily_average_temperature') | float(0) }}"
 
+- id: "initialize_low_temperature_today"
+  alias: "Initialize Low Temperature Today"
+  trigger:
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '00:00:00' }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.low_temperature_previous_day
+      data:
+        value: "{{ states('input_number.low_temperature_today') | float(0) }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.low_temperature_today
+      data:
+        value: "{{ states('sensor.current_temperature') | float(0) }}"
+
+- id: "update_low_temperature_today_specific_intervals"
+  alias: "Update Low Temperature Today at Specific Intervals"
+  trigger:
+    - platform: template
+      value_template: "{{ now().minute % 10 == 5 }}"
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '23:59:00' }}"
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ states('sensor.current_temperature') | float(0) <
+                   states('input_number.low_temperature_today') | float(0) }}
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.low_temperature_today
+              data:
+                value: "{{ states('sensor.current_temperature') | float(0) }}"
+
+- id: "initialize_high_temperature_today"
+  alias: "Initialize High Temperature Today"
+  trigger:
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '00:00:00' }}"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.high_temperature_previous_day
+      data:
+        value: "{{ states('input_number.high_temperature_today') | float(0) }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.high_temperature_today
+      data:
+        value: "{{ states('sensor.current_temperature') | float(0) }}"
+
+- id: "update_high_temperature_today_specific_intervals"
+  alias: "Update High Temperature Today at Specific Intervals"
+  trigger:
+    - platform: template
+      value_template: "{{ now().minute % 10 == 5 }}"
+    - platform: template
+      value_template: "{{ now().strftime('%H:%M:%S') == '23:59:00' }}"
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ states('sensor.current_temperature') | float(0) >
+                   states('input_number.high_temperature_today') | float(0) }}
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.high_temperature_today
+              data:
+                value: "{{ states('sensor.current_temperature') | float(0) }}"
