@@ -4,7 +4,7 @@
     - platform: state
       entity_id: sensor.hvac_radiator_setpoint_main_zone
   action:
-    - service: climate.living_room_main_heating
+    - service: climate.set_temperature
       data:
         entity_id: climate.living_room_main_heating
         temperature: "{{ states('sensor.hvac_radiator_setpoint_main_zone') | float(0) }}"
