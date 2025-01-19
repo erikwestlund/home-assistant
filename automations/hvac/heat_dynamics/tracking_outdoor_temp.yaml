@@ -1,5 +1,4 @@
 # Note, hour ago is stored after the hourly energy usage automation
-
 - id: update_daily_average_temperature_previous_day
   alias: "Update Daily Average Temperature Previous Day"
   trigger:
