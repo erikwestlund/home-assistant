@@ -94,13 +94,39 @@
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_mini_split_on = is_state('input_boolean.hvac_away_mini_split_on_office', 'on') %}
     {% set current_temp = states('sensor.current_temperature') | float %}
-    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_office') | float %}
-    {% set daytime_off_threshold = states('input_number.hvac_mini_split_daytime_off_threshold_office') | float %}
-    {% set nighttime_off_threshold = states('input_number.hvac_mini_split_night_off_threshold_office') | float %}
     {% set daytime_avg_temp = states('input_number.hvac_avg_temp_daytime_office') | float %}
     {% set nighttime_avg_temp = states('input_number.hvac_avg_temp_nighttime_office') | float %}
-    {% set not_working_temp_threshold = states('input_number.hvac_mini_split_off_when_not_working_temp_over_threshold_office') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_office', 'on') %}
+    {% set off_threshold = states('input_number.hvac_mini_split_off_threshold_office') | float %}
+
+    {# Comfort mode thresholds #}
+    {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_office') | lower %}
+    {% set daytime_off_freezing_threshold = states('input_number.hvac_mini_split_daytime_off_freezing_threshold_office') | float %}
+    {% set nighttime_off_freezing_threshold = states('input_number.hvac_mini_split_night_off_freezing_threshold_office') | float %}
+    {% set off_not_working_over_freezing = states('input_number.hvac_mini_split_off_when_not_working_temp_over_freezing_threshold_office') | float %}
+    {% set daytime_off_cold_threshold = states('input_number.hvac_mini_split_daytime_off_cold_threshold_office') | float %}
+    {% set nighttime_off_cold_threshold = states('input_number.hvac_mini_split_night_off_cold_threshold_office') | float %}
+    {% set off_not_working_over_cold = states('input_number.hvac_mini_split_off_when_not_working_temp_over_cold_threshold_office') | float %}
+    {% set daytime_off_hot_threshold = states('input_number.hvac_mini_split_daytime_off_hot_threshold_office') | float %}
+    {% set nighttime_off_hot_threshold = states('input_number.hvac_mini_split_night_off_hot_threshold_office') | float %}
+    {% set off_not_working_over_hot = states('input_number.hvac_mini_split_off_when_not_working_temp_under_hot_threshold_office') | float %}
+
+    {# Dynamic threshold selection based on comfort mode #}
+    {% set daytime_off_threshold = 
+      daytime_off_freezing_threshold if comfort_mode == 'freezing' else
+      daytime_off_cold_threshold if comfort_mode == 'cold' else
+      daytime_off_hot_threshold if comfort_mode == 'hot' else
+      off_threshold %}
+    {% set nighttime_off_threshold = 
+      nighttime_off_freezing_threshold if comfort_mode == 'freezing' else
+      nighttime_off_cold_threshold if comfort_mode == 'cold' else
+      nighttime_off_hot_threshold if comfort_mode == 'hot' else
+      off_threshold %}
+    {% set not_working_temp_threshold = 
+      off_not_working_over_freezing if comfort_mode == 'freezing' else
+      off_not_working_over_cold if comfort_mode == 'cold' else
+      off_not_working_over_hot if comfort_mode == 'hot' else
+      off_threshold %}
 
     {# 1. Mini Splits Enabled Toggle #}
     {% if not mini_splits_enabled %}
@@ -114,7 +140,7 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. Current Temperature Check (always first for Office) #}
+    {# 5. General Off Check (using general off threshold) #}
     {% elif current_temp < off_threshold %}
       off
     {# 6. Daytime Check (use daytime average temperature and daytime threshold) #}
@@ -123,7 +149,7 @@
     {# 7. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
     {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
       off
-    {# 8. Not Working Room Check (only during daytime) #}
+    {# 8. Not Working Room Check (only during daytime and above threshold) #}
     {% elif daytime_active and daytime_avg_temp > not_working_temp_threshold %}
       off
     {# 9. Default On State #}
