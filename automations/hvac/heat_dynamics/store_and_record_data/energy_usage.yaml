@@ -40,7 +40,7 @@
   alias: "Store and Record Daily Data for Energy Usage"
   trigger:
     - platform: template
-      value_template: "{{ now().strftime('%H:%M:%S') == '00:00:00' }}"
+      value_template: "{{ now().strftime('%H:%M:%S') == '00:01:00' }}"
   action:
     - service: google_sheets.append_sheet
       data:
