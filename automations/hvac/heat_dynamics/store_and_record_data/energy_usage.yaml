@@ -13,7 +13,7 @@
           timestamp: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
           outdoor_temp_hour_ago: "{{ states('sensor.snapshot_outdoor_temp_hour_ago') }}"
           outdoor_temp_current: "{{ states('sensor.snapshot_outdoor_temp_current') }}"
-          outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change_ducted') }}" # Use ducted as its closest.
+          outdoor_hour_temp_change: "{{ states('sensor.snapshot_outdoor_hour_temp_change') }}" # Use ducted as its closest.
           space_heater_energy_hourly: "{{ states('sensor.snapshot_space_heater_energy_hourly') }}"
           heat_pump_offices_dining_room_energy_hourly: "{{ states('sensor.snapshot_heat_pump_offices_dining_room_energy_hourly') }}"
           heat_pump_living_room_master_bedroom_energy_hourly: "{{ states('sensor.snapshot_heat_pump_living_room_master_bedroom_energy_hourly') }}"
@@ -40,7 +40,7 @@
   alias: "Store and Record Daily Data for Energy Usage"
   trigger:
     - platform: template
-      value_template: "{{ now().strftime('%H:%M:%S') == '00:01:00' }}"
+      value_template: "{{ now().strftime('%H:%M:%S') == '00:15:00' }}"
   action:
     - service: google_sheets.append_sheet
       data:
