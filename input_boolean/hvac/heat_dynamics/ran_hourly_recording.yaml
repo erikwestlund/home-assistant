@@ -1,0 +1,31 @@
+hourly_hvac_reset:
+  name: Hourly HVAC Reset
+  initial: false
+
+hourly_hvac_recording_office:
+  name: Hourly HVAC Recording Office
+  initial: false
+
+hourly_hvac_recording_family_room:
+  name: Hourly HVAC Recording Family Room
+  initial: false
+
+hourly_hvac_recording_living_room:
+  name: Hourly HVAC Recording Living Room
+  initial: false
+
+hourly_hvac_recording_dining_room:
+  name: Hourly HVAC Recording Dining Room
+  initial: false
+
+hourly_hvac_recording_erik_office:
+  name: Hourly HVAC Recording Erik Office
+  initial: false
+
+hourly_hvac_recording_master_bedroom:
+  name: Hourly HVAC Recording Master Bedroom
+  initial: false
+
+hourly_hvac_recording_ducted:
+  name: Hourly HVAC Recording Ducted
+  initial: false

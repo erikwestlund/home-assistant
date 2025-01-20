@@ -1,7 +1,10 @@
 - id: collect_hourly_data_office
   alias: "Store and Record Hourly Data for Office Heat Dynamics"
   trigger:
-    - platform: template
+    - platform: time_pattern
+      minutes: "*"
+  condition:
+    - condition: template
       value_template: >
         {{ now().minute == states('input_number.store_minute_office') | int }}
   action:
