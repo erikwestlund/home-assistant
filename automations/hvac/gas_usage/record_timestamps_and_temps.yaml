@@ -1,6 +1,6 @@
 # 🔄 Set Boiler Start Time
-- id: set_hvac_boiler_start_time
-  alias: "Set HVAC Boiler Start Time"
+- id: record_hvac_boiler_start_time_and_temps
+  alias: "Record HVAC Boiler Start Time & Temperatures"
   mode: single
   trigger:
     - platform: state
@@ -122,8 +122,8 @@
         value: "{{ states('sensor.bookshelf_temperature') }}"
 
 # 🔄 Set Boiler End Time
-- id: set_hvac_boiler_end_time
-  alias: "Set HVAC Boiler End Time"
+- id: record_hvac_boiler_end_time_and_temps
+  alias: "Record HVAC Boiler End Time and Temperatures"
   mode: single
   trigger:
     - platform: state
