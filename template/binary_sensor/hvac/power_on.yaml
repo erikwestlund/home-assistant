@@ -362,8 +362,9 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. General Off Check (using general_off_threshold) #}
-    {% elif current_temp < general_off_threshold %}
+    {# 5. General Off Check (using daytime or nighttime average temperature under general off threshold) #}
+    {% elif (daytime_active and daytime_avg_temp < general_off_threshold) or 
+            (not daytime_active and nighttime_avg_temp < general_off_threshold) %}
       off
     {# 6. Daytime Check (using daytime average temperature and daytime threshold) #}
     {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
@@ -398,6 +399,7 @@
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_erik_office', 'on') %}
     {% set is_weekend = is_state('binary_sensor.is_weekend', 'on') %}
     {% set apply_working_setpoint = is_state('binary_sensor.hvac_apply_working_setpoint_erik_office', 'on') %}
+    {% set current_temp = states('sensor.current_temperature') | float %}
 
     {# Comfort mode thresholds #}
     {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_erik_office') | lower %}
@@ -482,6 +484,7 @@
     {% set general_off_threshold = states('input_number.hvac_mini_split_off_threshold_master_bedroom') | float %}
     {% set preheating_off_threshold = states('input_number.hvac_mini_split_preheating_off_threshold_master_bedroom') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_master_bedroom', 'on') %}
+    {% set current_temp = states('sensor.current_temperature') | float %}
 
     {# Comfort mode thresholds #}
     {% set comfort_mode = states('sensor.hvac_mini_split_comfort_setting_mode_master_bedroom') | lower %}

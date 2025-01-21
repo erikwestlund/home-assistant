@@ -1,13 +1,13 @@
 
-# 🌞 HVAC Average Temperature Daytime Office
-- name: "HVAC Average Temperature Daytime Office"
-  unique_id: hvac_avg_temp_daytime_office
+# 🌞 HVAC Average Temperature Daytime Master Bedroom
+- name: "HVAC Average Temperature Daytime Master Bedroom"
+  unique_id: hvac_avg_temp_daytime_master_bedroom
   unit_of_measurement: "°F"
   state: >
     {% set pirate_forecast = state_attr('sensor.pirate_weather', 'hourly') %}
-    {% set fallback_temp = states('input_number.hvac_avg_temp_daytime_office') | float %}
-    {% set start_time = states('input_datetime.hvac_daytime_start_time_office') %}
-    {% set end_time = states('input_datetime.hvac_nighttime_start_time_office') %}
+    {% set fallback_temp = states('input_number.hvac_avg_temp_daytime_master_bedroom') | float %}
+    {% set start_time = states('input_datetime.hvac_daytime_start_time_master_bedroom') %}
+    {% set end_time = states('input_datetime.hvac_nighttime_start_time_master_bedroom') %}
     {% if pirate_forecast and pirate_forecast['data'] %}
       {% set start_timestamp = (now().replace(hour=start_time.split(':')[0] | int, minute=start_time.split(':')[1] | int)).timestamp() %}
       {% set end_timestamp = (now().replace(hour=end_time.split(':')[0] | int, minute=end_time.split(':')[1] | int)).timestamp() %}
@@ -18,15 +18,15 @@
     {% endif %}
   icon: mdi:thermometer-lines
 
-# 🌙 HVAC Average Temperature Nighttime Office
-- name: "HVAC Average Temperature Nighttime Office"
-  unique_id: hvac_avg_temp_nighttime_office
+# 🌙 HVAC Average Temperature Nighttime Master Bedroom
+- name: "HVAC Average Temperature Nighttime Master Bedroom"
+  unique_id: hvac_avg_temp_nighttime_master_bedroom
   unit_of_measurement: "°F"
   state: >
     {% set pirate_forecast = state_attr('sensor.pirate_weather', 'hourly') %}
-    {% set fallback_temp = states('input_number.hvac_avg_temp_nighttime_office') | float %}
-    {% set start_time = states('input_datetime.hvac_nighttime_start_time_office') %}
-    {% set end_time = states('input_datetime.hvac_daytime_start_time_office') %}
+    {% set fallback_temp = states('input_number.hvac_avg_temp_nighttime_master_bedroom') | float %}
+    {% set start_time = states('input_datetime.hvac_nighttime_start_time_master_bedroom') %}
+    {% set end_time = states('input_datetime.hvac_daytime_start_time_master_bedroom') %}
     {% if pirate_forecast and pirate_forecast['data'] %}
       {% set start_timestamp = (now().replace(hour=start_time.split(':')[0] | int, minute=start_time.split(':')[1] | int)).timestamp() %}
       {% set end_timestamp = (now().replace(hour=end_time.split(':')[0] | int, minute=end_time.split(':')[1] | int) + timedelta(days=1)).timestamp() %}
