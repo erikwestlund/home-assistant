@@ -42,3 +42,5 @@
                    states('input_number.energy_price_kwh') | float
             }}
           outdoor_temp: "{{ states('sensor.current_temperature') }}"
+          office_start_temp: "{{ states('input_number.hvac_boiler_run_start_temp_office_average') }}"
+          office_end_temp: "{{ states('input_number.hvac_boiler_run_end_temp_office_average') }}"

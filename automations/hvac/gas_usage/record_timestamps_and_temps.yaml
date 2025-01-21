@@ -1,0 +1,244 @@
+# 🔄 Set Boiler Start Time
+- id: set_hvac_boiler_start_time
+  alias: "Set HVAC Boiler Start Time"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: input_select.hvac_active_boiler_zone
+      from: "Idle"  # Trigger when transitioning from "Idle"
+  condition:
+    - condition: template
+      value_template: >
+        {{ trigger.from_state is not none and trigger.to_state is not none and
+           trigger.from_state.state == "Idle" and trigger.to_state.state != "Idle" }}
+  action:
+    # Record the current time
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.hvac_boiler_start_time
+      data:
+        timestamp: "{{ as_timestamp(now()) }}"
+
+    # Record sensor values into input_numbers
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_family_room_average
+        value: "{{ states('sensor.family_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_living_room_average
+        value: "{{ states('sensor.living_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_master_bedroom_average
+        value: "{{ states('sensor.master_bedroom_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_kids_room_average
+        value: "{{ states('sensor.kids_rooms_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_dining_room_average
+        value: "{{ states('sensor.dining_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_erik_office_average
+        value: "{{ states('sensor.erik_office_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_office_thermostat
+        value: "{{ states('sensor.office_current_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_office_bookshelf
+        value: "{{ states('sensor.office_bookshelf_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_office_desk
+        value: "{{ states('sensor.tina_desk_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_office_under_desk
+        value: "{{ states('sensor.tina_under_desk_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_living_room_thermostat
+        value: "{{ states('sensor.living_room_main_heating_current_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_living_room_radiator
+        value: "{{ states('sensor.living_room_radiator_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_dining_room_chest
+        value: "{{ states('sensor.dining_room_chest_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_kitchen
+        value: "{{ states('sensor.kitchen_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_kids_bathroom
+        value: "{{ states('sensor.kids_bathroom_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_guest_bathroom
+        value: "{{ states('sensor.guest_bathroom_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_master_bedroom_chair_endtable
+        value: "{{ states('sensor.master_bedroom_chair_endtable_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_master_bedroom_tina_endtable
+        value: "{{ states('sensor.master_bedroom_tina_endtable_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_master_bedroom_dresser
+        value: "{{ states('sensor.master_bedroom_dresser_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_tilly_room
+        value: "{{ states('sensor.tilly_s_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_hank_room
+        value: "{{ states('sensor.hank_s_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_erik_office_desk
+        value: "{{ states('sensor.erik_office_desk_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_family_room_thermostat
+        value: "{{ states('sensor.family_room_heating_current_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_family_room_lamp
+        value: "{{ states('sensor.lamp_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_start_temp_family_room_bookshelf
+        value: "{{ states('sensor.bookshelf_temperature') }}"
+
+# 🔄 Set Boiler End Time
+- id: set_hvac_boiler_end_time
+  alias: "Set HVAC Boiler End Time"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: input_select.hvac_active_boiler_zone
+      to: "Idle"  # Trigger when transitioning to "Idle"
+  condition:
+    - condition: template
+      value_template: >
+        {{ trigger.from_state is not none and trigger.to_state is not none and
+           trigger.to_state.state == "Idle" and trigger.from_state.state != "Idle" }}
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.hvac_boiler_end_time
+      data:
+        timestamp: "{{ as_timestamp(now()) }}"
+
+    # Record sensor values into input_numbers
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_family_room_average
+        value: "{{ states('sensor.family_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_living_room_average
+        value: "{{ states('sensor.living_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_master_bedroom_average
+        value: "{{ states('sensor.master_bedroom_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_kids_room_average
+        value: "{{ states('sensor.kids_rooms_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_dining_room_average
+        value: "{{ states('sensor.dining_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_erik_office_average
+        value: "{{ states('sensor.erik_office_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_office_thermostat
+        value: "{{ states('sensor.office_current_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_office_bookshelf
+        value: "{{ states('sensor.office_bookshelf_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_office_desk
+        value: "{{ states('sensor.tina_desk_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_office_under_desk
+        value: "{{ states('sensor.tina_under_desk_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_living_room_thermostat
+        value: "{{ states('sensor.living_room_main_heating_current_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_living_room_radiator
+        value: "{{ states('sensor.living_room_radiator_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_dining_room_chest
+        value: "{{ states('sensor.dining_room_chest_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_kitchen
+        value: "{{ states('sensor.kitchen_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_kids_bathroom
+        value: "{{ states('sensor.kids_bathroom_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_guest_bathroom
+        value: "{{ states('sensor.guest_bathroom_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_master_bedroom_chair_endtable
+        value: "{{ states('sensor.master_bedroom_chair_endtable_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_master_bedroom_tina_endtable
+        value: "{{ states('sensor.master_bedroom_tina_endtable_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_master_bedroom_dresser
+        value: "{{ states('sensor.master_bedroom_dresser_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_tilly_room
+        value: "{{ states('sensor.tilly_s_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_hank_room
+        value: "{{ states('sensor.hank_s_room_average_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_erik_office_desk
+        value: "{{ states('sensor.erik_office_desk_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_family_room_thermostat
+        value: "{{ states('sensor.family_room_heating_current_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_family_room_lamp
+        value: "{{ states('sensor.lamp_temperature') }}"
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_family_room_bookshelf
+        value: "{{ states('sensor.bookshelf_temperature') }}"

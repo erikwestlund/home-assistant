@@ -1,4 +1,18 @@
 # Averages
+hvac_boiler_run_start_temp_office_average:
+  name: "HVAC Boiler Run Start Temp Office Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_office_average:
+  name: "HVAC Boiler Run End Temp Office Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
 hvac_boiler_run_start_temp_family_room_average:
   name: "HVAC Boiler Run Start Temp Family Room Average"
   min: 50
