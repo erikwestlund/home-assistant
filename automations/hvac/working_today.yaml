@@ -3,10 +3,13 @@
 - id: "hvac_start_early_work_mode_office"
   alias: "HVAC Start Early Work Mode Office"
   trigger:
-    - platform: template
-      value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_early_work_mode_start_time_office') }}
+    - platform: time_pattern
+      minutes: "*"
   condition:
+    - condition: template
+      value_template: >
+        {{ now().hour == states('input_datetime.hvac_early_work_mode_start_time_office')[:2] | int and 
+           now().minute == states('input_datetime.hvac_early_work_mode_start_time_office')[3:5] | int }}
     - condition: state
       entity_id: input_boolean.hvac_early_work_mode_office
       state: "on"
@@ -19,10 +22,13 @@
 - id: "hvac_end_early_work_mode_office"
   alias: "HVAC End Early Work Mode Office"
   trigger:
-    - platform: template
-      value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_early_work_mode_end_time_office') }}
+    - platform: time_pattern
+      minutes: "*"
   condition:
+    - condition: template
+      value_template: >
+        {{ now().hour == states('input_datetime.hvac_early_work_mode_end_time_office')[:2] | int and 
+           now().minute == states('input_datetime.hvac_early_work_mode_end_time_office')[3:5] | int }}
     - condition: state
       entity_id: input_boolean.hvac_early_work_mode_office
       state: "on"
@@ -36,10 +42,13 @@
 - id: "hvac_set_working_at_start_time_office"
   alias: "HVAC Set Working at Start Time Office"
   trigger:
-    - platform: template
-      value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_start_time_office') }}
+    - platform: time_pattern
+      minutes: "*"
   condition:
+    - condition: template
+      value_template: >
+        {{ now().hour == states('input_datetime.hvac_apply_working_start_time_office')[:2] | int and 
+           now().minute == states('input_datetime.hvac_apply_working_start_time_office')[3:5] | int }}
     - condition: state
       entity_id: binary_sensor.is_weekday
       state: "on"
@@ -58,9 +67,13 @@
 - id: "hvac_reset_working_today_office"
   alias: "HVAC Reset Office Working Today"
   trigger:
-    - platform: template
+    - platform: time_pattern
+      minutes: "*"
+  condition:
+    - condition: template
       value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_end_time_office') }}
+        {{ now().hour == states('input_datetime.hvac_apply_working_end_time_office')[:2] | int and 
+           now().minute == states('input_datetime.hvac_apply_working_end_time_office')[3:5] | int }}
   action:
     - service: input_boolean.turn_off
       target:
@@ -92,10 +105,13 @@
 - id: "hvac_set_working_at_start_time_erik_office"
   alias: "HVAC Set Working at Start Time Erik Office"
   trigger:
-    - platform: template
-      value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_start_time_erik_office') }}
+    - platform: time_pattern
+      minutes: "*"
   condition:
+    - condition: template
+      value_template: >
+        {{ now().hour == states('input_datetime.hvac_apply_working_start_time_erik_office')[:2] | int and 
+           now().minute == states('input_datetime.hvac_apply_working_start_time_erik_office')[3:5] | int }}
     - condition: state
       entity_id: binary_sensor.is_weekday
       state: "on"
@@ -115,9 +131,16 @@
 - id: "hvac_reset_working_today_erik_office"
   alias: "HVAC Reset Working Today Erik Office"
   trigger:
-    - platform: template
+    - platform: time_pattern
+      minutes: "*"
+  condition:
+    - condition: template
       value_template: >
-        {{ now().strftime('%H:%M:%S') == states('input_datetime.hvac_apply_working_end_time_erik_office') }}
+        {{ now().hour == states('input_datetime.hvac_apply_working_end_time_erik_office')[:2] | int and 
+           now().minute == states('input_datetime.hvac_apply_working_end_time_erik_office')[3:5] | int }}
+    - condition: state
+      entity_id: binary_sensor.is_weekday
+      state: "on"
   action:
     - service: input_boolean.turn_off
       target:

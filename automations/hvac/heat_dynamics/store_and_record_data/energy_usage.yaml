@@ -44,11 +44,11 @@
   trigger:
     - platform: time_pattern
       minutes: "*"
-
   condition:
     - condition: template
       value_template: >
-        {{ now().hour == 0 and now().minute == 15 }}  action:
+        {{ now().hour == 0 and now().minute == 15 }}
+  action:
     - service: google_sheets.append_sheet
       data:
         config_entry: !secret google_sheets_sheet_id
