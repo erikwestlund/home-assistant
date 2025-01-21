@@ -293,14 +293,14 @@
     {% elif preheat_override == 'on' %}
       on
     {# 6. General Off Check (using average temperature and general thresholds) #}
-    {% elif (daytime_active and current_temp < general_off_threshold) or 
-            (not daytime_active and current_temp < general_off_threshold) %}
+    {% elif (daytime_active and daytime_avg_temp < general_off_threshold) or 
+            (not daytime_active and nighttime_avg_temp < general_off_threshold) %}
       off
     {# 7. Daytime Check (using average temperature and daytime threshold) #}
-    {% elif daytime_active and current_temp < daytime_off_threshold %}
+    {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off
     {# 8. Nighttime Check (using average temperature and nighttime threshold) #}
-    {% elif not daytime_active and current_temp < nighttime_off_threshold %}
+    {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
       off
     {# 9. Default On State #}
     {% else %}
