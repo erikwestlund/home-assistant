@@ -1,0 +1,358 @@
+# Averages
+hvac_boiler_run_start_temp_family_room_average:
+  name: "HVAC Boiler Run Start Temp Family Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_family_room_average:
+  name: "HVAC Boiler Run End Temp Family Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_living_room_average:
+  name: "HVAC Boiler Run Start Temp Living Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_living_room_average:
+  name: "HVAC Boiler Run End Temp Living Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_master_bedroom_average:
+  name: "HVAC Boiler Run Start Temp Master Bedroom Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_master_bedroom_average:
+  name: "HVAC Boiler Run End Temp Master Bedroom Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_kids_room_average:
+  name: "HVAC Boiler Run Start Temp Kids Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_kids_room_average:
+  name: "HVAC Boiler Run End Temp Kids Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_dining_room_average:
+  name: "HVAC Boiler Run Start Temp Dining Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_dining_room_average:
+  name: "HVAC Boiler Run End Temp Dining Room Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_erik_office_average:
+  name: "HVAC Boiler Run Start Temp Erik Office Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_erik_office_average:
+  name: "HVAC Boiler Run End Temp Erik Office Average"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Office
+hvac_boiler_run_start_temp_office_thermostat:
+  name: "HVAC Boiler Run Start Temp Office Thermostat"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_office_thermostat:
+  name: "HVAC Boiler Run End Temp Office Thermostat"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_office_bookshelf:
+  name: "HVAC Boiler Run Start Temp Office Bookshelf"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_office_bookshelf:
+  name: "HVAC Boiler Run End Temp Office Bookshelf"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_office_desk:
+  name: "HVAC Boiler Run Start Temp Office Desk"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_office_desk:
+  name: "HVAC Boiler Run End Temp Office Desk"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_office_under_desk:
+  name: "HVAC Boiler Run Start Temp Office Under Desk"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_office_under_desk:
+  name: "HVAC Boiler Run End Temp Office Under Desk"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Living Room
+hvac_boiler_run_start_temp_living_room_thermostat:
+  name: "HVAC Boiler Run Start Temp Living Room Thermostat"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_living_room_thermostat:
+  name: "HVAC Boiler Run End Temp Living Room Thermostat"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_living_room_radiator:
+  name: "HVAC Boiler Run Start Temp Living Room Radiator"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_living_room_radiator:
+  name: "HVAC Boiler Run End Temp Living Room Radiator"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Dining Room
+hvac_boiler_run_start_temp_dining_room_chest:
+  name: "HVAC Boiler Run Start Temp Dining Room Chest"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_dining_room_chest:
+  name: "HVAC Boiler Run End Temp Dining Room Chest"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Kitchen
+hvac_boiler_run_start_temp_kitchen:
+  name: "HVAC Boiler Run Start Temp Kitchen"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_kitchen:
+  name: "HVAC Boiler Run End Temp Kitchen"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Bathrooms
+hvac_boiler_run_start_temp_kids_bathroom:
+  name: "HVAC Boiler Run Start Temp Kids Bathroom"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_kids_bathroom:
+  name: "HVAC Boiler Run End Temp Kids Bathroom"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_guest_bathroom:
+  name: "HVAC Boiler Run Start Temp Guest Bathroom"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_guest_bathroom:
+  name: "HVAC Boiler Run End Temp Guest Bathroom"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Master Bedroom
+hvac_boiler_run_start_temp_master_bedroom_chair_endtable:
+  name: "HVAC Boiler Run Start Temp Master Bedroom Chair Endtable"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_master_bedroom_chair_endtable:
+  name: "HVAC Boiler Run End Temp Master Bedroom Chair Endtable"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_master_bedroom_tina_endtable:
+  name: "HVAC Boiler Run Start Temp Master Bedroom Tina Endtable"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_master_bedroom_tina_endtable:
+  name: "HVAC Boiler Run End Temp Master Bedroom Tina Endtable"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_master_bedroom_dresser:
+  name: "HVAC Boiler Run Start Temp Master Bedroom Dresser"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_master_bedroom_dresser:
+  name: "HVAC Boiler Run End Temp Master Bedroom Dresser"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Bedrooms
+hvac_boiler_run_start_temp_tilly_room:
+  name: "HVAC Boiler Run Start Temp Tilly Room"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_tilly_room:
+  name: "HVAC Boiler Run End Temp Tilly Room"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_hank_room:
+  name: "HVAC Boiler Run Start Temp Hank Room"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_hank_room:
+  name: "HVAC Boiler Run End Temp Hank Room"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_erik_office_desk:
+  name: "HVAC Boiler Run Start Temp Erik Office Desk"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_erik_office_desk:
+  name: "HVAC Boiler Run End Temp Erik Office Desk"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+# Family Room
+hvac_boiler_run_start_temp_family_room_thermostat:
+  name: "HVAC Boiler Run Start Temp Family Room Thermostat"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_family_room_thermostat:
+  name: "HVAC Boiler Run End Temp Family Room Thermostat"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_family_room_lamp:
+  name: "HVAC Boiler Run Start Temp Family Room Lamp"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_family_room_lamp:
+  name: "HVAC Boiler Run End Temp Family Room Lamp"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_start_temp_family_room_bookshelf:
+  name: "HVAC Boiler Run Start Temp Family Room Bookshelf"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"
+
+hvac_boiler_run_end_temp_family_room_bookshelf:
+  name: "HVAC Boiler Run End Temp Family Room Bookshelf"
+  min: 50
+  max: 90
+  step: 0.1
+  unit_of_measurement: "°F"

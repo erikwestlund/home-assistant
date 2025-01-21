@@ -212,8 +212,9 @@
     {# 4. Away Mode #}
     {% elif away_mode %}
       {{ 'on' if away_mini_split_on else 'off' }}
-    {# 5. General Off Check (using general off threshold) #}
-    {% elif daily_avg_temp < general_off_threshold %}
+    {# 5. General Off Check (using daytime or nighttime average temperature under general off threshold) #}
+    {% elif (daytime_active and daytime_avg_temp < general_off_threshold) or 
+            (not daytime_active and nighttime_avg_temp < general_off_threshold) %}
       off
     {# 6. Daytime Check (use daytime average temperature and daytime threshold) #}
     {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
