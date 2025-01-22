@@ -6,7 +6,7 @@ gas_daily_meter_reading_ft3:
   unit_of_measurement: "ft³"
   # initial: 1275
   icon: mdi:counter
-  
+
 gas_start_meter_reading_ft3:
   name: "Gas Start Meter Reading (ft³)"
   min: 1275

@@ -22,6 +22,10 @@
     # Record sensor values into input_numbers
     - service: input_number.set_value
       data:
+        entity_id: input_number.hvac_boiler_run_start_temp_office_average
+        value: "{{ states('sensor.tina_office_average_temperature') }}"
+    - service: input_number.set_value
+      data:
         entity_id: input_number.hvac_boiler_run_start_temp_family_room_average
         value: "{{ states('sensor.family_room_average_temperature') }}"
     - service: input_number.set_value
@@ -142,6 +146,10 @@
         timestamp: "{{ as_timestamp(now()) }}"
 
     # Record sensor values into input_numbers
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.hvac_boiler_run_end_temp_office_average
+        value: "{{ states('sensor.tina_office_average_temperature') }}"
     - service: input_number.set_value
       data:
         entity_id: input_number.hvac_boiler_run_end_temp_family_room_average
