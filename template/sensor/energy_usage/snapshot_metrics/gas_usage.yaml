@@ -1,6 +1,6 @@
 - name: "Snapshot Daily Gas Meter Reading"
   unique_id: "snapshot_daily_gas_meter_reading"
-  state: "{{ max([states('input_number.gas_start_meter_reading_ft3') | float, states('input_number.gas_start_meter_reading_ft3') | float ]) | float(0) }}"
+  state: "{{ max([states('input_number.gas_daily_meter_reading_ft3') | float, states('input_number.gas_start_meter_reading_ft3') | float, states('input_number.gas_end_meter_reading_ft3') | float ]) | float(0) }}"
   unit_of_measurement: "ft³"
   icon: mdi:flash
 
