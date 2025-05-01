@@ -24,6 +24,14 @@ hvac_mini_split_daytime_off_hot_threshold_office:
   unit_of_measurement: "°F"
   initial: -10
 
+hvac_mini_split_daytime_off_ac_threshold_office:
+  name: HVAC Office Mini Split Daytime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_office:
   name: HVAC Office Mini Split Nighttime Off Freezing Threshold
@@ -49,6 +57,14 @@ hvac_mini_split_night_off_hot_threshold_office:
   unit_of_measurement: "°F"
   initial: 55
 
+hvac_mini_split_night_off_ac_threshold_office:
+  name: HVAC Office Mini Split Nighttime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 # Turn off working settings
 hvac_mini_split_off_when_not_working_temp_over_freezing_threshold_office:
   name: HVAC Office Mini Split Off When Not Working Temp Over Freezing Threshold
@@ -68,6 +84,14 @@ hvac_mini_split_off_when_not_working_temp_over_cold_threshold_office:
 
 hvac_mini_split_off_when_not_working_temp_under_hot_threshold_office:
   name: HVAC Office Mini Split Off When Not Working Temp Over Hot Threshold
+  min: -20
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 60
+
+hvac_mini_split_off_when_not_working_temp_under_ac_threshold_office:
+  name: HVAC Office Mini Split Off When Not Working Temp Over AC Threshold
   min: -20
   max: 120
   step: 1
@@ -100,6 +124,14 @@ hvac_mini_split_daytime_off_hot_threshold_family_room:
   unit_of_measurement: "°F"
   initial: 22
 
+hvac_mini_split_daytime_off_ac_threshold_family_room:
+  name: HVAC Family Room Mini Split Daytime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_family_room:
   name: HVAC Family Room Mini Split Nighttime Off Freezing Threshold
@@ -119,6 +151,14 @@ hvac_mini_split_night_off_cold_threshold_family_room:
 
 hvac_mini_split_night_off_hot_threshold_family_room:
   name: HVAC Family Room Mini Split Nighttime Off Hot Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 22
+
+hvac_mini_split_night_off_ac_threshold_family_room:
+  name: HVAC Family Room Mini Split Nighttime Off AC Threshold
   min: -13
   max: 120
   step: 1
@@ -151,6 +191,14 @@ hvac_mini_split_daytime_off_hot_threshold_living_room:
   unit_of_measurement: "°F"
   initial: 55
 
+hvac_mini_split_daytime_off_ac_threshold_living_room:
+  name: HVAC Living Room Mini Split Daytime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_living_room:
   name: HVAC Living Room Mini Split Nighttime Off Freezing Threshold
@@ -170,6 +218,14 @@ hvac_mini_split_night_off_cold_threshold_living_room:
 
 hvac_mini_split_night_off_hot_threshold_living_room:
   name: HVAC Living Room Mini Split Nighttime Off Hot Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: -13
+
+hvac_mini_split_night_off_ac_threshold_living_room:
+  name: HVAC Living Room Mini Split Nighttime Off AC Threshold
   min: -13
   max: 120
   step: 1
@@ -202,6 +258,14 @@ hvac_mini_split_daytime_off_hot_threshold_dining_room:
   unit_of_measurement: "°F"
   initial: -13
 
+hvac_mini_split_daytime_off_ac_threshold_dining_room:
+  name: HVAC Dining Room Mini Split Daytime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: -13
+
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_dining_room:
   name: HVAC Dining Room Mini Split Nighttime Off Freezing Threshold
@@ -221,6 +285,14 @@ hvac_mini_split_night_off_cold_threshold_dining_room:
 
 hvac_mini_split_night_off_hot_threshold_dining_room:
   name: HVAC Dining Room Mini Split Nighttime Off Hot Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
+hvac_mini_split_night_off_ac_threshold_dining_room:
+  name: HVAC Dining Room Mini Split Nighttime Off AC Threshold
   min: -13
   max: 120
   step: 1
@@ -253,6 +325,14 @@ hvac_mini_split_daytime_off_hot_threshold_erik_office:
   unit_of_measurement: "°F"
   initial: -13
 
+hvac_mini_split_daytime_off_ac_threshold_erik_office:
+  name: HVAC Erik Office Mini Split Daytime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: -13
+
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_erik_office:
   name: HVAC Erik Office Mini Split Nighttime Off Freezing Threshold
@@ -272,6 +352,14 @@ hvac_mini_split_night_off_cold_threshold_erik_office:
 
 hvac_mini_split_night_off_hot_threshold_erik_office:
   name: HVAC Erik Office Mini Split Nighttime Off Hot Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
+hvac_mini_split_night_off_ac_threshold_erik_office:
+  name: HVAC Erik Office Mini Split Nighttime Off AC Threshold
   min: -13
   max: 120
   step: 1
@@ -303,6 +391,14 @@ hvac_mini_split_weekend_off_hot_threshold_erik_office:
   unit_of_measurement: "°F"
   initial: -13
 
+hvac_mini_split_weekend_off_ac_threshold_erik_office:
+  name: HVAC Erik Office Mini Split Weekend Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 ## Master Bedroom
 # Daytime Off Thresholds
 hvac_mini_split_daytime_off_freezing_threshold_master_bedroom:
@@ -329,6 +425,14 @@ hvac_mini_split_daytime_off_hot_threshold_master_bedroom:
   unit_of_measurement: "°F"
   initial: -13
 
+hvac_mini_split_daytime_off_ac_threshold_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Daytime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_master_bedroom:
   name: HVAC Master Bedroom Mini Split Nighttime Off Freezing Threshold
@@ -353,6 +457,14 @@ hvac_mini_split_night_off_hot_threshold_master_bedroom:
   step: 1
   unit_of_measurement: "°F"
   initial: -13
+
+hvac_mini_split_night_off_ac_threshold_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Nighttime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
 
 ## Ducted
 # Daytime Off Thresholds
@@ -380,6 +492,14 @@ hvac_ducted_daytime_off_hot_threshold:
   unit_of_measurement: "°F"
   initial: 55
 
+hvac_ducted_daytime_off_ac_threshold:
+  name: HVAC Ducted Daytime Off AC Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 55
+
 # Nighttime Off Thresholds
 hvac_ducted_night_off_freezing_threshold:
   name: HVAC Ducted Nighttime Off Freezing Threshold
@@ -399,6 +519,14 @@ hvac_ducted_night_off_cold_threshold:
 
 hvac_ducted_night_off_hot_threshold:
   name: HVAC Ducted Nighttime Off Hot Threshold
+  min: -13
+  max: 120
+  step: 1
+  unit_of_measurement: "°F"
+  initial: -13
+
+hvac_ducted_night_off_ac_threshold:
+  name: HVAC Ducted Nighttime Off AC Threshold
   min: -13
   max: 120
   step: 1
