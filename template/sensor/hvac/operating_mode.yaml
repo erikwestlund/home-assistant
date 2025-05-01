@@ -1,6 +1,6 @@
 - name: "HVAC Mode"
   unique_id: hvac_mode
-  state: "{{ states('select.hvac_mode') }}"
+  state: "{{ states('input_select.hvac_mode') }}"
   icon: >
     {% set mode = states('select.hvac_mode') %}
     {% if mode == 'Heat' %}
