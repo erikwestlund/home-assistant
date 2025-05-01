@@ -23,6 +23,14 @@ hvac_mini_split_weekday_hot_setpoint_living_room:
   unit_of_measurement: "°F"
   # initial: 70
 
+hvac_mini_split_weekday_ac_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekday Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 76
+
 # Weekend Setpoints
 hvac_mini_split_weekend_freezing_setpoint_living_room:
   name: HVAC Living Room Mini Split Weekend Setpoint (Freezing)
@@ -48,6 +56,14 @@ hvac_mini_split_weekend_hot_setpoint_living_room:
   unit_of_measurement: "°F"
   # initial: 70
 
+hvac_mini_split_weekend_ac_setpoint_living_room:
+  name: HVAC Living Room Mini Split Weekend Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 76
+
 # Night Setpoints
 hvac_mini_split_night_freezing_setpoint_living_room:
   name: HVAC Living Room Mini Split Night Setpoint (Freezing)
@@ -72,6 +88,14 @@ hvac_mini_split_night_hot_setpoint_living_room:
   step: 1
   unit_of_measurement: "°F"
   # initial: 74
+
+hvac_mini_split_night_ac_setpoint_living_room:
+  name: HVAC Living Room Mini Split Night Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 76
 
 # Master Bedroom Preheat Setpoints
 hvac_mini_split_master_bedroom_preheat_freezing_setpoint_living_room:

@@ -1,0 +1,8 @@
+hvac_mode:
+  name: HVAC System Mode
+  options:
+    - "Off"
+    - "Heat"
+    - "Cool"
+  initial: "Heat"
+  icon: mdi:home-group

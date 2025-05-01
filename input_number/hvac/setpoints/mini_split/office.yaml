@@ -22,6 +22,14 @@ hvac_mini_split_working_hot_setpoint_office:
   unit_of_measurement: "°F"
   # initial: 72
 
+hvac_mini_split_working_ac_setpoint_office:
+  name: HVAC Office Mini Split Working Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74
+
 hvac_mini_split_weekday_freezing_setpoint_office:
   name: HVAC Office Mini Split Weekday Setpoint (Freezing)
   min: 64
@@ -45,6 +53,14 @@ hvac_mini_split_weekday_hot_setpoint_office:
   step: 1
   unit_of_measurement: "°F"
   # initial: 72
+
+hvac_mini_split_weekday_ac_setpoint_office:
+  name: HVAC Office Mini Split Weekday Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74
 
 hvac_mini_split_weekend_freezing_setpoint_office:
   name: HVAC Office Mini Split Weekend Setpoint (Freezing)
@@ -70,6 +86,14 @@ hvac_mini_split_weekend_hot_setpoint_office:
   unit_of_measurement: "°F"
   # initial: 74
 
+hvac_mini_split_weekend_ac_setpoint_office:
+  name: HVAC Office Mini Split Weekend Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74
+
 hvac_mini_split_night_freezing_setpoint_office:
   name: HVAC Office Mini Split Night Setpoint (Freezing)
   min: 64
@@ -93,3 +117,11 @@ hvac_mini_split_night_hot_setpoint_office:
   step: 1
   unit_of_measurement: "°F"
   # initial: 72
+
+hvac_mini_split_night_ac_setpoint_office:
+  name: HVAC Office Mini Split Night Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74

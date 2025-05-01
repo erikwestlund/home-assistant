@@ -23,6 +23,14 @@ hvac_mini_split_day_hot_setpoint_master_bedroom:
   unit_of_measurement: "°F"
   # initial: 74
 
+hvac_mini_split_day_ac_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Day Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74
+
 # Preheating Setpoints
 hvac_mini_split_preheat_freezing_setpoint_master_bedroom:
   name: HVAC Master Bedroom Mini Split Preheating Setpoint (Freezing)
@@ -64,4 +72,12 @@ hvac_mini_split_night_hot_setpoint_master_bedroom:
   step: 1
   unit_of_measurement: "°F"
   # initial: 70
+
+hvac_mini_split_night_ac_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Night Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 72
 

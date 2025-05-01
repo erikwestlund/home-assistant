@@ -23,6 +23,15 @@ hvac_mini_split_day_hot_setpoint_dining_room:
   unit_of_measurement: "°F"
   # initial: 72
 
+
+hvac_mini_split_day_ac_setpoint_dining_room:
+  name: HVAC Dining Room Mini Split Day Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 74
+
 # Night Setpoints
 hvac_mini_split_night_freezing_setpoint_dining_room:
   name: HVAC Dining Room Mini Split Night Setpoint (Freezing)
@@ -47,3 +56,11 @@ hvac_mini_split_night_hot_setpoint_dining_room:
   step: 1
   unit_of_measurement: "°F"
   # initial: 74
+
+hvac_mini_split_night_ac_setpoint_dining_room:
+  name: HVAC Dining Room Mini Split Night Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 76
