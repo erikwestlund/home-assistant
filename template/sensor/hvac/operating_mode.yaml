@@ -1,9 +1,12 @@
 - name: "HVAC Mode"
   unique_id: hvac_mode
-  state: >
-    {% set avg_temp = states('sensor.daily_average_temperature') | float %}
-    {% set threshold = states('input_number.hvac_heat_to_cool_threshold') | float %}
-    {{ 'Heat' if avg_temp < threshold else 'Cool' }}
+  state: "{{ states('select.hvac_mode') }}"
   icon: >
-    {% set mode = states('sensor.hvac_mode') %}
-    {{ 'mdi:fire' if mode == 'Heat' else 'mdi:snowflake' }}
+    {% set mode = states('select.hvac_mode') %}
+    {% if mode == 'Heat' %}
+      mdi:fire
+    {% elif mode == 'Cool' %}
+      mdi:snowflake
+    {% else %}
+      mdi:power
+    {% endif %}
