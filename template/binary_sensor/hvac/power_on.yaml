@@ -111,22 +111,28 @@
     {% set daytime_off_hot_threshold = states('input_number.hvac_mini_split_daytime_off_hot_threshold_office') | float %}
     {% set nighttime_off_hot_threshold = states('input_number.hvac_mini_split_night_off_hot_threshold_office') | float %}
     {% set off_not_working_over_hot = states('input_number.hvac_mini_split_off_when_not_working_temp_under_hot_threshold_office') | float %}
+    {% set daytime_off_ac_threshold = states('input_number.hvac_mini_split_daytime_off_ac_threshold_office') | float %}
+    {% set nighttime_off_ac_threshold = states('input_number.hvac_mini_split_night_off_ac_threshold_office') | float %}
+    {% set off_not_working_over_ac = states('input_number.hvac_mini_split_off_when_not_working_temp_under_ac_threshold_office') | float %}
 
     {# Dynamic threshold selection based on comfort mode #}
     {% set daytime_off_threshold =
       daytime_off_freezing_threshold if comfort_mode == 'freezing' else
       daytime_off_cold_threshold if comfort_mode == 'cold' else
       daytime_off_hot_threshold if comfort_mode == 'hot' else
+      daytime_off_ac_threshold if comfort_mode == 'ac' else
       states('input_number.hvac_mini_split_daytime_off_' ~ comfort_mode ~ '_threshold_office') | float %}
     {% set nighttime_off_threshold =
       nighttime_off_freezing_threshold if comfort_mode == 'freezing' else
       nighttime_off_cold_threshold if comfort_mode == 'cold' else
       nighttime_off_hot_threshold if comfort_mode == 'hot' else
+      nighttime_off_ac_threshold if comfort_mode == 'ac' else
       states('input_number.hvac_mini_split_night_off_' ~ comfort_mode ~ '_threshold_office') | float %}
     {% set not_working_temp_threshold =
       off_not_working_over_freezing if comfort_mode == 'freezing' else
       off_not_working_over_cold if comfort_mode == 'cold' else
       off_not_working_over_hot if comfort_mode == 'hot' else
+      off_not_working_over_ac if comfort_mode == 'ac' else
       states('input_number.hvac_mini_split_off_not_working_temp_over_' ~ comfort_mode ~ '_threshold_office') | float %}
 
     {# 1. Mini Splits Enabled Toggle #}
