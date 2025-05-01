@@ -88,6 +88,7 @@
 - name: "HVAC Mini Split Power Status Office"
   unique_id: hvac_mini_split_power_status_office
   state: >
+    {% set hvac_mode = states('sensor.hvac_mode') %}
     {% set mini_splits_enabled = is_state('input_boolean.hvac_mini_splits_enabled', 'on') %}
     {% set power_control = is_state('input_boolean.hvac_mini_split_power_on_control_office', 'on') %}
     {% set override_status = is_state('input_boolean.hvac_override_status_office', 'on') %}

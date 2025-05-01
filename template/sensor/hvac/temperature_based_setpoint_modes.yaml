@@ -111,3 +111,23 @@
       Cold
     {% endif %}
   icon: mdi:thermometer
+
+
+# Ducted
+- name: "HVAC Comfort Setting Mode Ducted"
+  unique_id: hvac_comfort_setting_mode_ducted
+  state: >
+    {% set hvac_mode = states('sensor.hvac_mode') %}
+    {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set freezing_to_cold = states('input_number.hvac_ducted_freezing_to_cold_threshold') | float %}
+    {% set cold_to_hot = states('input_number.hvac_ducted_cold_to_hot_threshold') | float %}
+    {% if hvac_mode == "Cool" %}
+      AC
+    {% elif current_temp < freezing_to_cold %}
+      Freezing
+    {% elif current_temp > cold_to_hot %}
+      Hot
+    {% else %}
+      Cold
+    {% endif %}
+  icon: mdi:thermometer
