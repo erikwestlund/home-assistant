@@ -28,4 +28,4 @@ hvac_active_setpoint_cooling_ducted:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 61
+  initial: 62
