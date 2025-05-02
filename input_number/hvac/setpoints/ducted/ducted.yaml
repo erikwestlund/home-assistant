@@ -6,6 +6,14 @@ hvac_off_setpoint_ducted:
   unit_of_measurement: "°F"
   # initial: 62
 
+hvac_off_setpoint_cooling_ducted:
+  name: HVAC Ducted Off Setpoint (Cooling)
+  min: 62
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 86
+
 hvac_active_setpoint_ducted:
   name: HVAC Ducted Active Setpoint
   min: 62
@@ -13,3 +21,11 @@ hvac_active_setpoint_ducted:
   step: 1
   unit_of_measurement: "°F"
   # initial: 72
+
+hvac_active_setpoint_cooling_ducted:
+  name: HVAC Ducted Active Setpoint (Cooling)
+  min: 62
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+  initial: 61

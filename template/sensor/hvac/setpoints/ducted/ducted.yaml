@@ -2,19 +2,36 @@
 - name: "HVAC Setpoint Ducted"
   unique_id: hvac_setpoint_ducted
   state: >
-    {% if is_state('binary_sensor.hvac_ducted_power_status', 'off') %}
+    {% set mode = states('sensor.hvac_mode') %}
+    {% set is_off = is_state('binary_sensor.hvac_ducted_power_status', 'off') %}
+    {% set is_heating = is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+    {% set is_cooling = is_state('binary_sensor.hvac_calling_for_cooling_ducted', 'on') %}
+
+    {% if is_off %}
       None
-    {% elif is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+    {% elif is_heating %}
       {{ states('input_number.hvac_active_setpoint_ducted') }}
-    {% else %}
+    {% elif is_cooling %}
+      {{ states('input_number.hvac_active_setpoint_cooling_ducted') }}
+    {% elif mode == 'Heat' %}
       {{ states('input_number.hvac_off_setpoint_ducted') }}
+    {% elif mode == 'Cool' %}
+      {{ states('input_number.hvac_off_setpoint_cooling_ducted') }}
+    {% else %}
+      None
     {% endif %}
   unit_of_measurement: "°F"
   icon: >
-    {% if is_state('sensor.hvac_setpoint_ducted', 'None') %}
+    {% set state = states('sensor.hvac_setpoint_ducted') %}
+    {% set is_heating = is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+    {% set is_cooling = is_state('binary_sensor.hvac_calling_for_cooling_ducted', 'on') %}
+
+    {% if state == 'None' %}
       mdi:power
-    {% elif is_state('binary_sensor.hvac_calling_for_heat_ducted', 'on') %}
+    {% elif is_heating %}
       mdi:fire
+    {% elif is_cooling %}
+      mdi:snowflake
     {% else %}
       mdi:thermometer
     {% endif %}
