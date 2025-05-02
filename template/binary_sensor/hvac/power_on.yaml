@@ -557,7 +557,7 @@
   unique_id: hvac_ducted_power_status
   state: >
     {% set ducted_enabled = is_state('input_boolean.hvac_ducted_enabled', 'on') %}
-    {% set power_control = is_state('input_boolean.hvac_ducted_power_on_control_ducted', 'on') %}
+    {% set power_control = is_state('input_boolean.hvac_power_on_control_ducted', 'on') %}
     {% set override_status = is_state('input_boolean.hvac_override_status_ducted', 'on') %}
     {% set away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set away_system_on = is_state('input_boolean.hvac_away_system_on_ducted', 'on') %}
@@ -575,8 +575,8 @@
     {% set nighttime_off_cold_threshold = states('input_number.hvac_ducted_night_off_cold_threshold') | float %}
     {% set daytime_off_hot_threshold = states('input_number.hvac_ducted_daytime_off_hot_threshold') | float %}
     {% set nighttime_off_hot_threshold = states('input_number.hvac_ducted_night_off_hot_threshold') | float %}
-    {% set daytime_off_hot_threshold = states('input_number.hvac_ducted_daytime_off_ac_threshold') | float %}
-    {% set nighttime_off_hot_threshold = states('input_number.hvac_ducted_night_off_ac_threshold') | float %}
+    {% set daytime_off_ac_threshold = states('input_number.hvac_ducted_daytime_off_ac_threshold') | float %}
+    {% set nighttime_off_ac_threshold = states('input_number.hvac_ducted_night_off_ac_threshold') | float %}
 
     {# Dynamic threshold selection based on comfort mode #}
     {% set daytime_off_threshold = 
