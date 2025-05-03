@@ -157,8 +157,8 @@
     {# 7. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
     {% elif not daytime_active and current_temp < nighttime_off_threshold %}
       off
-    {# 8. Not Working Room Check (only during daytime and above threshold) #}
-    {% elif daytime_active and current_temp > not_working_temp_threshold %}
+    {# 8. Not Working Room Check (only when heating during daytime and above threshold) #}
+    {% elif hvac_mode == "Heat" and daytime_active and current_temp > not_working_temp_threshold %}
       off
     {# 9. Default On State #}
     {% else %}
