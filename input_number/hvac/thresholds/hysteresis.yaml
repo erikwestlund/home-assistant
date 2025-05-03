@@ -21,7 +21,7 @@ hvac_under_target_stop_threshold_ducted:
   max: 5
   step: 0.5
   unit_of_measurement: "°F"
-  initial: 0.5
+#  initial: 0.5
 
 hvac_over_target_start_threshold_ducted:
   name: HVAC Ducted Over Target Start Threshold (For Cooling)
@@ -29,7 +29,7 @@ hvac_over_target_start_threshold_ducted:
   max: 5
   step: 0.5
   unit_of_measurement: "°F"
-  initial: 1
+#  initial: 1
 
 # Space Heater
 hvac_under_target_start_threshold_office_space_heater:

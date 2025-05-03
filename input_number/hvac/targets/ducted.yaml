@@ -3,7 +3,7 @@ hvac_target_day_heat_ducted:
   name: HVAC Kids Rooms Day Heat Target
   min: 62
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 64
 
@@ -11,7 +11,7 @@ hvac_target_day_cool_ducted:
   name: HVAC Kids Rooms Day Cool Target
   min: 62
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 76
 
@@ -20,7 +20,7 @@ hvac_target_night_heat_ducted:
   name: HVAC Kids Rooms Night Heat Target
   min: 62
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 69
 
@@ -28,6 +28,6 @@ hvac_target_night_cool_ducted:
   name: HVAC Kids Rooms Night Cool Target
   min: 62
   max: 86
-  step: 1
+  step: 0.5
   unit_of_measurement: "°F"
   # initial: 72
