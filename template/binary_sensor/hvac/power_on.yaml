@@ -187,6 +187,7 @@
 - name: "HVAC Mini Split Power Status Family Room"
   unique_id: hvac_mini_split_power_status_family_room
   state: >
+    {% set hvac_mode = states('sensor.hvac_mode') %}
     {% set mini_splits_enabled = is_state('input_boolean.hvac_mini_splits_enabled', 'on') %}
     {% set power_control = is_state('input_boolean.hvac_mini_split_power_on_control_family_room', 'on') %}
     {% set override_status = is_state('input_boolean.hvac_override_status_family_room', 'on') %}
@@ -587,6 +588,7 @@
 - name: "HVAC Ducted Power Status"
   unique_id: hvac_ducted_power_status
   state: >
+    {% set hvac_mode = states('sensor.hvac_mode') %}
     {% set ducted_enabled = is_state('input_boolean.hvac_ducted_enabled', 'on') %}
     {% set power_control = is_state('input_boolean.hvac_power_on_control_ducted', 'on') %}
     {% set override_status = is_state('input_boolean.hvac_override_status_ducted', 'on') %}
