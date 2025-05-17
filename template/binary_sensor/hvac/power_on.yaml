@@ -588,7 +588,6 @@
 - name: "HVAC Ducted Power Status"
   unique_id: hvac_ducted_power_status
   state: >
-    {% set hvac_mode = states('sensor.hvac_mode') %}
     {% set ducted_enabled = is_state('input_boolean.hvac_ducted_enabled', 'on') %}
     {% set power_control = is_state('input_boolean.hvac_power_on_control_ducted', 'on') %}
     {% set override_status = is_state('input_boolean.hvac_override_status_ducted', 'on') %}
@@ -599,6 +598,7 @@
     {% set off_threshold = states('input_number.hvac_ducted_off_threshold') | float %}
     {% set daytime_active = is_state('binary_sensor.hvac_daytime_active_ducted', 'on') %}
     {% set current_temp = states('sensor.current_temperature') | float %}
+    {% set hvac_mode = states('sensor.hvac_mode') %}
 
     {# Comfort mode thresholds #}
     {% set comfort_mode = states('sensor.hvac_comfort_setting_mode_ducted') | lower %}
@@ -625,28 +625,31 @@
         nighttime_off_ac_threshold if comfort_mode == 'ac' else
         states('input_number.hvac_ducted_night_off_' ~ comfort_mode ~ '_threshold') | float %}
     
-    {# 1. Ducted Enabled Toggle #}
-    {% if not ducted_enabled %}
+    {# 1. System Off Check #}
+    {% if hvac_mode == 'Off' %}
         off
-    {# 2. Power Control Toggle #}
+    {# 2. Ducted Enabled Toggle #}
+    {% elif not ducted_enabled %}
+        off
+    {# 3. Power Control Toggle #}
     {% elif not power_control %}
         off
-    {# 3. Override Status #}
+    {# 4. Override Status #}
     {% elif override_status %}
         on
-    {# 4. Away Mode #}
+    {# 5. Away Mode #}
     {% elif away_mode %}
         {{ 'on' if away_system_on else 'off' }}
-    {# 5. General Off Check (using daytime or nighttime average temperature under general off threshold) #}
+    {# 6. General Off Check (using daytime or nighttime average temperature under general off threshold) #}
     {% elif (daytime_active and daytime_avg_temp < off_threshold) or (not daytime_active and nighttime_avg_temp < off_threshold) %}
         off
-    {# 6. Daytime Check (using daytime average temperature and daytime threshold) #}
+    {# 7. Daytime Check (using daytime average temperature and daytime threshold) #}
     {% elif daytime_active and daytime_avg_temp < daytime_off_threshold %}
       off
-    {# 7. Nighttime Check (using nighttime average temperature and nighttime threshold) #}
+    {# 8. Nighttime Check (using nighttime average temperature and nighttime threshold) #}
     {% elif not daytime_active and nighttime_avg_temp < nighttime_off_threshold %}
       off
-    {# 8. Default On State #}
+    {# 9. Default On State #}
     {% else %}
       on
     {% endif %}
