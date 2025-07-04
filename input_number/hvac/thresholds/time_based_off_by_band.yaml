@@ -63,7 +63,7 @@ hvac_mini_split_night_off_ac_threshold_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 75
+  initial: 70
 
 # Turn off working settings
 hvac_mini_split_off_when_not_working_temp_over_freezing_threshold_office:
@@ -96,7 +96,7 @@ hvac_mini_split_off_when_not_working_temp_under_ac_threshold_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 80
+  initial: 75
 
 ## Family Room
 # Daytime Off Thresholds
@@ -130,7 +130,7 @@ hvac_mini_split_daytime_off_ac_threshold_family_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 65
 
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_family_room:
@@ -163,7 +163,7 @@ hvac_mini_split_night_off_ac_threshold_family_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 75
+  initial: 70
 
 ## Living Room
 # Daytime Off Thresholds
@@ -197,7 +197,7 @@ hvac_mini_split_daytime_off_ac_threshold_living_room:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 75
+  initial: 65
 
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_living_room:
@@ -331,7 +331,7 @@ hvac_mini_split_daytime_off_ac_threshold_erik_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 65
+  initial: 60
 
 # Nighttime Off Thresholds
 hvac_mini_split_night_off_freezing_threshold_erik_office:
@@ -364,7 +364,7 @@ hvac_mini_split_night_off_ac_threshold_erik_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 75
+  initial: 70
 
 # Weekend Off Thresholds
 hvac_mini_split_weekend_off_freezing_threshold_erik_office:
@@ -397,7 +397,7 @@ hvac_mini_split_weekend_off_ac_threshold_erik_office:
   max: 120
   step: 1
   unit_of_measurement: "°F"
-  initial: 70
+  initial: 65
 
 ## Master Bedroom
 # Daytime Off Thresholds
@@ -532,4 +532,3 @@ hvac_ducted_night_off_ac_threshold:
   step: 1
   unit_of_measurement: "°F"
   initial: 60
-

@@ -29,7 +29,7 @@ hvac_mini_split_weekday_ac_setpoint_living_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 76
+  # initial: 76
 
 # Weekend Setpoints
 hvac_mini_split_weekend_freezing_setpoint_living_room:
@@ -62,7 +62,7 @@ hvac_mini_split_weekend_ac_setpoint_living_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 76
+  # initial: 76
 
 # Night Setpoints
 hvac_mini_split_night_freezing_setpoint_living_room:

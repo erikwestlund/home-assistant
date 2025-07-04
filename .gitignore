@@ -27,3 +27,4 @@ www/community/
 .storage*
 
 overview.yml
+.DS_Store
