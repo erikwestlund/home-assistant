@@ -163,11 +163,15 @@
     {# 6. General Off Check (using general off threshold) #}
     {% elif current_temp < general_off_threshold %}
       off
-    {# 7. Daytime Check (use daytime average temperature and daytime threshold) #}
-    {% elif daytime_active and current_temp < daytime_off_threshold %}
+    {# 7. Daytime Check - Mode aware (cooling vs heating) #}
+    {% elif daytime_active and hvac_mode == "Cool" and current_temp > daytime_off_threshold %}
       off
-    {# 8. Nighttime Check (use nighttime average temperature and nighttime threshold) #}
-    {% elif not daytime_active and current_temp < nighttime_off_threshold %}
+    {% elif daytime_active and hvac_mode != "Cool" and current_temp < daytime_off_threshold %}
+      off
+    {# 8. Nighttime Check - Mode aware (cooling vs heating) #}
+    {% elif not daytime_active and hvac_mode == "Cool" and current_temp > nighttime_off_threshold %}
+      off
+    {% elif not daytime_active and hvac_mode != "Cool" and current_temp < nighttime_off_threshold %}
       off
     {# 9. Not Working Room Check (only when heating during daytime and above threshold) #}
     {% elif hvac_mode == "Heat" and daytime_active and current_temp > not_working_temp_threshold %}
