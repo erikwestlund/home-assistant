@@ -163,25 +163,31 @@
     {# 6. General Off Check (using general off threshold) #}
     {% elif current_temp < general_off_threshold %}
       off
-    {# 7. Daytime Check - Mode aware (cooling vs heating) #}
-    {% elif daytime_active and hvac_mode == "Cool" and current_temp > daytime_off_threshold %}
-      off
-    {% elif daytime_active and hvac_mode != "Cool" and current_temp < daytime_off_threshold %}
-      off
-    {# 8. Nighttime Check - Mode aware (cooling vs heating) #}
-    {% elif not daytime_active and hvac_mode == "Cool" and current_temp > nighttime_off_threshold %}
-      off
-    {% elif not daytime_active and hvac_mode != "Cool" and current_temp < nighttime_off_threshold %}
-      off
-    {# 9. Not Working Room Check (only when heating during daytime and above threshold) #}
-    {% elif hvac_mode == "Heat" and daytime_active and current_temp > not_working_temp_threshold %}
-      off
-    {# 10. Default On State #}
+    {# 7. Temperature-based checks with explicit mode handling #}
+    {% elif hvac_mode == "Cool" %}
+      {# For cooling: turn off when it's cool enough outside #}
+      {% if (daytime_active and current_temp < daytime_off_threshold) or
+            (not daytime_active and current_temp < nighttime_off_threshold) %}
+        off
+      {% else %}
+        on
+      {% endif %}
+    {% elif hvac_mode == "Heat" %}
+      {# For heating: turn off when it's warm enough outside or room is too warm #}
+      {% if (daytime_active and current_temp < daytime_off_threshold) or
+            (not daytime_active and current_temp < nighttime_off_threshold) %}
+        off
+      {% elif daytime_active and current_temp > not_working_temp_threshold %}
+        off
+      {% else %}
+        on
+      {% endif %}
+    {# 8. Default On State for other modes #}
     {% else %}
       on
     {% endif %}
   icon: >
-    {% if is_state('sensor.hvac_mini_split_power_status_office', 'on') %}
+    {% if is_state('binary_sensor.hvac_mini_split_power_status_office', 'on') %}
       mdi:power
     {% else %}
       mdi:power-off
