@@ -1,0 +1,113 @@
+# Automatically set HVAC mode based on season and temperature at startup
+- alias: "HVAC: Set Mode Based on Season at Startup"
+  id: hvac_set_mode_based_on_season_at_startup
+  description: "Automatically select Heat or Cool mode based on season and outdoor temperature when Home Assistant starts"
+  trigger:
+    - platform: homeassistant
+      event: start
+  condition: []
+  action:
+    # Wait a moment for sensors to initialize
+    - delay:
+        seconds: 30
+    
+    # Set mode based on month and temperature
+    - choose:
+        # June, July, August - Always Cool
+        - conditions:
+            - condition: template
+              value_template: "{{ now().month in [6, 7, 8] }}"
+          sequence:
+            - service: input_select.select_option
+              target:
+                entity_id: input_select.hvac_mode
+              data:
+                option: "Cool"
+            - service: system_log.write
+              data:
+                message: "HVAC mode set to Cool - Summer month ({{ now().strftime('%B') }})"
+                level: info
+        
+        # October through April - Always Heat
+        - conditions:
+            - condition: template
+              value_template: "{{ now().month in [10, 11, 12, 1, 2, 3, 4] }}"
+          sequence:
+            - service: input_select.select_option
+              target:
+                entity_id: input_select.hvac_mode
+              data:
+                option: "Heat"
+            - service: system_log.write
+              data:
+                message: "HVAC mode set to Heat - Winter month ({{ now().strftime('%B') }})"
+                level: info
+        
+        # May and September - Decide based on temperature
+        - conditions:
+            - condition: template
+              value_template: "{{ now().month in [5, 9] }}"
+          sequence:
+            - choose:
+                # If temp below 65°F, set to Heat
+                - conditions:
+                    - condition: numeric_state
+                      entity_id: sensor.current_nws_outdoor_temperature
+                      below: 65
+                  sequence:
+                    - service: input_select.select_option
+                      target:
+                        entity_id: input_select.hvac_mode
+                      data:
+                        option: "Heat"
+                    - service: system_log.write
+                      data:
+                        message: "HVAC mode set to Heat - {{ now().strftime('%B') }}, outdoor temp is {{ states('sensor.current_nws_outdoor_temperature') }}°F"
+                        level: info
+                
+                # If temp above 75°F, set to Cool
+                - conditions:
+                    - condition: numeric_state
+                      entity_id: sensor.current_nws_outdoor_temperature
+                      above: 75
+                  sequence:
+                    - service: input_select.select_option
+                      target:
+                        entity_id: input_select.hvac_mode
+                      data:
+                        option: "Cool"
+                    - service: system_log.write
+                      data:
+                        message: "HVAC mode set to Cool - {{ now().strftime('%B') }}, outdoor temp is {{ states('sensor.current_nws_outdoor_temperature') }}°F"
+                        level: info
+                
+                # If temp between 65-75°F, set to Off
+                - conditions:
+                    - condition: numeric_state
+                      entity_id: sensor.current_nws_outdoor_temperature
+                      above: 65
+                    - condition: numeric_state
+                      entity_id: sensor.current_nws_outdoor_temperature
+                      below: 75
+                  sequence:
+                    - service: input_select.select_option
+                      target:
+                        entity_id: input_select.hvac_mode
+                      data:
+                        option: "Off"
+                    - service: system_log.write
+                      data:
+                        message: "HVAC mode set to Off - {{ now().strftime('%B') }}, outdoor temp is {{ states('sensor.current_nws_outdoor_temperature') }}°F"
+                        level: info
+              
+              # Default for May/Sept if temp unavailable
+              default:
+                - service: system_log.write
+                  data:
+                    message: "Unable to read outdoor temperature in {{ now().strftime('%B') }}, defaulting to Off"
+                    level: warning
+                - service: input_select.select_option
+                  target:
+                    entity_id: input_select.hvac_mode
+                  data:
+                    option: "Off"

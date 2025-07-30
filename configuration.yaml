@@ -1,6 +1,17 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+# HTTP configuration for reverse proxy
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.0.0/16     # All local network addresses
+    - 172.16.0.0/12      # Docker networks
+    - 10.0.0.0/8         # More private networks
+    - 127.0.0.1          # Localhost
+    - ::1                # IPv6 localhost
+    - 100.64.0.0/10      # Tailscale CGNAT range
+    - fd7a:115c:a1e0::/48 # Tailscale IPv6 range
 
 homeassistant:
   name: Home
