@@ -57,3 +57,61 @@ template:
 sensor: !include_dir_merge_list sensors/
 
 python_script:
+
+# InfluxDB 2.x Configuration
+influxdb:
+  api_version: 2
+  ssl: false
+  host: docker-services-host.lan
+  port: 8087
+  token: "BNH25bkqKoHuSHm5Rmh4fgiMFqs7QfrCHWGzqBXDpks2pd7G"
+  organization: "homelab"
+  bucket: "home_assistant"
+  tags:
+    source: home_assistant
+  tags_attributes:
+    - friendly_name
+  default_measurement: state
+  # Include all sensors, binary sensors, and HVAC input_numbers
+  include:
+    domains:
+      - sensor
+      - binary_sensor
+    entity_globs:
+      - "input_number.hvac_*"
+  # Exclude all other domains
+  exclude:
+    domains:
+      - automation
+      - button
+      - camera
+      - climate
+      - cover
+      - device_tracker
+      - fan
+      - group
+      - humidifier
+      - input_boolean
+      - input_button
+      - input_datetime
+      - input_number
+      - input_select
+      - input_text
+      - light
+      - lock
+      - media_player
+      - number
+      - person
+      - remote
+      - scene
+      - script
+      - select
+      - siren
+      - sun
+      - switch
+      - timer
+      - update
+      - vacuum
+      - water_heater
+      - weather
+      - zone
