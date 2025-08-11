@@ -1,0 +1,24 @@
+- id: reset_zigbee_recover_fail_count
+  alias: "Reset Zigbee Recovery Failure Count After Stability"
+  description: "Resets failure count and re-enables monitoring after Zigbee has been stable for 30 minutes"
+  triggers:
+    - platform: state
+      entity_id: binary_sensor.zigbee_down
+      to: "off"
+      for:
+        minutes: 30
+  conditions: []
+  actions:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.zigbee_recover_fail_count
+      data:
+        value: 0
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.zigbee_auto_recover_enabled
+    - service: notify.persistent_notification
+      data:
+        title: "Zigbee Monitoring Restored"
+        message: "Zigbee coordinator has been stable for 30 minutes. Auto-recovery monitoring has been restored."
+  mode: single

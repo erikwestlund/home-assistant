@@ -1,0 +1,4 @@
+zigbee_auto_recover_enabled:
+  name: "Zigbee Auto Recovery Enabled"
+  initial: on
+  icon: mdi:shield-refresh

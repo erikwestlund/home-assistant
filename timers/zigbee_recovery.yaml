@@ -1,0 +1,3 @@
+zigbee_recover_cooldown:
+  name: "Zigbee Recovery Cooldown"
+  duration: "00:10:00"

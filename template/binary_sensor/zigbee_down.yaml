@@ -1,0 +1,11 @@
+- name: "Zigbee Down"
+  unique_id: "zigbee_down"
+  state: >
+    {{ states('sensor.zigbee2mqtt_bridge_state') | lower != 'online' }}
+  device_class: problem
+  icon: >
+    {% if states('sensor.zigbee2mqtt_bridge_state') | lower == 'online' %}
+      mdi:zigbee
+    {% else %}
+      mdi:zigbee-off
+    {% endif %}

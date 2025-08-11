@@ -1,0 +1,88 @@
+- id: auto_recover_zigbee
+  alias: "Auto Recover Zigbee Coordinator"
+  description: "Automatically power-cycles PoE port and restarts Zigbee2MQTT when coordinator is down"
+  triggers:
+    - platform: state
+      entity_id: binary_sensor.zigbee_down
+      to: "on"
+  conditions:
+    - condition: state
+      entity_id: timer.zigbee_recover_cooldown
+      state: "idle"
+    - condition: state
+      entity_id: input_boolean.zigbee_auto_recover_enabled
+      state: "on"
+    - condition: template
+      value_template: >
+        {{ states('input_number.zigbee_recover_fail_count') | int < 
+           states('input_number.zigbee_recover_fail_limit') | int }}
+  actions:
+    - delay:
+        seconds: "{{ states('input_number.zigbee_debounce_seconds') | int }}"
+    - condition: state
+      entity_id: binary_sensor.zigbee_down
+      state: "on"
+    - service: switch.turn_off
+      target:
+        entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+    - delay:
+        seconds: 10
+    - service: switch.turn_on
+      target:
+        entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+    - wait_template: >
+        {{ states('sensor.zigbee2mqtt_bridge_state') | lower == 'online' }}
+      timeout: "00:02:00"
+      continue_on_timeout: true
+    - service: shell_command.restart_z2m
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ wait.completed }}"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.zigbee_recover_fail_count
+              data:
+                value: 0
+            - service: timer.start
+              target:
+                entity_id: timer.zigbee_recover_cooldown
+            - service: notify.persistent_notification
+              data:
+                title: "Zigbee Recovery Successful"
+                message: "Zigbee coordinator has been successfully recovered and is back online."
+        - conditions:
+            - condition: template
+              value_template: "{{ not wait.completed }}"
+          sequence:
+            - service: input_number.increment
+              target:
+                entity_id: input_number.zigbee_recover_fail_count
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ states('input_number.zigbee_recover_fail_count') | int >= 
+                           states('input_number.zigbee_recover_fail_limit') | int }}
+                  sequence:
+                    - service: input_boolean.turn_off
+                      target:
+                        entity_id: input_boolean.zigbee_auto_recover_enabled
+                    - service: notify.persistent_notification
+                      data:
+                        title: "Zigbee Recovery Failed - Monitoring Disabled"
+                        message: >
+                          Zigbee coordinator recovery has failed {{ states('input_number.zigbee_recover_fail_limit') }} times.
+                          Auto-recovery has been disabled. Manual investigation required.
+                default:
+                  - service: notify.persistent_notification
+                    data:
+                      title: "Zigbee Recovery Failed"
+                      message: >
+                        Zigbee coordinator recovery attempt failed.
+                        Failed attempts: {{ states('input_number.zigbee_recover_fail_count') }}/{{ states('input_number.zigbee_recover_fail_limit') }}
+            - service: timer.start
+              target:
+                entity_id: timer.zigbee_recover_cooldown
+  mode: single

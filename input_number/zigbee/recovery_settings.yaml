@@ -1,0 +1,24 @@
+zigbee_debounce_seconds:
+  name: "Zigbee Down Debounce Time"
+  initial: 60
+  min: 0
+  max: 600
+  step: 10
+  unit_of_measurement: "seconds"
+  icon: mdi:timer-sand
+
+zigbee_recover_fail_count:
+  name: "Zigbee Recovery Failure Count"
+  initial: 0
+  min: 0
+  max: 100
+  step: 1
+  icon: mdi:counter
+
+zigbee_recover_fail_limit:
+  name: "Zigbee Recovery Failure Limit"
+  initial: 5
+  min: 1
+  max: 20
+  step: 1
+  icon: mdi:alert-octagram

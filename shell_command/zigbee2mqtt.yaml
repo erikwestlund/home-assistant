@@ -1,0 +1,1 @@
+restart_z2m: 'docker restart zigbee2mqtt'

@@ -1,0 +1,4 @@
+zigbee_poe_port_entity:
+  name: "Zigbee Coordinator PoE Port Entity ID"
+  initial: ""
+  icon: mdi:ethernet
