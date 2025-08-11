@@ -77,11 +77,11 @@
                           Auto-recovery has been disabled. Manual investigation required.
               default:
                 - service: notify.persistent_notification
-                    data:
-                      title: "Zigbee Recovery Failed"
-                      message: >
-                        Zigbee coordinator recovery attempt failed.
-                        Failed attempts: {{ states('input_number.zigbee_recover_fail_count') }}/{{ states('input_number.zigbee_recover_fail_limit') }}
+                  data:
+                    title: "Zigbee Recovery Failed"
+                    message: >
+                      Zigbee coordinator recovery attempt failed.
+                      Failed attempts: {{ states('input_number.zigbee_recover_fail_count') }}/{{ states('input_number.zigbee_recover_fail_limit') }}
             - service: timer.start
               target:
                 entity_id: timer.zigbee_recover_cooldown
