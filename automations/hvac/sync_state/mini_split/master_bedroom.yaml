@@ -19,7 +19,7 @@
               entity_id: binary_sensor.hvac_mini_split_power_synced_master_bedroom
               state: "off"
           sequence:
-            - service: climate.set_hvac_mode
+            - action: climate.set_hvac_mode
               data:
                 entity_id: climate.master_bedroom_heat_pump
                 hvac_mode: >
@@ -32,12 +32,12 @@
                   {% else %}
                     off
                   {% endif %}
-            - service: climate.set_temperature
+            - action: climate.set_temperature
               data:
                 entity_id: climate.master_bedroom_heat_pump
                 temperature: >
                   {{ max([states('sensor.hvac_mini_split_setpoint_master_bedroom_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
-            - service: logbook.log
+            - action: logbook.log
               data:
                 name: "HVAC Mini Split Sync Master Bedroom"
                 message: >
@@ -51,7 +51,7 @@
               entity_id: binary_sensor.hvac_mini_split_mode_synced_master_bedroom
               state: "off"
           sequence:
-            - service: climate.set_hvac_mode
+            - action: climate.set_hvac_mode
               data:
                 entity_id: climate.master_bedroom_heat_pump
                 hvac_mode: >
@@ -60,12 +60,12 @@
                   {% else %}
                     cool
                   {% endif %}
-            - service: climate.set_temperature
+            - action: climate.set_temperature
               data:
                 entity_id: climate.master_bedroom_heat_pump
                 temperature: >
                   {{ max([states('sensor.hvac_mini_split_setpoint_master_bedroom_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
-            - service: logbook.log
+            - action: logbook.log
               data:
                 name: "HVAC Mini Split Sync Master Bedroom"
                 message: >
@@ -79,12 +79,12 @@
               entity_id: binary_sensor.hvac_mini_split_setpoint_synced_master_bedroom
               state: "off"
           sequence:
-            - service: climate.set_temperature
+            - action: climate.set_temperature
               data:
                 entity_id: climate.master_bedroom_heat_pump
                 temperature: >
                   {{ max([states('sensor.hvac_mini_split_setpoint_master_bedroom_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
-            - service: logbook.log
+            - action: logbook.log
               data:
                 name: "HVAC Mini Split Sync Master Bedroom"
                 message: >
