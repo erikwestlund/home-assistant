@@ -22,16 +22,39 @@
     - condition: state
       entity_id: binary_sensor.zigbee_down
       state: "on"
-    - service: switch.turn_off
+    # First try soft restart
+    - service: button.press
       target:
-        entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+        entity_id: button.slzb_06p7_zigbee_restart
     - delay:
-        seconds: 10
-    - service: switch.turn_on
-      target:
-        entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+        seconds: 30
+    - condition: template
+      value_template: >
+        {{ not is_state('binary_sensor.zigbee2mqtt_bridge_connection_state', 'on') }}
+    # If still down, try PoE cycle if configured
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ states('input_text.zigbee_poe_port_entity') not in ['', 'unknown', 'unavailable'] }}
+          sequence:
+            - service: switch.turn_off
+              target:
+                entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+            - delay:
+                seconds: 10
+            - service: switch.turn_on
+              target:
+                entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+      # If no PoE configured, try core restart
+      default:
+        - service: button.press
+          target:
+            entity_id: button.slzb_06p7_core_restart
+    - delay:
+        seconds: 30
     - wait_template: >
-        {{ states('sensor.zigbee2mqtt_bridge_state') | lower == 'online' }}
+        {{ is_state('binary_sensor.zigbee2mqtt_bridge_connection_state', 'on') }}
       timeout: "00:02:00"
       continue_on_timeout: true
     - service: shell_command.restart_z2m
