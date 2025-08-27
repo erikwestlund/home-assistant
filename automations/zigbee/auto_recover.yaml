@@ -38,14 +38,26 @@
               value_template: >
                 {{ states('input_text.zigbee_poe_port_entity') not in ['', 'unknown', 'unavailable'] }}
           sequence:
-            - service: switch.turn_off
-              target:
-                entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
-            - delay:
-                seconds: 10
-            - service: switch.turn_on
-              target:
-                entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+            - choose:
+                # If it's a button entity (UniFi power cycle)
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ states('input_text.zigbee_poe_port_entity').startswith('button.') }}
+                  sequence:
+                    - service: button.press
+                      target:
+                        entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+              # If it's a switch entity (traditional PoE switch)
+              default:
+                - service: switch.turn_off
+                  target:
+                    entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
+                - delay:
+                    seconds: 10
+                - service: switch.turn_on
+                  target:
+                    entity_id: "{{ states('input_text.zigbee_poe_port_entity') }}"
       # If no PoE configured, try core restart
       default:
         - service: button.press
