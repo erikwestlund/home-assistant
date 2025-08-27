@@ -36,7 +36,7 @@
               data:
                 entity_id: climate.eriks_office_room
                 temperature: >
-                  {{ max([states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
+                  {{ max([states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64), 64]) | float(64) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Erik's Office"
@@ -64,7 +64,7 @@
               data:
                 entity_id: climate.eriks_office_room
                 temperature: >
-                  {{ max([states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
+                  {{ max([states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64), 64]) | float(64) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Erik's Office"
@@ -83,7 +83,7 @@
               data:
                 entity_id: climate.eriks_office_room
                 temperature: >
-                  {{ max([states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64.4), 64.4]) | float(64.4) }}
+                  {{ max([states('sensor.hvac_mini_split_setpoint_erik_office_lg_converted') | float(64), 64]) | float(64) }}
             - service: logbook.log
               data:
                 name: "HVAC Mini Split Sync Erik's Office"
