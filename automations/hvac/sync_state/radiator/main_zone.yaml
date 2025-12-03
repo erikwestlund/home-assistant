@@ -4,6 +4,10 @@
     - platform: state
       entity_id: sensor.hvac_radiator_setpoint_main_zone
   condition:
+    # Master kill switch
+    - condition: state
+      entity_id: input_boolean.hvac_control
+      state: "on"
     # Only sync if HA should control (away/override mode OR Ecobee schedule toggle is off)
     - condition: or
       conditions:
@@ -42,6 +46,10 @@
     - platform: time_pattern
       minutes: "/5"
   condition:
+    # Master kill switch
+    - condition: state
+      entity_id: input_boolean.hvac_control
+      state: "on"
     # Only sync if HA should control (away/override mode OR Ecobee schedule toggle is off)
     - condition: or
       conditions:

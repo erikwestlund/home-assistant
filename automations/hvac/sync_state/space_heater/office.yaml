@@ -6,6 +6,10 @@
       entity_id: binary_sensor.hvac_space_heater_active_office
     - platform: time_pattern
       minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_control
+      state: "on"
   action:
     - choose:
         # Turn the space heater off if it shouldn't be active

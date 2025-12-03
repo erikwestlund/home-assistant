@@ -3,6 +3,10 @@
   trigger:
     - platform: state
       entity_id: sensor.hvac_radiator_setpoint_office
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_control
+      state: "on"
   action:
     - service: climate.set_temperature
       data:
@@ -28,6 +32,10 @@
       to: "off"
     - platform: time_pattern
       minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_control
+      state: "on"
   action:
     - choose:
         # ✅ Power, Mode, and Setpoint All at Once if Radiator is Off
