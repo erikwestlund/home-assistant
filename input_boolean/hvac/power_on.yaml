@@ -30,6 +30,11 @@ hvac_radiator_power_on_control_main_zone:
   initial: on
   icon: mdi:power
 
+hvac_radiator_use_ecobee_schedule_main_zone:
+  name: HVAC Main Zone Radiator Use Ecobee Schedule
+  initial: on
+  icon: mdi:calendar-clock
+
 # Mini Splits
 hvac_mini_split_power_on_control_office:
   name: HVAC Office Heat Pump Power On Control

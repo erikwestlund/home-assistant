@@ -33,7 +33,7 @@
   unit_of_measurement: "°F"
   state: >
     {% set sensors = [
-      states('sensor.dining_room_chest_temperature') | float(0)
+      states('sensor.dining_room_temperature') | float(0)
     ] %}
     {{ (sensors | sum / sensors | length) | round(1) }}
 
@@ -42,7 +42,7 @@
   unit_of_measurement: "°F"
   state: >
     {% set sensors = [
-      states('sensor.erik_office_desk_temperature') | float(0)
+      states('sensor.erik_office_temperature') | float(0)
     ] %}
     {{ (sensors | sum / sensors | length) | round(1) }}
 

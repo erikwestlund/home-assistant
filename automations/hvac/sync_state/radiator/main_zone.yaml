@@ -3,6 +3,19 @@
   trigger:
     - platform: state
       entity_id: sensor.hvac_radiator_setpoint_main_zone
+  condition:
+    # Only sync if HA should control (away/override mode OR Ecobee schedule toggle is off)
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_boolean.hvac_away_mode
+          state: "on"
+        - condition: state
+          entity_id: input_boolean.hvac_override_status_main_zone
+          state: "on"
+        - condition: state
+          entity_id: input_boolean.hvac_radiator_use_ecobee_schedule_main_zone
+          state: "off"
   action:
     - service: climate.set_temperature
       data:
@@ -25,8 +38,22 @@
         - binary_sensor.hvac_radiator_setpoint_synced_main_zone
         - input_boolean.hvac_override_status_main_zone
         - input_boolean.hvac_away_mode
+        - input_boolean.hvac_radiator_use_ecobee_schedule_main_zone
     - platform: time_pattern
       minutes: "/5"
+  condition:
+    # Only sync if HA should control (away/override mode OR Ecobee schedule toggle is off)
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_boolean.hvac_away_mode
+          state: "on"
+        - condition: state
+          entity_id: input_boolean.hvac_override_status_main_zone
+          state: "on"
+        - condition: state
+          entity_id: input_boolean.hvac_radiator_use_ecobee_schedule_main_zone
+          state: "off"
   action:
     - choose:
         # ✅ Power, Mode, and Setpoint All at Once if Radiator is Off
