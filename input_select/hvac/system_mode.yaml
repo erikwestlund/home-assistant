@@ -4,5 +4,7 @@ hvac_mode:
     - "Off"
     - "Heat"
     - "Cool"
-  # initial value removed - will be set by automation based on outdoor temp
+  # No `initial:` on purpose: HA restores the last selected mode on restart,
+  # which is always what we want. Nothing sets this automatically -- it is
+  # changed by hand only. See CLAUDE.md on `initial:` semantics.
   icon: mdi:home-group
