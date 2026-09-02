@@ -1,16 +1,24 @@
-# Automatically set HVAC mode based on season and temperature at startup
-- alias: "HVAC: Set Mode Based on Season at Startup"
+# Pick an HVAC mode from season and outdoor temperature.
+#
+# This deliberately has NO trigger. It used to fire on `homeassistant start`,
+# which overwrote the restored mode ~30s after every restart: in May/September a
+# restart on a cool morning would read outdoor temp < 65 and flip the whole house
+# to Heat. `input_select.hvac_mode` has no `initial:`, so HA already restores the
+# last mode on its own -- removing the trigger is what makes a restart keep it.
+#
+# Kept as a manually runnable action (Settings -> Automations -> Run actions) for
+# when you do want the seasonal default applied, e.g. at a season change.
+#
+# Note: with no stored state at all, input_select falls back to its first option,
+# which is "Off". That is the safe direction, and it is indistinguishable from
+# deliberately choosing "Off" -- which is why this cannot be a conditional
+# "only if unset" fallback.
+- alias: "HVAC: Set Mode Based on Season (manual)"
   id: hvac_set_mode_based_on_season_at_startup
-  description: "Automatically select Heat or Cool mode based on season and outdoor temperature when Home Assistant starts"
-  trigger:
-    - platform: homeassistant
-      event: start
+  description: "Select Heat or Cool based on season and outdoor temperature. Run manually; does not fire on Home Assistant start."
+  trigger: []
   condition: []
   action:
-    # Wait a moment for sensors to initialize
-    - delay:
-        seconds: 30
-    
     # Set mode based on month and temperature
     - choose:
         # June, July, August - Always Cool
