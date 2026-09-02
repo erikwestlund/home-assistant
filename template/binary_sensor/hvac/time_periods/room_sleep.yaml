@@ -16,7 +16,9 @@
       {% set mins = now().hour * 60 + now().minute %}
       {% set s = start.split(':')[0] | int * 60 + start.split(':')[1] | int %}
       {% set e = end.split(':')[0] | int * 60 + end.split(':')[1] | int %}
-      {% set in_window = (s <= mins < e) if s < e else (mins >= s or mins < e) %}
+      {# s == e is a zero-length window, i.e. unset. Treat it as no window at
+         all -- the wrap branch would otherwise evaluate to always-on. #}
+      {% set in_window = false if s == e else ((s <= mins < e) if s < e else (mins >= s or mins < e)) %}
 
       {{ enabled and is_night and in_window }}
     {% endif %}
