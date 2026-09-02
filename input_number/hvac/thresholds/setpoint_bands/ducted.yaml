@@ -4,7 +4,7 @@ hvac_ducted_freezing_to_cold_threshold:
   max: 50
   step: 1
   unit_of_measurement: "°F"
-  initial: 37
+  # initial: 37
 
 hvac_ducted_cold_to_hot_threshold:
   name: HVAC Ducted Cold to Hot Threshold
@@ -12,4 +12,4 @@ hvac_ducted_cold_to_hot_threshold:
   max: 90
   step: 1
   unit_of_measurement: "°F"
-  initial: 60
+  # initial: 60

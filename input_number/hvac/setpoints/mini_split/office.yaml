@@ -28,7 +28,7 @@ hvac_mini_split_working_ac_setpoint_office:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 74
+  # initial: 74
 
 hvac_mini_split_weekday_freezing_setpoint_office:
   name: HVAC Office Mini Split Weekday Setpoint (Freezing)

@@ -95,7 +95,7 @@ hvac_mini_split_night_ac_setpoint_living_room:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  initial: 76
+  # initial: 76
 
 # Master Bedroom Preheat Setpoints
 hvac_mini_split_master_bedroom_preheat_freezing_setpoint_living_room:

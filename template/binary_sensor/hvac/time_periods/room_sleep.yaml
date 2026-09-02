@@ -1,0 +1,23 @@
+# 😴 HVAC Sleep Active Master Bedroom
+# A colder sub-period carved out of nighttime. Unlike the other period windows
+# this one can wrap past midnight, so it compares minutes-since-midnight rather
+# than same-day timestamps.
+- name: "HVAC Sleep Active Master Bedroom"
+  unique_id: hvac_sleep_active_master_bedroom
+  state: >
+    {% set enabled = is_state('input_boolean.hvac_sleep_enabled_master_bedroom', 'on') %}
+    {% set is_night = is_state('binary_sensor.hvac_nighttime_active_master_bedroom', 'on') %}
+    {% set start = states('input_datetime.hvac_sleep_start_time_master_bedroom') %}
+    {% set end = states('input_datetime.hvac_sleep_end_time_master_bedroom') %}
+
+    {% if start in ['unknown', 'unavailable'] or end in ['unknown', 'unavailable'] %}
+      false
+    {% else %}
+      {% set mins = now().hour * 60 + now().minute %}
+      {% set s = start.split(':')[0] | int * 60 + start.split(':')[1] | int %}
+      {% set e = end.split(':')[0] | int * 60 + end.split(':')[1] | int %}
+      {% set in_window = (s <= mins < e) if s < e else (mins >= s or mins < e) %}
+
+      {{ enabled and is_night and in_window }}
+    {% endif %}
+  icon: mdi:sleep

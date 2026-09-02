@@ -80,3 +80,32 @@ hvac_mini_split_night_ac_setpoint_master_bedroom:
   step: 1
   unit_of_measurement: "°F"
   # initial: 75
+
+# Sleep Setpoints (colder sub-period inside nighttime)
+hvac_mini_split_sleep_freezing_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Sleep Setpoint (Freezing)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+
+hvac_mini_split_sleep_cold_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Sleep Setpoint (Cold)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+
+hvac_mini_split_sleep_hot_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Sleep Setpoint (Hot)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"
+
+hvac_mini_split_sleep_ac_setpoint_master_bedroom:
+  name: HVAC Master Bedroom Mini Split Sleep Setpoint (AC)
+  min: 64
+  max: 86
+  step: 1
+  unit_of_measurement: "°F"

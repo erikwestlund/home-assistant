@@ -24,3 +24,14 @@ hvac_preheating_started_master_bedroom:
   has_time: true
   has_date: true
   # initial: "2025-01-01T17:30:00"
+
+# Sleep window (a colder sub-period carved out of nighttime)
+hvac_sleep_start_time_master_bedroom:
+  name: HVAC Master Bedroom Sleep Start Time
+  has_time: true
+  has_date: false
+
+hvac_sleep_end_time_master_bedroom:
+  name: HVAC Master Bedroom Sleep End Time
+  has_time: true
+  has_date: false

@@ -1,0 +1,7 @@
+# Sleep mode enable toggle.
+# No `initial:` on purpose so the toggle survives a Home Assistant restart.
+# With no prior state (first load) an input_boolean restores to off, which is
+# what we want: Sleep stays inert until the sleep setpoints have been set.
+hvac_sleep_enabled_master_bedroom:
+  name: HVAC Master Bedroom Sleep Mode Enabled
+  icon: mdi:sleep
