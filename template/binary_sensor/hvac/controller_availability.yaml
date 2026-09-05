@@ -84,6 +84,13 @@
   device_class: problem
   state: >
     {{ states('sensor.hvac_offline_controller_count') | int(0) > 0 }}
+  # Without this, a non-numeric count falls through `| int(0)` to 0, which reads
+  # as "off" — a broken sensor chain would render as a healthy house. Going
+  # unavailable instead makes consumers show "status unknown" rather than a
+  # silent all-clear. This is the whole point of the alert, so it must not be
+  # the one thing that fails quietly.
+  availability: >
+    {{ states('sensor.hvac_offline_controller_count') | is_number }}
 
 # All six LG units down at once means the ThinQ integration or the internet is
 # the problem, not one unit. Changes what the alert should tell you to do.
@@ -107,6 +114,12 @@
   device_class: problem
   state: >
     {{ is_state('binary_sensor.hvac_any_controller_offline', 'on') }}
+  # Propagate the same failure semantics: if the chain below is broken, this
+  # goes unavailable rather than reporting a clear house. The life app treats an
+  # unavailable alert entity as "degraded" and shows an amber banner, so a
+  # broken chain surfaces instead of disappearing.
+  availability: >
+    {{ states('binary_sensor.hvac_any_controller_offline') in ['on', 'off'] }}
   delay_on: >
     {{ (states('input_number.hvac_controller_offline_alert_minutes') | int(5)) * 60 }}
   # Hold the alert through a short recovery so a flapping ThinQ connection reads
