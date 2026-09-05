@@ -53,8 +53,12 @@
         {% set ns.names = ns.names + [label] %}
       {% endif %}
     {% endfor %}
+    {#- Not the string "None": HA renders template states with parse_result on,
+        so "None" is literal_eval'd into Python None and the sensor reads
+        `unknown` — which downstream consumers correctly treat as "the sensor is
+        broken" rather than "nothing is offline". -#}
     {% if not ns.names %}
-      None
+      All online
     {% elif ns.names | count == 1 %}
       {{ ns.names[0] }}
     {% else %}
