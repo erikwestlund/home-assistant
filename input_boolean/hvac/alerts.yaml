@@ -1,0 +1,3 @@
+hvac_controller_offline_alerts_enabled:
+  name: HVAC Controller Offline Alerts Enabled
+  icon: mdi:bell-alert

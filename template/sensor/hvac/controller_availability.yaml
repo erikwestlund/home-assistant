@@ -1,0 +1,161 @@
+# Controller availability — detail sensors backing the offline alert.
+# See template/binary_sensor/hvac/controller_availability.yaml for the flags.
+#
+# The entity/label list is repeated in each sensor because HA template entities
+# have no shared scope. Keep these lists in sync with the per-unit binary
+# sensors when a thermostat is added or removed.
+
+- name: "HVAC Offline Controller Count"
+  unique_id: hvac_offline_controller_count
+  unit_of_measurement: "controllers"
+  state_class: measurement
+  state: >
+    {% set ns = namespace(down=0) %}
+    {% for entity_id in [
+      'climate.ducted_heat_pump',
+      'climate.master_bedroom_heat_pump',
+      'climate.living_room_heat_pump',
+      'climate.dining_room_heat_pump',
+      'climate.family_room_heat_pump',
+      'climate.tinas_office_heat_pump',
+      'climate.eriks_office_room',
+      'climate.living_room_main_heating',
+      'climate.family_room_heating',
+      'climate.office',
+    ] %}
+      {% if states(entity_id) in ['unavailable', 'unknown', 'none', 'None'] %}
+        {% set ns.down = ns.down + 1 %}
+      {% endif %}
+    {% endfor %}
+    {{ ns.down }}
+  icon: mdi:lan-disconnect
+
+- name: "HVAC Offline Controllers"
+  unique_id: hvac_offline_controllers
+  # State is deliberately short: HA rejects a state over 255 characters and the
+  # entity would go unavailable exactly when it matters. The full breakdown
+  # lives in the `controllers` attribute.
+  state: >
+    {% set ns = namespace(names=[]) %}
+    {% for entity_id, label in [
+      ('climate.ducted_heat_pump', 'Ducted (Kids Rooms)'),
+      ('climate.master_bedroom_heat_pump', 'Master Bedroom'),
+      ('climate.living_room_heat_pump', 'Living Room'),
+      ('climate.dining_room_heat_pump', 'Dining Room'),
+      ('climate.family_room_heat_pump', 'Family Room'),
+      ('climate.tinas_office_heat_pump', "Tina's Office"),
+      ('climate.eriks_office_room', "Erik's Office"),
+      ('climate.living_room_main_heating', 'Main Zone Radiators'),
+      ('climate.family_room_heating', 'Family Room Radiators'),
+      ('climate.office', 'Office Radiators'),
+    ] %}
+      {% if states(entity_id) in ['unavailable', 'unknown', 'none', 'None'] %}
+        {% set ns.names = ns.names + [label] %}
+      {% endif %}
+    {% endfor %}
+    {% if not ns.names %}
+      None
+    {% elif ns.names | count == 1 %}
+      {{ ns.names[0] }}
+    {% else %}
+      {{ ns.names[0] }} +{{ (ns.names | count) - 1 }} more
+    {% endif %}
+  attributes:
+    # Structured detail for the life app / dashboard. One entry per offline
+    # controller; `offline_minutes` is time since that unit last dropped, so it
+    # resets on a flap — use sensor.hvac_controller_outage_minutes for the
+    # headline duration.
+    controllers: >
+      {% set ns = namespace(rows=[]) %}
+      {% for entity_id, label in [
+        ('climate.ducted_heat_pump', 'Ducted (Kids Rooms)'),
+        ('climate.master_bedroom_heat_pump', 'Master Bedroom'),
+        ('climate.living_room_heat_pump', 'Living Room'),
+        ('climate.dining_room_heat_pump', 'Dining Room'),
+        ('climate.family_room_heat_pump', 'Family Room'),
+        ('climate.tinas_office_heat_pump', "Tina's Office"),
+        ('climate.eriks_office_room', "Erik's Office"),
+        ('climate.living_room_main_heating', 'Main Zone Radiators'),
+        ('climate.family_room_heating', 'Family Room Radiators'),
+        ('climate.office', 'Office Radiators'),
+      ] %}
+        {% set unit = states[entity_id] %}
+        {% if unit is not none and unit.state in ['unavailable', 'unknown', 'none', 'None'] %}
+          {% set ns.rows = ns.rows + [{
+            'entity_id': entity_id,
+            'name': label,
+            'offline_minutes': ((now() - unit.last_changed).total_seconds() / 60) | int,
+          }] %}
+        {% endif %}
+      {% endfor %}
+      {{ ns.rows }}
+    count: >
+      {{ states('sensor.hvac_offline_controller_count') | int(0) }}
+  icon: mdi:format-list-bulleted
+
+# Longest current outage, in minutes. `now()` makes HA re-render this every
+# minute, so it ticks up on its own while something is down and drops to 0 on
+# recovery. This is the number the alert leads with.
+- name: "HVAC Controller Offline Minutes"
+  unique_id: hvac_controller_offline_minutes
+  unit_of_measurement: "min"
+  state_class: measurement
+  state: >
+    {% set ns = namespace(longest=0) %}
+    {% for entity_id in [
+      'climate.ducted_heat_pump',
+      'climate.master_bedroom_heat_pump',
+      'climate.living_room_heat_pump',
+      'climate.dining_room_heat_pump',
+      'climate.family_room_heat_pump',
+      'climate.tinas_office_heat_pump',
+      'climate.eriks_office_room',
+      'climate.living_room_main_heating',
+      'climate.family_room_heating',
+      'climate.office',
+    ] %}
+      {% set unit = states[entity_id] %}
+      {% if unit is not none and unit.state in ['unavailable', 'unknown', 'none', 'None'] %}
+        {% set minutes = ((now() - unit.last_changed).total_seconds() / 60) | int %}
+        {% set ns.longest = [ns.longest, minutes] | max %}
+      {% endif %}
+    {% endfor %}
+    {{ ns.longest }}
+  icon: mdi:timer-alert-outline
+
+# Same, for the ducted system alone — the one that actually cooks the kids'
+# rooms when it sticks at the parked setpoint.
+- name: "HVAC Ducted Controller Offline Minutes"
+  unique_id: hvac_ducted_controller_offline_minutes
+  unit_of_measurement: "min"
+  state_class: measurement
+  state: >
+    {% set unit = states['climate.ducted_heat_pump'] %}
+    {% if unit is not none and unit.state in ['unavailable', 'unknown', 'none', 'None'] %}
+      {{ ((now() - unit.last_changed).total_seconds() / 60) | int }}
+    {% else %}
+      0
+    {% endif %}
+  icon: mdi:timer-alert-outline
+
+# Headline duration for the alert UI. Measured from when the outage *started*
+# (input_datetime.hvac_controller_outage_started), not from when any single
+# unit last dropped, so a flapping ThinQ connection that drops / recovers /
+# drops keeps counting up instead of resetting to 0 every few minutes.
+# Reads 0 whenever the debounced alert is clear.
+- name: "HVAC Controller Outage Minutes"
+  unique_id: hvac_controller_outage_minutes
+  unit_of_measurement: "min"
+  state_class: measurement
+  state: >
+    {# The `timestamp` attribute is a POSIX timestamp, so no timezone guessing —
+       the entity's own state string is naive local time and `as_local` would
+       treat it as UTC. #}
+    {% set started = state_attr('input_datetime.hvac_controller_outage_started', 'timestamp') %}
+    {% if is_state('binary_sensor.hvac_controller_outage_alert', 'on')
+          and started is not none %}
+      {{ [0, ((now().timestamp() - (started | float)) / 60) | int] | max }}
+    {% else %}
+      0
+    {% endif %}
+  icon: mdi:timer-alert

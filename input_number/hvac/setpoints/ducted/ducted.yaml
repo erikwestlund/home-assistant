@@ -1,3 +1,14 @@
+# Ducted (kids' rooms) setpoints.
+#
+# The ducted unit is not powered off to idle it — HA parks it at a setpoint it
+# will not reach. That makes the parked value a safety-critical number: if the
+# ThinQ controller drops offline while parked, the unit holds that setpoint
+# until someone power-cycles the controller. Park high enough to idle in normal
+# conditions, low enough that being stuck there is survivable.
+#
+# Reminder (CLAUDE.md): `initial:` stays commented; the live value is set in the
+# UI. The comments below record the intended value.
+
 hvac_off_setpoint_ducted:
   name: HVAC Ducted Off Setpoint
   min: 62
@@ -12,7 +23,11 @@ hvac_off_setpoint_cooling_ducted:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  # initial: 86
+  # Parked value in cooling season. Was 82 — high enough that a stuck
+  # controller let the kids' rooms bake. 76 still idles the unit under normal
+  # conditions (day cool target is 76, night 73.5) but caps the damage if the
+  # controller goes offline while parked. Even °F, so the LG accepts it as-is.
+  # initial: 76
 
 hvac_active_setpoint_ducted:
   name: HVAC Ducted Active Setpoint
@@ -28,4 +43,6 @@ hvac_active_setpoint_cooling_ducted:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  # initial: 62
+  # Was 68, which overcools and is a cold room to be stuck in if the controller
+  # drops mid-cycle. Even °F, so the LG accepts it as-is.
+  # initial: 70

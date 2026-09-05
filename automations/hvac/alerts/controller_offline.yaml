@@ -1,0 +1,166 @@
+# 🔔 HVAC controller offline alerting
+#
+# The failure this exists for: the LG ThinQ wireless controller drops off the
+# internet, every LG climate entity goes `unavailable`, and HA silently stops
+# being able to change anything. The units hold their last command — including
+# the parked idle setpoint the ducted system sits at — until someone notices
+# the house is baking and power-cycles the controller.
+#
+# binary_sensor.hvac_controller_outage_alert is the debounced flag; the life
+# app dashboard and Grafana read the same entity.
+
+# --- Stamp the outage start (undebounced, so the duration is honest) ---
+- id: hvac_controller_outage_record_start
+  alias: "HVAC: Record Controller Outage Start"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_any_controller_offline
+      from: "off"
+      to: "on"
+  condition:
+    # Only stamp the start of a *new* outage. The alert sensor holds for two
+    # minutes after recovery (delay_off), so a controller that drops, comes
+    # back for 30 seconds and drops again keeps its original start time and
+    # the reported duration keeps climbing instead of resetting.
+    - condition: state
+      entity_id: binary_sensor.hvac_controller_outage_alert
+      state: "off"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.hvac_controller_outage_started
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+  mode: single
+
+# --- Alert: a controller has been offline past the debounce window ---
+- id: hvac_controller_offline_alert
+  alias: "HVAC Alert: Controller Offline"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_controller_outage_alert
+      from: "off"
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_boolean.hvac_controller_offline_alerts_enabled
+      state: "on"
+  action:
+    - variables:
+        offline: "{{ states('sensor.hvac_offline_controllers') }}"
+        minutes: "{{ states('sensor.hvac_controller_outage_minutes') | int(0) }}"
+        whole_integration: "{{ is_state('binary_sensor.hvac_lg_thinq_offline', 'on') }}"
+        advice: >
+          {% if is_state('binary_sensor.hvac_lg_thinq_offline', 'on') %}
+            Every LG unit is down, so this is the ThinQ controller or the internet — power-cycle the wall controller and check the WAN.
+          {% else %}
+            Check that unit's controller; the rest of the system is still reachable.
+          {% endif %}
+        ducted_note: >
+          {% if is_state('binary_sensor.hvac_controller_offline_ducted', 'on') %}
+            The kids' rooms are stuck at {{ states('sensor.hvac_ducted_observed_setpoint') }}°F and HA cannot change it.
+          {% else %}
+            The ducted system is still reachable.
+          {% endif %}
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "🚨 HVAC controller offline"
+        message: >
+          {{ offline }} offline for {{ minutes }} min. {{ ducted_note }} {{ advice }}
+        data:
+          tag: hvac_controller_offline
+          group: hvac
+          url: /hvac/0
+          push:
+            interruption-level: time-sensitive
+    - service: persistent_notification.create
+      data:
+        notification_id: hvac_controller_offline
+        title: "🚨 HVAC controller offline"
+        message: >
+          **{{ offline }}** has been unavailable for {{ minutes }} minutes.
+
+
+          {{ ducted_note }}
+
+
+          {{ advice }}
+    - service: logbook.log
+      data:
+        name: "HVAC Controller Offline"
+        message: >
+          {{ offline }} unavailable for {{ minutes }} min.
+          Whole ThinQ integration down: {{ whole_integration }}.
+
+# --- Reminder while it stays offline ---
+- id: hvac_controller_offline_reminder
+  alias: "HVAC Alert: Controller Still Offline"
+  trigger:
+    - platform: time_pattern
+      minutes: "/5"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.hvac_controller_outage_alert
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.hvac_controller_offline_alerts_enabled
+      state: "on"
+    # Only re-notify on multiples of the reminder interval, measured from when
+    # the outage actually started rather than from HA's clock.
+    - condition: template
+      value_template: >
+        {% set every = states('input_number.hvac_controller_offline_repeat_minutes') | int(30) %}
+        {% set minutes = states('sensor.hvac_controller_outage_minutes') | int(0) %}
+        {{ minutes > 0 and every > 0 and (minutes % every) < 5 and minutes >= every }}
+  action:
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "🚨 HVAC still offline"
+        message: >
+          {{ states('sensor.hvac_offline_controllers') }} still unavailable —
+          {{ states('sensor.hvac_controller_outage_minutes') | int(0) }} minutes and counting.
+        data:
+          tag: hvac_controller_offline
+          group: hvac
+          push:
+            interruption-level: time-sensitive
+  mode: single
+
+# --- Recovery ---
+- id: hvac_controller_offline_recovered
+  alias: "HVAC Alert: Controller Recovered"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hvac_controller_outage_alert
+      from: "on"
+      to: "off"
+  action:
+    - variables:
+        # Read at recovery time, before the sensor drops back to 0.
+        outage_minutes: >
+          {% set started = state_attr('input_datetime.hvac_controller_outage_started', 'timestamp') %}
+          {% if started is not none %}
+            {{ [0, ((now().timestamp() - (started | float)) / 60) | int] | max }}
+          {% else %}
+            0
+          {% endif %}
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: hvac_controller_offline
+    - condition: state
+      entity_id: input_boolean.hvac_controller_offline_alerts_enabled
+      state: "on"
+    - service: notify.mobile_app_eriks_iphone
+      data:
+        title: "✅ HVAC controllers back online"
+        message: >
+          All HVAC controllers reachable again after {{ outage_minutes }} minutes.
+          Setpoints will resync within 5 minutes.
+        data:
+          tag: hvac_controller_offline
+          group: hvac
+    - service: logbook.log
+      data:
+        name: "HVAC Controller Recovered"
+        message: "All controllers reachable after {{ outage_minutes }} min."
+  mode: single

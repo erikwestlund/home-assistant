@@ -1,0 +1,7 @@
+# Set when any controller first drops offline; used to report the real outage
+# length on recovery (the alert sensor itself is debounced, so its own
+# last_changed understates the outage by the debounce window).
+hvac_controller_outage_started:
+  name: HVAC Controller Outage Started
+  has_date: true
+  has_time: true

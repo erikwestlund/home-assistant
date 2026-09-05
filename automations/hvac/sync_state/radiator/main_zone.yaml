@@ -8,6 +8,11 @@
     - condition: state
       entity_id: input_boolean.hvac_control
       state: "on"
+    # Skip while the controller is unreachable — the service calls below would
+    # only fail and fill the log.
+    - condition: state
+      entity_id: binary_sensor.hvac_controller_offline_radiator_main_zone
+      state: "off"
     # Only sync if HA should control (away/override mode OR Ecobee schedule toggle is off)
     - condition: or
       conditions:
@@ -45,11 +50,22 @@
         - input_boolean.hvac_radiator_use_ecobee_schedule_main_zone
     - platform: time_pattern
       minutes: "/5"
+    # Resync immediately when the controller comes back; the synced
+    # sensors are already "off" during an outage and produce no new trigger.
+    - platform: state
+      entity_id: binary_sensor.hvac_controller_offline_radiator_main_zone
+      from: "on"
+      to: "off"
   condition:
     # Master kill switch
     - condition: state
       entity_id: input_boolean.hvac_control
       state: "on"
+    # Skip while the controller is unreachable — the service calls below would
+    # only fail and fill the log.
+    - condition: state
+      entity_id: binary_sensor.hvac_controller_offline_radiator_main_zone
+      state: "off"
     # Only sync if HA should control (away/override mode OR Ecobee schedule toggle is off)
     - condition: or
       conditions:

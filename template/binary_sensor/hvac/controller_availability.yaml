@@ -1,0 +1,118 @@
+# Controller availability
+#
+# When a thermostat's integration loses its cloud/LAN connection the climate
+# entity goes `unavailable`, HA can no longer change the setpoint, and the unit
+# holds whatever it was last told. That is dangerous for the ducted system in
+# particular: HA idles it by parking it at an unreachable setpoint, so a stuck
+# controller means the kids' rooms sit at the parked value indefinitely.
+#
+# All six LG units share one `lg_thinq` config entry, so they drop together.
+# `on` = offline (device_class: problem), so it reads correctly in alerts,
+# on the dashboard, and in Grafana where 1 = bad.
+
+# --- LG ThinQ ---
+- name: "HVAC Controller Offline Ducted"
+  unique_id: hvac_controller_offline_ducted
+  device_class: problem
+  state: >
+    {{ states('climate.ducted_heat_pump') in ['unavailable', 'unknown', 'none', 'None'] }}
+  icon: >
+    {{ 'mdi:lan-disconnect' if is_state('binary_sensor.hvac_controller_offline_ducted', 'on') else 'mdi:lan-connect' }}
+
+- name: "HVAC Controller Offline Master Bedroom"
+  unique_id: hvac_controller_offline_master_bedroom
+  device_class: problem
+  state: >
+    {{ states('climate.master_bedroom_heat_pump') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+- name: "HVAC Controller Offline Living Room"
+  unique_id: hvac_controller_offline_living_room
+  device_class: problem
+  state: >
+    {{ states('climate.living_room_heat_pump') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+- name: "HVAC Controller Offline Dining Room"
+  unique_id: hvac_controller_offline_dining_room
+  device_class: problem
+  state: >
+    {{ states('climate.dining_room_heat_pump') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+- name: "HVAC Controller Offline Family Room"
+  unique_id: hvac_controller_offline_family_room
+  device_class: problem
+  state: >
+    {{ states('climate.family_room_heat_pump') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+- name: "HVAC Controller Offline Tinas Office"
+  unique_id: hvac_controller_offline_tinas_office
+  device_class: problem
+  state: >
+    {{ states('climate.tinas_office_heat_pump') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+# --- Flair ---
+- name: "HVAC Controller Offline Eriks Office"
+  unique_id: hvac_controller_offline_eriks_office
+  device_class: problem
+  state: >
+    {{ states('climate.eriks_office_room') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+# --- Ecobee radiator thermostats (via HomeKit) ---
+- name: "HVAC Controller Offline Radiator Main Zone"
+  unique_id: hvac_controller_offline_radiator_main_zone
+  device_class: problem
+  state: >
+    {{ states('climate.living_room_main_heating') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+- name: "HVAC Controller Offline Radiator Family Room"
+  unique_id: hvac_controller_offline_radiator_family_room
+  device_class: problem
+  state: >
+    {{ states('climate.family_room_heating') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+- name: "HVAC Controller Offline Radiator Office"
+  unique_id: hvac_controller_offline_radiator_office
+  device_class: problem
+  state: >
+    {{ states('climate.office') in ['unavailable', 'unknown', 'none', 'None'] }}
+
+# --- Rollups ---
+
+# Undebounced. Flickers on brief integration reloads — do not alert on this
+# directly, use hvac_controller_outage_alert below.
+- name: "HVAC Any Controller Offline"
+  unique_id: hvac_any_controller_offline
+  device_class: problem
+  state: >
+    {{ states('sensor.hvac_offline_controller_count') | int(0) > 0 }}
+
+# All six LG units down at once means the ThinQ integration or the internet is
+# the problem, not one unit. Changes what the alert should tell you to do.
+- name: "HVAC LG ThinQ Offline"
+  unique_id: hvac_lg_thinq_offline
+  device_class: problem
+  state: >
+    {{ [
+      'binary_sensor.hvac_controller_offline_ducted',
+      'binary_sensor.hvac_controller_offline_master_bedroom',
+      'binary_sensor.hvac_controller_offline_living_room',
+      'binary_sensor.hvac_controller_offline_dining_room',
+      'binary_sensor.hvac_controller_offline_family_room',
+      'binary_sensor.hvac_controller_offline_tinas_office',
+    ] | select('is_state', 'on') | list | count == 6 }}
+
+# The alerting entity. Debounced so an integration reload or a momentary blip
+# does not page anyone. This is what the life app and Grafana should show.
+- name: "HVAC Controller Outage Alert"
+  unique_id: hvac_controller_outage_alert
+  device_class: problem
+  state: >
+    {{ is_state('binary_sensor.hvac_any_controller_offline', 'on') }}
+  delay_on: >
+    {{ (states('input_number.hvac_controller_offline_alert_minutes') | int(5)) * 60 }}
+  # Hold the alert through a short recovery so a flapping ThinQ connection reads
+  # as one continuous outage rather than a burst of separate ones. This also
+  # keeps input_datetime.hvac_controller_outage_started from being re-stamped
+  # mid-flap, which is what makes sensor.hvac_controller_outage_minutes honest.
+  delay_off: 120
+  icon: >
+    {{ 'mdi:hvac-off' if is_state('binary_sensor.hvac_controller_outage_alert', 'on') else 'mdi:hvac' }}

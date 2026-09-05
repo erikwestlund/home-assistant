@@ -11,10 +11,23 @@
       to: "off"
     - platform: time_pattern
       minutes: "/5"
+    # Force an immediate resync the moment the controller comes back, rather
+    # than waiting up to 5 minutes for the time pattern. The synced sensors are
+    # already "off" during an outage, so they produce no new state trigger on
+    # recovery.
+    - platform: state
+      entity_id: binary_sensor.hvac_controller_offline_ducted
+      from: "on"
+      to: "off"
   condition:
     - condition: state
       entity_id: input_boolean.hvac_control
       state: "on"
+    # Nothing to do while the ThinQ controller is unreachable — the service
+    # calls below would just fail every 5 minutes and fill the log.
+    - condition: state
+      entity_id: binary_sensor.hvac_controller_offline_ducted
+      state: "off"
   action:
     - choose:
         # ✅ Power, Mode, and Setpoint All at Once if Ducted System is Off
@@ -36,11 +49,19 @@
                   {% else %}
                     off
                   {% endif %}
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.ducted_heat_pump
-                temperature: >
-                  {{ states('sensor.hvac_setpoint_ducted') | float(68) }}
+            # Only push a setpoint we actually computed. The old
+            # `| float(68)` fallback meant an unknown/None setpoint silently
+            # commanded 68F — full cooling — at the kids' rooms.
+            - if:
+                - condition: template
+                  value_template: >
+                    {{ states('sensor.hvac_setpoint_ducted') | is_number }}
+              then:
+                - service: climate.set_temperature
+                  data:
+                    entity_id: climate.ducted_heat_pump
+                    temperature: >
+                      {{ states('sensor.hvac_setpoint_ducted') | float }}
             - service: logbook.log
               data:
                 name: "HVAC Ducted Sync"
@@ -64,11 +85,19 @@
                   {% else %}
                     cool
                   {% endif %}
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.ducted_heat_pump
-                temperature: >
-                  {{ states('sensor.hvac_setpoint_ducted') | float(68) }}
+            # Only push a setpoint we actually computed. The old
+            # `| float(68)` fallback meant an unknown/None setpoint silently
+            # commanded 68F — full cooling — at the kids' rooms.
+            - if:
+                - condition: template
+                  value_template: >
+                    {{ states('sensor.hvac_setpoint_ducted') | is_number }}
+              then:
+                - service: climate.set_temperature
+                  data:
+                    entity_id: climate.ducted_heat_pump
+                    temperature: >
+                      {{ states('sensor.hvac_setpoint_ducted') | float }}
             - service: logbook.log
               data:
                 name: "HVAC Ducted Sync"
@@ -83,11 +112,19 @@
               entity_id: binary_sensor.hvac_ducted_setpoint_synced
               state: "off"
           sequence:
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.ducted_heat_pump
-                temperature: >
-                  {{ states('sensor.hvac_setpoint_ducted') | float(68) }}
+            # Only push a setpoint we actually computed. The old
+            # `| float(68)` fallback meant an unknown/None setpoint silently
+            # commanded 68F — full cooling — at the kids' rooms.
+            - if:
+                - condition: template
+                  value_template: >
+                    {{ states('sensor.hvac_setpoint_ducted') | is_number }}
+              then:
+                - service: climate.set_temperature
+                  data:
+                    entity_id: climate.ducted_heat_pump
+                    temperature: >
+                      {{ states('sensor.hvac_setpoint_ducted') | float }}
             - service: logbook.log
               data:
                 name: "HVAC Ducted Sync"

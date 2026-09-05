@@ -1,0 +1,22 @@
+# Controller offline alerting — see automations/hvac/alerts/controller_offline.yaml
+#
+# Reminder (CLAUDE.md): `initial:` stays commented. A helper with no stored
+# state falls back to its `min`, so set these in the UI after first reload.
+
+hvac_controller_offline_alert_minutes:
+  name: HVAC Controller Offline Alert Delay
+  min: 2
+  max: 60
+  step: 1
+  unit_of_measurement: "min"
+  icon: mdi:timer-sand
+  # initial: 5
+
+hvac_controller_offline_repeat_minutes:
+  name: HVAC Controller Offline Reminder Interval
+  min: 15
+  max: 240
+  step: 15
+  unit_of_measurement: "min"
+  icon: mdi:bell-ring-outline
+  # initial: 30
