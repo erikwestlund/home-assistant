@@ -16,7 +16,28 @@
     {% elif mode == 'Heat' %}
       {{ states('input_number.hvac_off_setpoint_ducted') }}
     {% elif mode == 'Cool' %}
-      {{ states('input_number.hvac_off_setpoint_cooling_ducted') }}
+      {#- Parked (idle) cooling setpoint.
+
+          HA does not power the ducted unit off to idle it, it parks it at a
+          setpoint. Whatever it is parked at is what it holds if the ThinQ
+          controller drops off the internet, because HA then has no channel to
+          change it — so the parked value has to be safe to be stuck at
+          indefinitely, at any hour.
+
+          Parking AT the current period's target (76 by day, 73.5 -> 74 at
+          night) satisfies that, and unlike a fixed low value it never fights
+          HA's own call logic: the LG holds the target on its own and HA's
+          active cooling setpoint acts as a boost when a room runs hot.
+
+          Rounded to an even F because the LG only stores 1C steps and would
+          silently round an odd value (see lg_converted_setpoints.yaml).
+          hvac_off_setpoint_cooling_ducted is now a hard ceiling rather than
+          the parked value itself, so a mis-set target can never park the
+          system somewhere dangerous. -#}
+      {% set target = states('sensor.hvac_target_ducted') | float(76) %}
+      {% set parked = ((target / 2) | round(0) | int) * 2 %}
+      {% set ceiling = states('input_number.hvac_off_setpoint_cooling_ducted') | float(76) %}
+      {{ [parked, ceiling] | min | round(0) | int }}
     {% else %}
       None
     {% endif %}

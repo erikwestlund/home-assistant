@@ -23,10 +23,11 @@ hvac_off_setpoint_cooling_ducted:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  # Parked value in cooling season. Was 82 — high enough that a stuck
-  # controller let the kids' rooms bake. 76 still idles the unit under normal
-  # conditions (day cool target is 76, night 73.5) but caps the damage if the
-  # controller goes offline while parked. Even °F, so the LG accepts it as-is.
+  # No longer the parked value itself — it is now the CEILING on it. The unit
+  # parks at the current period's cool target rounded to an even °F (76 by day,
+  # 74 at night), and this caps that so a mis-set target can never park the
+  # system somewhere it is dangerous to be stuck. See the parked-setpoint
+  # comment in template/sensor/hvac/setpoints/ducted/ducted.yaml.
   # initial: 76
 
 hvac_active_setpoint_ducted:

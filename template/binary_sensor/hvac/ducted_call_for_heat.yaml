@@ -27,7 +27,7 @@
     {% set target_temp = states('sensor.hvac_target_ducted') | float(64) %}
     {% set over_offset = states('input_number.hvac_over_target_start_threshold_ducted') | float(1) %}
     {% set under_offset = states('input_number.hvac_under_target_stop_threshold_ducted') | float(1) %}
-    {% set is_cooling = is_state('binary_sensor.hvac_calling_for_cool_ducted', 'on') %}
+    {% set is_cooling = is_state('binary_sensor.hvac_calling_for_cooling_ducted', 'on') %}
     
     {{ (hvac_mode == 'Cool') and (
       current_temp > (target_temp + over_offset) if not is_cooling
