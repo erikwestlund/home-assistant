@@ -76,6 +76,20 @@
     {{ states('climate.office') in ['unavailable', 'unknown', 'none', 'None'] }}
 
 # --- Rollups ---
+#
+# INVARIANT, load-bearing across two repos: the life app treats
+# binary_sensor.hvac_controller_outage_alert as the SOLE gate. An alert of "off"
+# is a complete answer there — it returns "healthy" without reading any other
+# entity — so nothing downstream can catch a fault in this chain.
+#
+# Therefore every sensor between sensor.hvac_offline_controller_count and the
+# alert must go UNAVAILABLE when its input is bad, never fall back to a default
+# that happens to read as "off" or 0. A silent all-clear is the one outcome this
+# alert exists to prevent, and it is indistinguishable from a healthy house.
+#
+# If you add a hop to this chain, give it an `availability:` template too, and
+# tell whoever maintains ~/Projects/life — from there this is one boolean and
+# the extra hop is invisible.
 
 # Undebounced. Flickers on brief integration reloads — do not alert on this
 # directly, use hvac_controller_outage_alert below.
