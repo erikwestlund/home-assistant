@@ -159,3 +159,31 @@
       0
     {% endif %}
   icon: mdi:timer-alert
+
+# What the ducted unit is actually holding, including while the controller is
+# offline.
+#
+# sensor.hvac_ducted_observed_setpoint reads the climate entity's `temperature`
+# attribute, which becomes None the moment the controller goes unavailable — so
+# it reports `unavailable` exactly when someone is asking "what is it stuck at?".
+# This sensor latches the last value HA actually observed by falling back to its
+# own previous state (`this.state`), which does not register a dependency and so
+# does not self-trigger.
+#
+# Caveat: a plain template sensor does not restore across an HA restart, so a
+# restart mid-outage leaves this `unknown` until the controller returns. Consumers
+# must handle a non-numeric value rather than interpolating it into a sentence.
+- name: "HVAC Ducted Held Setpoint"
+  unique_id: hvac_ducted_held_setpoint
+  unit_of_measurement: "°F"
+  state_class: measurement
+  state: >
+    {% set observed = state_attr('climate.ducted_heat_pump', 'temperature') %}
+    {% if observed is not none %}
+      {{ observed | float }}
+    {% elif this.state | is_number %}
+      {{ this.state }}
+    {% else %}
+      unknown
+    {% endif %}
+  icon: mdi:thermometer-lines

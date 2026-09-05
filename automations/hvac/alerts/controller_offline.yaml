@@ -56,11 +56,18 @@
           {% else %}
             Check that unit's controller; the rest of the system is still reachable.
           {% endif %}
+        # Uses the *held* setpoint, not the observed one: the climate entity's
+        # temperature attribute is gone while the controller is unavailable, so
+        # sensor.hvac_ducted_observed_setpoint reads `unavailable` at exactly
+        # this moment. Held latches the last value HA saw.
         ducted_note: >
-          {% if is_state('binary_sensor.hvac_controller_offline_ducted', 'on') %}
-            The kids' rooms are stuck at {{ states('sensor.hvac_ducted_observed_setpoint') }}°F and HA cannot change it.
-          {% else %}
+          {% set held = states('sensor.hvac_ducted_held_setpoint') %}
+          {% if not is_state('binary_sensor.hvac_controller_offline_ducted', 'on') %}
             The ducted system is still reachable.
+          {% elif held | is_number %}
+            The kids' rooms are stuck at {{ held | float | round(0) | int }}°F and HA cannot change it.
+          {% else %}
+            The kids' rooms are stuck at whatever the unit last had and HA cannot change it.
           {% endif %}
     - service: notify.mobile_app_eriks_iphone
       data:
