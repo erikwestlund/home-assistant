@@ -34,8 +34,13 @@
           hvac_off_setpoint_cooling_ducted is now a hard ceiling rather than
           the parked value itself, so a mis-set target can never park the
           system somewhere dangerous. -#}
+      {#- Round UP to the next even F. An odd target lands exactly on a .5 tie
+          (75 -> 37.5), so leaving this to Jinja's default tie-breaking would
+          make a safety-relevant value depend on a rounding convention. Up is
+          also the right direction: parking warmer means less cooling, and the
+          ceiling below caps how warm it can get. -#}
       {% set target = states('sensor.hvac_target_ducted') | float(76) %}
-      {% set parked = ((target / 2) | round(0) | int) * 2 %}
+      {% set parked = ((target / 2) | round(0, 'ceil') | int) * 2 %}
       {% set ceiling = states('input_number.hvac_off_setpoint_cooling_ducted') | float(76) %}
       {{ [parked, ceiling] | min | round(0) | int }}
     {% else %}
