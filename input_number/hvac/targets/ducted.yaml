@@ -30,13 +30,7 @@ hvac_target_night_cool_ducted:
   max: 86
   step: 0.5
   unit_of_measurement: "°F"
-  # Was 73.5, which parked at 74 and left the rooms resting near 73.4F
-  # overnight — colder than wanted and more expensive. 75 parks at 76.
-  #
-  # 76 is how you ask an LG for 75. The units store whole C, so the reachable
-  # steps here are 23C = 73.4F, 24C = 75.2F, 25C = 77F. There is no 75 setting:
-  # sending 75 is converted down to 74 (see lg_converted_setpoints.yaml), which
-  # is the value this was raised to get away from. Sending 76 stores 24C and
-  # the room actually rests at 75.2F. The *_celsius and *_rounded_back sensors
-  # show this round trip for each unit.
-  # initial: 75
+  # The CONTROL target: the centre of the call-for-cooling hysteresis,
+  # not the temperature the rooms rest at when idle. That is
+  # hvac_off_setpoint_cooling_ducted.
+  # initial: 73.5

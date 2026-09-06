@@ -23,11 +23,15 @@ hvac_off_setpoint_cooling_ducted:
   max: 86
   step: 1
   unit_of_measurement: "°F"
-  # No longer the parked value itself — it is now the CEILING on it. The unit
-  # parks at the current period's cool target rounded to an even °F (76 by day,
-  # 74 at night), and this caps that so a mis-set target can never park the
-  # system somewhere it is dangerous to be stuck. See the parked-setpoint
-  # comment in template/sensor/hvac/setpoints/ducted/ducted.yaml.
+  # The temperature the kids' rooms REST at whenever the system is not actively
+  # calling for cooling — a fixed value, independent of the control target.
+  #
+  # 76 here means 75 in the room: the LG stores whole °C, so the reachable steps
+  # are 23°C = 73.4°F, 24°C = 75.2°F, 25°C = 77°F. Sending 75 is converted down
+  # to 74. Do not "correct" this to 75.
+  #
+  # Also the value the unit is stuck holding if the ThinQ controller drops
+  # offline, so it has to be safe at any hour. Was 82, which cooked the rooms.
   # initial: 76
 
 hvac_active_setpoint_ducted:
