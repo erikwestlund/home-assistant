@@ -21,7 +21,18 @@ hvac_under_target_stop_threshold_ducted:
   max: 5
   step: 0.5
   unit_of_measurement: "°F"
-#  initial: 0.5
+  # How far BELOW target cooling keeps running once it has started.
+  #
+  # 0 = stop exactly at target. This was 1.5, but that value had never actually
+  # run: the hysteresis typo (fixed in c806cb0) made the "still cooling" branch
+  # unreachable, so for as long as the bug existed cooling stopped 1.0 ABOVE
+  # target instead — 74.5 every night against a 73.5 target, 10-14 short cycles
+  # a night with a 0.1°F deadband. Fixing the typo activated the 1.5 for the
+  # first time and the rooms went to 72.0 overnight, which was too cold.
+  #
+  # Half-degree values are fine here: this is HA-internal. Only the setpoint
+  # actually pushed to the LG has to be even (see lg_converted_setpoints.yaml).
+#  initial: 0
 
 hvac_over_target_start_threshold_ducted:
   name: HVAC Ducted Over Target Start Threshold (For Cooling)
