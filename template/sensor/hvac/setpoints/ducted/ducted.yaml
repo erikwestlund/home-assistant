@@ -16,24 +16,36 @@
     {% elif mode == 'Heat' %}
       {{ states('input_number.hvac_off_setpoint_ducted') }}
     {% elif mode == 'Cool' %}
-      {#- Parked (idle) cooling setpoint — a fixed value, deliberately.
+      {#- Parked (idle) cooling setpoint: park just ABOVE where HA takes over.
 
-          HA does not power the ducted unit off to idle it, it parks it at a
-          setpoint, and the unit holds that value if the ThinQ controller drops
-          off the internet (HA then has no channel to change it). So this has to
-          be safe to be stuck at indefinitely, at any hour.
+          Two jobs, and they pull in opposite directions. The unit is never
+          powered off to idle it, so whatever it is parked at is (a) what the
+          LG's own thermostat will chase whenever HA is not calling, and (b)
+          what the unit holds forever if the ThinQ controller drops offline.
 
-          This does NOT track sensor.hvac_target_ducted. The target is the
-          control point — where the call-for-cooling hysteresis is centred — and
-          at night it is 73.5, which is colder than the house should merely
-          *rest* at. Idle temperature and control target are separate concerns.
+          Park too low and the LG quietly becomes the real controller: at a
+          flat 76 it holds 75.2F all day, undercutting the 76 day target that
+          exists to keep cost down. Park too high (the old 82) and a stuck
+          controller cooks the rooms.
 
-          hvac_off_setpoint_cooling_ducted is 76, which is how you ask an LG for
-          75: the units store whole C, so the reachable steps here are 23C =
-          73.4F, 24C = 75.2F, 25C = 77F. There is no 75 setting — sending 75 is
-          converted down to 74 (see lg_converted_setpoints.yaml). Sending 76
-          stores 24C and the rooms rest at 75.2F. -#}
-      {{ states('input_number.hvac_off_setpoint_cooling_ducted') }}
+          So park one step above the call threshold. HA always calls first —
+          at 77 by day, 74.5 at night — which keeps the LG's thermostat inert
+          in normal operation and leaves the parked value doing only its
+          safety job.
+
+              day    76 + 1.0 = 77    -> park 78  (LG stores 26C = 78.8F)
+              night  73.5 + 1.0 = 74.5 -> park 76  (LG stores 24C = 75.2F)
+
+          Even F only: the LG stores whole C and silently converts odd values
+          (75 becomes 74). The +1 margin covers the C rounding, which is not
+          symmetric — 76 rounds down to 24C = 75.2F while 78 rounds up to
+          26C = 78.8F. hvac_off_setpoint_cooling_ducted caps the result so a
+          raised target can never park the system somewhere dangerous. -#}
+      {% set target = states('sensor.hvac_target_ducted') | float(76) %}
+      {% set over_start = states('input_number.hvac_over_target_start_threshold_ducted') | float(1) %}
+      {% set parked = (((target + over_start + 1) / 2) | round(0, 'ceil') | int) * 2 %}
+      {% set ceiling = states('input_number.hvac_off_setpoint_cooling_ducted') | float(78) %}
+      {{ [parked, ceiling] | min | round(0) | int }}
     {% else %}
       None
     {% endif %}
