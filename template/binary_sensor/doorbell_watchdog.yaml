@@ -1,0 +1,161 @@
+# Watchdog for the doorbell chime path.
+#
+# In Sept 2026 the chime went silent for five weeks and nothing said so. The
+# websocket feeding the automations had stopped delivering rings while the
+# integration still reported "available", polling still worked, and the log was
+# clean. A silent input is the hard case: you cannot detect a missing signal
+# unless you have a second, independent signal to compare against.
+#
+# So this covers the failures HA can actually observe, all of which are cheap
+# and none of which depend on parsing anybody's timestamp format:
+#
+#   1. A chime automation is not `on` — turned off in the UI, or disabled. This
+#      is the answer to "did this thing get disabled somehow?": yes, and now you
+#      get a push notification about it.
+#   2. Fewer than four chime automations exist — a YAML error dropped one, so a
+#      door is silently unchimed. That is why the count is checked and not just
+#      the state of each automation we happen to find.
+#   3. A UniFi Protect doorbell entity is `unavailable` — integration failed to
+#      load, NVR unreachable, credential rejected. Note `unknown` is NOT treated
+#      as a problem: an event entity that has never rung is legitimately unknown,
+#      and so is a `last_doorbell_ring` sensor on a door nobody has ever rung.
+#
+# Deliberately NOT checked: "a ring arrived but no chime played" — the most
+# interesting case, and the one that actually happened. It would mean comparing
+# `event.<door>_doorbell`'s timestamp against the chime automations'
+# `last_triggered`, and that comparison is only valid if the event entity's
+# state parses to the right instant. It may not: the UI shows
+# `2026-08-08T19:33:37.724+00:00` (carries a UTC offset) while a state dump of
+# the same entity showed a bare `2026-09-12T22:44:53.959939`. HA reads a
+# naive timestamp as *local* time, which here would place a fresh ring four
+# hours in the future — the check would fire on every ring you actually DID
+# get. A check that cries wolf on the happy path is worse than no check, so this
+# stays out until the format is confirmed:
+#
+#     ssh the box, read `event.side_door_doorbell` in Developer Tools -> States,
+#     ring the side doorbell, read it again. If the new value carries a UTC
+#     offset, the comparison below is safe and can be added as a fourth check.
+#
+# The same ambiguity is why the chime automations trigger on `not_from:
+# [unknown, unavailable]` rather than on a timestamp comparison.
+#
+# What it cannot catch, and neither can anything else in HA: both delivery paths
+# wedged at the same time. If the events websocket and the occupancy sensor are
+# both silent, HA never learns a ring happened, so there is nothing to notice.
+# The partial answer would be `sensor.<door>_last_doorbell_ring`, refreshed by
+# the 15-minute bootstrap poll rather than by the websocket — but the same
+# timestamp-format question applies, and its entity id is
+# `..._doorbell_last_trip_time`, which suggests motion advances it too.
+#
+# `delay_on` keeps an integration reload from paging anyone — entities blink
+# `unavailable` for a few seconds during a reload and that is not news.
+#
+# Two deliberate braces against a watchdog that quietly stops working, which
+# would be worse than no watchdog at all:
+#
+#   * Attributes are only strings and numbers. HA stores a rendered attribute as
+#     the template layer produced it, and a list that came back as the string
+#     "['a']" would make a `| count > 0` test permanently true. So counts are
+#     numbers and lists are comma-joined strings.
+#   * `reject('undefined')` sits next to `reject('none')` on the
+#     `last_triggered` chain. A never-triggered automation has
+#     `last_triggered: null`, but an absent attribute renders as Undefined, and
+#     passing that to `| max` raises and takes the whole entity unavailable —
+#     the watchdog failing silently, which is the exact bug it exists to catch.
+
+- name: "Doorbell Chime Problem"
+  unique_id: "doorbell_chime_problem"
+  device_class: problem
+  delay_on:
+    minutes: 5
+
+  state: >
+    {% set chimes = states.automation
+         | selectattr('attributes.friendly_name', 'defined')
+         | selectattr('attributes.friendly_name', 'match', '^Play Chime on Sonos when')
+         | list %}
+    {% set dead = states
+         | selectattr('entity_id', 'match',
+              '^(event|binary_sensor|sensor)\.(front_door|side_door|mudroom_door|patio_door)_(doorbell|last_doorbell_ring)$')
+         | selectattr('state', 'eq', 'unavailable')
+         | list %}
+
+    {{ chimes | count < 4
+       or chimes | rejectattr('state', 'eq', 'on') | list | count > 0
+       or dead | count > 0 }}
+
+  attributes:
+    # Human-readable cause, computed here so the automation only has to forward
+    # it. Ordered most-specific-first: a disabled automation is the most
+    # actionable thing to say, and it is also the one a reload cannot fix.
+    diagnosis: >
+      {% set chimes = states.automation
+           | selectattr('attributes.friendly_name', 'defined')
+           | selectattr('attributes.friendly_name', 'match', '^Play Chime on Sonos when')
+           | list %}
+      {% set off = chimes
+           | rejectattr('state', 'eq', 'on')
+           | map(attribute='entity_id') | list %}
+      {% set dead = states
+           | selectattr('entity_id', 'match',
+                '^(event|binary_sensor|sensor)\.(front_door|side_door|mudroom_door|patio_door)_(doorbell|last_doorbell_ring)$')
+           | selectattr('state', 'eq', 'unavailable')
+           | map(attribute='entity_id') | list %}
+      {%- if off | count > 0 -%}
+        {{ off | join(', ') }} is turned off, so that door is unchimed. Re-enable it in Settings -> Automations; reloading the integration will not do it.
+      {%- elif dead | count > 0 -%}
+        UniFi Protect entities are unavailable: {{ dead | join(', ') }}. The integration is not talking to the NVR.
+      {%- elif chimes | count < 4 -%}
+        Only {{ chimes | count }} of 4 chime automations loaded. A door is silently unchimed — check for a YAML load error.
+      {%- else -%}
+        The chime path was unhealthy but has since recovered.
+      {%- endif -%}
+
+    # Counts, so the automation can branch on them without caring whether the
+    # attribute came back as an int or a string. `| int` coerces either way.
+    disabled_count: >
+      {{ states.automation
+         | selectattr('attributes.friendly_name', 'defined')
+         | selectattr('attributes.friendly_name', 'match', '^Play Chime on Sonos when')
+         | rejectattr('state', 'eq', 'on')
+         | list | count }}
+    unavailable_count: >
+      {{ states
+         | selectattr('entity_id', 'match',
+              '^(event|binary_sensor|sensor)\.(front_door|side_door|mudroom_door|patio_door)_(doorbell|last_doorbell_ring)$')
+         | selectattr('state', 'eq', 'unavailable')
+         | list | count }}
+    chime_automations_loaded: >
+      {{ states.automation
+         | selectattr('attributes.friendly_name', 'defined')
+         | selectattr('attributes.friendly_name', 'match', '^Play Chime on Sonos when')
+         | list | count }}
+
+    # Display strings. Comma-joined so they are unambiguously strings.
+    disabled_automations: >
+      {{ states.automation
+         | selectattr('attributes.friendly_name', 'defined')
+         | selectattr('attributes.friendly_name', 'match', '^Play Chime on Sonos when')
+         | rejectattr('state', 'eq', 'on')
+         | map(attribute='entity_id') | list | join(', ') }}
+    unavailable_entities: >
+      {{ states
+         | selectattr('entity_id', 'match',
+              '^(event|binary_sensor|sensor)\.(front_door|side_door|mudroom_door|patio_door)_(doorbell|last_doorbell_ring)$')
+         | selectattr('state', 'eq', 'unavailable')
+         | map(attribute='entity_id') | list | join(', ') }}
+    last_chime_fired: >
+      {% set fired = states.automation
+           | selectattr('attributes.friendly_name', 'defined')
+           | selectattr('attributes.friendly_name', 'match', '^Play Chime on Sonos when')
+           | map(attribute='attributes.last_triggered')
+           | reject('none') | reject('undefined')
+           | map('as_timestamp') | list %}
+      {{ (fired | max) | timestamp_local if fired else 'never' }}
+
+  icon: >
+    {% if is_state('binary_sensor.doorbell_chime_problem', 'on') %}
+      mdi:doorbell-alert
+    {% else %}
+      mdi:doorbell
+    {% endif %}

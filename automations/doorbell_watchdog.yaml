@@ -1,0 +1,101 @@
+# Acts on template/binary_sensor/doorbell_watchdog.yaml, which does the actual
+# diagnosis and exposes it as a `diagnosis` attribute.
+#
+# The notification is the reliable half of this. The reload is a best-effort
+# repair: when the chime died in Sept 2026, reloading the integration did NOT
+# fix it — only re-enabling the entities did, which is a UI action we cannot
+# drive from YAML. So a reload here is "pull the one lever we have", not a
+# promise that the chime is back. That is why there is no silent auto-repair:
+# every attempt announces itself, and the repair's failure is still visible as
+# the alert not clearing.
+#
+# This is edge-triggered (the watchdog going from off to on), and the watchdog
+# only turns on after five minutes of sustained trouble, so a persistent fault
+# alerts once rather than once a minute. No extra rate limiting is needed.
+
+- id: doorbell_watchdog_alert
+  alias: Alert when the Doorbell Chime Path is Broken
+  description: >-
+    Notify when the doorbell chime path is unhealthy, and attempt a repair
+    unless the cause is a disabled automation (which a reload cannot fix).
+  triggers:
+    - entity_id:
+        - binary_sensor.doorbell_chime_problem
+      to: "on"
+      trigger: state
+  conditions: []
+  actions:
+    - variables:
+        diagnosis: >-
+          {{ state_attr('binary_sensor.doorbell_chime_problem', 'diagnosis')
+             | default('Cause unknown — see the attributes on binary_sensor.doorbell_chime_problem.', true) }}
+        last_fired: >-
+          {{ state_attr('binary_sensor.doorbell_chime_problem', 'last_chime_fired')
+             | default('never', true) }}
+
+    - action: notify.mobile_app_eriks_iphone
+      data:
+        title: "🔔 Doorbell chime is broken"
+        message: "{{ diagnosis }}"
+        data:
+          tag: doorbell_chime_problem
+          group: doorbell
+          push:
+            interruption-level: time-sensitive
+
+    - action: persistent_notification.create
+      data:
+        notification_id: doorbell_chime_problem
+        title: "🔔 Doorbell chime is broken"
+        message: >
+          **{{ diagnosis }}**
+
+          Last chime fired: **{{ last_fired }}**
+
+    # Deliberately last, so a hung reload cannot delay the alert. The
+    # integration has a single config entry, so reloading via any one of its
+    # entities reloads all of it — the doorbell entity here is just an anchor.
+    - choose:
+        - conditions:
+            # Compared with `| int` rather than against a variable: an
+            # automation `variables:` value can come back as the string "0",
+            # and `"0" == 0` is False in Jinja, which would silently mean the
+            # reload never runs.
+            - condition: template
+              value_template: >-
+                {{ state_attr('binary_sensor.doorbell_chime_problem', 'disabled_count')
+                   | default(0, true) | int == 0 }}
+          sequence:
+            - action: homeassistant.reload_config_entry
+              continue_on_error: true
+              data:
+                entity_id: event.side_door_doorbell
+      default: []
+
+  mode: single
+
+- id: doorbell_watchdog_clear
+  alias: Clear Doorbell Chime Alert when the Path Recovers
+  description: Dismiss the persistent notification once the chime path is healthy.
+  triggers:
+    - entity_id:
+        - binary_sensor.doorbell_chime_problem
+      to: "off"
+      for:
+        minutes: 2
+      trigger: state
+  conditions: []
+  actions:
+    - action: persistent_notification.dismiss
+      data:
+        notification_id: doorbell_chime_problem
+    - action: notify.mobile_app_eriks_iphone
+      data:
+        title: "🔔 Doorbell chime recovered"
+        message: >
+          The chime path is healthy again. Last chime fired:
+          {{ state_attr('binary_sensor.doorbell_chime_problem', 'last_chime_fired') | default('never', true) }}.
+        data:
+          tag: doorbell_chime_problem
+          group: doorbell
+  mode: single
