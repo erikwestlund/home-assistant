@@ -1,3 +1,25 @@
+# Doorbell chimes.
+#
+# Each doorbell is pressed through TWO independent delivery paths, and either
+# can go quietly dead on its own:
+#
+#   binary_sensor.<door>_doorbell  — the occupancy sensor, fed by the local
+#       (private) websocket. This is what these automations originally watched,
+#       and it worked for years.
+#   event.<door>_doorbell          — the ring event itself, fed by the separate
+#       public events websocket on a different credential.
+#
+# In Sept 2026 the occupancy sensor stopped delivering rings while everything
+# else about the integration looked healthy, so the chime went silent for five
+# weeks with nothing in the log. When we went to diagnose it, the reverse was
+# true: the event entity was delivering and the occupancy sensor was not. So we
+# trigger on BOTH, and `mode: single` keeps whichever loses the race from firing
+# a second chime — while the automation is running its 10-second delay, further
+# triggers are ignored.
+#
+# Note this only covers rings that reach HA at all. If both paths are silent,
+# `automations/doorbell_watchdog.yaml` is what tells you.
+
 - id: front_door_bell_alert
   alias: Play Chime on Sonos when Front Door Doorbell is Pressed
   description: ""
@@ -5,6 +27,21 @@
     - entity_id:
         - binary_sensor.front_door_doorbell
       to: "on"
+      trigger: state
+    - entity_id:
+        - event.front_door_doorbell
+      # A genuine ring is a timestamp changing to a newer timestamp. The
+      # `not_from` guard matters: on every integration reload the event entity
+      # has its state re-set from the NVR's record of the last ring, so a door
+      # whose state had gone stale goes unknown -> timestamp and would otherwise
+      # play a phantom chime. The watchdog below reloads the integration as a
+      # repair, so without this guard the repair would chime.
+      not_from:
+        - unknown
+        - unavailable
+      not_to:
+        - unknown
+        - unavailable
       trigger: state
   conditions: []
   actions:
@@ -38,6 +75,7 @@
       data:
         with_group: true
   mode: single
+
 - id: side_door_alert
   alias: Play Chime on Sonos when Side Door Doorbell is Pressed
   description: ""
@@ -45,6 +83,21 @@
     - entity_id:
         - binary_sensor.side_door_doorbell
       to: "on"
+      trigger: state
+    - entity_id:
+        - event.side_door_doorbell
+      # A genuine ring is a timestamp changing to a newer timestamp. The
+      # `not_from` guard matters: on every integration reload the event entity
+      # has its state re-set from the NVR's record of the last ring, so a door
+      # whose state had gone stale goes unknown -> timestamp and would otherwise
+      # play a phantom chime. The watchdog below reloads the integration as a
+      # repair, so without this guard the repair would chime.
+      not_from:
+        - unknown
+        - unavailable
+      not_to:
+        - unknown
+        - unavailable
       trigger: state
   conditions: []
   actions:
@@ -78,6 +131,7 @@
       data:
         with_group: true
   mode: single
+
 - id: mudroom_door_alert
   alias: Play Chime on Sonos when Mudroom Door Doorbell is Pressed
   description: ""
@@ -85,6 +139,21 @@
     - entity_id:
         - binary_sensor.mudroom_door_doorbell
       to: "on"
+      trigger: state
+    - entity_id:
+        - event.mudroom_door_doorbell
+      # A genuine ring is a timestamp changing to a newer timestamp. The
+      # `not_from` guard matters: on every integration reload the event entity
+      # has its state re-set from the NVR's record of the last ring, so a door
+      # whose state had gone stale goes unknown -> timestamp and would otherwise
+      # play a phantom chime. The watchdog below reloads the integration as a
+      # repair, so without this guard the repair would chime.
+      not_from:
+        - unknown
+        - unavailable
+      not_to:
+        - unknown
+        - unavailable
       trigger: state
   conditions: []
   actions:
@@ -106,6 +175,62 @@
       data:
         media_content_type: music
         media_content_id: /local/chime-mudroom-door.mp3
+      action: media_player.play_media
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - target:
+        entity_id: media_player.kitchen
+      action: sonos.restore
+      data:
+        with_group: true
+  mode: single
+
+- id: patio_door_alert
+  alias: Play Chime on Sonos when Patio Door Doorbell is Pressed
+  description: ""
+  triggers:
+    - entity_id:
+        - binary_sensor.patio_door_doorbell
+      to: "on"
+      trigger: state
+    - entity_id:
+        - event.patio_door_doorbell
+      # A genuine ring is a timestamp changing to a newer timestamp. The
+      # `not_from` guard matters: on every integration reload the event entity
+      # has its state re-set from the NVR's record of the last ring, so a door
+      # whose state had gone stale goes unknown -> timestamp and would otherwise
+      # play a phantom chime. The watchdog below reloads the integration as a
+      # repair, so without this guard the repair would chime.
+      not_from:
+        - unknown
+        - unavailable
+      not_to:
+        - unknown
+        - unavailable
+      trigger: state
+  conditions: []
+  actions:
+    - target:
+        entity_id: media_player.kitchen
+      action: sonos.snapshot
+      continue_on_error: true
+      data:
+        with_group: true
+    - data:
+        volume_level: 0.65
+      action: media_player.volume_set
+      target:
+        entity_id:
+          - media_player.kitchen
+    - target:
+        entity_id:
+          - media_player.kitchen
+      data:
+        media_content_type: music
+        media_content_id: /local/chime-patio-door.mp3
       action: media_player.play_media
     - delay:
         hours: 0
