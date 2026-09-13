@@ -78,8 +78,17 @@
   alias: Clear Doorbell Chime Alert when the Path Recovers
   description: Dismiss the persistent notification once the chime path is healthy.
   triggers:
+    # `from: "on"` is load-bearing. Without it this fires on the entity's first
+    # appearance — a template binary_sensor is created as `off`, and "did not
+    # exist" -> `off` counts as a transition to `off`. That sent a "chime
+    # recovered" push for a problem that had never happened, ~2 minutes after
+    # the entity was created, and it would do so after every HA restart. A
+    # binary sensor does not restore its state, so it is recreated as `off`
+    # every time. Requiring the previous state to have been `on` means this only
+    # speaks up when there was a real problem to recover from.
     - entity_id:
         - binary_sensor.doorbell_chime_problem
+      from: "on"
       to: "off"
       for:
         minutes: 2
