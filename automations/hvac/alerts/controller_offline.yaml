@@ -17,15 +17,44 @@
       entity_id: binary_sensor.hvac_any_controller_offline
       from: "off"
       to: "on"
-  condition:
+      id: dropped
+    # An outage that is already underway when HA starts never produces an
+    # off -> on edge, so without this the helper keeps whatever it restored
+    # from the last outage and the alert reports a duration measured from
+    # days ago. This is how 2.6 hours offline was announced as 47.
+    - platform: homeassistant
+      event: start
+      id: started
+  action:
+    # The template chain has not necessarily rendered when `start` fires, so
+    # give it a minute before asking whether anything is actually offline.
+    - if:
+        - condition: trigger
+          id: started
+      then:
+        - delay: "00:01:00"
+    - condition: state
+      entity_id: binary_sensor.hvac_any_controller_offline
+      state: "on"
     # Only stamp the start of a *new* outage. The alert sensor holds for two
     # minutes after recovery (delay_off), so a controller that drops, comes
     # back for 30 seconds and drops again keeps its original start time and
     # the reported duration keeps climbing instead of resetting.
-    - condition: state
-      entity_id: binary_sensor.hvac_controller_outage_alert
-      state: "off"
-  action:
+    #
+    # A restart is exempt from that guard: the alert renders `on` in the same
+    # millisecond as the sensor beneath it (delay_on does not apply to a
+    # template entity's first evaluation), so requiring `off` here would block
+    # the one case this trigger exists to cover.
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.hvac_controller_outage_alert
+          state: "off"
+        - condition: trigger
+          id: started
+    # On a restart HA cannot know when the controller really dropped, only
+    # that it was already gone by the time HA came up. Stamping now() reports
+    # an honest floor -- "at least this long" -- rather than a stale number.
     - service: input_datetime.set_datetime
       target:
         entity_id: input_datetime.hvac_controller_outage_started
