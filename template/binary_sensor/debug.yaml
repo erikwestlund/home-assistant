@@ -1,16 +1,40 @@
+# 🐞 Day/night scaffolding for testing the period logic. Nothing consumes
+# these -- they exist to be eyeballed in Developer Tools.
+#
+# They were reading input_datetime.day_start_time / .night_start_time, which
+# have never existed; the helpers are hvac_-prefixed. strptime() on the
+# resulting "unknown" threw, so Daytime sat at `unavailable` and Nighttime,
+# which inverts it, answered "on" around the clock.
+#
+# Compared as "HH:MM:SS" strings rather than timestamps. Both bounds are
+# clock times on the same day and day_start < night_start, so the ordering
+# is plain lexicographic -- and it sidesteps the naive-vs-aware trap, where
+# `as_local` reads a naive local string as if it were UTC.
+
 - name: "Debug Daytime Status"
   unique_id: debug_daytime_status
   state: >
-    {% set today = now().strftime('%Y-%m-%d') %}
-    {% set day_start = today ~ 'T' ~ states('input_datetime.day_start_time') %}
-    {% set night_start = today ~ 'T' ~ states('input_datetime.night_start_time') %}
-    {% set day_start_ts = as_timestamp(strptime(day_start, '%Y-%m-%dT%H:%M:%S')) %}
-    {% set night_start_ts = as_timestamp(strptime(night_start, '%Y-%m-%dT%H:%M:%S')) %}
-    {% set now_ts = (states('input_datetime.current_time_debug') | as_timestamp(default=None)) or now().timestamp() %}
-    
-    {{ day_start_ts <= now_ts < night_start_ts }}
+    {% set day_start = states('input_datetime.hvac_day_start_time') %}
+    {% set night_start = states('input_datetime.hvac_night_start_time') %}
+    {# input_datetime has no "unset", so the commented `initial:` on
+       current_time_debug names 2024-01-01T00:00:00 as the sentinel. Without
+       this check the knob is permanently engaged: the old expression fell
+       back to now() only when as_timestamp returned something falsy, and any
+       valid timestamp is truthy. #}
+    {% set debug_raw = states('input_datetime.current_time_debug') %}
+    {% set time_travelling = debug_raw | as_datetime(default=None) is not none
+                             and not debug_raw.startswith('2024-01-01') %}
+    {% set now_hms = debug_raw[11:19] if time_travelling else now().strftime('%H:%M:%S') %}
+    {{ day_start <= now_hms < night_start }}
+  availability: >
+    {{ states('input_datetime.hvac_day_start_time') not in ['unknown', 'unavailable']
+       and states('input_datetime.hvac_night_start_time') not in ['unknown', 'unavailable'] }}
 
 - name: "Debug Nighttime Status"
   unique_id: debug_nighttime_status
+  # Inverting a sensor that can go unavailable is how "unavailable" silently
+  # became "it is night". Mirror the availability instead of guessing.
   state: >
-    {{ not is_state('binary_sensor.debug_daytime_status', 'on') }}
+    {{ is_state('binary_sensor.debug_daytime_status', 'off') }}
+  availability: >
+    {{ states('binary_sensor.debug_daytime_status') in ['on', 'off'] }}

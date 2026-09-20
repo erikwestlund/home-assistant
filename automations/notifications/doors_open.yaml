@@ -38,10 +38,17 @@
   condition:
     - condition: template
       value_template: >
+        {# Was reading .master_bedroom_bedtime_start_time / .._sleep_start_time,
+           neither of which exists -- the helpers are hvac_-prefixed and
+           suffixed with the room. Both sides rendered "unknown", and
+           'unknown' <= '21:43:00' is false, so this never fired. The window
+           is the Night period up to Sleep, matching the description. #}
         {% set now_time = now().strftime('%H:%M:%S') %}
-        {% set bedtime = states('input_datetime.master_bedroom_bedtime_start_time') %}
-        {% set sleeptime = states('input_datetime.master_bedroom_sleep_start_time') %}
-        {{ bedtime <= now_time <= sleeptime }}
+        {% set bedtime = states('input_datetime.hvac_nighttime_start_time_master_bedroom') %}
+        {% set sleeptime = states('input_datetime.hvac_sleep_start_time_master_bedroom') %}
+        {{ bedtime not in ['unknown', 'unavailable']
+           and sleeptime not in ['unknown', 'unavailable']
+           and bedtime <= now_time <= sleeptime }}
   action:
     - service: notify.mobile_app_eriks_iphone
       data:
