@@ -20,7 +20,7 @@
           entity_id: input_boolean.hvac_away_mode
           state: "on"
         - condition: state
-          entity_id: input_boolean.hvac_override_status_main_zone
+          entity_id: input_boolean.hvac_override_status_main_radiator_zone
           state: "on"
         - condition: state
           entity_id: input_boolean.hvac_radiator_use_ecobee_schedule_main_zone
@@ -45,7 +45,7 @@
         - binary_sensor.hvac_radiator_power_synced_main_zone
         - binary_sensor.hvac_radiator_mode_synced_main_zone
         - binary_sensor.hvac_radiator_setpoint_synced_main_zone
-        - input_boolean.hvac_override_status_main_zone
+        - input_boolean.hvac_override_status_main_radiator_zone
         - input_boolean.hvac_away_mode
         - input_boolean.hvac_radiator_use_ecobee_schedule_main_zone
     - platform: time_pattern
@@ -73,7 +73,7 @@
           entity_id: input_boolean.hvac_away_mode
           state: "on"
         - condition: state
-          entity_id: input_boolean.hvac_override_status_main_zone
+          entity_id: input_boolean.hvac_override_status_main_radiator_zone
           state: "on"
         - condition: state
           entity_id: input_boolean.hvac_radiator_use_ecobee_schedule_main_zone

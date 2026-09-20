@@ -1,7 +1,10 @@
 - name: "HVAC Radiator Setpoint Main Zone"
   unique_id: hvac_radiator_setpoint_main_zone
   state: >
-    {% set is_override = is_state('input_boolean.hvac_override_status_main_zone', 'on') %}
+    {# The helper is ..._main_radiator_zone. Spelled _main_zone this test
+       was always false, so an override on this zone stamped its expiry and
+       then changed nothing -- the setpoint fell through to the schedule. #}
+    {% set is_override = is_state('input_boolean.hvac_override_status_main_radiator_zone', 'on') %}
     {% set is_away_mode = is_state('input_boolean.hvac_away_mode', 'on') %}
     {% set comfort_setting = states('sensor.hvac_comfort_setting_main_radiator_zone') %}
     
