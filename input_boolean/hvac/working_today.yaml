@@ -1,9 +1,18 @@
+# `initial:` is not a default -- it forces the value on every start AND
+# disables state restore entirely (see CLAUDE.md). With `initial: off` here,
+# every HA restart silently cleared "working today" mid-day: the office
+# dropped off the working setpoint and nothing said so. Erik's was wiped by
+# the restart on 2026-09-20. Present = frozen, absent = remembered.
+#
+# Kept commented as documentation of the intended starting value, per the
+# convention in this repo.
+
 hvac_working_today_office:
   name: HVAC Office Working Today
-  initial: off
+  # initial: off
   icon: mdi:account-check
 
 hvac_working_today_erik_office:
   name: HVAC Erik Office Working Today
-  initial: off
+  # initial: off
   icon: mdi:account-check

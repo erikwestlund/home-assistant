@@ -82,9 +82,10 @@
 - id: "hvac_set_working_today_before_monitor_end_office"
   alias: "HVAC Set Working Today Before Monitor End Office"
   trigger:
+    # No `from:` guard. The tracker can go unavailable (it did, for days),
+    # and unavailable -> on is a real arrival that `from: "off"` would drop.
     - platform: state
       entity_id: binary_sensor.tina_home
-      from: "off"
       to: "on"
   condition:
     - condition: and
@@ -93,8 +94,13 @@
           entity_id: binary_sensor.is_weekday
           state: "on"
         - condition: template
+          # The bounds check is a string compare, so an unknown monitor end
+          # would read as '07:12:00' < 'unknown' -- true, because a digit
+          # sorts below a letter. Require a real time first.
           value_template: >
-            {{ now().strftime('%H:%M:%S') < states('sensor.hvac_occupancy_monitor_office_end') }}
+            {% set monitor_end = states('sensor.hvac_occupancy_monitor_office_end') %}
+            {{ monitor_end is match('^[0-9]{2}:[0-9]{2}:[0-9]{2}$')
+               and now().strftime('%H:%M:%S') < monitor_end }}
   action:
     - service: input_boolean.turn_on
       target:
@@ -150,9 +156,10 @@
 - id: "hvac_set_working_today_before_monitor_end_erik_office"
   alias: "HVAC Set Working Today Before Monitor End Erik Office"
   trigger:
+    # No `from:` guard. The tracker can go unavailable (it did, for days),
+    # and unavailable -> on is a real arrival that `from: "off"` would drop.
     - platform: state
       entity_id: binary_sensor.erik_home
-      from: "off"
       to: "on"
   condition:
     - condition: and
@@ -161,8 +168,13 @@
           entity_id: binary_sensor.is_weekday
           state: "on"
         - condition: template
+          # The bounds check is a string compare, so an unknown monitor end
+          # would read as '07:12:00' < 'unknown' -- true, because a digit
+          # sorts below a letter. Require a real time first.
           value_template: >
-            {{ now().strftime('%H:%M:%S') < states('sensor.hvac_occupancy_monitor_erik_office_end') }}
+            {% set monitor_end = states('sensor.hvac_occupancy_monitor_erik_office_end') %}
+            {{ monitor_end is match('^[0-9]{2}:[0-9]{2}:[0-9]{2}$')
+               and now().strftime('%H:%M:%S') < monitor_end }}
   action:
     - service: input_boolean.turn_on
       target:

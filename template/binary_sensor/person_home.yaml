@@ -1,9 +1,22 @@
+# Presence, derived from the UniFi client trackers.
+#
+# `is_state(tracker, 'home')` is false for `unavailable` exactly as it is for
+# `not_home`, so when a tracker dropped out of UniFi's client list these
+# sensors reported "away" with total confidence. That is how "Working Today"
+# for Erik's office became unreliable: the 07:00 automation is gated on
+# erik_home, and erik_iphone_network went unavailable on 2026-09-20 and
+# stayed there, so the flag silently stopped being set.
+#
+# `availability` makes the difference between "away" and "no idea" visible
+# instead of guessing the answer that happens to look calm.
+
 - name: "Erik Home"
   unique_id: erik_home
   device_class: occupancy
   state: >
-    {% set phone_tracker = 'device_tracker.erik_iphone_network' %}
-    {{ is_state(phone_tracker, 'home') }}
+    {{ is_state('device_tracker.erik_iphone_network', 'home') }}
+  availability: >
+    {{ states('device_tracker.erik_iphone_network') not in ['unavailable', 'unknown'] }}
   icon: >-
     {% if is_state('binary_sensor.erik_home', 'on') %}
       mdi:account
@@ -15,23 +28,25 @@
   unique_id: tina_home
   device_class: occupancy
   state: >
-    {% set phone_tracker = 'device_tracker.tina_iphone_network' %}
-    {{ is_state(phone_tracker, 'home') }}
+    {{ is_state('device_tracker.tina_iphone_network', 'home') }}
+  availability: >
+    {{ states('device_tracker.tina_iphone_network') not in ['unavailable', 'unknown'] }}
+  # Was checking erik_home here -- a copy-paste, so Tina's icon tracked Erik.
   icon: >-
-    {% if is_state('binary_sensor.erik_home', 'on') %}
+    {% if is_state('binary_sensor.tina_home', 'on') %}
       mdi:account
     {% else %}
       mdi:account-off
     {% endif %}
-    
+
 - name: "Someone Home"
   unique_id: someone_home
   device_class: occupancy
+  # Deliberately NOT availability-gated: one tracker being dark does not stop
+  # the other from answering "yes, someone is here". It only goes unavailable
+  # when neither can say anything.
   state: >
     {{ is_state('binary_sensor.erik_home', 'on') or is_state('binary_sensor.tina_home', 'on') }}
-  icon: >-
-    {% if is_state('binary_sensor.someone_home', 'on') %}
-      mdi:home-account
-    {% else %}
-      mdi:home-outline
-    {% endif %}
+  availability: >
+    {{ states('binary_sensor.erik_home') in ['on', 'off']
+       or states('binary_sensor.tina_home') in ['on', 'off'] }}
