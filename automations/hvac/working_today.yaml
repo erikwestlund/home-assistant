@@ -53,6 +53,8 @@
       entity_id: binary_sensor.is_weekday
       state: "on"
   action:
+    # Requires a confirmed `on`, unlike Erik's office above: an unknown here
+    # stays off rather than assuming a working day.
     - choose:
         - conditions:
             - condition: state
@@ -121,16 +123,23 @@
     - condition: state
       entity_id: binary_sensor.is_weekday
       state: "on"
+    # Assume working unless presence positively says otherwise. This is
+    # deliberately asymmetric with Tina's office below, which requires a
+    # confirmed `on`.
+    #
+    # erik_home goes unavailable when its tracker drops out of UniFi's client
+    # list, which is not a rare edge -- it happened at the gateway swap on
+    # 2026-09-20 and lasted days. Requiring `on` meant the flag silently
+    # stopped being set for the whole outage. Testing for `off` inverts which
+    # way an unknown fails: a wasted morning of conditioning an empty office,
+    # rather than a cold one with no indication why.
+    - condition: template
+      value_template: >
+        {{ not is_state('binary_sensor.erik_home', 'off') }}
   action:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.erik_home
-              state: "on"
-          sequence:
-            - service: input_boolean.turn_on
-              target:
-                entity_id: input_boolean.hvac_working_today_erik_office
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.hvac_working_today_erik_office
   mode: single
 
 # Reset Working Today for Erik Office
